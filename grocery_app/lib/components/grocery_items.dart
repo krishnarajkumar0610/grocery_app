@@ -63,7 +63,7 @@ class GroceryItemTile extends StatelessWidget {
                   },
                   color: color,
                   child: Text(
-                    "Rs.$itemPrice",
+                    "Rs.$itemPrice"+"/-",
                     style: GoogleFonts.notoSerif(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
