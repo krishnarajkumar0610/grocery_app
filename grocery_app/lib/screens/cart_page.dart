@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:priya_project/bloc/grocery_bloc.dart';
+
+import '../bloc/grocery_events.dart';
+import '../bloc/grocery_states.dart';
+
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        centerTitle: true,
+        title: Text(
+          "My Cart",
+          style: GoogleFonts.notoSerif(fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: BlocConsumer<GroceryBloc, GroceryStates>(
+        builder: (context, state) {
+          // Your UI based on state goes here
+          return ListView.builder(
+            itemCount: state.cartItems.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20)),
+                  child: ListTile(
+                      leading: Image.asset(state.cartItems[index][2]),
+                      title: Text(state.cartItems[index][0]),
+                      subtitle: Text("Rs." + state.cartItems[index][1]),
+                      trailing: IconButton(
+                        onPressed: () {
+                          context.read<GroceryBloc>().add(RemoveItem(
+                              index: index, localCarts: state.cartItems));
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.cancel),
+                      )),
+                ),
+              );
+            },
+          );
+        },
+        listener: (context, state) {
+          // Handle events or side effects here
+        },
+      ),
+    );
+  }
+}
