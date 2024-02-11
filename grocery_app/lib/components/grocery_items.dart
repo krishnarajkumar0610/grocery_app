@@ -29,50 +29,64 @@ class GroceryItemTile extends StatelessWidget {
         color: color[100],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              imagePath,
-              height: 60,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              itemName,
-              style: GoogleFonts.notoSerif(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-          ),
-          BlocConsumer<GroceryBloc, GroceryStates>(
-            builder: (BuildContext context, GroceryStates state) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
+      child: BlocConsumer<GroceryBloc, GroceryStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Stack(
+            children: [
+              Positioned(
+                left: 15,
+                top: 10,
+                child: Image.asset(
+                  imagePath,
+                  height: 60,
+                ),
+              ),
+              Positioned(
+                left: 110,
+                top: 10,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    icon: const Icon(Icons.add_shopping_cart),
+                    onPressed: () {
+                      context.read<GroceryBloc>().add(AddItem(index: index));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ));
+                    },
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 20,
+                top: 80,
+                child: Text(
+                  itemName,
+                  style: GoogleFonts.notoSerif(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+              ),
+              Positioned(
+                top: 120,
+                left: 10,
                 child: MaterialButton(
-                  onPressed: () {
-                    context.read<GroceryBloc>().add(AddItem(index: index));
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CartPage(),
-                        ));
-                  },
                   color: color,
+                  onPressed: () {},
                   child: Text(
-                    "Rs.$itemPrice"+"/-",
+                    "Buy Rs.${itemPrice}/-",
                     style: GoogleFonts.notoSerif(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
-              );
-            },
-            listener: (BuildContext context, GroceryStates state) {},
-          )
-        ],
+              )
+            ],
+          );
+        },
       ),
     );
   }
