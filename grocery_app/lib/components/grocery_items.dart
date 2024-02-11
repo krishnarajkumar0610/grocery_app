@@ -76,9 +76,34 @@ class GroceryItemTile extends StatelessWidget {
                 left: 10,
                 child: MaterialButton(
                   color: color,
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content: Text(
+                            "Order Item",
+                            style: GoogleFonts.notoSerif(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: color),
+                              child: Text(
+                                "Order",
+                                style:
+                                    GoogleFonts.notoSerif(color: Colors.black),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: Text(
-                    "Buy Rs.${itemPrice}/-",
+                    "Buy Rs.$itemPrice/-",
                     style: GoogleFonts.notoSerif(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),

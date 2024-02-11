@@ -46,8 +46,16 @@ class _CartPageState extends State<CartPage> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ListTile(
                             leading: Image.asset(state.cartItems[index][2]),
-                            title: Text(state.cartItems[index][0]),
-                            subtitle: Text("Rs." + state.cartItems[index][1]),
+                            title: Text(
+                              state.cartItems[index][0],
+                              style: GoogleFonts.notoSerif(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              "Rs.${state.cartItems[index][1]}",
+                              style: GoogleFonts.notoSerif(
+                                  fontWeight: FontWeight.bold),
+                            ),
                             trailing: IconButton(
                               onPressed: () {
                                 context.read<GroceryBloc>().add(RemoveItem(
