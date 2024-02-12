@@ -56,9 +56,6 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Divider(),
             ),
-            const SizedBox(
-              height: 15,
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(

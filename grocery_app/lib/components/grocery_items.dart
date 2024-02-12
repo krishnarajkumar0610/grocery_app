@@ -37,32 +37,36 @@ class GroceryItemTile extends StatelessWidget {
               Positioned(
                 left: 15,
                 top: 10,
-                child: Image.asset(
-                  imagePath,
-                  height: 60,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 35,
+                  child: Image.asset(
+                    imagePath,
+                    height: 40,
+                  ),
                 ),
               ),
               Positioned(
                 left: 110,
                 top: 10,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    icon: const Icon(Icons.add_shopping_cart),
-                    onPressed: () {
-                      context.read<GroceryBloc>().add(AddItem(index: index));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CartPage(),
-                          ));
-                    },
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.add_shopping_cart,
+                    size: 30,
                   ),
+                  onPressed: () {
+                    context.read<GroceryBloc>().add(AddItem(index: index));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartPage(),
+                        ));
+                  },
                 ),
               ),
               Positioned(
                 left: 20,
-                top: 80,
+                top: 90,
                 child: Text(
                   itemName,
                   style: GoogleFonts.notoSerif(
@@ -72,7 +76,7 @@ class GroceryItemTile extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 120,
+                top: 130,
                 left: 10,
                 child: MaterialButton(
                   color: color,
