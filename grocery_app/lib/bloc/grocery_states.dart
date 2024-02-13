@@ -49,7 +49,7 @@ class GroceryStates {
       "350",
       "assets/chicken.png",
       "Chicken is a versatile poultry meat known for its mild flavor and lean protein content. It can be grilled, roasted, fried, or incorporated into a variety of dishes worldwide.",
-      Colors.brown
+      Colors.redAccent
     ],
     [
       "Water",
