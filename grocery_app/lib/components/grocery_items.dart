@@ -40,31 +40,29 @@ class GroceryItemTile extends StatelessWidget {
               Positioned(
                 left: 15,
                 top: 10,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 35,
-                  child: Image.asset(
-                    imagePath,
-                    height: 40,
-                  ),
+                child: Image.asset(
+                  imagePath,
+                  height: 80,
                 ),
               ),
               Positioned(
                 left: 110,
                 top: 10,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.add_shopping_cart,
-                    size: 30,
+                child: CircleAvatar(
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add_shopping_cart,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      context.read<GroceryBloc>().add(AddToCart(index: index));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ));
+                    },
                   ),
-                  onPressed: () {
-                    context.read<GroceryBloc>().add(AddToCart(index: index));
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CartPage(),
-                        ));
-                  },
                 ),
               ),
               Positioned(
