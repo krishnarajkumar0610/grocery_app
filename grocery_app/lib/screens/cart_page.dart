@@ -31,9 +31,11 @@ class _CartPageState extends State<CartPage> {
           return state.cartItems.isEmpty
               ? Center(
                   child: Text(
-                  "Cart is empty 😩",
+                  "Cart is empty 🙃",
                   style: GoogleFonts.notoSerif(
-                      fontWeight: FontWeight.bold, fontSize: 20),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      letterSpacing: 1),
                 ))
               : ListView.builder(
                   itemCount: state.cartItems.length,

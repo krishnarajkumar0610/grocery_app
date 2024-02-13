@@ -46,6 +46,9 @@ class OrderPage extends StatelessWidget {
                 child: Image.asset(imagePath!),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, top: 10.0),
               child: Text(
@@ -54,17 +57,20 @@ class OrderPage extends StatelessWidget {
                     fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, top: 10.0),
               child: Container(
                   width: 300,
-                  height: 150,
+                  height: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.white60,
+                    color: color,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: ListView(
                       children: [
                         Text(
@@ -76,6 +82,9 @@ class OrderPage extends StatelessWidget {
                     ),
                   )),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, top: 10.0),
               child: Text(
@@ -84,28 +93,37 @@ class OrderPage extends StatelessWidget {
                     fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 30, top: 10.0),
               child: Container(
                 width: 300,
                 height: 80,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white),
+                    borderRadius: BorderRadius.circular(20), color: color),
                 child: BlocConsumer<GroceryBloc, GroceryStates>(
                   listener: (context, state) {},
                   builder: (context, state) {
                     return Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: const EdgeInsets.only(left: 50.0),
                           child: Text(
                             "Quantity :",
                             style: GoogleFonts.notoSerif(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Text("${state.quantity}")
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0, top: 5),
+                          child: Text(
+                            "${state.quantity}",
+                            style: GoogleFonts.notoSerif(
+                                fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                        )
                       ],
                     );
                   },
