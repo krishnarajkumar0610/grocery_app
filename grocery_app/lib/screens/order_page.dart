@@ -40,10 +40,13 @@ class OrderPage extends StatelessWidget {
                 width: 300,
                 height: 200,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30),
                   color: Colors.white60,
                 ),
-                child: Image.asset(imagePath!),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset(imagePath!),
+                ),
               ),
             ),
             const SizedBox(
