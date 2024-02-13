@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:priya_project/bloc/grocery_bloc.dart';
+import 'bloc/grocery_states.dart';
 import 'screens/intro_page.dart';
 
 void main() {
@@ -14,10 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => GroceryBloc(),
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: IntroPage(),
-      ),
+      child: BlocConsumer<GroceryBloc, GroceryStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              theme: state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
+              debugShowCheckedModeBanner: false,
+              home: const IntroPage(),
+            );
+          }),
     );
   }
 }

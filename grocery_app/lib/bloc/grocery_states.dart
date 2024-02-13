@@ -60,10 +60,15 @@ class GroceryStates {
     ],
   ]; // List of data's
 
-  final List cartItems;
+  final List? cartItems;
 
   final double? totalPrice;
+
   int quantity;
 
-  GroceryStates({this.totalPrice, required this.cartItems, this.quantity = 1});
+  bool? themeStatus;
+
+  GroceryStates({this.totalPrice,  this.cartItems, this.quantity = 1,this.themeStatus=true}){
+    print(this.themeStatus);
+  }
 }

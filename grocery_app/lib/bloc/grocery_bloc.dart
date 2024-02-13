@@ -7,7 +7,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     on<AddToCart>((event, emit) async {
       // add item event
       int? index = event.index;
-      state.cartItems.add(state.shopItems[index!]);
+      state.cartItems?.add(state.shopItems[index!]);
     });
 
     on<RemoveItem>((event, emit) async {
@@ -16,6 +16,14 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       int index = event.index!;
       localCarts.removeAt(index);
       emit(GroceryStates(cartItems: localCarts));
+    });
+
+    on<ChangeTheme>((event, emit) async {
+      // remove item event
+      var theme = event.themeStatus!;
+      theme = !theme;
+
+      emit(GroceryStates(themeStatus: theme));
     });
   }
 }

@@ -12,3 +12,11 @@ class RemoveItem extends GrossEvents {
 
   RemoveItem({this.index, required this.localCarts});
 }
+
+class ChangeTheme extends GrossEvents {
+  bool? themeStatus;
+
+  ChangeTheme({this.themeStatus}) {
+    print("VANTEA");
+  }
+}

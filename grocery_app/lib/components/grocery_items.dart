@@ -52,7 +52,8 @@ class GroceryItemTile extends StatelessWidget {
                   child: IconButton(
                     icon: const Icon(
                       Icons.add_shopping_cart,
-                      size: 20,
+                      size: 25,
+                      color: Colors.black,
                     ),
                     onPressed: () {
                       context.read<GroceryBloc>().add(AddToCart(index: index));
