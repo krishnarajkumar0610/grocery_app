@@ -58,7 +58,7 @@ class GroceryItemTile extends StatelessWidget {
                     size: 30,
                   ),
                   onPressed: () {
-                    context.read<GroceryBloc>().add(AddItem(index: index));
+                    context.read<GroceryBloc>().add(AddToCart(index: index));
                     Navigator.push(
                         context,
                         MaterialPageRoute(

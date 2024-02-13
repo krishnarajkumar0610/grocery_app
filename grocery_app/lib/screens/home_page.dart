@@ -66,28 +66,28 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
                 child: BlocConsumer<GroceryBloc, GroceryStates>(
-              builder: (context, state) {
-                return GridView.builder(
-                  itemCount: state.shopItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: GroceryItemTile(
-                        itemName: state.shopItems[index][0],
-                        itemPrice: state.shopItems[index][1],
-                        imagePath: state.shopItems[index][2],
-                        description: state.shopItems[index][3],
-                        color: state.shopItems[index][4],
-                        index: index,
-                      ),
+                  builder: (context, state) {
+                    return GridView.builder(
+                      itemCount: state.shopItems.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: GroceryItemTile(
+                            itemName: state.shopItems[index][0],
+                            itemPrice: state.shopItems[index][1],
+                            imagePath: state.shopItems[index][2],
+                            description: state.shopItems[index][3],
+                            color: state.shopItems[index][4],
+                            index: index,
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-              listener: (BuildContext context, state) {},
-            ))
+                  listener: (BuildContext context, state) {},
+                ))
           ],
         ),
       ),

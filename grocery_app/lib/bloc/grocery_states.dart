@@ -58,7 +58,7 @@ class GroceryStates {
       "Water is a transparent, tasteless, and odorless substance essential for life on Earth. It comprises about 71% of the planet's surface and is vital for hydration, regulating body temperature, and facilitating various biochemical processes.",
       Colors.blue
     ],
-  ];
+  ]; // List of data's
 
   final List cartItems;
 

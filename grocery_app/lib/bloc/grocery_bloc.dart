@@ -4,15 +4,17 @@ import 'package:priya_project/bloc/grocery_states.dart';
 
 class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
-    on<AddItem>((event, emit) async {
+    on<AddToCart>((event, emit) async {
+      // add item event
       int? index = event.index;
       state.cartItems.add(state.shopItems[index!]);
     });
+
     on<RemoveItem>((event, emit) async {
+      // remove item event
       List localCarts = event.localCarts;
       int index = event.index!;
       localCarts.removeAt(index);
-
       emit(GroceryStates(cartItems: localCarts));
     });
   }
