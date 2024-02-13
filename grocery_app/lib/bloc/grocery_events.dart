@@ -15,8 +15,8 @@ class RemoveItem extends GrossEvents {
 
 class ChangeTheme extends GrossEvents {
   bool? themeStatus;
-
-  ChangeTheme({this.themeStatus}) {
+  final List? cartItems;
+  ChangeTheme({this.themeStatus,this.cartItems}) {
     print("VANTEA");
   }
 }

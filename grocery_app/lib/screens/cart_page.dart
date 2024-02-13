@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> {
       body: BlocConsumer<GroceryBloc, GroceryStates>(
         builder: (context, state) {
           // Your UI based on state goes here
-          return state.cartItems!.length == 0
+          return state.cartItems!.isEmpty
               ? Center(
                   child: Text(
                   "Cart is empty 🙃",

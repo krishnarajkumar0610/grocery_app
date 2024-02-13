@@ -68,7 +68,7 @@ class GroceryStates {
 
   bool? themeStatus;
 
-  GroceryStates({this.totalPrice,  this.cartItems, this.quantity = 1,this.themeStatus=true}){
+  GroceryStates({this.totalPrice,  required this.cartItems, this.quantity = 1,this.themeStatus=true}){
     print(this.themeStatus);
   }
 }

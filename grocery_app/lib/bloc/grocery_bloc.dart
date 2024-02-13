@@ -22,8 +22,8 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       // remove item event
       var theme = event.themeStatus!;
       theme = !theme;
-
-      emit(GroceryStates(themeStatus: theme));
+      List localCarts = event.cartItems!;
+      emit(GroceryStates(themeStatus: theme,cartItems: localCarts));
     });
   }
 }
