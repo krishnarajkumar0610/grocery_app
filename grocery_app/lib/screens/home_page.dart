@@ -78,7 +78,8 @@ class HomePage extends StatelessWidget {
                         itemName: state.shopItems[index][0],
                         itemPrice: state.shopItems[index][1],
                         imagePath: state.shopItems[index][2],
-                        color: state.shopItems[index][3],
+                        description: state.shopItems[index][3],
+                        color: state.shopItems[index][4],
                         index: index,
                       ),
                     );

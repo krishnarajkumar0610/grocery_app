@@ -15,12 +15,5 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
 
       emit(GroceryStates(cartItems: localCarts));
     });
-    on<CalculateTotalPrice>((event, emit) async {
-      double totalPrice = 0;
-      for (int i = 0; i < state.cartItems.length; i++) {
-        totalPrice += state.cartItems[i][1];
-      }
-      emit(GroceryStates(totalPrice: totalPrice, cartItems: []));
-    });
   }
 }

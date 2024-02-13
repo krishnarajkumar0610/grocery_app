@@ -5,11 +5,13 @@ import 'package:priya_project/bloc/grocery_bloc.dart';
 import 'package:priya_project/bloc/grocery_events.dart';
 import 'package:priya_project/bloc/grocery_states.dart';
 import 'package:priya_project/screens/cart_page.dart';
+import 'package:priya_project/screens/order_page.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;
   final String itemPrice;
   final String imagePath;
+  final String description;
   final color;
   int index;
 
@@ -18,6 +20,7 @@ class GroceryItemTile extends StatelessWidget {
     required this.itemName,
     required this.itemPrice,
     required this.imagePath,
+    required this.description,
     required this.index,
     required this.color,
   });
@@ -81,30 +84,17 @@ class GroceryItemTile extends StatelessWidget {
                 child: MaterialButton(
                   color: color,
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content: Text(
-                            "Order Item",
-                            style: GoogleFonts.notoSerif(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrderPage(
+                            itemName: itemName,
+                            itemPrice: itemPrice,
+                            imagePath: imagePath,
+                            description: description,
+                            color: color,
                           ),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () => Navigator.pop(context),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: color),
-                              child: Text(
-                                "Order",
-                                style:
-                                    GoogleFonts.notoSerif(color: Colors.black),
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                    );
+                        ));
                   },
                   child: Text(
                     "Buy Rs.$itemPrice/-",

@@ -1,4 +1,5 @@
 class GrossEvents {}
+
 class AddItem extends GrossEvents {
   int? index;
 
@@ -8,10 +9,6 @@ class AddItem extends GrossEvents {
 class RemoveItem extends GrossEvents {
   int? index;
   List localCarts;
-  RemoveItem({this.index,required this.localCarts});
 
+  RemoveItem({this.index, required this.localCarts});
 }
-
-class CalculateTotalPrice extends GrossEvents {}
-
-
