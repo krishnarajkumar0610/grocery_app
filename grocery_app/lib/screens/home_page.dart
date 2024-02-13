@@ -25,10 +25,10 @@ class HomePage extends StatelessWidget {
                 height: 40,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(children: [
                   Text(
-                    "Good Morning",
+                    "Good Morning 🤩",
                     style: GoogleFonts.notoSerif(
                         fontWeight: FontWeight.bold, fontSize: 20),
                   ),

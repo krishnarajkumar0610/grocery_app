@@ -49,6 +49,7 @@ class GroceryItemTile extends StatelessWidget {
                 left: 110,
                 top: 10,
                 child: CircleAvatar(
+                  backgroundColor: Colors.white,
                   child: IconButton(
                     icon: const Icon(
                       Icons.add_shopping_cart,

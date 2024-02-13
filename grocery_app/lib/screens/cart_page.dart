@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> {
       body: BlocConsumer<GroceryBloc, GroceryStates>(
         builder: (context, state) {
           // Your UI based on state goes here
-          return state.cartItems!.isEmpty
+          return state.cartItems!.length == 0
               ? Center(
                   child: Text(
                   "Cart is empty 🙃",
@@ -61,7 +61,8 @@ class _CartPageState extends State<CartPage> {
                             trailing: IconButton(
                               onPressed: () {
                                 context.read<GroceryBloc>().add(RemoveItem(
-                                    index: index, localCarts: state.cartItems!));
+                                    index: index,
+                                    localCarts: state.cartItems!));
                                 Navigator.pop(context);
                               },
                               icon: const Icon(Icons.cancel),
