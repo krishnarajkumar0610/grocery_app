@@ -12,9 +12,10 @@ class GroceryStates {
     ["Water", "40", "assets/water.png", Colors.blue],
   ];
 
-  List cartItems = [];
+  List cartItems;
 
   double? totalPrice;
+  int? quantity;
 
-  GroceryStates({this.totalPrice, required this.cartItems});
+  GroceryStates({this.totalPrice, required this.cartItems, this.quantity});
 }

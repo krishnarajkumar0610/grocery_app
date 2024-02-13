@@ -7,7 +7,7 @@ class AddItem extends GrossEvents {
 
 class RemoveItem extends GrossEvents {
   int? index;
-  final localCarts;
+  List localCarts;
   RemoveItem({this.index,required this.localCarts});
 
 }
