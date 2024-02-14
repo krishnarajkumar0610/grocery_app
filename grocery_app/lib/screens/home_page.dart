@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/screens/new_user.dart';
 
 import '../bloc/grocery_bloc.dart';
 import '../bloc/grocery_events.dart';
@@ -14,69 +15,76 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: BlocConsumer<GroceryBloc, GroceryStates>(
-          listener: (context, state) {},
-          builder: (context, state) => Column(
+      child: BlocConsumer<GroceryBloc, GroceryStates>(
+        listener: (context, state) {},
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.deepPurple,
+            title: Text(
+              "Grocery App",
+              style: GoogleFonts.notoSerif(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    print("CALLING THEME");
+                    context.read<GroceryBloc>().add(ChangeTheme(
+                          themeStatus: state.themeStatus,
+                        ));
+                  },
+                  icon: state.themeStatus!
+                      ? const Icon(
+                          Icons.dark_mode,
+                          size: 30,
+                          color: Colors.black,
+                        )
+                      : const Icon(
+                          Icons.sunny,
+                          color: Colors.yellow,
+                          size: 30,
+                        )),
+              const SizedBox(
+                width: 30,
+              ),
+              CircleAvatar(
+                  radius: 25,
+                  backgroundColor:
+                      state.themeStatus! ? Colors.black : Colors.white,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ));
+                    },
+                    icon: const Icon(
+                      Icons.shopping_cart,
+                      color: Colors.green,
+                      size: 30,
+                    ),
+                  )),
+            ],
+          ),
+          drawer: const Drawer(
+            backgroundColor: Colors.white,
+          ),
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 40,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  state.greetingStatus!,
+                  style: GoogleFonts.notoSerif(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: state.themeStatus! ? Colors.black : Colors.white),
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        state.greetingStatus ?? "Good Morning",
-                        style: GoogleFonts.notoSerif(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: state.themeStatus!
-                                ? Colors.black
-                                : Colors.white),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            print("CALLING THEME");
-                            context.read<GroceryBloc>().add(ChangeTheme(
-                                  themeStatus: state.themeStatus,
-
-                                ));
-                          },
-                          icon: state.themeStatus!
-                              ? const Icon(
-                                  Icons.dark_mode,
-                                  size: 30,
-                                )
-                              : const Icon(
-                                  Icons.sunny,
-                                  color: Colors.yellow,
-                                  size: 30,
-                                )),
-                      CircleAvatar(
-                          radius: 25,
-                          backgroundColor:
-                              state.themeStatus! ? Colors.black : Colors.white,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CartPage(),
-                                  ));
-                            },
-                            icon: const Icon(
-                              Icons.shopping_cart,
-                              color: Colors.green,
-                              size: 30,
-                            ),
-                          ))
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
@@ -91,10 +99,6 @@ class HomePage extends StatelessWidget {
                             state.themeStatus! ? Colors.black : Colors.white),
                   ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Divider(),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
