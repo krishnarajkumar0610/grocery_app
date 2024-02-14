@@ -176,20 +176,199 @@ class _NewUserState extends State<NewUser> {
                     style: GoogleFonts.notoSerif(
                         fontWeight: FontWeight.bold, fontSize: 15),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            width: 120,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Google",
+                                style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.black),
+                              ),
+                            )),
+                        Container(
+                            width: 120,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple[900],
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Facebook",
+                                style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.white),
+                              ),
+                            )),
+                      ],
+                    ),
                   )
                 ],
               ),
             ]),
+
             // Content of Sign in tab
-            const Center(
-              child: Text(
-                'Sign in content',
-                style: TextStyle(fontSize: 20),
+            ListView(children: [
+              Column(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 20.0, top: 30),
+                      child: getField(
+                          _fullName,
+                          "Full Name",
+                          const Icon(
+                            Icons.person,
+                            color: Colors.black,
+                          ))),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 20.0, top: 30),
+                      child: getField(
+                          _email,
+                          "Email",
+                          const Icon(
+                            Icons.email,
+                            color: Colors.black,
+                          ))),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 20.0, top: 30),
+                      child: getField(
+                          _fullName,
+                          "Password",
+                          const Icon(
+                            Icons.lock,
+                            color: Colors.black,
+                          ))),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        // when i sign up then it need to display a box to tell go to sign in page
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                      },
+                      child: Container(
+                        width: 250,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.orange,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 2,
+                                offset: const Offset(0, 3),
+                              ),
+                            ]),
+                        child: Center(
+                          child: Text(
+                            "Sign Up",
+                            style: GoogleFonts.notoSerif(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "--------------or Sign up with--------------",
+                    style: GoogleFonts.notoSerif(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            width: 120,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Google",
+                                style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.black),
+                              ),
+                            )),
+                        Container(
+                            width: 120,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple[900],
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Facebook",
+                                style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.white),
+                              ),
+                            )),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            ),
+            ]),
           ],
         ),
       ),
