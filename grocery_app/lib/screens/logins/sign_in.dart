@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../home_page.dart';
+import '../pages/home_page.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -24,7 +24,7 @@ class _SignInState extends State<SignIn> {
               child: TextField(
                 controller: _username,
                 decoration: InputDecoration(
-                    hintText: "Full Name",
+                    hintText: "Username or Email id",
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),

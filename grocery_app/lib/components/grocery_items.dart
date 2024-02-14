@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../bloc/grocery_bloc.dart';
 import '../bloc/grocery_events.dart';
 import '../bloc/grocery_states.dart';
-import '../screens/cart_page.dart';
-import '../screens/order_page.dart';
+import '../screens/pages/cart_page.dart';
+import '../screens/pages/order_page.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;

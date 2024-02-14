@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/screens/new_user.dart';
+import 'package:grocery_app/screens/drawer/drawer_page.dart';
 
-import '../bloc/grocery_bloc.dart';
-import '../bloc/grocery_events.dart';
-import '../bloc/grocery_states.dart';
-import '../components/grocery_items.dart';
+import '../../bloc/grocery_bloc.dart';
+import '../../bloc/grocery_events.dart';
+import '../../bloc/grocery_states.dart';
+import '../../components/grocery_items.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -75,77 +75,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          drawer: Drawer(
-            backgroundColor: Colors.white,
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                UserAccountsDrawerHeader(
-                    currentAccountPicture: const CircleAvatar(
-                      backgroundColor: Colors.black,
-                      child: Icon(Icons.person),
-                    ),
-                    accountName: Text(
-                      "Priyadharshini P",
-                      style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                    accountEmail: Text(
-                      "pd02102005@gmail.com",
-                      style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    )),
-                ListTile(
-                  leading: const Icon(
-                    Icons.settings,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    'Settings',
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  onTap: () {
-                    // Add navigation functionality here
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    'Edit Profile',
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  onTap: () {
-                    // Add navigation functionality here
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.logout,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    'Log out',
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  onTap: () {
-                    // Add navigation functionality here
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NewUser(),
-                        ));
-                  },
-                ),
-                // Add more ListTile widgets for additional items
-              ],
-            ),
-          ),
+          drawer:
+              const Drawer(backgroundColor: Colors.white, child: MyDrawer()),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

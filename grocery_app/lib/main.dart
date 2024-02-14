@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/screens/new_user.dart';
 
 import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
-import 'screens/intro_page.dart';
+import 'screens/pages/intro_page.dart';
 
 void main() {
   runApp(const MyApp());

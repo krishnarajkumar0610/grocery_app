@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/screens/home_page.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
 import 'package:grocery_app/screens/logins/sign_in.dart';
 import 'package:grocery_app/screens/logins/sign_up.dart';
 

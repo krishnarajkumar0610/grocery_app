@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/grocery_bloc.dart';
-import '../bloc/grocery_states.dart';
+import '../../bloc/grocery_bloc.dart';
+import '../../bloc/grocery_states.dart';
 
 class OrderPage extends StatelessWidget {
   final String? itemName;

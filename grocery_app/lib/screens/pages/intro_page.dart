@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/grocery_bloc.dart';
 import 'package:grocery_app/bloc/grocery_events.dart';
-import 'package:grocery_app/screens/new_user.dart';
+import 'package:grocery_app/screens/pages/new_user.dart';
 
 import 'home_page.dart';
 
