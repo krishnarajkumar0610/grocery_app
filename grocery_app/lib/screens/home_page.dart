@@ -29,7 +29,10 @@ class HomePage extends StatelessWidget {
                   Text(
                     "Good Morning 🤩",
                     style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color:
+                            state.themeStatus! ? Colors.black : Colors.white),
                   ),
                   const SizedBox(
                     width: 80,
@@ -56,7 +59,10 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "Let's order fresh items for you 😍",
                     style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, fontSize: 33),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 33,
+                        color:
+                            state.themeStatus! ? Colors.black : Colors.white),
                   ),
                 ),
               ),
@@ -69,7 +75,9 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   "Fresh Items",
                   style: GoogleFonts.notoSerif(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: state.themeStatus! ? Colors.black : Colors.white),
                 ),
               ),
               Expanded(

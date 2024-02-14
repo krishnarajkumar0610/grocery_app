@@ -51,21 +51,25 @@ class _CartPageState extends State<CartPage> {
                             title: Text(
                               state.cartItems![index][0],
                               style: GoogleFonts.notoSerif(
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                             ),
                             subtitle: Text(
                               "Rs.${state.cartItems![index][1]}",
                               style: GoogleFonts.notoSerif(
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                             ),
                             trailing: IconButton(
                               onPressed: () {
+                                print("INSIDE CART : ${state.themeStatus}");
                                 context.read<GroceryBloc>().add(RemoveItem(
                                     index: index,
-                                    localCarts: state.cartItems!));
+                                    localCarts: state.cartItems!,
+                                    themeStatus: state.themeStatus!));
                                 Navigator.pop(context);
                               },
-                              icon: const Icon(Icons.cancel),
+                              icon: const Icon(Icons.cancel,color: Colors.black),
                             )),
                       ),
                     );
