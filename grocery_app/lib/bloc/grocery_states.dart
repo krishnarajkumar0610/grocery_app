@@ -66,11 +66,11 @@ class GroceryStates {
 
   int quantity;
 
-  bool? themeStatus = true;
+  bool? themeStatus;
 
   GroceryStates(
       {this.totalPrice,
       required this.cartItems,
       this.quantity = 1,
-      this.themeStatus});
+      this.themeStatus = true});
 }

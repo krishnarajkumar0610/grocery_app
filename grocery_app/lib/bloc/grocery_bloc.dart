@@ -17,7 +17,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       int index = event.index!;
       cartItems.removeAt(index);
 
-      emit(GroceryStates(cartItems: cartItems, ));
+      emit(GroceryStates(cartItems: cartItems,themeStatus: event.themeStatus));
     });
 
     on<ChangeTheme>((event, emit) async {
