@@ -25,29 +25,54 @@ class HomePage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(children: [
-                  Text(
-                    "Good Morning 🤩",
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color:
-                            state.themeStatus! ? Colors.black : Colors.white),
-                  ),
-                  const SizedBox(
-                    width: 80,
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        print("CALLING THEME");
-                        context.read<GroceryBloc>().add(ChangeTheme(
-                            themeStatus: state.themeStatus,
-                            cartItems: state.cartItems));
-                      },
-                      icon: state.themeStatus!
-                          ? const Icon(Icons.dark_mode)
-                          : const Icon(Icons.sunny, color: Colors.yellow))
-                ]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        state.greetingStatus ?? "Good Morning",
+                        style: GoogleFonts.notoSerif(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: state.themeStatus!
+                                ? Colors.black
+                                : Colors.white),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            print("CALLING THEME");
+                            context.read<GroceryBloc>().add(ChangeTheme(
+                                  themeStatus: state.themeStatus,
+                                  cartItems: state.cartItems,
+                                ));
+                          },
+                          icon: state.themeStatus!
+                              ? const Icon(
+                                  Icons.dark_mode,
+                                  size: 30,
+                                )
+                              : const Icon(
+                                  Icons.sunny,
+                                  color: Colors.yellow,
+                                  size: 30,
+                                )),
+                      CircleAvatar(
+                          radius: 25,
+                          backgroundColor: state.themeStatus!?Colors.black:Colors.white,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CartPage(),
+                                  ));
+                            },
+                            icon: const Icon(
+                              Icons.shopping_cart,
+                              color: Colors.green,
+                              size: 30,
+                            ),
+                          ))
+                    ]),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -81,41 +106,26 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: GridView.builder(
-                itemCount: state.shopItems.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: GroceryItemTile(
-                      itemName: state.shopItems[index][0],
-                      itemPrice: state.shopItems[index][1],
-                      imagePath: state.shopItems[index][2],
-                      description: state.shopItems[index][3],
-                      color: state.shopItems[index][4],
-                      index: index,
-                    ),
-                  );
-                },
-              ))
+                child: GridView.builder(
+                  itemCount: state.shopItems.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: GroceryItemTile(
+                        itemName: state.shopItems[index][0],
+                        itemPrice: state.shopItems[index][1],
+                        imagePath: state.shopItems[index][2],
+                        description: state.shopItems[index][3],
+                        color: state.shopItems[index][4],
+                        index: index,
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Colors.black,
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CartPage(),
-              )),
-          label: Text(
-            "My cart",
-            style: GoogleFonts.notoSerif(color: Colors.white),
-          ),
-          icon: const Icon(
-            Icons.shopping_cart,
-            color: Colors.green,
           ),
         ),
       ),

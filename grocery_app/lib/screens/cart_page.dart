@@ -31,8 +31,10 @@ class _CartPageState extends State<CartPage> {
           // Your UI based on state goes here
           return state.cartItems!.isEmpty
               ? const Center(
-                  child:Icon(Icons.remove_shopping_cart,size: 100,)
-          )
+                  child: Icon(
+                  Icons.remove_shopping_cart,
+                  size: 200,
+                ))
               : ListView.builder(
                   itemCount: state.cartItems!.length!,
                   itemBuilder: (context, index) {

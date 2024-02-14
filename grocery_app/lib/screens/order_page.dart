@@ -43,6 +43,15 @@ class OrderPage extends StatelessWidget {
                   height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                     color: Colors.white60,
                   ),
                   child: Padding(
@@ -74,6 +83,15 @@ class OrderPage extends StatelessWidget {
                     height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
                       color: color,
                     ),
                     child: Padding(
@@ -113,7 +131,18 @@ class OrderPage extends StatelessWidget {
                   width: 300,
                   height: 80,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: color),
+                    borderRadius: BorderRadius.circular(20),
+                    color: color,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Row(
                     children: [
                       Padding(
@@ -153,21 +182,35 @@ class OrderPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, top: 10.0),
-                child: Container(
-                  width: 300,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: color),
-                  child: Center(
-                    child: Text(
-                      "Order",
-                      style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          letterSpacing: 2,
-                          color: Colors.black),
+              GestureDetector(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, top: 20.0),
+                  child: Container(
+                    width: 300,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: color,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Order Now",
+                        style: GoogleFonts.notoSerif(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            letterSpacing: 2,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),

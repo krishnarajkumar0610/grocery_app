@@ -67,10 +67,12 @@ class GroceryStates {
   int quantity;
 
   bool? themeStatus;
+  String? greetingStatus;
 
   GroceryStates(
       {this.totalPrice,
       required this.cartItems,
       this.quantity = 1,
+      this.greetingStatus,
       this.themeStatus = true});
 }
