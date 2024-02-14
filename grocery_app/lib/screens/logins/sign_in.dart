@@ -78,14 +78,19 @@ class _SignInState extends State<SignIn> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 190.0, top: 10),
-            child: Text(
-              "Forget password?",
-              style: GoogleFonts.notoSerif(
-                  fontSize: 15, fontWeight: FontWeight.bold),
+            child: GestureDetector(
+              onTap: () {
+                print("Pressed forget password");
+              },
+              child: Text(
+                "Forget password?",
+                style: GoogleFonts.notoSerif(
+                    fontSize: 15, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 20.0),
             child: Text(
               "--------------or Sign In with--------------",
               style: GoogleFonts.notoSerif(
@@ -93,7 +98,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 30.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
