@@ -142,7 +142,7 @@ class OrderPage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             child: IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.add,
                                   color: Colors.black,
                                 ))),
