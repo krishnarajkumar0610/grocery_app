@@ -25,6 +25,7 @@ class _SignInState extends State<SignIn> {
                 controller: _username,
                 decoration: InputDecoration(
                     hintText: "Full Name",
+                    prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),
               )),
@@ -33,7 +34,8 @@ class _SignInState extends State<SignIn> {
               child: TextField(
                 controller: _signInPass,
                 decoration: InputDecoration(
-                    hintText: "Full Name",
+                    hintText: "Password",
+                    prefixIcon: const Icon(Icons.lock),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),
               )),
@@ -43,7 +45,6 @@ class _SignInState extends State<SignIn> {
               onTap: () {
                 // when i sign up then it need to display a box to tell go to sign in page
                 _username.dispose();
-
                 _signInPass.dispose();
                 Navigator.pushReplacement(
                     context,
