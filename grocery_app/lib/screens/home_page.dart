@@ -57,7 +57,8 @@ class HomePage extends StatelessWidget {
                                 )),
                       CircleAvatar(
                           radius: 25,
-                          backgroundColor: state.themeStatus!?Colors.black:Colors.white,
+                          backgroundColor:
+                              state.themeStatus! ? Colors.black : Colors.white,
                           child: IconButton(
                             onPressed: () {
                               Navigator.push(
