@@ -18,6 +18,7 @@ class _NewUserState extends State<NewUser> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      animationDuration: const Duration(seconds: 1),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(280),
@@ -130,17 +131,19 @@ class _NewUserState extends State<NewUser> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 20.0, top: 30),
                       child: getField(
-                          _fullName,
+                          _password,
                           "Password",
                           const Icon(
                             Icons.lock,
                             color: Colors.black,
                           ))),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: GestureDetector(
                       onTap: () {
                         // when i sign up then it need to display a box to tell go to sign in page
+                        _fullName.dispose();
+                        _password.dispose();
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -171,10 +174,13 @@ class _NewUserState extends State<NewUser> {
                       ),
                     ),
                   ),
-                  Text(
-                    "--------------or Sign up with--------------",
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "--------------or Sign up with--------------",
+                      style: GoogleFonts.notoSerif(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
@@ -245,19 +251,9 @@ class _NewUserState extends State<NewUser> {
                           left: 30.0, right: 20.0, top: 30),
                       child: getField(
                           _fullName,
-                          "Full Name",
+                          "User Name",
                           const Icon(
                             Icons.person,
-                            color: Colors.black,
-                          ))),
-                  Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 20.0, top: 30),
-                      child: getField(
-                          _email,
-                          "Email",
-                          const Icon(
-                            Icons.email,
                             color: Colors.black,
                           ))),
                   Padding(
@@ -271,10 +267,13 @@ class _NewUserState extends State<NewUser> {
                             color: Colors.black,
                           ))),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(top: 30.0),
                     child: GestureDetector(
                       onTap: () {
                         // when i sign up then it need to display a box to tell go to sign in page
+                        _fullName.dispose();
+
+                        _password.dispose();
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -297,7 +296,7 @@ class _NewUserState extends State<NewUser> {
                             ]),
                         child: Center(
                           child: Text(
-                            "Sign Up",
+                            "Sign In",
                             style: GoogleFonts.notoSerif(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
@@ -305,13 +304,24 @@ class _NewUserState extends State<NewUser> {
                       ),
                     ),
                   ),
-                  Text(
-                    "--------------or Sign up with--------------",
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 190.0, top: 10),
+                    child: Text(
+                      "Forget password?",
+                      style: GoogleFonts.notoSerif(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "--------------or Sign In with--------------",
+                      style: GoogleFonts.notoSerif(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
