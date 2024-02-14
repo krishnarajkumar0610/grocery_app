@@ -141,7 +141,9 @@ class OrderPage extends StatelessWidget {
                         child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  // add quantity function is here
+                                },
                                 icon: const Icon(
                                   Icons.add,
                                   color: Colors.black,

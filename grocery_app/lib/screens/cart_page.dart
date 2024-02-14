@@ -30,14 +30,9 @@ class _CartPageState extends State<CartPage> {
         builder: (context, state) {
           // Your UI based on state goes here
           return state.cartItems!.isEmpty
-              ? Center(
-                  child: Text(
-                  "Cart is empty 🙃",
-                  style: GoogleFonts.notoSerif(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      letterSpacing: 1),
-                ))
+              ? const Center(
+                  child:Icon(Icons.remove_shopping_cart,size: 100,)
+          )
               : ListView.builder(
                   itemCount: state.cartItems!.length!,
                   itemBuilder: (context, index) {
