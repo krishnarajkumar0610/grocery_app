@@ -18,11 +18,12 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.orangeAccent,
         centerTitle: true,
         title: Text(
           "My Cart",
-          style: GoogleFonts.notoSerif(fontWeight: FontWeight.bold),
+          style: GoogleFonts.notoSerif(
+              fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
       body: BlocConsumer<GroceryBloc, GroceryStates>(
@@ -69,7 +70,8 @@ class _CartPageState extends State<CartPage> {
                                     themeStatus: state.themeStatus!));
                                 Navigator.pop(context);
                               },
-                              icon: const Icon(Icons.cancel,color: Colors.black),
+                              icon:
+                                  const Icon(Icons.cancel, color: Colors.black),
                             )),
                       ),
                     );

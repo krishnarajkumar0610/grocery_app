@@ -22,18 +22,19 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: color,
-          centerTitle: true,
-          title: Text(
-            "Order Page",
-            style: GoogleFonts.notoSerif(fontWeight: FontWeight.bold),
+    return BlocConsumer<GroceryBloc, GroceryStates>(
+      listener: (context, state) {},
+      builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            backgroundColor: color,
+            centerTitle: true,
+            title: Text(
+              "Order Page",
+              style: GoogleFonts.notoSerif(
+                  fontWeight: FontWeight.bold, color: Colors.black),
+            ),
           ),
-        ),
-        body: BlocConsumer<GroceryBloc, GroceryStates>(
-          listener: (context, state) {},
-          builder: (context, state) => ListView(children: [
+          body: ListView(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 20),
@@ -135,6 +136,17 @@ class OrderPage extends StatelessWidget {
                               color: Colors.black),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, left: 20),
+                        child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                ))),
+                      ),
                     ],
                   ),
                 ),
@@ -146,10 +158,20 @@ class OrderPage extends StatelessWidget {
                   height: 80,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20), color: color),
+                  child: Center(
+                    child: Text(
+                      "Order",
+                      style: GoogleFonts.notoSerif(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          letterSpacing: 2,
+                          color: Colors.black),
+                    ),
+                  ),
                 ),
               )
             ]),
-          ]),
-        ));
+          ])),
+    );
   }
 }

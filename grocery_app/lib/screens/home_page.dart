@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  "Fresh Items",
+                  "Fresh Items every day 😋",
                   style: GoogleFonts.notoSerif(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
