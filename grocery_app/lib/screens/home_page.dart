@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                             print("CALLING THEME");
                             context.read<GroceryBloc>().add(ChangeTheme(
                                   themeStatus: state.themeStatus,
-                                  cartItems: state.cartItems,
+
                                 ));
                           },
                           icon: state.themeStatus!

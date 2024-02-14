@@ -17,28 +17,37 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       int index = event.index!;
       cartItems.removeAt(index);
 
-      emit(GroceryStates(cartItems: cartItems, themeStatus: event.themeStatus));
+      emit(GroceryStates(
+          cartItems: cartItems,
+          themeStatus: state.themeStatus,
+          greetingStatus: state.greetingStatus));
     });
 
     on<ChangeTheme>((event, emit) async {
       // changing theme
       var theme = event.themeStatus!;
       theme = !theme;
-      List localCarts = event.cartItems!;
-      print(theme);
-      emit(GroceryStates(themeStatus: theme, cartItems: localCarts,greetingStatus: state.greetingStatus!));
+      print("ENA DA ");
+      emit(GroceryStates(
+          themeStatus: theme,
+          cartItems: state.cartItems,
+          greetingStatus: state.greetingStatus!));
     });
 
     on<TimeStatus>((event, emit) async {
       var hour = DateTime.now().hour;
       if (hour >= 6 && hour < 12) {
-        emit(GroceryStates(greetingStatus: "Good Morning 🥞", cartItems: event.cartItems!));
+        emit(GroceryStates(
+            greetingStatus: "Good Morning 🥞", cartItems: state.cartItems!));
       } else if (hour >= 12 && hour < 17) {
-        emit(GroceryStates(greetingStatus: "Good Afternoon 🍕", cartItems: event.cartItems));
+        emit(GroceryStates(
+            greetingStatus: "Good Afternoon 🍕", cartItems: state.cartItems));
       } else if (hour >= 17 && hour < 19) {
-        emit(GroceryStates(greetingStatus: "Good Evening 🍫", cartItems: event.cartItems));
+        emit(GroceryStates(
+            greetingStatus: "Good Evening 🍫", cartItems: state.cartItems));
       } else {
-        emit(GroceryStates(greetingStatus: "Good Night 🍛", cartItems: event.cartItems));
+        emit(GroceryStates(
+            greetingStatus: "Good Night 🍛", cartItems: state.cartItems));
       }
     });
   }
