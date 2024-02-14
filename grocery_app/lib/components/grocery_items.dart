@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:priya_project/bloc/grocery_bloc.dart';
-import 'package:priya_project/bloc/grocery_events.dart';
-import 'package:priya_project/bloc/grocery_states.dart';
-import 'package:priya_project/screens/cart_page.dart';
-import 'package:priya_project/screens/order_page.dart';
+
+import '../bloc/grocery_bloc.dart';
+import '../bloc/grocery_events.dart';
+import '../bloc/grocery_states.dart';
+import '../screens/cart_page.dart';
+import '../screens/order_page.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:priya_project/bloc/grocery_events.dart';
-import 'package:priya_project/bloc/grocery_states.dart';
+
+import 'grocery_events.dart';
+import 'grocery_states.dart';
 
 class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
@@ -23,7 +24,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       var theme = event.themeStatus!;
       theme = !theme;
       List localCarts = event.cartItems!;
-      emit(GroceryStates(themeStatus: theme,cartItems: localCarts));
+      emit(GroceryStates(themeStatus: theme, cartItems: localCarts));
     });
   }
 }

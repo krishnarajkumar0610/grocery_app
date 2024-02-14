@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:priya_project/bloc/grocery_bloc.dart';
-import 'package:priya_project/bloc/grocery_events.dart';
 
-import 'package:priya_project/components/grocery_items.dart';
-
+import '../bloc/grocery_bloc.dart';
+import '../bloc/grocery_events.dart';
 import '../bloc/grocery_states.dart';
+import '../components/grocery_items.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,9 +37,9 @@ class HomePage extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         print("CALLING THEME");
-                        context
-                            .read<GroceryBloc>()
-                            .add(ChangeTheme(themeStatus: state.themeStatus,cartItems: state.cartItems));
+                        context.read<GroceryBloc>().add(ChangeTheme(
+                            themeStatus: state.themeStatus,
+                            cartItems: state.cartItems));
                       },
                       icon: state.themeStatus!
                           ? const Icon(Icons.dark_mode)

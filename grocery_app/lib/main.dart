@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:priya_project/bloc/grocery_bloc.dart';
+
+import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
 import 'screens/intro_page.dart';
 

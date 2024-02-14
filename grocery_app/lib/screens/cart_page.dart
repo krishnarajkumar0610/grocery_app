@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:priya_project/bloc/grocery_bloc.dart';
 
+import '../bloc/grocery_bloc.dart';
 import '../bloc/grocery_events.dart';
 import '../bloc/grocery_states.dart';
 

@@ -1,4 +1,4 @@
-# priya_project
+# grocery_app
 
 A new Flutter project.
 
