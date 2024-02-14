@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlue,
             title: Text(
               "Grocery App",
               style: GoogleFonts.notoSerif(
@@ -53,8 +53,7 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 child: CircleAvatar(
                     radius: 25,
-                    backgroundColor:
-                        state.themeStatus! ? Colors.orange : Colors.white,
+                    backgroundColor: Colors.white,
                     child: IconButton(
                       onPressed: () {
                         Navigator.push(
@@ -78,7 +77,6 @@ class HomePage extends StatelessWidget {
           drawer:
               const Drawer(backgroundColor: Colors.white, child: MyDrawer()),
           body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -97,13 +95,16 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.orange,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Text(
-                    "Let's order fresh items for you 😍",
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 33,
-                        color:
-                            state.themeStatus! ? Colors.black : Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "Let's order fresh items for you 😍",
+                      style: GoogleFonts.notoSerif(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color:
+                              state.themeStatus! ? Colors.black : Colors.white),
+                    ),
                   ),
                 ),
               ),
