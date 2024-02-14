@@ -13,9 +13,9 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
 
     on<RemoveItem>((event, emit) async {
       // remove item event
-      List cartItems = event.localCarts;
+      List? cartItems = state.cartItems;
       int index = event.index!;
-      cartItems.removeAt(index);
+      cartItems?.removeAt(index);
 
       emit(GroceryStates(
           cartItems: cartItems,
@@ -41,13 +41,13 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
             greetingStatus: "Good Morning 🥞", cartItems: state.cartItems!));
       } else if (hour >= 12 && hour < 17) {
         emit(GroceryStates(
-            greetingStatus: "Good Afternoon 🍕", cartItems: state.cartItems));
+            greetingStatus: "Good Afternoon 🍚", cartItems: state.cartItems));
       } else if (hour >= 17 && hour < 19) {
         emit(GroceryStates(
             greetingStatus: "Good Evening 🍫", cartItems: state.cartItems));
       } else {
         emit(GroceryStates(
-            greetingStatus: "Good Night 🍛", cartItems: state.cartItems));
+            greetingStatus: "Good Night 🍜", cartItems: state.cartItems));
       }
     });
   }

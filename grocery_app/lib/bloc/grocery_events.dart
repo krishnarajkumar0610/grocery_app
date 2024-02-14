@@ -8,17 +8,15 @@ class AddToCart extends GrossEvents {
 
 class RemoveItem extends GrossEvents {
   int? index; // this will store the index value
-  List localCarts;
 
-  RemoveItem({this.index, required this.localCarts});
+
+  RemoveItem({this.index});
 }
 
 class ChangeTheme extends GrossEvents {
   bool? themeStatus;
 
-  final String? greetings;
-
-  ChangeTheme({this.themeStatus, this.greetings});
+  ChangeTheme({this.themeStatus});
 }
 
 class TimeStatus extends GrossEvents {}

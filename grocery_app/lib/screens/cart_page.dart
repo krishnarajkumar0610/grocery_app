@@ -63,7 +63,6 @@ class _CartPageState extends State<CartPage> {
                                 print("INSIDE CART : ${state.themeStatus}");
                                 context.read<GroceryBloc>().add(RemoveItem(
                                       index: index,
-                                      localCarts: state.cartItems!,
                                     ));
                                 Navigator.pop(context);
                               },
