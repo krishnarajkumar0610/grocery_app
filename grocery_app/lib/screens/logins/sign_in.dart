@@ -77,7 +77,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 190.0, top: 10),
+            padding: const EdgeInsets.only(left: 180.0, top: 20),
             child: GestureDetector(
               onTap: () {
                 print("Pressed forget password");
@@ -85,7 +85,9 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forget password?",
                 style: GoogleFonts.notoSerif(
-                    fontSize: 15, fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red),
               ),
             ),
           ),
