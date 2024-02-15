@@ -91,17 +91,15 @@ class GroceryStates {
 
   final List? cartItems;
 
-  final double? totalPrice;
-
   int? quantity;
-
+  int? totalAmount;
   bool? themeStatus;
   String? greetingStatus;
 
   GroceryStates(
-      {this.totalPrice,
-      required this.cartItems,
+      {required this.cartItems,
       this.quantity = 1,
+      this.totalAmount = 0,
       this.greetingStatus,
       this.themeStatus = true});
 }

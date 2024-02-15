@@ -177,7 +177,7 @@ class OrderPage extends StatelessWidget {
                                   state.quantity == null
                                       ? context
                                           .read<GroceryBloc>()
-                                          .add(AddQuantity(quantity: 0))
+                                          .add(AddQuantity(quantity: 1))
                                       : context.read<GroceryBloc>().add(
                                           AddQuantity(
                                               quantity: state.quantity));
@@ -192,7 +192,26 @@ class OrderPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                        title: Text(
+                          "Grocery App",
+                          style: GoogleFonts.notoSerif(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        content: ListTile(
+                          title: Text(
+                            "Ordering $itemName",
+                            style: GoogleFonts.notoSerif(
+                                fontWeight: FontWeight.bold,
+                              fontSize: 15
+                            ),
+                          ),
+                        )),
+                  );
+                },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 30, top: 20.0),
                   child: Container(

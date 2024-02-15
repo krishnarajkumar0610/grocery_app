@@ -26,5 +26,7 @@ class TimeStatus extends GrossEvents {
 class AddQuantity extends GrossEvents {
   int? quantity;
 
-  AddQuantity({this.quantity});
+  AddQuantity({
+    this.quantity,
+  });
 }

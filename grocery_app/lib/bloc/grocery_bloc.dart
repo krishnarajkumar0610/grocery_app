@@ -42,16 +42,16 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       var hour = DateTime.now().hour;
       if (hour >= 6 && hour < 12) {
         emit(GroceryStates(
-            greetingStatus: "Good Morning 🥞", cartItems: state.cartItems!));
+            greetingStatus: "Good Morning 🥞", cartItems: state.cartItems!,themeStatus: state.themeStatus));
       } else if (hour >= 12 && hour < 17) {
         emit(GroceryStates(
-            greetingStatus: "Good Afternoon 🍚", cartItems: state.cartItems));
+            greetingStatus: "Good Afternoon 🍚", cartItems: state.cartItems,themeStatus: state.themeStatus));
       } else if (hour >= 17 && hour < 19) {
         emit(GroceryStates(
-            greetingStatus: "Good Evening 🍫", cartItems: state.cartItems));
+            greetingStatus: "Good Evening 🍫", cartItems: state.cartItems,themeStatus: state.themeStatus));
       } else {
         emit(GroceryStates(
-            greetingStatus: "Good Night 🍜", cartItems: state.cartItems));
+            greetingStatus: "Good Night 🍜", cartItems: state.cartItems,themeStatus: state.themeStatus));
       }
     });
 
@@ -59,11 +59,13 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       var quantity = event.quantity!;
       quantity++;
       print("Inside the Quantity event $quantity");
+
       emit(GroceryStates(
-          cartItems: state.cartItems,
-          quantity: quantity,
-          greetingStatus: state.greetingStatus,
-          themeStatus: state.themeStatus));
+        cartItems: state.cartItems,
+        quantity: quantity,
+        greetingStatus: state.greetingStatus,
+        themeStatus: state.themeStatus,
+      ));
     });
   }
 }
