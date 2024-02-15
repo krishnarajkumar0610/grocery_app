@@ -68,6 +68,10 @@ flutter:
     - assets/chicken.png
     - assets/banana.png
     - assets/water.png
+    - assets/apple.png
+    - assets/carrot.png
+    - assets/orange.png
+    - assets/watermelon.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
