@@ -58,6 +58,34 @@ class GroceryStates {
       "Watermelon is a juicy and refreshing fruit with a vibrant red or pink flesh and black seeds, known for its high water content and sweet flavor, making it a popular summer treat.",
       Colors.lightGreen
     ],
+    [
+      "Cabbage",
+      "60",
+      "assets/cabbage.png",
+      "Cabbage is a leafy green or purple biennial plant grown as an annual vegetable crop for its dense-leaved heads. It's rich in vitamins and fiber, commonly used in various cuisines worldwide for salads, soups, and stir-fries.",
+      Colors.lightGreen
+    ],
+    [
+      "Milk",
+      "30",
+      "assets/milk.png",
+      "Milk is a nutrient-rich liquid produced by mammals to nourish their young, containing essential vitamins, minerals, and proteins vital for human health. It serves as a versatile ingredient in various culinary dishes and beverages, offering a creamy texture and distinctive flavor.",
+      Colors.lightGreen
+    ],
+    [
+      "Potato",
+      "45",
+      "assets/potato.png",
+      "Potato, a starchy tuber, is a versatile and widely consumed vegetable prized for its rich carbohydrate content and culinary adaptability, serving as a staple ingredient in countless dishes worldwide.",
+      Colors.lightGreen
+    ],
+    [
+      "Rocemilk",
+      "60",
+      "assets/rocemilk.png",
+      "Rocemilk is an educational platform providing interactive learning experiences through online courses and tutorials. It offers a diverse range of subjects, catering to learners of all levels and interests.",
+      Colors.lightGreen
+    ],
   ]; // List
   // of data's
 

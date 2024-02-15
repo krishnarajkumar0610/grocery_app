@@ -72,6 +72,10 @@ flutter:
     - assets/carrot.png
     - assets/orange.png
     - assets/watermelon.png
+    - assets/cabbage.png
+    - assets/milk.png
+    - assets/potato.png
+    - assets/rocemilk.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
