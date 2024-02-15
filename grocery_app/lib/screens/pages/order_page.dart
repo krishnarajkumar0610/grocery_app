@@ -115,7 +115,7 @@ class OrderPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 10.0),
                 child: Text(
-                  "Product Price : ${itemPrice!}",
+                  "Product Price : ${itemPrice!}/-",
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,

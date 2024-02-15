@@ -64,7 +64,7 @@ class _CartPageState extends State<CartPage> {
                                 context.read<GroceryBloc>().add(RemoveItem(
                                       index: index,
                                     ));
-                                Navigator.pop(context);
+                                //Navigator.pop(context);
                               },
                               icon:
                                   const Icon(Icons.cancel, color: Colors.black),
