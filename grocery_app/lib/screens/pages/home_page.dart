@@ -90,59 +90,67 @@ class _HomePageState extends State<HomePage> {
           ),
           drawer:
               const Drawer(backgroundColor: Colors.white, child: MyDrawer()),
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  state.greetingStatus!,
-                  style: GoogleFonts.notoSerif(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: state.themeStatus! ? Colors.black : Colors.white),
+          body: RefreshIndicator(
+            onRefresh: () async {
+              context.read<GroceryBloc>().add(TimeStatus());
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text(
+                    state.greetingStatus!,
+                    style: GoogleFonts.notoSerif(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color:
+                            state.themeStatus! ? Colors.black : Colors.white),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      "Let's order fresh items for you 😍",
-                      style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color:
-                              state.themeStatus! ? Colors.black : Colors.white),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Let's order fresh items for you 😍",
+                        style: GoogleFonts.notoSerif(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: state.themeStatus!
+                                ? Colors.black
+                                : Colors.white),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: GridView.builder(
-                  itemCount: state.shopItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: GroceryItemTile(
-                        itemName: state.shopItems[index][0],
-                        itemPrice: state.shopItems[index][1],
-                        imagePath: state.shopItems[index][2],
-                        description: state.shopItems[index][3],
-                        color: state.shopItems[index][4],
-                        index: index,
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: state.shopItems.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: GroceryItemTile(
+                          itemName: state.shopItems[index][0],
+                          itemPrice: state.shopItems[index][1],
+                          imagePath: state.shopItems[index][2],
+                          description: state.shopItems[index][3],
+                          color: state.shopItems[index][4],
+                          index: index,
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
