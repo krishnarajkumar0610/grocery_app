@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: Colors.deepPurple,
             title: Text(
               "Grocery App",
               style: GoogleFonts.notoSerif(
