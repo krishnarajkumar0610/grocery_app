@@ -11,6 +11,7 @@ class OrderPage extends StatelessWidget {
   final String? itemPrice;
   final String? imagePath;
   final String? description;
+
   final color;
 
   const OrderPage(
@@ -205,9 +206,7 @@ class OrderPage extends StatelessWidget {
                           title: Text(
                             "Ordering $itemName",
                             style: GoogleFonts.notoSerif(
-                                fontWeight: FontWeight.bold,
-                              fontSize: 15
-                            ),
+                                fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                         )),
                   );
