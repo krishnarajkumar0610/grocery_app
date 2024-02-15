@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../pages/new_user.dart';
+import '../pages/newuser_page.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -30,10 +30,10 @@ class _MyDrawerState extends State<MyDrawer> {
           onTap: () {
             // Add navigation functionality here
             if (navigateToLogout) {
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NewUser(),
+                    builder: (context) => const NewUser(),
                   ));
             }
           },

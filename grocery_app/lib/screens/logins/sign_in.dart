@@ -44,8 +44,8 @@ class _SignInState extends State<SignIn> {
             child: GestureDetector(
               onTap: () {
                 // when i sign up then it need to display a box to tell go to sign in page
-                _username.dispose();
-                _signInPass.dispose();
+                _username.clear();
+                _signInPass.clear();
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(

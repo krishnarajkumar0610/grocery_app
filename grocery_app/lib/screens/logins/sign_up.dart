@@ -55,14 +55,11 @@ class _SignUpState extends State<SignUp> {
             child: GestureDetector(
               onTap: () {
                 // when i sign up then it need to display a box to tell go to sign in page
-                _fullName.dispose();
-                _email.dispose();
-                _password.dispose();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ));
+                _fullName.clear();
+                _email.clear();
+                _password.clear();
+                print(
+                    "Successfully Created accout for this app, You can log in");
               },
               child: Container(
                 width: 250,
