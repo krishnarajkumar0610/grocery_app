@@ -17,9 +17,14 @@ class _MyDrawerState extends State<MyDrawer> {
       padding: EdgeInsets.zero,
       children: <Widget>[
         UserAccountsDrawerHeader(
-            currentAccountPicture: const CircleAvatar(
-              backgroundColor: Colors.black,
-              child: Icon(Icons.person),
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [Colors.red, Colors.blue])),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.orange,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Image.asset("assets/user_profile.png"),
+              ),
             ),
             accountName: Text(
               "Priyadharshini P",
