@@ -18,3 +18,5 @@ class ChangeTheme extends GrossEvents {
 }
 
 class TimeStatus extends GrossEvents {}
+
+class AddQantity extends GrossEvents {}

@@ -5,13 +5,13 @@ import 'grocery_states.dart';
 
 class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
-    on<AddToCart>((event, emit) async {
+    on<AddToCart>((event, emit)  {
       // add item event
       int? index = event.index;
       state.cartItems?.add(state.shopItems[index!]);
     });
 
-    on<RemoveItem>((event, emit) async {
+    on<RemoveItem>((event, emit)  {
       // remove item event
       List? cartItems = state.cartItems;
       int index = event.index!;
@@ -23,7 +23,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
           greetingStatus: state.greetingStatus));
     });
 
-    on<ChangeTheme>((event, emit) async {
+    on<ChangeTheme>((event, emit)  {
       // changing theme
       var theme = event.themeStatus!;
       theme = !theme;
@@ -34,7 +34,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
           greetingStatus: state.greetingStatus!));
     });
 
-    on<TimeStatus>((event, emit) async {
+    on<TimeStatus>((event, emit)  {
       var hour = DateTime.now().hour;
       if (hour >= 6 && hour < 12) {
         emit(GroceryStates(
@@ -50,5 +50,9 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
             greetingStatus: "Good Night 🍜", cartItems: state.cartItems));
       }
     });
+
+    // on<AddQantity>((event,emit)()){
+    //
+    // }
   }
 }
