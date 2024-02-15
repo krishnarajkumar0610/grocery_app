@@ -8,8 +8,6 @@ class AddToCart extends GrossEvents {
 
 class RemoveItem extends GrossEvents {
   int? index; // this will store the index value
-
-
   RemoveItem({this.index});
 }
 
