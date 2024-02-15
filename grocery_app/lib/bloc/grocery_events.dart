@@ -17,6 +17,14 @@ class ChangeTheme extends GrossEvents {
   ChangeTheme({this.themeStatus});
 }
 
-class TimeStatus extends GrossEvents {}
+class TimeStatus extends GrossEvents {
+  TimeStatus() {
+    print("VANTU VANTU POVEA");
+  }
+}
 
-class AddQantity extends GrossEvents {}
+class AddQuantity extends GrossEvents {
+  int? quantity;
+
+  AddQuantity({this.quantity});
+}

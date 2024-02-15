@@ -5,13 +5,17 @@ import 'grocery_states.dart';
 
 class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
-    on<AddToCart>((event, emit)  {
+    on<AddToCart>((event, emit) {
       // add item event
       int? index = event.index;
       state.cartItems?.add(state.shopItems[index!]);
+      emit(GroceryStates(
+          cartItems: state.cartItems,
+          greetingStatus: state.greetingStatus,
+          themeStatus: state.themeStatus));
     });
 
-    on<RemoveItem>((event, emit)  {
+    on<RemoveItem>((event, emit) {
       // remove item event
       List? cartItems = state.cartItems;
       int index = event.index!;
@@ -23,7 +27,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
           greetingStatus: state.greetingStatus));
     });
 
-    on<ChangeTheme>((event, emit)  {
+    on<ChangeTheme>((event, emit) {
       // changing theme
       var theme = event.themeStatus!;
       theme = !theme;
@@ -34,7 +38,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
           greetingStatus: state.greetingStatus!));
     });
 
-    on<TimeStatus>((event, emit)  {
+    on<TimeStatus>((event, emit) {
       var hour = DateTime.now().hour;
       if (hour >= 6 && hour < 12) {
         emit(GroceryStates(
@@ -51,8 +55,15 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       }
     });
 
-    // on<AddQantity>((event,emit)()){
-    //
-    // }
+    on<AddQuantity>((event, emit) async {
+      var quantity = event.quantity!;
+      quantity++;
+      print("Inside the Quantity event $quantity");
+      emit(GroceryStates(
+          cartItems: state.cartItems,
+          quantity: quantity,
+          greetingStatus: state.greetingStatus,
+          themeStatus: state.themeStatus));
+    });
   }
 }

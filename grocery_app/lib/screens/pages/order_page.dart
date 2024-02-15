@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/grocery_events.dart';
 
 import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_states.dart';
@@ -146,7 +147,7 @@ class OrderPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 50.0),
+                        padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
                           "Quantity :",
                           style: GoogleFonts.notoSerif(
@@ -158,7 +159,7 @@ class OrderPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 5),
                         child: Text(
-                          "${state.quantity}",
+                          state.quantity == null ? "0" : "${state.quantity}",
                           style: GoogleFonts.notoSerif(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
@@ -172,6 +173,14 @@ class OrderPage extends StatelessWidget {
                             child: IconButton(
                                 onPressed: () {
                                   // add quantity function is here
+                                  print("CLICLED + ${state.quantity}");
+                                  state.quantity == null
+                                      ? context
+                                          .read<GroceryBloc>()
+                                          .add(AddQuantity(quantity: 0))
+                                      : context.read<GroceryBloc>().add(
+                                          AddQuantity(
+                                              quantity: state.quantity));
                                 },
                                 icon: const Icon(
                                   Icons.add,

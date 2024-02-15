@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,8 +11,20 @@ import '../../bloc/grocery_states.dart';
 import '../../components/grocery_items.dart';
 import 'cart_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GroceryBloc>().add(TimeStatus());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +93,7 @@ class HomePage extends StatelessWidget {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top:20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Text(
                   state.greetingStatus!,
                   style: GoogleFonts.notoSerif(
@@ -108,7 +122,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-
               Expanded(
                 child: GridView.builder(
                   itemCount: state.shopItems.length,

@@ -93,7 +93,7 @@ class GroceryStates {
 
   final double? totalPrice;
 
-  int quantity;
+  int? quantity;
 
   bool? themeStatus;
   String? greetingStatus;
