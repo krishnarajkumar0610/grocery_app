@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(top:20),
                 child: Text(
                   state.greetingStatus!,
                   style: GoogleFonts.notoSerif(
@@ -108,16 +108,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  "Fresh Items every day 😋",
-                  style: GoogleFonts.notoSerif(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: state.themeStatus! ? Colors.black : Colors.white),
-                ),
-              ),
+
               Expanded(
                 child: GridView.builder(
                   itemCount: state.shopItems.length,

@@ -11,6 +11,29 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  Widget getOptions({required Icon icon, required String text}) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[500],
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: ListTile(
+          leading: icon,
+          title: Text(
+            text,
+            style: GoogleFonts.notoSerif(
+                fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+          onTap: () {
+            // Add navigation functionality here
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -18,13 +41,11 @@ class _MyDrawerState extends State<MyDrawer> {
       children: <Widget>[
         UserAccountsDrawerHeader(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [Colors.red, Colors.blue])),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.orange,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Image.asset("assets/user_profile.png"),
-              ),
+              gradient: LinearGradient(colors: [Colors.red, Colors.blue]),
+            ),
+            currentAccountPicture: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.asset("assets/user_profile.png"),
             ),
             accountName: Text(
               "Priyadharshini P",
@@ -36,53 +57,34 @@ class _MyDrawerState extends State<MyDrawer> {
               style: GoogleFonts.notoSerif(
                   fontWeight: FontWeight.bold, color: Colors.black),
             )),
-        ListTile(
-          leading: const Icon(
-            Icons.settings,
-            color: Colors.black,
-          ),
-          title: Text(
-            'Settings',
-            style: GoogleFonts.notoSerif(
-                fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          onTap: () {
-            // Add navigation functionality here
-          },
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.edit,
-            color: Colors.black,
-          ),
-          title: Text(
-            'Edit Profile',
-            style: GoogleFonts.notoSerif(
-                fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          onTap: () {
-            // Add navigation functionality here
-          },
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.logout,
-            color: Colors.black,
-          ),
-          title: Text(
-            'Log out',
-            style: GoogleFonts.notoSerif(
-                fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          onTap: () {
-            // Add navigation functionality here
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const NewUser(),
-                ));
-          },
-        ),
+        getOptions(
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.black,
+            ),
+            text: 'Settings'),
+        getOptions(
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.black,
+            ),
+            text: "Edit Profile"),
+        getOptions(
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.black,
+            ),
+            text: "Logout"),
+
+        Padding(
+            padding: const EdgeInsets.only(top: 100, left: 50),
+            child: Text(
+              "Enjoy your food 😇",
+              style: GoogleFonts.notoSerif(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ))
         // Add more ListTile widgets for additional items
       ],
     );
