@@ -11,14 +11,15 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  Widget getOptions({required Icon icon, required String text}) {
+  Widget getOptions(
+      {required Icon icon,
+      required String text,
+      required bool navigateToLogout}) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[500],
-          borderRadius: BorderRadius.circular(10)
-        ),
+            color: Colors.grey[500], borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           leading: icon,
           title: Text(
@@ -28,6 +29,13 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           onTap: () {
             // Add navigation functionality here
+            if (navigateToLogout) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewUser(),
+                  ));
+            }
           },
         ),
       ),
@@ -41,7 +49,8 @@ class _MyDrawerState extends State<MyDrawer> {
       children: <Widget>[
         UserAccountsDrawerHeader(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [Colors.red, Colors.blue]),
+              gradient:
+                  LinearGradient(colors: [Colors.blueAccent, Colors.white]),
             ),
             currentAccountPicture: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -62,19 +71,22 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.settings,
               color: Colors.black,
             ),
-            text: 'Settings'),
+            text: 'Settings',
+            navigateToLogout: false),
         getOptions(
             icon: const Icon(
               Icons.edit,
               color: Colors.black,
             ),
-            text: "Edit Profile"),
+            text: "Edit Profile",
+            navigateToLogout: false),
         getOptions(
             icon: const Icon(
               Icons.logout,
               color: Colors.black,
             ),
-            text: "Logout"),
+            text: "Logout",
+            navigateToLogout: true),
 
         Padding(
             padding: const EdgeInsets.only(top: 100, left: 50),
