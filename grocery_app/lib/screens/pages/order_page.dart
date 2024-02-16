@@ -7,20 +7,21 @@ import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_states.dart';
 
 class OrderPage extends StatelessWidget {
-  final String? itemName;
-  final String? itemPrice;
-  final String? imagePath;
-  final String? description;
-
+  final String itemName;
+  final int itemPrice;
+  final String imagePath;
+  final String description;
+  final int? index;
   final color;
 
   const OrderPage(
       {super.key,
       required this.itemName,
-      this.itemPrice,
-      this.imagePath,
-      this.description,
-      this.color});
+      required this.itemPrice,
+      required this.imagePath,
+      required this.description,
+      required this.color,
+      this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class OrderPage extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Image.asset(imagePath!),
+                    child: Image.asset(imagePath),
                   ),
                 ),
               ),
@@ -68,7 +69,7 @@ class OrderPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 10.0),
                 child: Text(
-                  "Product Name : ${itemName!}",
+                  "Product Name : $itemName",
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -101,7 +102,7 @@ class OrderPage extends StatelessWidget {
                       child: ListView(
                         children: [
                           Text(
-                            description!,
+                            description,
                             style: GoogleFonts.notoSerif(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -117,7 +118,7 @@ class OrderPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 10.0),
                 child: Text(
-                  "Product Price : ${itemPrice!}/-",
+                  "Product Price : $itemPrice/-",
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -174,14 +175,18 @@ class OrderPage extends StatelessWidget {
                             child: IconButton(
                                 onPressed: () {
                                   // add quantity function is here
-                                  print("CLICLED + ${state.quantity}");
+
                                   state.quantity == null
                                       ? context
                                           .read<GroceryBloc>()
-                                          .add(AddQuantity(quantity: 1))
-                                      : context.read<GroceryBloc>().add(
-                                          AddQuantity(
-                                              quantity: state.quantity));
+                                          .add(AddQuantity(
+                                            quantity: 1,
+                                          ))
+                                      : context
+                                          .read<GroceryBloc>()
+                                          .add(AddQuantity(
+                                            quantity: state.quantity,
+                                          ));
                                 },
                                 icon: const Icon(
                                   Icons.add,
@@ -208,6 +213,7 @@ class OrderPage extends StatelessWidget {
                             style: GoogleFonts.notoSerif(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
+                          subtitle: Text("TOTAL PRICE : ${state.totalAmount!}"),
                         )),
                   );
                 },

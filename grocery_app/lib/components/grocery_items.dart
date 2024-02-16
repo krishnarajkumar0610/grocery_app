@@ -10,11 +10,11 @@ import '../screens/pages/order_page.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;
-  final String itemPrice;
+  final int itemPrice;
   final String imagePath;
   final String description;
   final color;
-  int index;
+  final int? index;
 
   GroceryItemTile({
     super.key,
@@ -93,6 +93,7 @@ class GroceryItemTile extends StatelessWidget {
                             itemPrice: itemPrice,
                             imagePath: imagePath,
                             description: description,
+                            index: index,
                             color: color,
                           ),
                         ));
