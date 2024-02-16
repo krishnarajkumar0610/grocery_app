@@ -213,7 +213,7 @@ class OrderPage extends StatelessWidget {
                             style: GoogleFonts.notoSerif(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
-                          subtitle: Text("TOTAL PRICE : ${state.totalAmount!}"),
+                          subtitle: Text("TOTAL PRICE : ${state.totalAmount?? 0}"),
                         )),
                   );
                 },

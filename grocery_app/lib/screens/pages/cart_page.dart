@@ -68,8 +68,8 @@ class _CartPageState extends State<CartPage> {
                                       ));
                                   //Navigator.pop(context);
                                 },
-                                icon:
-                                    const Icon(Icons.cancel, color: Colors.black),
+                                icon: const Icon(Icons.cancel,
+                                    color: Colors.black),
                               )),
                         ),
                       );
