@@ -140,9 +140,9 @@ class _HomePageState extends State<HomePage> {
                         child: GroceryItemTile(
                           itemName: state.shopItems[index][0],
                           itemPrice: state.shopItems[index][1],
-                          imagePath: state.shopItems[index][4],
-                          description: state.shopItems[index][5],
-                          color: state.shopItems[index][6],
+                          imagePath: state.shopItems[index][2],
+                          description: state.shopItems[index][3],
+                          color: state.shopItems[index][4],
                           index: index,
                         ),
                       );

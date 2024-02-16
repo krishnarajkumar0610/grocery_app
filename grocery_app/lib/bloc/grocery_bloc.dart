@@ -70,18 +70,6 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       }
     });
 
-    on<AddQuantity>((event, emit) {
-      var quantity = event.quantity!;
-      quantity++;
-
-      emit(GroceryStates(
-          cartItems: state.cartItems,
-          quantity: quantity,
-          greetingStatus: state.greetingStatus,
-          themeStatus: state.themeStatus,
-          totalAmount: state.totalAmount));
-    });
-
-
+    on<AddQuantity>((event, emit) {});
   }
 }

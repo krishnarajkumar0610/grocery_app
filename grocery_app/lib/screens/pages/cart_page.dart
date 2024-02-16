@@ -47,7 +47,7 @@ class _CartPageState extends State<CartPage> {
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(20)),
                           child: ListTile(
-                              leading: Image.asset(state.cartItems![index][4]),
+                              leading: Image.asset(state.cartItems![index][2]),
                               title: Text(
                                 state.cartItems![index][0],
                                 style: GoogleFonts.notoSerif(

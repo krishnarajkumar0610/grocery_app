@@ -160,13 +160,12 @@ class OrderPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 5),
-                        child: Text(
-                          state.quantity == null ? "0" : "${state.quantity}",
-                          style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              color: Colors.black),
-                        ),
+                        // child: Text(
+                        //   style: GoogleFonts.notoSerif(
+                        //       fontWeight: FontWeight.bold,
+                        //       fontSize: 25,
+                        //       color: Colors.black),
+                        // ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0, left: 20),
@@ -175,18 +174,6 @@ class OrderPage extends StatelessWidget {
                             child: IconButton(
                                 onPressed: () {
                                   // add quantity function is here
-
-                                  state.quantity == null
-                                      ? context
-                                          .read<GroceryBloc>()
-                                          .add(AddQuantity(
-                                            quantity: 1,
-                                          ))
-                                      : context
-                                          .read<GroceryBloc>()
-                                          .add(AddQuantity(
-                                            quantity: state.quantity,
-                                          ));
                                 },
                                 icon: const Icon(
                                   Icons.add,
@@ -213,7 +200,8 @@ class OrderPage extends StatelessWidget {
                             style: GoogleFonts.notoSerif(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
-                          subtitle: Text("TOTAL PRICE : ${state.totalAmount?? 0}"),
+                          subtitle:
+                              Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
                         )),
                   );
                 },
