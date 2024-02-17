@@ -28,4 +28,3 @@ class AddQuantity extends GrossEvents {
 
   AddQuantity({this.quantity});
 }
-
