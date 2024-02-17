@@ -158,15 +158,7 @@ class OrderPage extends StatelessWidget {
                               color: Colors.black),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 5),
-                        // child: Text(
-                        //   style: GoogleFonts.notoSerif(
-                        //       fontWeight: FontWeight.bold,
-                        //       fontSize: 25,
-                        //       color: Colors.black),
-                        // ),
-                      ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0, left: 20),
                         child: CircleAvatar(

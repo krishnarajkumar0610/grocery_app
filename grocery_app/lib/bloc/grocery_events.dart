@@ -19,7 +19,7 @@ class ChangeTheme extends GrossEvents {
 
 class GreetingStatus extends GrossEvents {
   GreetingStatus() {
-    print("VANTU VANTU POVEA");
+    print("Inside the Greeting status");
   }
 }
 
