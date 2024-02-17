@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../pages/home_page.dart';
 
+// this is sign in page
+
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -49,7 +51,8 @@ class _SignInState extends State<SignIn> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) =>
+                          const HomePage(), // <= click this for home page
                     ));
               },
               child: Container(
@@ -160,3 +163,5 @@ class _SignInState extends State<SignIn> {
     ]);
   }
 }
+
+// ending sing in

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/screens/pages/home_page.dart';
+
 import 'package:grocery_app/screens/logins/sign_in.dart';
 import 'package:grocery_app/screens/logins/sign_up.dart';
+
+// 2nd page starting
 
 class NewUser extends StatefulWidget {
   const NewUser({Key? key}) : super(key: key);
@@ -12,10 +14,6 @@ class NewUser extends StatefulWidget {
 }
 
 class _NewUserState extends State<NewUser> {
-  final _fullName = TextEditingController();
-  final _email = TextEditingController();
-  final _password = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -103,12 +101,17 @@ class _NewUserState extends State<NewUser> {
             ),
           ),
         ),
+
+        // calling sign up and sign in
+
         body: const TabBarView(
           children: [
             // Content of Sign up tab
-            SignUp(),
+            SignUp(), // <= click this for sign up
+
             // Content of Sign in tab
-            SignIn()
+
+            SignIn(), // <= click this for sign in
           ],
         ),
       ),
@@ -124,4 +127,6 @@ class _NewUserState extends State<NewUser> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
     );
   }
+
+// 2nd page ending
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,17 +16,18 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
+  // calling 2nd page
   @override
   void initState() {
     super.initState();
     final bloc = BlocProvider.of<GroceryBloc>(context);
     bloc.add(TimeStatus());
     Timer(
-      const Duration(seconds: 5),
+      const Duration(seconds: 10),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const NewUser(),
+          builder: (context) => const NewUser(),// <= click this for new user
         ),
       ),
     );
@@ -35,6 +35,8 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Splash screen
+
     return Scaffold(
       body: ListView(children: [
         Column(
@@ -56,5 +58,7 @@ class _IntroPageState extends State<IntroPage> {
         ),
       ]),
     );
+
+    // Splash screen
   }
 }

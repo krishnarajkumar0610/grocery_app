@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../pages/home_page.dart';
+
+// this is sing up page
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -154,3 +155,5 @@ class _SignUpState extends State<SignUp> {
     ]);
   }
 }
+
+// end of sign up page

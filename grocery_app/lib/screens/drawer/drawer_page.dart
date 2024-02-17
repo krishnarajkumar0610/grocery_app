@@ -33,7 +33,8 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const NewUser(),
+                    builder: (context) =>
+                        const NewUser(), // <= click this for New user (logout)
                   ));
             }
           },

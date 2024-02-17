@@ -11,6 +11,8 @@ import '../../bloc/grocery_states.dart';
 import '../../components/grocery_items.dart';
 import 'cart_page.dart';
 
+// 3rd page home screen
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -73,7 +75,8 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const CartPage(),
+                              builder: (context) =>
+                                  const CartPage(), // <= click this for cart page
                             ));
                       },
                       icon: const Icon(
@@ -89,7 +92,10 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           drawer:
-              const Drawer(backgroundColor: Colors.white, child: MyDrawer()),
+              const Drawer(
+                  backgroundColor: Colors.white,
+                  child: MyDrawer() // <= click this for Drawer
+              ),
           body: RefreshIndicator(
             onRefresh: () async {
               context.read<GroceryBloc>().add(TimeStatus());
@@ -137,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: GroceryItemTile(
+                        child: GroceryItemTile( // <= click this for grocery item container
                           itemName: state.shopItems[index][0],
                           itemPrice: state.shopItems[index][1],
                           imagePath: state.shopItems[index][2],
@@ -157,3 +163,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// ending 3rd page

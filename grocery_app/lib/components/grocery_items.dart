@@ -62,7 +62,8 @@ class GroceryItemTile extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const CartPage(),
+                            builder: (context) =>
+                                const CartPage(), // <= click it for cart page
                           ));
                     },
                   ),
