@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<GroceryBloc>().add(TimeStatus());
+    context.read<GroceryBloc>().add(GreetingStatus());
   }
 
   @override
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               ),
           body: RefreshIndicator(
             onRefresh: () async {
-              context.read<GroceryBloc>().add(TimeStatus());
+              context.read<GroceryBloc>().add(GreetingStatus());
             },
             child: Column(
               children: [

@@ -95,9 +95,5 @@ class GroceryStates {
   String? greetingStatus;
   int? totalAmount;
 
-  GroceryStates(
-      {required this.cartItems,
-      this.totalAmount,
-      this.greetingStatus,
-      this.themeStatus = true});
+  GroceryStates({required this.cartItems, this.totalAmount, this.greetingStatus, this.themeStatus = true});
 }

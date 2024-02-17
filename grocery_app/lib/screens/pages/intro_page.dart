@@ -21,9 +21,9 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     final bloc = BlocProvider.of<GroceryBloc>(context);
-    bloc.add(TimeStatus());
+    bloc.add(GreetingStatus());
     Timer(
-      const Duration(seconds: 10),
+      const Duration(seconds: 5),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
