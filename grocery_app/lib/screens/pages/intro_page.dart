@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/grocery_bloc.dart';
 import 'package:grocery_app/bloc/grocery_events.dart';
-import 'package:grocery_app/screens/pages/newuser_page.dart';
-
-import 'home_page.dart';
+import 'package:grocery_app/screens/pages/new_user_page.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -27,7 +26,7 @@ class _IntroPageState extends State<IntroPage> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const NewUser(),// <= click this for new user
+          builder: (context) => const NewUser(), // <= click this for new user
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:grocery_app/screens/logins/sign_in.dart';
@@ -21,7 +22,7 @@ class _NewUserState extends State<NewUser> {
       animationDuration: const Duration(seconds: 1),
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(280),
+          preferredSize: const Size.fromHeight(300),
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
@@ -74,14 +75,18 @@ class _NewUserState extends State<NewUser> {
                     "Welcome to our Application",
                     style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 20,
                       color: Colors.black,
                       letterSpacing: 0.5,
                     ),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 29, left: 40, right: 40),
+                  padding: EdgeInsets.only(
+                    top: 46, //ScreenUtil().setHeight(37.5),
+                    left: 40, //ScreenUtil().setWidth(40),
+                    right: 40,
+                  ), //ScreenUtil().setWidth(40)),
                   child: TabBar(
                     labelColor: Colors.black, // Set tab text color
                     labelStyle: TextStyle(
