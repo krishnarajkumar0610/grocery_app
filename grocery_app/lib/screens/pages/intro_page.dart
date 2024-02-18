@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/grocery_bloc.dart';
@@ -41,16 +42,16 @@ class _IntroPageState extends State<IntroPage> {
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50, top: 200),
+              padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 200.h),
               child: Image.asset("assets/logo.png"),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.w),
               child: Text("We Deliver Groceries at your doorstep ❤️",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.aclonica(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w700,
                   )),
             ),
           ],

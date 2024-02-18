@@ -90,10 +90,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        drawer:
-            const Drawer(
-                backgroundColor: Colors.white,
-                child: MyDrawer() // <= click this for Drawer
+        drawer: const Drawer(
+            backgroundColor: Colors.white,
+            child: MyDrawer() // <= click this for Drawer
             ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -108,8 +107,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color:
-                          state.themeStatus! ? Colors.black : Colors.white),
+                      color: state.themeStatus! ? Colors.black : Colors.white),
                 ),
               ),
               Padding(
@@ -126,9 +124,8 @@ class _HomePageState extends State<HomePage> {
                       style: GoogleFonts.notoSerif(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: state.themeStatus!
-                              ? Colors.black
-                              : Colors.white),
+                          color:
+                              state.themeStatus! ? Colors.black : Colors.white),
                     ),
                   ),
                 ),
@@ -136,13 +133,13 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: GridView.builder(
                   itemCount: state.shopItems.length,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, childAspectRatio: 1 / 1.2),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 1 / 1.2),
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: GroceryItemTile( // <= click this for grocery item container
+                      child: GroceryItemTile(
+                        // <= click this for grocery item container
                         itemName: state.shopItems[index][0],
                         itemPrice: state.shopItems[index][1],
                         imagePath: state.shopItems[index][2],

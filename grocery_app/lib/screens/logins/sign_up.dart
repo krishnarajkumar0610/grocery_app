@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 // this is sing up page
 
@@ -22,14 +22,14 @@ class _SignUpState extends State<SignUp> {
       Column(
         children: [
           Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 20.0, top: 30),
+              padding: EdgeInsets.only(left: 30, right: 20, top: 30),
               child: TextField(
                 controller: _fullName,
                 decoration: InputDecoration(
                     hintText: "Full Name",
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(20.r))),
               )),
           Padding(
               padding: const EdgeInsets.only(left: 30.0, right: 20.0, top: 30),
@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
                     hintText: "Mail id",
                     prefixIcon: const Icon(Icons.mail),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(20.r))),
               )),
           Padding(
               padding: const EdgeInsets.only(left: 30.0, right: 20.0, top: 30),
