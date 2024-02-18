@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../pages/home_page.dart';
@@ -16,31 +17,77 @@ class _SignInState extends State<SignIn> {
   final _username = TextEditingController();
   final _signInPass = TextEditingController();
 
+  Widget getField(
+      {double? left,
+      double? right,
+      double? top,
+      double? bottom,
+      TextEditingController? controller,
+      String? hintText,
+      Icon? icon}) {
+    return Padding(
+        padding: EdgeInsets.only(
+            left: left?.w ?? 0,
+            right: right?.w ?? 0,
+            top: top?.h ?? 0,
+            bottom: bottom?.w ?? 0),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+              hintText: hintText,
+              prefixIcon: icon,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.r))),
+        ));
+  }
+
+  Widget otherSignUp(
+          {double? width, double? height, String? text, Color? color}) =>
+      Container(
+          width: width?.w ?? 0,
+          height: height?.h ?? 0,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              text ?? "",
+              style: GoogleFonts.notoSerif(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15.sp,
+                  color: Colors.black),
+            ),
+          ));
+
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
       Column(
         children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 20.0, top: 30),
-              child: TextField(
-                controller: _username,
-                decoration: InputDecoration(
-                    hintText: "Username or Email id",
-                    prefixIcon: const Icon(Icons.person),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              )),
-          Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 20.0, top: 30),
-              child: TextField(
-                controller: _signInPass,
-                decoration: InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: const Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              )),
+          // left 30,right 20, top 30
+          getField(
+              controller: _username,
+              icon: const Icon(Icons.person),
+              hintText: "User name",
+              top: 30,
+              left: 30,
+              right: 20),
+          getField(
+              controller: _signInPass,
+              icon: const Icon(Icons.lock),
+              hintText: "Password",
+              top: 30,
+              left: 30,
+              right: 20),
           Padding(
             padding: const EdgeInsets.only(top: 30.0),
             child: GestureDetector(

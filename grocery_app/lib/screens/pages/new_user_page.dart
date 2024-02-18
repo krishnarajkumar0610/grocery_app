@@ -80,10 +80,10 @@ class _NewUserState extends State<NewUser> {
                         left: 45.w,
                         right: 45.w,
                       ),
-                      child: TabBar(
+                      child:  const TabBar(
                         labelColor: Colors.black,
                         labelStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                         tabs: [
                           Tab(
@@ -103,7 +103,7 @@ class _NewUserState extends State<NewUser> {
           body: SingleChildScrollView(
             child: SizedBox(
               height: 0.6.sh, // Adjust height as necessary
-              child: TabBarView(
+              child: const TabBarView(
                 children: [
                   SignUp(),
                   SignIn(),
