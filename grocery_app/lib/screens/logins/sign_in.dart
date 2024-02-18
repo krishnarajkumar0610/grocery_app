@@ -27,17 +27,17 @@ class _SignInState extends State<SignIn> {
       Icon? icon}) {
     return Padding(
         padding: EdgeInsets.only(
-            left: left?.w ?? 0,
-            right: right?.w ?? 0,
-            top: top?.h ?? 0,
-            bottom: bottom?.w ?? 0),
+            left: left ?? 0,
+            right: right ?? 0,
+            top: top ?? 0,
+            bottom: bottom ?? 0),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
               hintText: hintText,
               prefixIcon: icon,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.r))),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ));
   }
 
@@ -48,7 +48,7 @@ class _SignInState extends State<SignIn> {
           height: height?.h ?? 0,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(20.r),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -62,8 +62,8 @@ class _SignInState extends State<SignIn> {
             child: Text(
               text ?? "",
               style: GoogleFonts.notoSerif(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
                   color: Colors.black),
             ),
           ));

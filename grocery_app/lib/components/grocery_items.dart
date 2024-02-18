@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/grocery_bloc.dart';
@@ -31,7 +32,7 @@ class GroceryItemTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color[100],
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: BlocConsumer<GroceryBloc, GroceryStates>(
         listener: (context, state) {},
@@ -43,7 +44,7 @@ class GroceryItemTile extends StatelessWidget {
                 top: 10,
                 child: Image.asset(
                   imagePath,
-                  height: 80,
+                  height: 60,
                 ),
               ),
               Positioned(
@@ -81,7 +82,7 @@ class GroceryItemTile extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 130,
+                top: 120,
                 left: 10,
                 child: MaterialButton(
                   color: color,

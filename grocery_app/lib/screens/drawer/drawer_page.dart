@@ -13,8 +13,8 @@ class MyDrawer extends StatefulWidget {
 class _MyDrawerState extends State<MyDrawer> {
   Widget getOptions(
       {required Icon icon,
-      required String text,
-      required bool navigateToLogout}) {
+        required String text,
+        required bool navigateToLogout}) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -34,7 +34,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const NewUser(), // <= click this for New user (logout)
+                    const NewUser(), // <= click this for New user (logout)
                   ));
             }
           },
@@ -51,7 +51,7 @@ class _MyDrawerState extends State<MyDrawer> {
         UserAccountsDrawerHeader(
             decoration: const BoxDecoration(
               gradient:
-                  LinearGradient(colors: [Colors.blueAccent, Colors.white]),
+              LinearGradient(colors: [Colors.blueAccent, Colors.white]),
             ),
             currentAccountPicture: Padding(
               padding: const EdgeInsets.all(10.0),

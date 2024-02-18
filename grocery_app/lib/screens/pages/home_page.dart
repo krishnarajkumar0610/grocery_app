@@ -53,13 +53,13 @@ class _HomePageState extends State<HomePage> {
                 icon: state.themeStatus!
                     ? const Icon(
                         Icons.dark_mode,
-                        size: 30,
+                        size: 25,
                         color: Colors.black,
                       )
                     : const Icon(
                         Icons.sunny,
                         color: Colors.yellow,
-                        size: 30,
+                        size: 25,
                       )),
             const SizedBox(
               width: 10,
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: CircleAvatar(
-                  radius: 25,
+                  radius: 20,
                   backgroundColor: Colors.white,
                   child: IconButton(
                     onPressed: () {
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     icon: const Icon(
                       Icons.shopping_cart,
                       color: Colors.black,
-                      size: 30,
+                      size: 18,
                     ),
                   )),
             ),
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10),
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                       "Let's order fresh items for you 😍",
                       style: GoogleFonts.notoSerif(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 15,
                           color:
                               state.themeStatus! ? Colors.black : Colors.white),
                     ),
