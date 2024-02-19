@@ -101,7 +101,7 @@ class _SignInState extends State<SignIn> {
                   // when i sign up then it need to display a box to tell go to sign in page
                   _username.clear();
                   _signInPass.clear();
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),

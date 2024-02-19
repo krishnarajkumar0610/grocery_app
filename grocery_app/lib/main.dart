@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
 import 'screens/pages/intro_page.dart';
