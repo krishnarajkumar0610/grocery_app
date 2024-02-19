@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/logins/sign_in.dart';
 import 'package:grocery_app/screens/logins/sign_up.dart';
 
 class NewUser extends StatelessWidget {
-  const NewUser({super.key});
+  const NewUser({Key? key});
 
-  Widget getAppText(String greetingText) {
+  Widget getAppText(String greetingText, double size) {
     return Text(
-      "Grocery App",
+      greetingText,
       style: GoogleFonts.notoSerif(
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        fontSize: size.sp,
         color: Colors.black,
         letterSpacing: 0.5,
       ),
@@ -20,82 +21,82 @@ class NewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       body: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(200),
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3),
+              preferredSize: Size.fromHeight(isPortrait ? 250 : 200),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40.r),
+                    bottomRight: Radius.circular(40.r),
                   ),
-                ],
-                color: Colors.orange,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: SizedBox(
-                      width: 120,
-                      height: 60,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Image.asset(
-                            "assets/logo.png",
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: SizedBox(
+                        width: isPortrait ? 120.w : 50.w,
+                        height: isPortrait ? 100.w : 20.w,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Image.asset(
+                              "assets/logo.png",
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  getAppText("Grocery App"),
-                  Text(
-                    "Welcome to our Application",
-                    style: GoogleFonts.notoSerif(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black,
-                      letterSpacing: 0.5,
+                    getAppText(
+                      "Grocery App",
+                      isPortrait ? 18.w : 5.w,
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      top: 15,
-                      left: 45,
-                      right: 45,
+                    getAppText(
+                      "Welcome to our Application",
+                      isPortrait ? 18.w : 5.w,
                     ),
-                    child: TabBar(
-                      labelColor: Colors.black,
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: isPortrait ? 32 : 22,
+                        left: isPortrait ? 40 : 20,
+                        right: isPortrait ? 40 : 20,
                       ),
-                      tabs: [
-                        Tab(
-                          text: "Sign up",
+                      child: const TabBar(
+                        labelColor: Colors.black,
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        Tab(
-                          text: "Sign in",
-                        ),
-                      ],
+                        tabs: [
+                          Tab(
+                            text: "Sign up",
+                          ),
+                          Tab(
+                            text: "Sign in",
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                  ],
+                ),
+              )),
           body: const TabBarView(
             children: [
               SignUp(),

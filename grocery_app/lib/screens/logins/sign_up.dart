@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,25 +67,30 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return ListView(children: [
       Column(
-        children: [
+        children: <Widget>[
           //l:30,r:20,t:30
+          const SizedBox(
+            height: 20,
+          ),
           getField(
               horizontal: 30,
-              vertical: 20,
+              vertical: 10,
               hintText: "Full Name",
               icon: const Icon(Icons.person),
               controller: _fullName),
           getField(
               horizontal: 30,
-              vertical: 20,
+              vertical: 10,
               hintText: "Email",
               icon: const Icon(Icons.mail),
               controller: _email),
           getField(
               horizontal: 30,
-              vertical: 20,
+              vertical: 10,
               hintText: "Password",
               icon: const Icon(Icons.lock),
               controller: _password),
@@ -101,13 +107,13 @@ class _SignUpState extends State<SignUp> {
                       "Successfully Created account for this app, You can log in");
                 }, //w:250,h:50,
                 child: otherSignUp(
-                    width: 250,
-                    height: 50,
+                    width: 250.w,
+                    height: 50.h,
                     text: "SIGN UP",
                     color: Colors.orange)),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.w),
             child: Text(
               "--------------or Sign up with--------------",
               style: GoogleFonts.notoSerif(
@@ -116,20 +122,20 @@ class _SignUpState extends State<SignUp> {
           ),
           //w:120,h:50,
           Padding(
-            padding: const EdgeInsets.only(top: 5.0),
+            padding: EdgeInsets.only(top: 5.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 otherSignUp(
                     color: Colors.white,
-                    height: 50,
-                    width: 120,
+                    height: 50.h,
+                    width: 120.w,
                     text: "Google"),
                 otherSignUp(
                     color: Colors.deepPurple,
                     text: "Facebook",
-                    width: 120,
-                    height: 50)
+                    width: 120.w,
+                    height: 50.h)
               ],
             ),
           )

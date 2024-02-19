@@ -17,14 +17,13 @@ class _SignInState extends State<SignIn> {
   final _username = TextEditingController();
   final _signInPass = TextEditingController();
 
-  Widget getField(
-      {double? left,
-      double? right,
-      double? top,
-      double? bottom,
-      TextEditingController? controller,
-      String? hintText,
-      Icon? icon}) {
+  Widget getField({double? left,
+    double? right,
+    double? top,
+    double? bottom,
+    TextEditingController? controller,
+    String? hintText,
+    Icon? icon}) {
     return Padding(
         padding: EdgeInsets.only(
             left: left ?? 0,
@@ -37,15 +36,15 @@ class _SignInState extends State<SignIn> {
               hintText: hintText,
               prefixIcon: icon,
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ));
   }
 
   Widget otherSignUp(
-          {double? width, double? height, String? text, Color? color}) =>
+      {double? width, double? height, String? text, Color? color}) =>
       Container(
-          width: width?.w ?? 0,
-          height: height?.h ?? 0,
+          width: width ?? 0,
+          height: height ?? 0,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20),
@@ -70,64 +69,55 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery
+            .of(context)
+            .orientation == Orientation.portrait;
+    final double horizontalForgetPassword = isPortrait ? 10 : 10;
     return ListView(children: [
       Column(
         children: [
           // left 30,right 20, top 30
+          SizedBox(
+            height: 30.h,
+          ),
           getField(
               controller: _username,
               icon: const Icon(Icons.person),
               hintText: "User name",
-              top: 30,
-              left: 30,
-              right: 20),
+              top: 30.h,
+              left: 30.w,
+              right: 20.w),
           getField(
               controller: _signInPass,
               icon: const Icon(Icons.lock),
               hintText: "Password",
-              top: 30,
-              left: 30,
-              right: 20),
+              top: 30.h,
+              left: 30.w,
+              right: 20.w),
           Padding(
-            padding: const EdgeInsets.only(top: 30.0),
+            padding: EdgeInsets.only(top: 20.w),
             child: GestureDetector(
-              onTap: () {
-                // when i sign up then it need to display a box to tell go to sign in page
-                _username.clear();
-                _signInPass.clear();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const HomePage(), // <= click this for home page
-                    ));
-              },
-              child: Container(
-                width: 250,
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.orange,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 2,
-                        offset: const Offset(0, 3),
-                      ),
-                    ]),
-                child: Center(
-                  child: Text(
-                    "Sign In",
-                    style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                ),
-              ),
-            ),
+                onTap: () {
+                  // when i sign up then it need to display a box to tell go to sign in page
+                  _username.clear();
+                  _signInPass.clear();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ));
+                  print(
+                      "Successfully Created account for this app, You can log in");
+                }, //w:250,h:50,
+                child: otherSignUp(
+                    width: 250.w,
+                    height: 50.h,
+                    text: "SIGN IN",
+                    color: Colors.orange)),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 180.0, top: 20),
+            padding: EdgeInsets.only(left: 180.0.w, top: 20.h),
             child: GestureDetector(
               onTap: () {
                 print("Pressed forget password");
@@ -135,7 +125,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forget password?",
                 style: GoogleFonts.notoSerif(
-                    fontSize: 16,
+                    fontSize: horizontalForgetPassword.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),
