@@ -39,7 +39,11 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget otherSignUp(
-          {double? width, double? height, String? text, Color? color}) =>
+          {double? width,
+          double? height,
+          String? text,
+          Color? color,
+          Color? textColor}) =>
       Container(
           width: width,
           height: height,
@@ -59,9 +63,7 @@ class _SignUpState extends State<SignUp> {
             child: Text(
               text ?? "",
               style: GoogleFonts.notoSerif(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.black),
+                  fontWeight: FontWeight.bold, fontSize: 15, color: textColor),
             ),
           ));
 
@@ -110,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                     width: 250.w,
                     height: 50.h,
                     text: "SIGN UP",
-                    color: Colors.orange)),
+                    color: Colors.lightGreen)),
           ),
           Padding(
             padding: EdgeInsets.all(10.w),
@@ -130,12 +132,14 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.white,
                     height: 50.h,
                     width: 120.w,
-                    text: "Google"),
+                    text: "Google",
+                    textColor: Colors.black),
                 otherSignUp(
-                    color: Colors.deepPurple,
+                    color: Colors.deepPurple[700],
                     text: "Facebook",
                     width: 120.w,
-                    height: 50.h)
+                    height: 50.h,
+                    textColor: Colors.white)
               ],
             ),
           )

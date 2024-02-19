@@ -40,7 +40,11 @@ class NewUser extends StatelessWidget {
                       offset: const Offset(0, 3),
                     ),
                   ],
-                  color: Colors.orange,
+                  gradient: const LinearGradient(
+                    colors: [Colors.lightGreen, Colors.white60],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(40.r),
                     bottomRight: Radius.circular(40.r),
@@ -75,9 +79,9 @@ class NewUser extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: isPortrait ? 32 : 22,
-                        left: isPortrait ? 40 : 20,
-                        right: isPortrait ? 40 : 20,
+                        top: isPortrait ? 27.5.h : 43.h,
+                        left: isPortrait ? 40.w : 20.w,
+                        right: isPortrait ? 40.w : 20.w,
                       ),
                       child: const TabBar(
                         labelColor: Colors.black,

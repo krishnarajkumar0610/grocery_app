@@ -17,13 +17,14 @@ class _SignInState extends State<SignIn> {
   final _username = TextEditingController();
   final _signInPass = TextEditingController();
 
-  Widget getField({double? left,
-    double? right,
-    double? top,
-    double? bottom,
-    TextEditingController? controller,
-    String? hintText,
-    Icon? icon}) {
+  Widget getField(
+      {double? left,
+      double? right,
+      double? top,
+      double? bottom,
+      TextEditingController? controller,
+      String? hintText,
+      Icon? icon}) {
     return Padding(
         padding: EdgeInsets.only(
             left: left ?? 0,
@@ -36,12 +37,12 @@ class _SignInState extends State<SignIn> {
               hintText: hintText,
               prefixIcon: icon,
               border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ));
   }
 
   Widget otherSignUp(
-      {double? width, double? height, String? text, Color? color}) =>
+          {double? width, double? height, String? text, Color? color}) =>
       Container(
           width: width ?? 0,
           height: height ?? 0,
@@ -70,10 +71,8 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     final isPortrait =
-        MediaQuery
-            .of(context)
-            .orientation == Orientation.portrait;
-    final double horizontalForgetPassword = isPortrait ? 10 : 10;
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return ListView(children: [
       Column(
         children: [
@@ -114,7 +113,7 @@ class _SignInState extends State<SignIn> {
                     width: 250.w,
                     height: 50.h,
                     text: "SIGN IN",
-                    color: Colors.orange)),
+                    color: Colors.lightGreen)),
           ),
           Padding(
             padding: EdgeInsets.only(left: 180.0.w, top: 20.h),
@@ -125,7 +124,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forget password?",
                 style: GoogleFonts.notoSerif(
-                    fontSize: horizontalForgetPassword.sp,
+                    fontSize: isPortrait ? 15.sp : 10.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),
