@@ -80,7 +80,7 @@ class GroceryStates {
       Colors.brown
     ],
     [
-      "Rocemilk",
+      "Rosemilk",
       60,
       "assets/rocemilk.png",
       "Rocemilk is an educational platform providing interactive learning experiences through online courses and tutorials. It offers a diverse range of subjects, catering to learners of all levels and interests.",
@@ -91,7 +91,7 @@ class GroceryStates {
 
   final List? cartItems;
 
-  bool? themeStatus;
+  bool themeStatus;
   String? greetingStatus;
   int? totalAmount;
 

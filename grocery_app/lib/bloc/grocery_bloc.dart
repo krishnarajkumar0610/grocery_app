@@ -32,8 +32,13 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     on<ChangeTheme>((event, emit) {
       // changing theme
       var theme = event.themeStatus!;
-      theme = !theme;
-      print("ENA DA ");
+      var fromLogout = event.fromLogout;
+      if (fromLogout) {
+        theme = true;
+      } else {
+        theme = !theme;
+      }
+
       emit(GroceryStates(
           themeStatus: theme,
           cartItems: state.cartItems,
@@ -43,32 +48,25 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
 
     on<GreetingStatus>((event, emit) {
       var hour = DateTime.now().hour;
+      var message;
       if (hour >= 6 && hour < 12) {
+        message="Good Morning 🥞";
 
-        emit(GroceryStates(
-            greetingStatus: "Good Morning 🥞",
-            cartItems: state.cartItems!,
-            themeStatus: state.themeStatus,
-            totalAmount: state.totalAmount));
-      }
-
-      else if (hour >= 12 && hour < 17) {
+      } else if (hour >= 12 && hour < 17) {
+        message="Good Morning 🥞";
         emit(GroceryStates(
             greetingStatus: "Good Afternoon 🍚",
             cartItems: state.cartItems,
             themeStatus: state.themeStatus,
             totalAmount: state.totalAmount));
-      }
-
-      else if (hour >= 17 && hour < 19) {
+      } else if (hour >= 17 && hour < 19) { message="Good Morning 🥞";
         emit(GroceryStates(
             greetingStatus: "Good Evening 🍫",
             cartItems: state.cartItems,
             themeStatus: state.themeStatus,
             totalAmount: state.totalAmount));
-      }
-
-      else {
+      } else {
+        message="Good Morning 🥞";
         emit(GroceryStates(
             greetingStatus: "Good Night 🍜",
             cartItems: state.cartItems,

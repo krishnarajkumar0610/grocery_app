@@ -14,20 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) => BlocProvider(
-        create: (BuildContext context) => GroceryBloc(),
-        child: BlocConsumer<GroceryBloc, GroceryStates>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return MaterialApp(
-                theme:
-                    state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
-                debugShowCheckedModeBanner: false,
-                home: const IntroPage(), // <= click this for intro page
-              );
-            }),
-      ),
+    return BlocProvider(
+      create: (BuildContext context) => GroceryBloc(),
+      child: BlocConsumer<GroceryBloc, GroceryStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              theme:
+                  state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
+              debugShowCheckedModeBanner: false,
+              home: const IntroPage(), // <= click this for intro page
+            );
+          }),
     );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/grocery_bloc.dart';
+import 'package:grocery_app/bloc/grocery_events.dart';
 
+import '../../bloc/grocery_states.dart';
 import '../pages/new_user_page.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -20,23 +24,32 @@ class _MyDrawerState extends State<MyDrawer> {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.grey[500], borderRadius: BorderRadius.circular(10)),
-        child: ListTile(
-          leading: icon,
-          title: Text(
-            text,
-            style: GoogleFonts.notoSerif(
-                fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          onTap: () {
-            // Add navigation functionality here
-            if (navigateToLogout) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const NewUser(), // <= click this for New user (logout)
-                  ));
-            }
+        child: BlocConsumer<GroceryBloc, GroceryStates>(
+          listener: (context, state) {},
+          builder: (BuildContext context, state) {
+            return ListTile(
+              leading: icon,
+              title: Text(
+                text,
+                style: GoogleFonts.notoSerif(
+                    fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              onTap: () {
+                // Add navigation functionality here
+                context
+                    .read<GroceryBloc>()
+                    .add(ChangeTheme(themeStatus: state.themeStatus,fromLogout: true));
+                print("Adhu poiruchu");
+                if (navigateToLogout) {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const NewUser(), // <= click this for New user (logout)
+                      ));
+                }
+              },
+            );
           },
         ),
       ),

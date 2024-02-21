@@ -13,15 +13,12 @@ class RemoveItem extends GrossEvents {
 
 class ChangeTheme extends GrossEvents {
   bool? themeStatus;
+  bool fromLogout;
 
-  ChangeTheme({this.themeStatus});
+  ChangeTheme({this.themeStatus, this.fromLogout = false});
 }
 
-class GreetingStatus extends GrossEvents {
-  GreetingStatus() {
-    print("Inside the Greeting status");
-  }
-}
+class GreetingStatus extends GrossEvents {}
 
 class AddQuantity extends GrossEvents {
   int? quantity;

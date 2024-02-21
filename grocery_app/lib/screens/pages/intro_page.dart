@@ -42,7 +42,7 @@ class _IntroPageState extends State<IntroPage> {
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 50.w, right: 50.w, top: 200.h),
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 200),
               child: Image.asset("assets/logo.png"),
             ),
             Padding(
@@ -50,8 +50,8 @@ class _IntroPageState extends State<IntroPage> {
               child: Text("We Deliver Groceries at your doorstep ❤️",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.aclonica(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   )),
             ),
           ],

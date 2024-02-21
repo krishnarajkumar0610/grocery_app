@@ -5,14 +5,14 @@ import 'package:grocery_app/screens/logins/sign_in.dart';
 import 'package:grocery_app/screens/logins/sign_up.dart';
 
 class NewUser extends StatelessWidget {
-  const NewUser({Key? key});
+  const NewUser({super.key});
 
   Widget getAppText(String greetingText, double size) {
     return Text(
       greetingText,
       style: GoogleFonts.notoSerif(
-        fontWeight: FontWeight.w700,
-        fontSize: size.sp,
+        fontWeight: FontWeight.bold,
+        fontSize: size,
         color: Colors.black,
         letterSpacing: 0.5,
       ),
@@ -21,15 +21,14 @@ class NewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    // final isPortrait =MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Scaffold(
       body: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: PreferredSize(
-              preferredSize: Size.fromHeight(isPortrait ? 250 : 200),
+              preferredSize: const Size.fromHeight(280),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -45,45 +44,60 @@ class NewUser extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40.r),
-                    bottomRight: Radius.circular(40.r),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
                   ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: isPortrait ? 120.w : 50.w,
-                        height: isPortrait ? 100.w : 20.w,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Image.asset(
-                              "assets/logo.png",
+                    Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: SizedBox(
+                                width: 120,
+                                height: 100,
+                                // width:  isPortrait ? 120 : 50,
+                                // height: isPortrait ? 100 : 20,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.asset(
+                                      "assets/logo.png",
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            getAppText(
+                              "Grocery App",
+                              //isPortrait ? 18 : 5,
+                              18,
+                            ),
+                            getAppText(
+                              "Welcome to our Application",
+                              //isPortrait ? 18 : 5,
+                              18,
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
-                    getAppText(
-                      "Grocery App",
-                      isPortrait ? 18.w : 5.w,
-                    ),
-                    getAppText(
-                      "Welcome to our Application",
-                      isPortrait ? 18.w : 5.w,
-                    ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
-                        top: isPortrait ? 27.5.h : 43.h,
-                        left: isPortrait ? 40.w : 20.w,
-                        right: isPortrait ? 40.w : 20.w,
+                        top: 27.5,
+                        left: 40,
+                        right: 40,
+                        // top:  isPortrait ? 27.5 : 43,
+                        // left: isPortrait ? 40    : 20,
+                        // right:isPortrait ? 40    : 20,
                       ),
-                      child: const TabBar(
+                      child: TabBar(
                         labelColor: Colors.black,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.bold,

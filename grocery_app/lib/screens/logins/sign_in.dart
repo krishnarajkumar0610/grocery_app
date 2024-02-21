@@ -77,25 +77,25 @@ class _SignInState extends State<SignIn> {
       Column(
         children: [
           // left 30,right 20, top 30
-          SizedBox(
-            height: 30.h,
+          const SizedBox(
+            height: 30,
           ),
           getField(
               controller: _username,
               icon: const Icon(Icons.person),
               hintText: "User name",
-              top: 30.h,
-              left: 30.w,
-              right: 20.w),
+              top: 30,
+              left: 30,
+              right: 20),
           getField(
               controller: _signInPass,
               icon: const Icon(Icons.lock),
               hintText: "Password",
-              top: 30.h,
-              left: 30.w,
-              right: 20.w),
+              top: 30,
+              left: 30,
+              right: 20),
           Padding(
-            padding: EdgeInsets.only(top: 20.w),
+            padding: const EdgeInsets.only(top: 20),
             child: GestureDetector(
                 onTap: () {
                   // when i sign up then it need to display a box to tell go to sign in page
@@ -110,13 +110,13 @@ class _SignInState extends State<SignIn> {
                       "Successfully Created account for this app, You can log in");
                 }, //w:250,h:50,
                 child: otherSignUp(
-                    width: 250.w,
-                    height: 50.h,
+                    width: 250,
+                    height: 50,
                     text: "SIGN IN",
                     color: Colors.lightGreen)),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 180.0.w, top: 20.h),
+            padding: const EdgeInsets.only(left: 180.0, top: 20),
             child: GestureDetector(
               onTap: () {
                 print("Pressed forget password");
@@ -124,7 +124,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forget password?",
                 style: GoogleFonts.notoSerif(
-                    fontSize: isPortrait ? 15.sp : 10.sp,
+                    fontSize: isPortrait ? 15 : 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),

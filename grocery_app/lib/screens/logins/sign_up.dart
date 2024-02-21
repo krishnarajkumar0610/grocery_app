@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -69,8 +68,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
     return ListView(children: [
       Column(
         children: <Widget>[
@@ -109,13 +106,13 @@ class _SignUpState extends State<SignUp> {
                       "Successfully Created account for this app, You can log in");
                 }, //w:250,h:50,
                 child: otherSignUp(
-                    width: 250.w,
-                    height: 50.h,
+                    width: 250,
+                    height: 50,
                     text: "SIGN UP",
                     color: Colors.lightGreen)),
           ),
           Padding(
-            padding: EdgeInsets.all(10.w),
+            padding: const EdgeInsets.all(10),
             child: Text(
               "--------------or Sign up with--------------",
               style: GoogleFonts.notoSerif(
@@ -124,21 +121,21 @@ class _SignUpState extends State<SignUp> {
           ),
           //w:120,h:50,
           Padding(
-            padding: EdgeInsets.only(top: 5.0.h),
+            padding: const EdgeInsets.only(top: 5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 otherSignUp(
                     color: Colors.white,
-                    height: 50.h,
-                    width: 120.w,
+                    height: 50,
+                    width: 120,
                     text: "Google",
                     textColor: Colors.black),
                 otherSignUp(
                     color: Colors.deepPurple[700],
                     text: "Facebook",
-                    width: 120.w,
-                    height: 50.h,
+                    width: 120,
+                    height: 50,
                     textColor: Colors.white)
               ],
             ),
