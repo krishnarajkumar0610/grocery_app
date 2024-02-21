@@ -18,7 +18,7 @@ class ChangeTheme extends GrossEvents {
   ChangeTheme({this.themeStatus, this.fromLogout = false});
 }
 
-class GreetingStatus extends GrossEvents {}
+class GreetingStatus extends GrossEvents { }
 
 class AddQuantity extends GrossEvents {
   int? quantity;
