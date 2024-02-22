@@ -19,8 +19,11 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<GroceryBloc, GroceryStates>(
           listener: (context, state) {},
           builder: (context, state) {
+
+            // HAHA TA<BI ENA SANDOSAMA
+
             return MaterialApp(
-              theme: state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
+              theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),
               debugShowCheckedModeBanner: false,
               home: const IntroPage(), // <= click this for intro page
             );
