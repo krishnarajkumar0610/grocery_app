@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import '../pages/home_page.dart';
@@ -70,13 +70,9 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-
     return ListView(children: [
       Column(
         children: [
-          // left 30,right 20, top 30
           const SizedBox(
             height: 30,
           ),
@@ -124,7 +120,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forget password?",
                 style: GoogleFonts.notoSerif(
-                    fontSize: isPortrait ? 15 : 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),

@@ -21,8 +21,6 @@ class NewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isPortrait =MediaQuery.of(context).orientation == Orientation.portrait;
-
     return Scaffold(
       body: DefaultTabController(
         length: 2,
@@ -61,8 +59,6 @@ class NewUser extends StatelessWidget {
                               child: SizedBox(
                                 width: 120,
                                 height: 100,
-                                // width:  isPortrait ? 120 : 50,
-                                // height: isPortrait ? 100 : 20,
                                 child: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   child: Padding(
@@ -76,12 +72,10 @@ class NewUser extends StatelessWidget {
                             ),
                             getAppText(
                               "Grocery App",
-                              //isPortrait ? 18 : 5,
                               18,
                             ),
                             getAppText(
                               "Welcome to our Application",
-                              //isPortrait ? 18 : 5,
                               18,
                             ),
                           ],
@@ -93,9 +87,6 @@ class NewUser extends StatelessWidget {
                         top: 27.5,
                         left: 40,
                         right: 40,
-                        // top:  isPortrait ? 27.5 : 43,
-                        // left: isPortrait ? 40    : 20,
-                        // right:isPortrait ? 40    : 20,
                       ),
                       child: TabBar(
                         labelColor: Colors.black,
