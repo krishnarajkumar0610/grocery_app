@@ -68,6 +68,10 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return ListView(children: [
       Column(
         children: <Widget>[
@@ -75,19 +79,19 @@ class _SignUpState extends State<SignUp> {
             height: 20,
           ),
           getField(
-              horizontal: 30,
+              horizontal: orientation == Orientation.portrait ? 30 : 100,
               vertical: 10,
               hintText: "Full Name",
               icon: const Icon(Icons.person),
               controller: _fullName),
           getField(
-              horizontal: 30,
+              horizontal: orientation == Orientation.portrait ? 30 : 100,
               vertical: 10,
               hintText: "Email",
               icon: const Icon(Icons.mail),
               controller: _email),
           getField(
-              horizontal: 30,
+              horizontal: orientation == Orientation.portrait ? 30 : 100,
               vertical: 10,
               hintText: "Password",
               icon: const Icon(Icons.lock),
@@ -138,6 +142,9 @@ class _SignUpState extends State<SignUp> {
                     textColor: Colors.white)
               ],
             ),
+          ),
+          const SizedBox(
+            height: 50,
           )
         ],
       ),

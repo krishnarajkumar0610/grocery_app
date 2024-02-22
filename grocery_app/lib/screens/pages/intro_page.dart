@@ -21,9 +21,8 @@ class _IntroPageState extends State<IntroPage> {
     super.initState();
     final bloc = BlocProvider.of<GroceryBloc>(context);
     bloc.add(GreetingStatus());
-    Timer(
-      const Duration(seconds: 5),
-      () => Navigator.pushReplacement(
+    Timer(const Duration(seconds: 5),
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewUser(), // <= click this for new user
@@ -35,14 +34,28 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     // Splash screen
-
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+    Orientation orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       body: ListView(children: [
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 200),
-              child: Image.asset("assets/logo.png"),
+              padding: EdgeInsets.only(
+                left: orientation == Orientation.portrait
+                    ? deviceWidth*0.1
+                    : deviceWidth * 0.4,
+                right: orientation == Orientation.portrait
+                    ? deviceWidth*0.1
+                    : deviceWidth * 0.4,
+                top: orientation == Orientation.portrait
+                    ? deviceWidth*0.5
+                    : deviceHeight * 0.1,
+              ),
+              child: Image.asset(
+                "assets/logo.png",
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(20),

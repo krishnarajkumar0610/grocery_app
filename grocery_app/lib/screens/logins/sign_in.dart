@@ -189,6 +189,9 @@ class _SignInState extends State<SignIn> {
                     )),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 50,
           )
         ],
       ),
