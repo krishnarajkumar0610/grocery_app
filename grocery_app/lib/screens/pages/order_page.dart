@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/bloc/grocery_events.dart';
 
 import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_states.dart';
@@ -41,12 +40,12 @@ class OrderPage extends StatelessWidget {
           body: ListView(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
-                padding: EdgeInsets.only(left: 30.w, top: 20.h),
+                padding: EdgeInsets.only(left: 30, top: 20),
                 child: Container(
                   width: 300,
                   height: 200,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.r),
+                    borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -59,7 +58,7 @@ class OrderPage extends StatelessWidget {
                     color: Colors.white60,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0.w),
+                    padding: EdgeInsets.all(10.0),
                     child: Image.asset(imagePath),
                   ),
                 ),
@@ -68,25 +67,25 @@ class OrderPage extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 30.w, top: 10.h),
+                padding: const EdgeInsets.only(left: 30, top: 10),
                 child: Text(
                   "Product Name : $itemName",
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
-                      color: state.themeStatus! ? Colors.black : Colors.white),
+                      fontSize: 20,
+                      color: state.themeStatus ? Colors.black : Colors.white),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 30.w, top: 10.h),
+                padding: const EdgeInsets.only(left: 30, top: 10),
                 child: Container(
-                    width: 300.w,
-                    height: 120.h,
+                    width: 300,
+                    height: 120,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -99,43 +98,43 @@ class OrderPage extends StatelessWidget {
                       color: color,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(10.w),
+                      padding: const EdgeInsets.all(10),
                       child: ListView(
                         children: [
                           Text(
                             description,
                             style: GoogleFonts.notoSerif(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                                 color: Colors.black),
                           ),
                         ],
                       ),
                     )),
               ),
-              SizedBox(
-                height: 10.h,
+              const SizedBox(
+                height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 30.w, top: 10.h),
+                padding: const EdgeInsets.only(left: 30, top: 10),
                 child: Text(
                   "Product Price : $itemPrice/-",
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
-                      color: state.themeStatus! ? Colors.black : Colors.white),
+                      fontSize: 20,
+                      color: state.themeStatus ? Colors.black : Colors.white),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
+              const SizedBox(
+                height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 30.w, top: 10.h,right: 30),
+                padding: const EdgeInsets.only(left: 30, top: 10, right: 30),
                 child: Container(
-                  width: 300.w,
-                  height: 60.h,
+                  width: 300,
+                  height: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.r),
+                    borderRadius: BorderRadius.circular(20),
                     color: color,
                     boxShadow: [
                       BoxShadow(
@@ -150,17 +149,17 @@ class OrderPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 20.w),
+                        padding: const EdgeInsets.only(left: 20),
                         child: Text(
                           "Quantity :",
                           style: GoogleFonts.notoSerif(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
                               color: Colors.black),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.h, left: 20.w),
+                        padding: const EdgeInsets.only(top: 8, left: 20),
                         child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: IconButton(
@@ -184,13 +183,13 @@ class OrderPage extends StatelessWidget {
                         title: Text(
                           "Grocery App",
                           style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold, fontSize: 20.sp),
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         content: ListTile(
                           title: Text(
                             "Ordering $itemName",
                             style: GoogleFonts.notoSerif(
-                                fontWeight: FontWeight.bold, fontSize: 15.sp),
+                                fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                           subtitle:
                               Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
@@ -198,12 +197,12 @@ class OrderPage extends StatelessWidget {
                   );
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 30.w, top: 20.h,right: 30),
+                  padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
                   child: Container(
-                    width: 300.w,
-                    height: 60.h,
+                    width: 300,
+                    height: 60,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                       color: color,
                       boxShadow: [
                         BoxShadow(
@@ -220,7 +219,7 @@ class OrderPage extends StatelessWidget {
                         "Order Now",
                         style: GoogleFonts.notoSerif(
                             fontWeight: FontWeight.w700,
-                            fontSize: 25.sp,
+                            fontSize: 25,
                             letterSpacing: 2,
                             color: Colors.black),
                       ),

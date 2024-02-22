@@ -39,7 +39,7 @@ class _CartPageState extends State<CartPage> {
                     size: 200,
                   ))
                 : ListView.builder(
-                    itemCount: state.cartItems!.length!,
+                    itemCount: state.cartItems!.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(15.0),

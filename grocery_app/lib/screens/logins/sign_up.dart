@@ -71,7 +71,6 @@ class _SignUpState extends State<SignUp> {
     return ListView(children: [
       Column(
         children: <Widget>[
-          //l:30,r:20,t:30
           const SizedBox(
             height: 20,
           ),
@@ -104,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                   _password.clear();
                   print(
                       "Successfully Created account for this app, You can log in");
-                }, //w:250,h:50,
+                },
                 child: otherSignUp(
                     width: 250,
                     height: 50,

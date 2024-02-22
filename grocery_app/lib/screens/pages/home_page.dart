@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/drawer/drawer_page.dart';
 
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             style: GoogleFonts.notoSerif(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: state.themeStatus! ? Colors.black : Colors.white),
+                color: state.themeStatus ? Colors.black : Colors.white),
           ),
           actions: [
             IconButton(
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                         themeStatus: state.themeStatus,
                       ));
                 },
-                icon: state.themeStatus!
+                icon: state.themeStatus
                     ? const Icon(
                         Icons.dark_mode,
                         size: 25,
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.notoSerif(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: state.themeStatus! ? Colors.black : Colors.white),
+                      color: state.themeStatus ? Colors.black : Colors.white),
                 ),
               ),
               Padding(
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                           color:
-                              state.themeStatus! ? Colors.black : Colors.white),
+                              state.themeStatus ? Colors.black : Colors.white),
                     ),
                   ),
                 ),
