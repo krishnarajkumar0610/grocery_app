@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/logins/sign_in.dart';
@@ -79,8 +77,9 @@ class NewUser extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height:
-                              orientation == Orientation.portrait ? 100 : 20,
+                          height: orientation == Orientation.portrait
+                              ? deviceHeight * 0.120
+                              : deviceHeight * 0.100,
                         ),
                         getAppText(
                           "Grocery App",

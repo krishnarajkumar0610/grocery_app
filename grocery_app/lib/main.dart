@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<GroceryBloc, GroceryStates>(
           listener: (context, state) {},
           builder: (context, state) {
-
-            // HAHA TA<BI ENA SANDOSAMA
+            // HAHA TAMBI ENA SANDOSAMA
 
             return MaterialApp(
               theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),

@@ -47,32 +47,27 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
-      var hour = DateTime.now().hour;
-      var message;
-      if (hour >= 6 && hour < 12) {
-        message="Good Morning 🥞";
+      DateTime now = DateTime.now();
+      int hour = now.hour;
 
-      } else if (hour >= 12 && hour < 17) {
-        message="Good Morning 🥞";
-        emit(GroceryStates(
-            greetingStatus: "Good Afternoon 🍚",
-            cartItems: state.cartItems,
-            themeStatus: state.themeStatus,
-            totalAmount: state.totalAmount));
-      } else if (hour >= 17 && hour < 19) { message="Good Morning 🥞";
-        emit(GroceryStates(
-            greetingStatus: "Good Evening 🍫",
-            cartItems: state.cartItems,
-            themeStatus: state.themeStatus,
-            totalAmount: state.totalAmount));
+      // Determine the time of day based on the hour
+      String message;
+      if (hour >= 6 && hour < 12) {
+        message = 'Good Morning 🥞';
+        print("PODAPODA ");
+      } else if (hour >= 12 && hour < 16) {
+        message = 'Good Afternoon 🍚';
+      } else if (hour >= 16 && hour < 19) {
+        message = 'Good Evening 🍟';
       } else {
-        message="Good Morning 🥞";
-        emit(GroceryStates(
-            greetingStatus: "Good Night 🍜",
-            cartItems: state.cartItems,
-            themeStatus: state.themeStatus,
-            totalAmount: state.totalAmount));
+        message = 'Good Night 🍜';
       }
+      print(message);
+      emit(GroceryStates(
+          greetingStatus: message,
+          cartItems: state.cartItems,
+          themeStatus: state.themeStatus,
+          totalAmount: state.totalAmount));
     });
 
     on<AddQuantity>((event, emit) {});

@@ -17,16 +17,16 @@ class _SignUpState extends State<SignUp> {
   final _password = TextEditingController();
 
   Widget getField(
-      {double? vertical,
-      double? horizontal,
+      {double? left = 0,
+      double? right = 0,
+      double? top = 0,
+      double? bottom = 0,
       TextEditingController? controller,
       String? hintText,
       Icon? icon}) {
     return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontal ?? 0,
-          vertical: vertical ?? 0,
-        ),
+        padding: EdgeInsets.only(
+            left: left!, right: right!, top: top!, bottom: bottom!),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
@@ -38,14 +38,14 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget otherSignUp(
-          {double? width,
-          double? height,
+          {double? width = 0,
+          double? height = 0,
           String? text,
           Color? color,
           Color? textColor}) =>
       Container(
-          width: width,
-          height: height,
+          width: width!,
+          height: height!,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20),
@@ -60,7 +60,7 @@ class _SignUpState extends State<SignUp> {
           ),
           child: Center(
             child: Text(
-              text ?? "",
+              text!,
               style: GoogleFonts.notoSerif(
                   fontWeight: FontWeight.bold, fontSize: 15, color: textColor),
             ),
@@ -74,72 +74,104 @@ class _SignUpState extends State<SignUp> {
 
     return ListView(children: [
       Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 20,
+        children: [
+          getField(
+            controller: _fullName,
+            icon: const Icon(Icons.person),
+            hintText: "Full Name",
+            top: orientation == Orientation.portrait
+                ? deviceHeight * 0.04
+                : deviceHeight * 0.04,
+            left: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+            right: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
           ),
           getField(
-              horizontal: orientation == Orientation.portrait ? 30 : 100,
-              vertical: 10,
-              hintText: "Full Name",
-              icon: const Icon(Icons.person),
-              controller: _fullName),
+            controller: _email,
+            icon: const Icon(Icons.lock),
+            hintText: "Email ID",
+            top: orientation == Orientation.portrait
+                ? deviceHeight * 0.04
+                : deviceHeight * 0.04,
+            left: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+            right: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+          ),
           getField(
-              horizontal: orientation == Orientation.portrait ? 30 : 100,
-              vertical: 10,
-              hintText: "Email",
-              icon: const Icon(Icons.mail),
-              controller: _email),
-          getField(
-              horizontal: orientation == Orientation.portrait ? 30 : 100,
-              vertical: 10,
-              hintText: "Password",
-              icon: const Icon(Icons.lock),
-              controller: _password),
-
+            controller: _password,
+            icon: const Icon(Icons.lock),
+            hintText: "Password",
+            top: orientation == Orientation.portrait
+                ? deviceHeight * 0.04
+                : deviceHeight * 0.04,
+            left: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+            right: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+          ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 30),
             child: GestureDetector(
                 onTap: () {
                   // when i sign up then it need to display a box to tell go to sign in page
                   _fullName.clear();
                   _email.clear();
                   _password.clear();
+
                   print(
                       "Successfully Created account for this app, You can log in");
-                },
+                }, //w:250,h:50,
                 child: otherSignUp(
-                    width: 250,
-                    height: 50,
-                    text: "SIGN UP",
+                    width: orientation == Orientation.portrait
+                        ? deviceWidth * 0.70
+                        : deviceWidth * 0.50,
+                    height: orientation == Orientation.portrait
+                        ? deviceHeight * 0.05
+                        : deviceHeight * 0.10,
+                    text: "SIGN IN",
                     color: Colors.lightGreen)),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(top: 20.0),
             child: Text(
-              "--------------or Sign up with--------------",
+              "--------------or Sign In with--------------",
               style: GoogleFonts.notoSerif(
                   fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
-          //w:120,h:50,
           Padding(
-            padding: const EdgeInsets.only(top: 5.0),
+            padding: const EdgeInsets.only(top: 30.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 otherSignUp(
-                    color: Colors.white,
-                    height: 50,
-                    width: 120,
+                    width: orientation == Orientation.portrait
+                        ? deviceWidth * 0.360
+                        : deviceWidth * 0.360,
                     text: "Google",
+                    color: Colors.white,
+                    height: orientation == Orientation.portrait
+                        ? deviceHeight * 0.050
+                        : deviceHeight * 0.10,
                     textColor: Colors.black),
                 otherSignUp(
-                    color: Colors.deepPurple[700],
+                    width: orientation == Orientation.portrait
+                        ? deviceWidth * 0.360
+                        : deviceWidth * 0.360,
                     text: "Facebook",
-                    width: 120,
-                    height: 50,
-                    textColor: Colors.white)
+                    color: Colors.deepPurple[700],
+                    height: orientation == Orientation.portrait
+                        ? deviceHeight * 0.050
+                        : deviceHeight * 0.10,
+                    textColor: Colors.white),
               ],
             ),
           ),

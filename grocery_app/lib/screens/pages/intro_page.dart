@@ -21,8 +21,9 @@ class _IntroPageState extends State<IntroPage> {
     super.initState();
     final bloc = BlocProvider.of<GroceryBloc>(context);
     bloc.add(GreetingStatus());
-    Timer(const Duration(seconds: 5),
-          () => Navigator.pushReplacement(
+    Timer(
+      const Duration(seconds: 5),
+      () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewUser(), // <= click this for new user
@@ -44,13 +45,13 @@ class _IntroPageState extends State<IntroPage> {
             Padding(
               padding: EdgeInsets.only(
                 left: orientation == Orientation.portrait
-                    ? deviceWidth*0.1
+                    ? deviceWidth * 0.1
                     : deviceWidth * 0.4,
                 right: orientation == Orientation.portrait
-                    ? deviceWidth*0.1
+                    ? deviceWidth * 0.1
                     : deviceWidth * 0.4,
                 top: orientation == Orientation.portrait
-                    ? deviceWidth*0.5
+                    ? deviceWidth * 0.5
                     : deviceHeight * 0.1,
               ),
               child: Image.asset(
