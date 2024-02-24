@@ -47,8 +47,8 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
-      int hour = DateTime.now().hour;
-
+      final hour = DateTime.now().hour;
+      print(hour);
       // Determine the time of day based on the hour
       String message;
       if (hour >= 6 && hour < 12) {
@@ -61,7 +61,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
       } else {
         message = 'Good Night 🍜';
       }
-      print(message);
+
       emit(GroceryStates(
           greetingStatus: message,
           cartItems: state.cartItems,
