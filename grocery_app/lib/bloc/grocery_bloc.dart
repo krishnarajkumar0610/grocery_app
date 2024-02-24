@@ -47,8 +47,7 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
-      DateTime now = DateTime.now();
-      int hour = now.hour;
+      int hour = DateTime.now().hour;
 
       // Determine the time of day based on the hour
       String message;

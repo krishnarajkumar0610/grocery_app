@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/drawer/drawer_page.dart';
-
 import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_events.dart';
 import '../../bloc/grocery_states.dart';
@@ -100,7 +98,9 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: orientation == Orientation.portrait ? 20 : 10),
+                    top: orientation == Orientation.portrait
+                        ? deviceHeight * 0.01
+                        : deviceHeight * 0.01),
                 child: Text(
                   state.greetingStatus!,
                   style: GoogleFonts.notoSerif(

@@ -45,22 +45,22 @@ class GroceryItemTile extends StatelessWidget {
             children: [
               Positioned(
                 left: orientation == Orientation.portrait
-                    ? deviceWidth * 0.200
-                    : deviceWidth * 0.250,
+                    ? deviceWidth * 0.28
+                    : deviceWidth * 0.22,
                 top: orientation == Orientation.portrait
-                    ? deviceHeight * 0.100
-                    : deviceHeight * 0.95,
+                    ? deviceHeight * 0.01
+                    : deviceHeight * 0.02,
                 child: CircleAvatar(
                   radius: orientation == Orientation.portrait
-                      ? deviceWidth * 0.05
-                      : deviceWidth * 0.03,
+                      ? deviceHeight * 0.03
+                      : deviceHeight * 0.08,
                   backgroundColor: Colors.white,
                   child: IconButton(
                     icon: Icon(
                       Icons.add_shopping_cart,
                       size: orientation == Orientation.portrait
-                          ? deviceWidth * 0.05
-                          : deviceWidth * 0.03,
+                          ? deviceWidth * 0.07
+                          : deviceWidth * 0.040,
                       color: Colors.black,
                     ),
                     onPressed: () {
@@ -76,34 +76,46 @@ class GroceryItemTile extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: orientation == Orientation.portrait ? 15 : 12,
-                top: orientation == Orientation.portrait ? 20 : 15,
+                left: orientation == Orientation.portrait
+                    ? deviceWidth * 0.02
+                    : deviceWidth * 0.02,
+                top: orientation == Orientation.portrait
+                    ? deviceWidth * 0.02
+                    : deviceWidth * 0.02,
                 child: Image.asset(
                   imagePath,
                   height: orientation == Orientation.portrait
-                      ? deviceHeight * 0.15
-                      : deviceHeight * 0.20,
+                      ? deviceHeight * 0.10
+                      : deviceHeight * 0.18,
                 ),
               ),
               Positioned(
                   left: orientation == Orientation.portrait
-                      ? deviceWidth * 0.20
-                      : deviceWidth * 0.1,
-                  top: orientation == Orientation.portrait ? 100 : 90,
+                      ? deviceWidth * 0.03
+                      : deviceWidth * 0.02,
+                  top: orientation == Orientation.portrait
+                      ? deviceHeight * 0.12
+                      : deviceHeight * 0.25,
                   child: Text(itemName,
                       style: GoogleFonts.notoSerif(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: orientation == Orientation.portrait
-                            ? deviceHeight * 0.1
-                            : deviceHeight * 0.1,
+                            ? deviceHeight * 0.02
+                            : deviceHeight * 0.05,
                       ))),
               Positioned(
-                top: orientation == Orientation.portrait ? 130 : 120,
+                top: orientation == Orientation.portrait
+                    ? deviceHeight * 0.16
+                    : deviceHeight * 0.35,
                 left: orientation == Orientation.portrait ? 10 : 10,
                 child: SizedBox(
-                  width: 150,
-                  height: 50,
+                  width: orientation == Orientation.portrait
+                      ? deviceWidth * 0.35
+                      : deviceWidth * 0.20,
+                  height: orientation == Orientation.portrait
+                      ? deviceHeight * 0.05
+                      : deviceHeight * 0.1,
                   child: MaterialButton(
                     color: color,
                     onPressed: () {
@@ -121,9 +133,14 @@ class GroceryItemTile extends StatelessWidget {
                           ));
                     },
                     child: Text(
-                      "Buy Rs.$itemPrice/-",
+                      "Buy $itemPrice/-",
                       style: GoogleFonts.notoSerif(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: orientation == Orientation.portrait
+                            ? deviceHeight * 0.02
+                            : deviceHeight * 0.05,
+                      ),
                     ),
                   ),
                 ),

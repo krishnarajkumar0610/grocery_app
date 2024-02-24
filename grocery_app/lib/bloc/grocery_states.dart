@@ -100,6 +100,4 @@ class GroceryStates {
       this.totalAmount,
       this.greetingStatus,
       this.themeStatus = true});
-
-
 }
