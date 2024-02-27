@@ -64,6 +64,7 @@ class _CartPageState extends State<CartPage> {
                               trailing: IconButton(
                                 onPressed: () {
                                   print("INSIDE CART : ${state.themeStatus}");
+
                                   context.read<GroceryBloc>().add(RemoveItem(
                                         index: index,
                                       ));
