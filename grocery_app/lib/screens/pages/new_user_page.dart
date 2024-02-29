@@ -21,12 +21,18 @@ class NewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       body: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(280),
+              preferredSize: Size.fromHeight(orientation == Orientation.portrait
+                  ? deviceHeight * 0.35
+                  : deviceHeight * 0.4),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -47,64 +53,76 @@ class NewUser extends StatelessWidget {
                     bottomRight: Radius.circular(40),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
+                child: Stack(children: [
+                  Positioned(
+                    left: orientation == Orientation.portrait
+                        ? deviceWidth * 0.35
+                        : deviceWidth * 0.1,
+                    top: orientation == Orientation.portrait
+                        ? deviceHeight * 0.07
+                        : deviceHeight * 0.1,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          "assets/logo.png",
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 40),
-                              child: SizedBox(
-                                width: 120,
-                                height: 100,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.asset(
-                                      "assets/logo.png",
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            getAppText(
-                              "Grocery App",
-                              18,
-                            ),
-                            getAppText(
-                              "Welcome to our Application",
-                              18,
-                            ),
-                          ],
+                        SizedBox(
+                          height: orientation == Orientation.portrait
+                              ? deviceHeight * 0.120
+                              : deviceHeight * 0.100,
+                        ),
+                        getAppText(
+                          "Grocery App",
+                          18,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        getAppText(
+                          "Welcome to our Application",
+                          18,
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(
-                        top: 27.5,
-                        left: 40,
-                        right: 40,
-                      ),
-                      child: TabBar(
-                        labelColor: Colors.black,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        tabs: [
-                          Tab(
-                            text: "Sign up",
-                          ),
-                          Tab(
-                            text: "Sign in",
-                          ),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: orientation == Orientation.portrait
+                          ? deviceHeight * 0.350
+                          : deviceHeight * 0.400,
+                      left: orientation == Orientation.portrait
+                          ? deviceWidth * 0.1
+                          : deviceWidth * 0.1,
+                      right: orientation == Orientation.portrait
+                          ? deviceWidth * 0.1
+                          : deviceWidth * 0.1,
                     ),
-                  ],
-                ),
+                    child: const TabBar(
+                      labelColor: Colors.black,
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      tabs: [
+                        Tab(
+                          text: "Sign up",
+                        ),
+                        Tab(
+                          text: "Sign in",
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
               )),
           body: const TabBarView(
             children: [

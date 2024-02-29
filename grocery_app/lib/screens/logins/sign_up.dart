@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/grocery_bloc.dart';
+import 'package:grocery_app/bloc/grocery_events.dart';
+import 'package:grocery_app/bloc/grocery_states.dart';
 
 // this is sing up page
 
@@ -17,16 +21,16 @@ class _SignUpState extends State<SignUp> {
   final _password = TextEditingController();
 
   Widget getField(
-      {double? vertical,
-      double? horizontal,
+      {double? left = 0,
+      double? right = 0,
+      double? top = 0,
+      double? bottom = 0,
       TextEditingController? controller,
       String? hintText,
       Icon? icon}) {
     return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontal ?? 0,
-          vertical: vertical ?? 0,
-        ),
+        padding: EdgeInsets.only(
+            left: left!, right: right!, top: top!, bottom: bottom!),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
@@ -38,14 +42,14 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget otherSignUp(
-          {double? width,
-          double? height,
+          {double? width = 0,
+          double? height = 0,
           String? text,
           Color? color,
           Color? textColor}) =>
       Container(
-          width: width,
-          height: height,
+          width: width!,
+          height: height!,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(20),
@@ -60,7 +64,7 @@ class _SignUpState extends State<SignUp> {
           ),
           child: Center(
             child: Text(
-              text ?? "",
+              text!,
               style: GoogleFonts.notoSerif(
                   fontWeight: FontWeight.bold, fontSize: 15, color: textColor),
             ),
@@ -68,80 +72,123 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 20,
-          ),
-          getField(
-              horizontal: 30,
-              vertical: 10,
-              hintText: "Full Name",
-              icon: const Icon(Icons.person),
-              controller: _fullName),
-          getField(
-              horizontal: 30,
-              vertical: 10,
-              hintText: "Email",
-              icon: const Icon(Icons.mail),
-              controller: _email),
-          getField(
-              horizontal: 30,
-              vertical: 10,
-              hintText: "Password",
-              icon: const Icon(Icons.lock),
-              controller: _password),
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+    Orientation orientation = MediaQuery.of(context).orientation;
 
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: GestureDetector(
-                onTap: () {
-                  // when i sign up then it need to display a box to tell go to sign in page
-                  _fullName.clear();
-                  _email.clear();
-                  _password.clear();
-                  print(
-                      "Successfully Created account for this app, You can log in");
-                },
-                child: otherSignUp(
-                    width: 250,
-                    height: 50,
-                    text: "SIGN UP",
-                    color: Colors.lightGreen)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              "--------------or Sign up with--------------",
-              style: GoogleFonts.notoSerif(
-                  fontWeight: FontWeight.bold, fontSize: 15),
+    return BlocConsumer<GroceryBloc, GroceryStates>(
+      listener: (context, state) {},
+      builder: (context, state) => ListView(children: [
+        Column(
+          children: [
+            getField(
+              controller: _fullName,
+              icon: const Icon(Icons.person),
+              hintText: "Full Name",
+              top: orientation == Orientation.portrait
+                  ? deviceHeight * 0.04
+                  : deviceHeight * 0.04,
+              left: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
+              right: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
             ),
-          ),
-          //w:120,h:50,
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                otherSignUp(
-                    color: Colors.white,
-                    height: 50,
-                    width: 120,
-                    text: "Google",
-                    textColor: Colors.black),
-                otherSignUp(
-                    color: Colors.deepPurple[700],
-                    text: "Facebook",
-                    width: 120,
-                    height: 50,
-                    textColor: Colors.white)
-              ],
+            getField(
+              controller: _email,
+              icon: const Icon(Icons.lock),
+              hintText: "Email ID",
+              top: orientation == Orientation.portrait
+                  ? deviceHeight * 0.04
+                  : deviceHeight * 0.04,
+              left: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
+              right: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
             ),
-          )
-        ],
-      ),
-    ]);
+            getField(
+              controller: _password,
+              icon: const Icon(Icons.lock),
+              hintText: "Password",
+              top: orientation == Orientation.portrait
+                  ? deviceHeight * 0.04
+                  : deviceHeight * 0.04,
+              left: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
+              right: orientation == Orientation.portrait
+                  ? deviceWidth * 0.05
+                  : deviceWidth * 0.04,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: GestureDetector(
+                  onTap: () {
+                    // when i sign up then it need to display a box to tell go to sign in page
+                    context.read<GroceryBloc>().add(SignupValidation());
+                    _fullName.clear();
+                    _email.clear();
+                    _password.clear();
+
+                    print(
+                        "Successfully Created account for this app, You can log in");
+                  }, //w:250,h:50,
+                  child: otherSignUp(
+                      width: orientation == Orientation.portrait
+                          ? deviceWidth * 0.70
+                          : deviceWidth * 0.50,
+                      height: orientation == Orientation.portrait
+                          ? deviceHeight * 0.05
+                          : deviceHeight * 0.10,
+                      text: "SIGN IN",
+                      color: Colors.lightGreen)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Text(
+                "--------------or Sign In with--------------",
+                style: GoogleFonts.notoSerif(
+                    fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  otherSignUp(
+                      width: orientation == Orientation.portrait
+                          ? deviceWidth * 0.360
+                          : deviceWidth * 0.360,
+                      text: "Google",
+                      color: Colors.white,
+                      height: orientation == Orientation.portrait
+                          ? deviceHeight * 0.050
+                          : deviceHeight * 0.10,
+                      textColor: Colors.black),
+                  otherSignUp(
+                      width: orientation == Orientation.portrait
+                          ? deviceWidth * 0.360
+                          : deviceWidth * 0.360,
+                      text: "Facebook",
+                      color: Colors.deepPurple[700],
+                      height: orientation == Orientation.portrait
+                          ? deviceHeight * 0.050
+                          : deviceHeight * 0.10,
+                      textColor: Colors.white),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            )
+          ],
+        ),
+      ]),
+    );
   }
 }
 

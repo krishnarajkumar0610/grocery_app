@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
 import 'screens/pages/intro_page.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 
@@ -19,9 +24,6 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<GroceryBloc, GroceryStates>(
           listener: (context, state) {},
           builder: (context, state) {
-
-            // HAHA TA<BI ENA SANDOSAMA
-
             return MaterialApp(
               theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),
               debugShowCheckedModeBanner: false,

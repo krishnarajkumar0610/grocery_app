@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'grocery_events.dart';
 import 'grocery_states.dart';
 
-class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
+class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
     on<AddToCart>((event, emit) {
       // add item event
@@ -47,25 +47,41 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
-      var hour = DateTime.now();
-      var message;
+
+      final hour = DateTime
+          .now()
+          .hour;
       print(hour);
-      // if (hour >= 6 && hour < 12) {
-      //   message = "Good Morning 🥞";
-      // } else if (hour >= 12 && hour < 17) {
-      //   message = "Good Afternoon 🍚";
-      // } else if (hour >= 17 && hour < 19) {
-      //   message = "Good Evening 🍫";
-      // } else {
-      //   message = "Good Night 🍜";
-      // }
-      // emit(GroceryStates(
-      //     greetingStatus: message,
-      //     cartItems: state.cartItems,
-      //     themeStatus: state.themeStatus,
-      //     totalAmount: state.totalAmount));
+      // Determine the time of day based on the hour
+      String message;
+      if (hour >= 6 && hour < 12) {
+        message = 'Good Morning 🥞';
+        print("PODAPODA ");
+      } else if (hour >= 12 && hour < 16) {
+        message = 'Good Afternoon 🍚';
+      } else if (hour >= 16 && hour < 19) {
+        message = 'Good Evening 🍟';
+      } else {
+        message = 'Good Night 🍜';
+      }
+
+      emit(GroceryStates(
+          greetingStatus: message,
+          cartItems: state.cartItems,
+          themeStatus: state.themeStatus,
+          totalAmount: state.totalAmount));
     });
 
     on<AddQuantity>((event, emit) {});
+
+    on<SignupValidation>((event, emit) {
+      String fullName = event.fullName!;
+      String email = event.emailId!;
+      String password = event.password!;
+
+      if (fullName[0] == " " || fullName.isEmpty) {
+        
+      }
+    });
   }
 }
