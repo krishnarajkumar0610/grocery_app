@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'grocery_events.dart';
 import 'grocery_states.dart';
 
-class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
+class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
   GroceryBloc() : super(GroceryStates(cartItems: [])) {
     on<AddToCart>((event, emit) {
       // add item event
@@ -47,7 +47,9 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
-      final hour = DateTime.now().hour;
+      final hour = DateTime
+          .now()
+          .hour;
       print(hour);
       // Determine the time of day based on the hour
       String message;
@@ -70,5 +72,15 @@ class GroceryBloc extends Bloc<GrossEvents, GroceryStates> {
     });
 
     on<AddQuantity>((event, emit) {});
+
+    on<SignupValidation>((event, emit) {
+      String fullName = event.fullName!;
+      String email = event.emailId!;
+      String password = event.password!;
+
+      if (fullName[0] == " " || fullName.isEmpty) {
+        
+      }
+    });
   }
 }
