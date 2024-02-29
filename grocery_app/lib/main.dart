@@ -6,7 +6,7 @@ import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
 import 'screens/pages/intro_page.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

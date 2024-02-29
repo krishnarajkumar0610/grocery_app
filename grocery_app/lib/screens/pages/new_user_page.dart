@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/logins/sign_in.dart';
 import 'package:grocery_app/screens/logins/sign_up.dart';
 
-class NewUser extends StatelessWidget {
+import '../../bloc/grocery_bloc.dart';
+import '../../bloc/grocery_events.dart';
+
+class NewUser extends StatefulWidget {
   const NewUser({super.key});
+
+  @override
+  State<NewUser> createState() => _NewUserState();
+}
+
+class _NewUserState extends State<NewUser> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GroceryBloc>().add(GreetingStatus());
+  }
 
   Widget getAppText(String greetingText, double size) {
     return Text(

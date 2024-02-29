@@ -19,14 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    final bloc = GroceryBloc();
-    bloc.add(GreetingStatus());
-  }
-
-  @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
@@ -131,7 +123,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.builder(
-                  itemCount: state.shopItems.length,
+                  itemCount: state.shopItems!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
                     childAspectRatio:

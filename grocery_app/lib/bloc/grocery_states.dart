@@ -87,7 +87,6 @@ class GroceryStates {
       Colors.pink
     ],
   ]; // List
-  // of data's
 
   final List? cartItems;
 
@@ -99,5 +98,6 @@ class GroceryStates {
       {required this.cartItems,
       this.totalAmount,
       this.greetingStatus,
-      this.themeStatus = true});
+      this.themeStatus = true,
+     });
 }
