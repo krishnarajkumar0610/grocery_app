@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'grocery_events.dart';
 import 'grocery_states.dart';
@@ -106,7 +102,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
     on<AddToCart>((event, emit) {
       // add item event
       int? index = event.index;
-      state.cartItems?.add(state.shopItems![index!]);
+      state.cartItems?.add(state.shopItems[index!]);
       emit(GroceryStates(
           cartItems: state.cartItems,
           greetingStatus: state.greetingStatus,

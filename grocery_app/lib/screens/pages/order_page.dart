@@ -58,7 +58,7 @@ class OrderPage extends StatelessWidget {
                     color: Colors.white60,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Image.asset(imagePath),
                   ),
                 ),

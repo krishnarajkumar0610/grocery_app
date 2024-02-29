@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
 
 import 'bloc/grocery_bloc.dart';
 import 'bloc/grocery_states.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),
               debugShowCheckedModeBanner: false,
-              home: const IntroPage(), // <= click this for intro page
+              home: const HomePage(), // <= click this for intro page
             );
           }),
     );

@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.builder(
-                  itemCount: state.shopItems!.length,
+                  itemCount: state.shopItems.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
                     childAspectRatio:
