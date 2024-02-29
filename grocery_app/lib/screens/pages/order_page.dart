@@ -16,12 +16,12 @@ class OrderPage extends StatelessWidget {
 
   const OrderPage(
       {super.key,
-      required this.itemName,
-      required this.itemPrice,
-      required this.imagePath,
-      required this.description,
-      required this.color,
-      this.index});
+        required this.itemName,
+        required this.itemPrice,
+        required this.imagePath,
+        required this.description,
+        required this.color,
+        this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class OrderPage extends StatelessWidget {
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset:
-                            const Offset(0, 3), // changes position of shadow
+                        const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                     color: Colors.white60,
@@ -92,7 +92,7 @@ class OrderPage extends StatelessWidget {
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset:
-                              const Offset(0, 3), // changes position of shadow
+                          const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                       color: color,
@@ -142,7 +142,7 @@ class OrderPage extends StatelessWidget {
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset:
-                            const Offset(0, 3), // changes position of shadow
+                        const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -192,7 +192,7 @@ class OrderPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                           subtitle:
-                              Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
+                          Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
                         )),
                   );
                 },
@@ -210,7 +210,7 @@ class OrderPage extends StatelessWidget {
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset:
-                              const Offset(0, 3), // changes position of shadow
+                          const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),

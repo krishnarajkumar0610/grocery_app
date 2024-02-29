@@ -47,6 +47,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
     });
 
     on<GreetingStatus>((event, emit) {
+
       final hour = DateTime
           .now()
           .hour;
