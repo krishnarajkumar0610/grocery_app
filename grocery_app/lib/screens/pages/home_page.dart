@@ -19,6 +19,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GroceryBloc>().add(GetInitialData());
+  }
+
+  @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
@@ -122,29 +129,37 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Expanded(
-                child: GridView.builder(
-                  itemCount: state.shopItems!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-                    childAspectRatio:
-                        orientation == Orientation.portrait ? 1 / 1.2 : 1 / 0.8,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.all(
-                          orientation == Orientation.portrait ? 12.0 : 12),
-                      child: GroceryItemTile(
-                        // <= click this for grocery item container
-                        itemName: state.shopItems[index][0],
-                        itemPrice: state.shopItems[index][1],
-                        imagePath: state.shopItems[index][2],
-                        description: state.shopItems[index][3],
-                        color: state.shopItems[index][4],
-                        index: index,
+                child: state.shopItems == null
+                    ? const Center(
+                        child: Text("No Data found !"),
+                      )
+                    : GridView.builder(
+                        itemCount: state.shopItems?.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              orientation == Orientation.portrait ? 2 : 3,
+                          childAspectRatio: orientation == Orientation.portrait
+                              ? 1 / 1.2
+                              : 1 / 0.8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(
+                                orientation == Orientation.portrait
+                                    ? 12.0
+                                    : 12),
+                            child: GroceryItemTile(
+                              // <= click this for grocery item container
+                              itemName: state.shopItems?[index][0],
+                              itemPrice: state.shopItems?[index][1],
+                              imagePath: state.shopItems?[index][2],
+                              description: state.shopItems?[index][3],
+                              color: Color(state.shopItems?[index][4]),
+                              index: index,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               )
             ],
           ),

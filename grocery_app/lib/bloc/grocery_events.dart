@@ -33,3 +33,5 @@ class SignupValidation extends GroceryEvents {
 
   SignupValidation({this.fullName, this.emailId, this.password});
 }
+
+class GetInitialData extends GroceryEvents {}

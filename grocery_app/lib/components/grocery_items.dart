@@ -35,9 +35,14 @@ class GroceryItemTile extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: color[100],
-        borderRadius: BorderRadius.circular(20),
-      ),
+          color: Colors.grey,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black,
+              blurRadius: 5,
+            )
+          ]),
       child: BlocConsumer<GroceryBloc, GroceryStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -69,7 +74,7 @@ class GroceryItemTile extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                            const CartPage(), // <= click it for cart page
+                                const CartPage(), // <= click it for cart page
                           ));
                     },
                   ),
