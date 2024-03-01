@@ -116,29 +116,49 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
           totalAmount: state.totalAmount));
     });
 
-    on<AddToCart>((event, emit) {
-      // add item event
-      int? index = event.index;
-      state.cartItems?.add(state.shopItems![index!]);
+    on<AddToCart>((event, emit) async {
+      final sharedPreference = await SharedPreferences.getInstance();
+      // sharedPreference.clear();
+      final data;
+      List cartItem = state.cartItems ?? [];
+      if (!sharedPreference.containsKey("cartItem")) {
+        cartItem.add(state.shopItems?[event.index!]);
+        await sharedPreference.setString("cartItem", jsonEncode(cartItem));
+        print("INSIDE IF : $cartItem");
+      } else {
+        data = sharedPreference.getString("cartItem");
+        cartItem = jsonDecode(data);
+        print("ENCODED DATA : $cartItem");
+        cartItem.add(state.shopItems?[event.index!]);
+        await sharedPreference.setString("cartItem", jsonEncode(cartItem));
+        print("INSIDE ELSE : $cartItem");
+      }
       emit(GroceryStates(
           shopItems: state.shopItems,
-          cartItems: state.cartItems,
-          greetingStatus: state.greetingStatus,
           themeStatus: state.themeStatus,
+          cartItems: cartItem,
+          greetingStatus: state.greetingStatus!,
           totalAmount: state.totalAmount));
     });
 
-    on<RemoveItem>((event, emit) {
-      // remove item event
-      List? cartItems = state.cartItems;
-      int index = event.index!;
-      cartItems?.removeAt(index);
+    on<RemoveItem>((event, emit) async {
+      final sharedPreference = await SharedPreferences.getInstance();
+      // sharedPreference.clear();
+      final data;
+      List cartItem = state.cartItems ?? [];
+
+      data = sharedPreference.getString("cartItem");
+      cartItem = jsonDecode(data);
+      print("ENCODED DATA : $cartItem");
+      cartItem.removeAt(event.index!);
+      await sharedPreference.setString("cartItem", jsonEncode(cartItem));
+      print("INSIDE ELSE : $cartItem");
 
       emit(GroceryStates(
           shopItems: state.shopItems,
-          cartItems: cartItems,
           themeStatus: state.themeStatus,
-          greetingStatus: state.greetingStatus,
+          cartItems: cartItem,
+          greetingStatus: state.greetingStatus!,
           totalAmount: state.totalAmount));
     });
 
