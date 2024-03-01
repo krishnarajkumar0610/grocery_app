@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),
               debugShowCheckedModeBanner: false,
-              home: const HomePage(), // <= click this for intro page
+              home: const IntroPage(), // <= click this for intro page
             );
           }),
     );
