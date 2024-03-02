@@ -99,13 +99,15 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
       dynamic data;
       final sharedPreference = await SharedPreferences.getInstance();
+      // sharedPreference.remove("shopItem");
+      //print("SHOPITEM REMOVED");
       if (!sharedPreference.containsKey("shopItem")) {
-        final encodedList = jsonEncode(shopItem);
-        await sharedPreference.setString("shopItem", encodedList);
+        print("DATA POGUDHU");
+        await sendData(keyName: "shopItem", item: shopItem);
       }
-
       data = sharedPreference.getString("shopItem");
       data = jsonDecode(data);
+      print(data.runtimeType);
       print("ILAMA IRUNCHU IPA VANDHURUCHU");
 
       emit(GroceryStates(
@@ -116,14 +118,24 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
           totalAmount: state.totalAmount));
     });
 
+    on<Clearcart>((event, emit) async {
+      final sharedPreference = await SharedPreferences.getInstance();
+       sharedPreference.remove("cartItem");
+      emit(GroceryStates(
+          shopItems: state.shopItems,
+          cartItems: [],
+          greetingStatus: state.greetingStatus,
+          themeStatus: state.themeStatus,
+          totalAmount: state.totalAmount));
+    });
+
     on<AddToCart>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
-      // sharedPreference.clear();
       final data;
-      List cartItem = state.cartItems ?? [];
+      List cartItem = [];
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(state.shopItems?[event.index!]);
-        await sharedPreference.setString("cartItem", jsonEncode(cartItem));
+        sendData(keyName: "cartItem", item: cartItem);
         print("INSIDE IF : $cartItem");
       } else {
         data = sharedPreference.getString("cartItem");
@@ -145,12 +157,13 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
       final sharedPreference = await SharedPreferences.getInstance();
       // sharedPreference.clear();
       final data;
-      List cartItem = state.cartItems ?? [];
+      List cartItem;
 
       data = sharedPreference.getString("cartItem");
       cartItem = jsonDecode(data);
       print("ENCODED DATA : $cartItem");
       cartItem.removeAt(event.index!);
+      sharedPreference.remove("cartItem");
       await sharedPreference.setString("cartItem", jsonEncode(cartItem));
       print("INSIDE ELSE : $cartItem");
 
@@ -214,4 +227,18 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
       if (fullName[0] == " " || fullName.isEmpty) {}
     });
   }
+
+  Future<void> sendData({required final item, required String keyName}) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    await sharedPreference.setString(keyName, jsonEncode(item));
+    print("DATA SENDED");
+  }
+//
+// Future<List<dynamic>> getData({required String keyName}) async {
+//   final sharedPreference = await SharedPreferences.getInstance();
+//   final encodedData = jsonEncode(keyName);
+//   // final encodedList = jsonEncode(item);
+//   // await sharedPreference.setString(keyName, encodedList);
+//   return encodedData as List<dynamic>;
+// }
 }

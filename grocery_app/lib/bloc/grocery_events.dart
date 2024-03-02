@@ -1,5 +1,9 @@
 class GroceryEvents {}
 
+class GetInitialData extends GroceryEvents {}
+
+class Clearcart extends GroceryEvents {}
+
 class AddToCart extends GroceryEvents {
   int? index;
 
@@ -33,5 +37,3 @@ class SignupValidation extends GroceryEvents {
 
   SignupValidation({this.fullName, this.emailId, this.password});
 }
-
-class GetInitialData extends GroceryEvents {}

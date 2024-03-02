@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
               child: GestureDetector(
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
-                    context.read<GroceryBloc>().add(SignupValidation());
+                    //context.read<GroceryBloc>().add(SignupValidation());
                     _fullName.clear();
                     _email.clear();
                     _password.clear();
@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                       height: orientation == Orientation.portrait
                           ? deviceHeight * 0.05
                           : deviceHeight * 0.10,
-                      text: "SIGN IN",
+                      text: "SIGN UP",
                       color: Colors.lightGreen)),
             ),
             Padding(

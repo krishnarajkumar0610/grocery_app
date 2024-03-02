@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,19 +9,8 @@ import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_events.dart';
 import '../../bloc/grocery_states.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({super.key});
-
-  @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +19,54 @@ class _CartPageState extends State<CartPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.lightGreenAccent,
-          centerTitle: true,
           title: Text(
             "My Cart",
             style: GoogleFonts.notoSerif(
                 fontWeight: FontWeight.bold, color: Colors.black),
           ),
+          actions: [
+            IconButton(
+              tooltip: "Clear cart",
+              icon: const Icon(Icons.remove_shopping_cart),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: const Text("Need confirmation to clear cart"),
+                    actions: [
+                      MaterialButton(
+                        onPressed: () {
+                          context.read<GroceryBloc>().add(Clearcart());
+                          Navigator.pop(context);
+                        },
+                        color: Colors.green,
+                        child: const Text("Clear cart"),
+                      )
+                    ],
+                  ),
+                );
+              },
+            )
+          ],
         ),
         body: BlocConsumer<GroceryBloc, GroceryStates>(
           builder: (context, state) {
             // Your UI based on state goes here
             return state.cartItems!.isEmpty
                 ? const Center(
-                    child: Icon(
-                    Icons.remove_shopping_cart,
-                    size: 200,
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "🛒",
+                        style: TextStyle(fontSize: 200),
+                      ),
+                      Text(
+                        "Cart is empty",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ))
                 : ListView.builder(
                     itemCount: state.cartItems!.length,
