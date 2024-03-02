@@ -123,7 +123,8 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
           cartItems: [],
           greetingStatus: state.greetingStatus,
           themeStatus: state.themeStatus,
-          totalAmount: state.totalAmount));
+          totalAmount: state.totalAmount
+      ));
     });
 
     on<AddToCart>((event, emit) async {
