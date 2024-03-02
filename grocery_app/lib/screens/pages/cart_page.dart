@@ -1,19 +1,23 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../bloc/grocery_bloc.dart';
 import '../../bloc/grocery_events.dart';
 import '../../bloc/grocery_states.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //context.read<GroceryBloc>().add(event);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +65,8 @@ class CartPage extends StatelessWidget {
                   width: 100,
                   height: 30,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.greenAccent
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.greenAccent),
                   child: Center(
                     child: Text(
                       "Clear cart",

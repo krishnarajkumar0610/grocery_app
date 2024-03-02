@@ -16,12 +16,12 @@ class OrderPage extends StatelessWidget {
 
   const OrderPage(
       {super.key,
-        required this.itemName,
-        required this.itemPrice,
-        required this.imagePath,
-        required this.description,
-        required this.color,
-        this.index});
+      required this.itemName,
+      required this.itemPrice,
+      required this.imagePath,
+      required this.description,
+      required this.color,
+      this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class OrderPage extends StatelessWidget {
           body: ListView(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
-                padding: EdgeInsets.only(left: 30, top: 20),
+                padding: const EdgeInsets.only(left: 30, top: 20),
                 child: Container(
                   width: 300,
                   height: 200,
@@ -52,13 +52,13 @@ class OrderPage extends StatelessWidget {
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset:
-                        const Offset(0, 3), // changes position of shadow
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                     color: Colors.white60,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Image.asset(imagePath),
                   ),
                 ),
@@ -92,7 +92,7 @@ class OrderPage extends StatelessWidget {
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset:
-                          const Offset(0, 3), // changes position of shadow
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                       color: color,
@@ -142,7 +142,7 @@ class OrderPage extends StatelessWidget {
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset:
-                        const Offset(0, 3), // changes position of shadow
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -192,7 +192,7 @@ class OrderPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                           subtitle:
-                          Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
+                              Text("TOTAL PRICE : ${state.totalAmount ?? 0}"),
                         )),
                   );
                 },
@@ -210,7 +210,7 @@ class OrderPage extends StatelessWidget {
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset:
-                          const Offset(0, 3), // changes position of shadow
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),

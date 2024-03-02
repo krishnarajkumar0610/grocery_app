@@ -2,6 +2,8 @@ class GroceryEvents {}
 
 class GetInitialData extends GroceryEvents {}
 
+class GetInitialCartData extends GroceryEvents {}
+
 class Clearcart extends GroceryEvents {}
 
 class AddToCart extends GroceryEvents {

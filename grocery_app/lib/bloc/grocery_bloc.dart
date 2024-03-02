@@ -223,6 +223,8 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
       if (fullName[0] == " " || fullName.isEmpty) {}
     });
+
+    on<GetInitialCartData>((event, emit) {});
   }
 
   void sendData({required final item, required String keyName}) async {
