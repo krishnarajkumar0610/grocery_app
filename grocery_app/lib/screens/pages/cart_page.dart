@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -25,28 +28,42 @@ class CartPage extends StatelessWidget {
                 fontWeight: FontWeight.bold, color: Colors.black),
           ),
           actions: [
-            IconButton(
-              tooltip: "Clear cart",
-              icon: const Icon(Icons.remove_shopping_cart),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    content: const Text("Need confirmation to clear cart"),
-                    actions: [
-                      MaterialButton(
-                        onPressed: () {
-                          context.read<GroceryBloc>().add(Clearcart());
-                          Navigator.pop(context);
-                        },
-                        color: Colors.green,
-                        child: const Text("Clear cart"),
-                      )
-                    ],
-                  ),
-                );
-              },
-            )
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: const Center(
+                              child: Text(
+                                "⚠️",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            ),
+                            content: const Text(
+                              "Clear cart items",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            actions: [
+                              MaterialButton(
+                                color: Colors.green,
+                                onPressed: () {
+                                  context.read<GroceryBloc>().add(Clearcart());
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("Clear"),
+                              )
+                            ],
+                          ));
+                },
+                child: const Text(
+                  "Clear cart",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ))
           ],
         ),
         body: BlocConsumer<GroceryBloc, GroceryStates>(

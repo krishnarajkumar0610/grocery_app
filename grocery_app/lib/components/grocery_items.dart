@@ -35,7 +35,7 @@ class GroceryItemTile extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
