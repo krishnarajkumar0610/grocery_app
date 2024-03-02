@@ -57,12 +57,22 @@ class CartPage extends StatelessWidget {
                             ],
                           ));
                 },
-                child: const Text(
-                  "Clear cart",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                child: Container(
+                  width: 100,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.greenAccent
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Clear cart",
+                      style: GoogleFonts.notoSerif(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ))
           ],
         ),
@@ -79,7 +89,7 @@ class CartPage extends StatelessWidget {
                         style: TextStyle(fontSize: 200),
                       ),
                       Text(
-                        "Cart is empty",
+                        "Cart is empty 🥲",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )
@@ -117,7 +127,7 @@ class CartPage extends StatelessWidget {
                                       ));
                                   //Navigator.pop(context);
                                 },
-                                icon: const Icon(Icons.cancel,
+                                icon: const Icon(Icons.remove_circle,
                                     size: 30, color: Colors.black),
                               )),
                         ),

@@ -101,7 +101,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
       final sharedPreference = await SharedPreferences.getInstance();
 
       if (!sharedPreference.containsKey("shopItem")) {
-        await sendData(keyName: "shopItem", item: shopItem);
+        sendData(keyName: "shopItem", item: shopItem);
         print("DATA SENDED FROM INITIAL DATA CLASS");
       }
       data = getData(keyName: "shopItem", sharedPreference: sharedPreference);
@@ -133,14 +133,14 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(state.shopItems?[event.index!]);
         print("ADD TO CART : $cartItem");
-        await sendData(keyName: "cartItem", item: cartItem);
+        sendData(keyName: "cartItem", item: cartItem);
       } else {
         cartItem =
             getData(keyName: "cartItem", sharedPreference: sharedPreference);
 
         cartItem.add(state.shopItems?[event.index!]);
         print("CART ITEM : $cartItem");
-        await sendData(item: cartItem, keyName: "cartItem");
+        sendData(item: cartItem, keyName: "cartItem");
       }
       emit(GroceryStates(
           shopItems: state.shopItems,
@@ -225,7 +225,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
     });
   }
 
-  Future<void> sendData({required final item, required String keyName}) async {
+  void sendData({required final item, required String keyName}) async {
     final sharedPreference = await SharedPreferences.getInstance();
     await sharedPreference.setString(keyName, jsonEncode(item));
   }

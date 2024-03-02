@@ -130,8 +130,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: state.shopItems == null
-                    ? const Center(
-                        child: Text("No Data found !"),
+                    ? Center(
+                        child: Text("Sorry server is down 😓",
+                            style: GoogleFonts.notoSerif(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
                       )
                     : GridView.builder(
                         itemCount: state.shopItems?.length,
