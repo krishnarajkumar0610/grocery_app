@@ -36,10 +36,9 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               onTap: () {
                 // Add navigation functionality here
-                context
-                    .read<GroceryBloc>()
-                    .add(ChangeTheme(themeStatus: state.themeStatus,fromLogout: true));
-                print("Adhu poiruchu");
+                context.read<GroceryBloc>().add(ChangeTheme(
+                    themeStatus: state.themeStatus, fromLogout: true));
+
                 if (navigateToLogout) {
                   Navigator.pushReplacement(
                       context,
