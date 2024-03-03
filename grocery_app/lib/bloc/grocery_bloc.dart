@@ -102,13 +102,30 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
       if (!sharedPreference.containsKey("shopItem")) {
         sendData(keyName: "shopItem", item: shopItem);
-        print("DATA SENDED FROM INITIAL DATA CLASS");
       }
       data = getData(keyName: "shopItem", sharedPreference: sharedPreference);
-      print("INITIAL DATA : $data");
+      //print("INITIAL DATA : $data");
       emit(GroceryStates(
           shopItems: data,
           cartItems: state.cartItems,
+          greetingStatus: state.greetingStatus,
+          themeStatus: state.themeStatus,
+          totalAmount: state.totalAmount));
+    });
+
+    on<GetInitialCartData>((event, emit) async {
+      final sharedPreference = await SharedPreferences.getInstance();
+      final List cartItem;
+      if (!sharedPreference.containsKey("cartItem")) {
+        cartItem = [];
+        sendData(keyName: "cartItem", item: cartItem);
+      } else {
+        cartItem =
+            getData(keyName: "cartItem", sharedPreference: sharedPreference);
+      }
+      emit(GroceryStates(
+          shopItems: state.shopItems,
+          cartItems: cartItem,
           greetingStatus: state.greetingStatus,
           themeStatus: state.themeStatus,
           totalAmount: state.totalAmount));
@@ -123,8 +140,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
           cartItems: [],
           greetingStatus: state.greetingStatus,
           themeStatus: state.themeStatus,
-          totalAmount: state.totalAmount
-      ));
+          totalAmount: state.totalAmount));
     });
 
     on<AddToCart>((event, emit) async {
@@ -133,14 +149,14 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
       List cartItem = [];
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(state.shopItems?[event.index!]);
-        print("ADD TO CART : $cartItem");
+
         sendData(keyName: "cartItem", item: cartItem);
       } else {
         cartItem =
             getData(keyName: "cartItem", sharedPreference: sharedPreference);
 
         cartItem.add(state.shopItems?[event.index!]);
-        print("CART ITEM : $cartItem");
+
         sendData(item: cartItem, keyName: "cartItem");
       }
       emit(GroceryStates(
@@ -159,7 +175,7 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
       data = sharedPreference.getString("cartItem");
       cartItem = jsonDecode(data);
-      print("ENCODED DATA : $cartItem");
+
       cartItem.removeAt(event.index!);
       sharedPreference.remove("cartItem");
       await sharedPreference.setString("cartItem", jsonEncode(cartItem));
@@ -193,12 +209,10 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
     on<GreetingStatus>((event, emit) {
       final hour = DateTime.now().hour;
-      print(hour);
       // Determine the time of day based on the hour
       String message;
       if (hour >= 6 && hour < 12) {
         message = 'Good Morning 🥞';
-        print("PODAPODA ");
       } else if (hour >= 12 && hour < 16) {
         message = 'Good Afternoon 🍚';
       } else if (hour >= 16 && hour < 19) {
@@ -224,8 +238,6 @@ class GroceryBloc extends Bloc<GroceryEvents, GroceryStates> {
 
       if (fullName[0] == " " || fullName.isEmpty) {}
     });
-
-    on<GetInitialCartData>((event, emit) {});
   }
 
   void sendData({required final item, required String keyName}) async {

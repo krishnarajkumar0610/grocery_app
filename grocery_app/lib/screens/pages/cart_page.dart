@@ -7,6 +7,7 @@ import '../../bloc/grocery_states.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
+
   @override
   State<CartPage> createState() => _CartPageState();
 }
@@ -16,7 +17,7 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //context.read<GroceryBloc>().add(event);
+    context.read<GroceryBloc>().add(GetInitialCartData());
   }
 
   @override
