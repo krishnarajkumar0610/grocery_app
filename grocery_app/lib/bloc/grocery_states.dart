@@ -9,8 +9,8 @@ class GroceryStates {
 
   GroceryStates(
       {required this.cartItems,
-      this.totalAmount,
-      this.greetingStatus,
-      this.themeStatus = true,
-      this.shopItems});
+        this.totalAmount,
+        this.greetingStatus,
+        this.themeStatus = true,
+        this.shopItems});
 }

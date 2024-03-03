@@ -23,7 +23,7 @@ class _IntroPageState extends State<IntroPage> {
     bloc.add(GreetingStatus());
     Timer(
       const Duration(seconds: 5),
-      () => Navigator.pushReplacement(
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewUser(), // <= click this for new user
