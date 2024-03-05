@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/screens/logins/sign_in.dart';
-import 'package:grocery_app/screens/logins/sign_up.dart';
 
-import '../../bloc/grocery_bloc.dart';
-import '../../bloc/grocery_events.dart';
+import '../logins/sign_in.dart';
+import '../logins/sign_up.dart';
 
 class NewUser extends StatefulWidget {
   const NewUser({super.key});
@@ -16,13 +12,6 @@ class NewUser extends StatefulWidget {
 }
 
 class _NewUserState extends State<NewUser> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    context.read<GroceryBloc>().add(GreetingStatus());
-  }
-
   Widget getAppText(String greetingText, double size) {
     return Text(
       greetingText,
@@ -34,7 +23,12 @@ class _NewUserState extends State<NewUser> {
       ),
     );
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   // context.read<UsersBloc>().add(SetIds());
+  }
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;

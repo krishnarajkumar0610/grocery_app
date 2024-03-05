@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'bloc/grocery_bloc.dart';
-import 'bloc/grocery_states.dart';
+import 'package:grocery_app/bloc/cart/cart_bloc.dart';
+import 'package:grocery_app/bloc/cart/cart_state.dart';
+import 'package:grocery_app/bloc/shop/shopl_bloc.dart';
+import 'package:grocery_app/bloc/themes/theme_bloc.dart';
+import 'package:grocery_app/bloc/themes/theme_event.dart';
+import 'package:grocery_app/bloc/users/users_bloc.dart';
+import 'package:grocery_app/bloc/users/users_events.dart';
+import 'bloc/greetings/greeting_bloc.dart';
+
+import 'bloc/greetings/greeting_event.dart';
+import 'bloc/themes/theme_state.dart';
 import 'screens/pages/intro_page.dart';
 
 void main() async {
@@ -10,25 +19,45 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (context) => InitialShopBloc(),
+    ),
+    BlocProvider(
+      create: (context) => GreetingBloc(),
+    ),
+    BlocProvider(
+      create: (context) => CartBloc(),
+    ),
+    BlocProvider(
+      create: (context) => ThemeBloc(),
+    )
+  ], child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ThemeBloc>().add(ChangeTheme());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => GroceryBloc(),
-      child: BlocConsumer<GroceryBloc, GroceryStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return MaterialApp(
-              theme: state.themeStatus ? ThemeData.light() : ThemeData.dark(),
-              debugShowCheckedModeBanner: false,
-              home: const IntroPage(), // <= click this for intro page
-            );
-          }),
+    return MaterialApp(
+      title: 'Grocery App',
+      debugShowCheckedModeBanner: false,
+      home: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (BuildContext context, state) => IntroPage(),
+      ),
     );
   }
 }
