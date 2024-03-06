@@ -58,9 +58,9 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                         ),
                         onPressed: () {
                           context.read<CartBloc>().add(AddToCart(
-                              index: widget.index,
-                              shopItems: state.shopItems,
-                              quantity: quantity));
+                              index: widget.index!,
+                              shopItems: state.shopItems!,
+                              quantity: quantity!));
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -144,7 +144,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                               });
                             },
                             child: const Icon(
-                              Icons.add,
+                              Icons.add_circle,
                               color: Colors.green,
                               size: 30,
                             ))

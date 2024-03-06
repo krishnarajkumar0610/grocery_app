@@ -35,131 +35,145 @@ class _HomePageState extends State<HomePage> {
 
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (context, state) => Text(
-            "Grocery App",
-            style: GoogleFonts.notoSerif(
-                fontSize: orientation == Orientation.portrait ? 20 : 30,
-                fontWeight: FontWeight.bold,
-                color: state.themeStatus! ? Colors.black : Colors.white),
-          ),
-        ),
-        actions: [
-          BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, state) => IconButton(
-                onPressed: () {
-                  print("CALLING THEME");
-                  context.read<ThemeBloc>().add(ChangeTheme());
-                },
-                icon: state.themeStatus!
-                    ? const Icon(
-                        Icons.dark_mode,
-                        size: 30,
-                        color: Colors.black,
-                      )
-                    : const Icon(
-                        Icons.sunny,
-                        color: Colors.yellow,
-                        size: 25,
-                      )),
-          ),
-          SizedBox(
-            width: orientation == Orientation.portrait ? 10 : 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.white,
-                child: GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const CartPage(), // <= click this for cart page
-                        )),
-                    child: const Icon(
-                      Icons.shopping_cart,
-                      color: Colors.black,
-                      size: 25,
-                    ))),
-          ),
-          SizedBox(
-            width: orientation == Orientation.portrait ? 10 : 50,
-          ),
-        ],
-      ),
-      drawer: const Drawer(
-          backgroundColor: Colors.white,
-          child: MyDrawer() // <= click this for Drawer
-          ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-            child: BlocBuilder<GreetingBloc, GreetingState>(
-              builder: (context, state) => Text(
-                state.greeting!,
-                style: GoogleFonts.notoSerif(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(19),
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  "Let's order fresh items for you 😍",
+            appBar: AppBar(
+              backgroundColor: Colors.deepPurple,
+              title: BlocBuilder<ThemeBloc, ThemeState>(
+                builder: (context, state) => Text(
+                  "Grocery App",
                   style: GoogleFonts.notoSerif(
+                      fontSize: orientation == Orientation.portrait ? 20 : 30,
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white),
+                      color: state.themeStatus! ? Colors.black : Colors.white),
                 ),
               ),
-            ),
-          ),
-          BlocBuilder<InitialShopBloc, InitialShopState>(
-              builder: (context, state) => state.shopItems!.isEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 250.0),
-                      child: Center(
-                        child: Text("Sorry server is down 😓",
-                            style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold,
+              actions: [
+                BlocBuilder<ThemeBloc, ThemeState>(
+                  builder: (context, state) => IconButton(
+                      onPressed: () {
+                        print("CALLING THEME");
+                        context.read<ThemeBloc>().add(ChangeTheme());
+                      },
+                      icon: state.themeStatus!
+                          ? const Icon(
+                              Icons.dark_mode,
+                              size: 30,
                               color: Colors.black,
+                            )
+                          : const Icon(
+                              Icons.sunny,
+                              color: Colors.yellow,
+                              size: 25,
                             )),
+                ),
+                SizedBox(
+                  width: orientation == Orientation.portrait ? 10 : 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const CartPage(), // <= click this for cart page
+                              )),
+                          child: const Icon(
+                            Icons.shopping_cart,
+                            color: Colors.black,
+                            size: 25,
+                          ))),
+                ),
+                SizedBox(
+                  width: orientation == Orientation.portrait ? 10 : 50,
+                ),
+              ],
+            ),
+            drawer: const Drawer(
+                backgroundColor: Colors.white,
+                child: MyDrawer() // <= click this for Drawer
+                ),
+            body: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: deviceHeight * 0.01, left: deviceWidth * 0.05),
+                  child: BlocBuilder<GreetingBloc, GreetingState>(
+                    builder: (context, state) => Text(
+                      state.greeting!,
+                      style: GoogleFonts.notoSerif(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.green,
                       ),
-                    )
-                  : SizedBox(
-                      width: double.infinity,
-                      height: 500,
-                      child: GridView.builder(
-                        itemCount: state.shopItems!.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1 / 1.4),
-                        itemBuilder: (context, index) {
-                          print(index);
-                          print(
-                              "------------------------------------------------------");
-                          return GroceryItemTile(index: index);
-                        },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(19),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Let's order fresh items for you 😍",
+                        style: GoogleFonts.notoSerif(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.white),
                       ),
-                    )),
-        ],
-      ),
-    ));
+                    ),
+                  ),
+                ),
+                BlocBuilder<InitialShopBloc, InitialShopState>(
+                    builder: (context, state) => state.shopItems!.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 250.0),
+                            child: Center(
+                              child: Text("Sorry server is down 😓",
+                                  style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  )),
+                            ),
+                          )
+                        : SizedBox(
+                            width: double.infinity,
+                            height: 500,
+                            child: GridView.builder(
+                              itemCount: state.shopItems!.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 1 / 1.4),
+                              itemBuilder: (context, index) {
+                                return GroceryItemTile(index: index);
+                              },
+                            ),
+                          )),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              backgroundColor: Colors.green,
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.black,
+              ),
+              onPressed: () {},
+              label: const Text(
+                "Edit",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    letterSpacing: 1,
+                    color: Colors.black
+                ),
+              ),
+            )));
   }
 }

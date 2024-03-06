@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:grocery_app/bloc/validations/valdation_event.dart';
 import 'package:grocery_app/bloc/validations/validation_bloc.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
 
 import '../../bloc/validations/validation_state.dart';
 
@@ -118,11 +119,16 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
 
-                    context.read<ValidationBloc>().add(SignInEvent(
-                        name: _username.text,
-                        password: _signInPass.text,
-                        context: context));
+                    // context.read<ValidationBloc>().add(SignInEvent(
+                    //     name: _username.text,
+                    //     password: _signInPass.text,
+                    //     context: context));
 
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ));
                     _username.clear();
                     _signInPass.clear();
 

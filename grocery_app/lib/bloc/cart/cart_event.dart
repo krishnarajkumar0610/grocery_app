@@ -5,11 +5,11 @@ class GetInitialCartData extends CartEvents {}
 class Clearcart extends CartEvents {}
 
 class AddToCart extends CartEvents {
-  int? index;
-  List? shopItems;
-  int? quantity;
+  int index;
+  List shopItems;
+  int quantity;
 
-  AddToCart({this.index, this.shopItems, this.quantity});
+  AddToCart({required this.index,required this.shopItems,required this.quantity});
 }
 
 class RemoveItem extends CartEvents {
