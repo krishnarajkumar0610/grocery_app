@@ -16,24 +16,20 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
     on<AddToCart>((event, emit) async {
       print("INDEX : ${event.index}");
-      List cartItem = [];
+      // event.shopItems?[11][0] = event.quantity;
+      // print(event.shopItems?[11][0]);
+      List<dynamic> item = [];
       final sharedPreference = await SharedPreferences.getInstance();
-
       if (!sharedPreference.containsKey("cartItem")) {
-        cartItem.add(event.shopItems![event.index!]);
-
-        sendData(item: cartItem, keyName: "cartItem");
-        print("INSIDE THE IF OF CART");
+        final data = event.shopItems?[event.index!];
+        sendData(item: data, keyName: "cartItem");
+        print(data);
       } else {
-        cartItem =
-            getData(keyName: "cartItem", sharedPreference: sharedPreference);
-        cartItem.add(event.shopItems![event.index!]);
-        cartItem[event.index!][0] = event.quantity!;
-
-        sendData(item: cartItem, keyName: "cartItem");
-        print("INSIDE THE Else OF CART");
+        item.add(getData(keyName: "cartItem", sharedPreference: sharedPreference));
+        item.add(event.shopItems?[event.index!]);
+        print(item);
       }
-      emit(CartState(cartItem: cartItem));
+      emit(CartState(cartItem: []));
     });
 
     on<RemoveItem>((event, emit) async {

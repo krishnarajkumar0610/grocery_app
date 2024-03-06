@@ -4,17 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
-import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
-import 'package:grocery_app/bloc/themes/theme_event.dart';
 import 'package:grocery_app/bloc/themes/theme_state.dart';
-import 'package:grocery_app/bloc/validations/valdation_event.dart';
 import 'package:grocery_app/bloc/validations/validation_bloc.dart';
-import 'package:grocery_app/bloc/validations/validation_state.dart';
 import 'bloc/greetings/greeting_bloc.dart';
-
 import 'bloc/greetings/greeting_event.dart';
-
 import 'screens/pages/intro_page.dart';
 
 void main() async {

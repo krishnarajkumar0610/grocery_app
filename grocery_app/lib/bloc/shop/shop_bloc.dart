@@ -112,16 +112,19 @@ class InitialShopBloc extends Bloc<GetInitialShopItem, InitialShopState> {
 
       final sharedPreference = await SharedPreferences.getInstance();
       // sharedPreference.clear();
-      if (!sharedPreference.containsKey("shopItems") &&
-          !sharedPreference.containsKey("users")) {
+      final users = {"123": "12345"};
+      await sendListOfData(keyName: "users", item: users);
+      if (!sharedPreference.containsKey("shopItems")) {
+        // for(var item in shopItem){
+        //   print("*"*10);
+        //   print(item);
+        //   print("*"*10);
+        // }
         await sendListOfData(item: shopItem, keyName: "shopItems");
-        final users = {"123": "12345"};
-        await sendListOfData(keyName: "users", item: users);
       }
-      final items = getListOfData(
+      final data = getListOfData(
           keyName: "shopItems", sharedPreference: sharedPreference);
-      print("DATA IS : $items");
-      emit(InitialShopState(shopItems: items));
+      emit(InitialShopState(shopItems: data));
     });
   }
 

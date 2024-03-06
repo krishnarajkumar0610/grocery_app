@@ -8,6 +8,8 @@ import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
 
+import '../../bloc/cart/cart_bloc.dart';
+import '../../bloc/cart/cart_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
@@ -15,8 +17,15 @@ import 'cart_page.dart';
 
 // 3rd page home screen
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -122,13 +131,16 @@ class HomePage extends StatelessWidget {
             ),
           ),
           BlocBuilder<InitialShopBloc, InitialShopState>(
-              builder: (context, state) => state.shopItems == null
-                  ? Center(
-                      child: Text("Sorry server is down 😓",
-                          style: GoogleFonts.notoSerif(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          )),
+              builder: (context, state) => state.shopItems!.isEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 250.0),
+                      child: Center(
+                        child: Text("Sorry server is down 😓",
+                            style: GoogleFonts.notoSerif(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
+                      ),
                     )
                   : SizedBox(
                       width: double.infinity,
@@ -142,12 +154,7 @@ class HomePage extends StatelessWidget {
                           print(index);
                           print(
                               "------------------------------------------------------");
-                          return Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: GroceryItemTile(
-                              index: index,
-                            ),
-                          );
+                          return GroceryItemTile(index: index);
                         },
                       ),
                     )),
