@@ -21,12 +21,12 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       List<dynamic> item = [];
       final sharedPreference = await SharedPreferences.getInstance();
       if (!sharedPreference.containsKey("cartItem")) {
-        item.add(event.shopItems?[event.index!]);
+        item.add(event.shopItems[event.index]);
         sendData(item: item, keyName: "cartItem");
       } else {
         item = getData(keyName: "cartItem", sharedPreference: sharedPreference);
-        item.add(event.shopItems?[event.index!]);
-        item[event.index!][0] = event.quantity!;
+        item.add(event.shopItems[event.index]);
+        item[event.index][0] = event.quantity;
         sharedPreference.remove("cartItem");
         sendData(item: item, keyName: "cartItem");
         print("ITEM in else : $item");
