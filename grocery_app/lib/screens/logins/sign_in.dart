@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:grocery_app/bloc/validations/valdation_event.dart';
+import 'package:grocery_app/bloc/validations/validation_bloc.dart';
+
+import '../../bloc/validations/validation_state.dart';
 import '../pages/home_page.dart';
 
 class SignIn extends StatefulWidget {
@@ -109,28 +114,40 @@ class _SignInState extends State<SignIn> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 30),
-            child: GestureDetector(
-                onTap: () {
-                  // when i sign up then it need to display a box to tell go to sign in page
-                  _username.clear();
-                  _signInPass.clear();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ));
-                  print(
-                      "Successfully Created account for this app, You can log in");
-                }, //w:250,h:50,
-                child: otherSignUp(
-                    width: orientation == Orientation.portrait
-                        ? deviceWidth * 0.70
-                        : deviceWidth * 0.50,
-                    height: orientation == Orientation.portrait
-                        ? deviceHeight * 0.05
-                        : deviceHeight * 0.10,
-                    text: "SIGN IN",
-                    color: Colors.lightGreen)),
+            child: BlocBuilder<ValidationBloc, ValidationState>(
+              builder: (context, state) => GestureDetector(
+                  onTap: () {
+                    // when i sign up then it need to display a box to tell go to sign in page
+                    _username.clear();
+                    _signInPass.clear();
+                    context.read<ValidationBloc>().add(SignInEvent(
+                        name: _username.text, password: _signInPass.text));
+
+                    if (state.signinStatus!) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AlertDialog(),
+                      );
+                    } else {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ));
+                    }
+                    print(
+                        "Successfully Created account for this app, You can log in");
+                  }, //w:250,h:50,
+                  child: otherSignUp(
+                      width: orientation == Orientation.portrait
+                          ? deviceWidth * 0.70
+                          : deviceWidth * 0.50,
+                      height: orientation == Orientation.portrait
+                          ? deviceHeight * 0.05
+                          : deviceHeight * 0.10,
+                      text: "SIGN IN",
+                      color: Colors.lightGreen)),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(

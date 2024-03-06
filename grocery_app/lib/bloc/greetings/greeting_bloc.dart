@@ -7,7 +7,6 @@ class GreetingBloc extends Bloc<GreetingEvent, GreetingState> {
       : super(GreetingState(
             greeting: "Let food be thy medicine and medicine be thy food")) {
     on<GetGreetings>((event, emit) {
-      print("VERA LEVEL DA DEI");
       final hour = DateTime.now().hour;
       // Determine the time of day based on the hour
       String message;
@@ -20,7 +19,7 @@ class GreetingBloc extends Bloc<GreetingEvent, GreetingState> {
       } else {
         message = 'Good Night 🍜';
       }
-      print("SUPER GREETINGS");
+      print("GREETING : $message");
       emit(GreetingState(greeting: message));
     });
   }

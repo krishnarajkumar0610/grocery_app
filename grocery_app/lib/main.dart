@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
-import 'package:grocery_app/bloc/cart/cart_state.dart';
 import 'package:grocery_app/bloc/shop/shopl_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
-import 'package:grocery_app/bloc/users/users_bloc.dart';
-import 'package:grocery_app/bloc/users/users_events.dart';
+import 'package:grocery_app/bloc/themes/theme_state.dart';
+import 'package:grocery_app/bloc/validations/valdation_event.dart';
+import 'package:grocery_app/bloc/validations/validation_bloc.dart';
+import 'package:grocery_app/bloc/validations/validation_state.dart';
 import 'bloc/greetings/greeting_bloc.dart';
 
 import 'bloc/greetings/greeting_event.dart';
-import 'bloc/themes/theme_state.dart';
+
 import 'screens/pages/intro_page.dart';
 
 void main() async {
@@ -31,6 +32,9 @@ void main() async {
     ),
     BlocProvider(
       create: (context) => ThemeBloc(),
+    ),
+    BlocProvider(
+      create: (context) => ValidationBloc(),
     )
   ], child: const MyApp()));
 }
@@ -48,15 +52,17 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     context.read<ThemeBloc>().add(ChangeTheme());
+    context.read<GreetingBloc>().add(GetGreetings());
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Grocery App',
-      debugShowCheckedModeBanner: false,
-      home: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (BuildContext context, state) => IntroPage(),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) => MaterialApp(
+        title: 'Grocery App',
+        theme: state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        home: IntroPage(),
       ),
     );
   }
