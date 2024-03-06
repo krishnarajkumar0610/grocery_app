@@ -53,7 +53,6 @@ class _MyAppState extends State<MyApp> {
     context.read<InitialShopBloc>().add(GetInitialShopItem());
     print("SUCCESS");
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
