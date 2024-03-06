@@ -118,23 +118,15 @@ class _SignInState extends State<SignIn> {
               builder: (context, state) => GestureDetector(
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
+
+                    context.read<ValidationBloc>().add(SignInEvent(
+                        name: _username.text,
+                        password: _signInPass.text,
+                        context: context));
+
                     _username.clear();
                     _signInPass.clear();
-                    context.read<ValidationBloc>().add(SignInEvent(
-                        name: _username.text, password: _signInPass.text));
 
-                    if (state.signinStatus!) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AlertDialog(),
-                      );
-                    } else {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ));
-                    }
                     print(
                         "Successfully Created account for this app, You can log in");
                   }, //w:250,h:50,

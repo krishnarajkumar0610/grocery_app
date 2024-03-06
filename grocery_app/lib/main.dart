@@ -51,7 +51,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<ThemeBloc>().add(ChangeTheme());
     context.read<GreetingBloc>().add(GetGreetings());
   }
 
@@ -62,7 +61,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Grocery App',
         theme: state.themeStatus! ? ThemeData.light() : ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: IntroPage(),
+        home: const IntroPage(),
       ),
     );
   }
