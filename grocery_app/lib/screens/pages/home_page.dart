@@ -121,8 +121,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           BlocBuilder<InitialShopBloc, InitialShopState>(
-            builder: (context, state) => Expanded(
-              child: state.shopItems == null
+              builder: (context, state) => state.shopItems == null
                   ? Center(
                       child: Text("Sorry server is down 😓",
                           style: GoogleFonts.notoSerif(
@@ -130,29 +129,24 @@ class HomePage extends StatelessWidget {
                             color: Colors.black,
                           )),
                     )
-                  : GridView.builder(
-                      itemCount: state.shopItems?.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              orientation == Orientation.portrait ? 2 : 3,
-                          childAspectRatio: 1 / 1.2),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: GroceryItemTile(
-                            // <= click this for grocery item container
-                            itemName: state.shopItems?[index][0],
-                            itemPrice: state.shopItems?[index][1],
-                            imagePath: state.shopItems?[index][2],
-                            description: state.shopItems?[index][3],
-                            color: Color(state.shopItems?[index][4]),
-                            index: index,
-                          ),
-                        );
-                      },
-                    ),
-            ),
-          )
+                  : SizedBox(
+                      width: double.infinity,
+                      height: 500,
+                      child: GridView.builder(
+                        itemCount: state.shopItems?.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, childAspectRatio: 1 / 1.4),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: GroceryItemTile(
+                              index: index,
+                            ),
+                          );
+                        },
+                      ),
+                    )),
         ],
       ),
     ));

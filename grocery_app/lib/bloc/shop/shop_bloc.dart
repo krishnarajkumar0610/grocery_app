@@ -13,6 +13,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
     on<GetInitialEvent>((event, emit) async {
       List shopItem = [
         [
+          1,
           "Avocado",
           120,
           "assets/avocado.png",
@@ -20,6 +21,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.green.value
         ],
         [
+          1,
           "Banana",
           60,
           "assets/banana.png",
@@ -27,6 +29,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.yellow.value
         ],
         [
+          1,
           "Chicken",
           350,
           "assets/chicken.png",
@@ -34,6 +37,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.redAccent.value
         ],
         [
+          1,
           "Water",
           40,
           "assets/water.png",
@@ -41,6 +45,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.blue.value
         ],
         [
+          1,
           "Apple",
           120,
           "assets/apple.png",
@@ -48,6 +53,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.redAccent.value
         ],
         [
+          1,
           "Orange",
           70,
           "assets/orange.png",
@@ -55,6 +61,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.orangeAccent.value
         ],
         [
+          1,
           "Carrot",
           100,
           "assets/carrot.png",
@@ -62,6 +69,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.deepOrange.value
         ],
         [
+          1,
           "Watermelon",
           220,
           "assets/watermelon.png",
@@ -69,6 +77,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.lightGreen.value
         ],
         [
+          1,
           "Cabbage",
           60,
           "assets/cabbage.png",
@@ -76,6 +85,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.lightGreenAccent.value
         ],
         [
+          1,
           "Milk",
           30,
           "assets/milk.png",
@@ -83,6 +93,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.grey.value
         ],
         [
+          1,
           "Potato",
           45,
           "assets/potato.png",
@@ -90,6 +101,7 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
           Colors.brown.value
         ],
         [
+          1,
           "Rocemilk",
           60,
           "assets/rocemilk.png",
