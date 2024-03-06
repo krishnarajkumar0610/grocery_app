@@ -1,3 +1,3 @@
 class ShopEvent {}
 
-class GetInitialEvent extends ShopEvent {}
+class GetInitialShopItem extends ShopEvent {}

@@ -11,6 +11,7 @@ import 'package:grocery_app/bloc/themes/theme_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
+import 'cart_page.dart';
 
 // 3rd page home screen
 
@@ -58,24 +59,24 @@ class HomePage extends StatelessWidget {
           SizedBox(
             width: orientation == Orientation.portrait ? 10 : 50,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(5.0),
-          //   child: CircleAvatar(
-          //       radius: 20,
-          //       backgroundColor: Colors.white,
-          //       child: GestureDetector(
-          //           onTap: () => Navigator.push(
-          //               context,
-          //               MaterialPageRoute(
-          //                 builder: (context) =>
-          //                     const CartPage(), // <= click this for cart page
-          //               )),
-          //           child: const Icon(
-          //             Icons.shopping_cart,
-          //             color: Colors.black,
-          //             size: 25,
-          //           ))),
-          // ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const CartPage(), // <= click this for cart page
+                        )),
+                    child: const Icon(
+                      Icons.shopping_cart,
+                      color: Colors.black,
+                      size: 25,
+                    ))),
+          ),
           SizedBox(
             width: orientation == Orientation.portrait ? 10 : 50,
           ),
@@ -133,11 +134,14 @@ class HomePage extends StatelessWidget {
                       width: double.infinity,
                       height: 500,
                       child: GridView.builder(
-                        itemCount: state.shopItems?.length,
+                        itemCount: state.shopItems!.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2, childAspectRatio: 1 / 1.4),
                         itemBuilder: (context, index) {
+                          print(index);
+                          print(
+                              "------------------------------------------------------");
                           return Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: GroceryItemTile(

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
 import 'package:grocery_app/bloc/themes/theme_state.dart';
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
 
     context.read<GreetingBloc>().add(GetGreetings());
     print("SUCCESS");
-    context.read<InitialShopBloc>().add(GetInitialEvent());
+    context.read<InitialShopBloc>().add(GetInitialShopItem());
     print("SUCCESS");
   }
 

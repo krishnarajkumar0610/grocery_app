@@ -7,8 +7,9 @@ class Clearcart extends CartEvents {}
 class AddToCart extends CartEvents {
   int? index;
   List? shopItems;
+  int? quantity;
 
-  AddToCart({this.index, this.shopItems});
+  AddToCart({this.index, this.shopItems, this.quantity});
 }
 
 class RemoveItem extends CartEvents {

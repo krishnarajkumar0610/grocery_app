@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/cart/cart_bloc.dart';
+import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 
 import '../bloc/shop/shop_state.dart';
 
 class GroceryItemTile extends StatefulWidget {
-  final int? index;
+  int index;
 
-  const GroceryItemTile({
+  GroceryItemTile({
     super.key,
     required this.index,
   });
@@ -54,24 +55,22 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      //context.read<GroceryBloc>().add(AddToCart(index: index));
+                      print(
+                          "INSIDE ITEMS : ${state.shopItems?[widget.index!]}");
+                      context.read<CartBloc>().add(AddToCart(
+                          index: widget.index,
+                          shopItems: state.shopItems,
+                          quantity: quantity));
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
                       //       builder: (context) =>
-                      //       const CartPage(), // <= click it for cart page
+                      //           const CartPage(), // <= click it for cart page
                       //     ));
                     },
                   ),
                 ),
               ),
-              // [
-              //   "Rocemilk",
-              //   60,
-              //   "assets/rocemilk.png",
-              //   "Rocemilk is an educational platform providing interactive learning experiences through online courses and tutorials. It offers a diverse range of subjects, catering to learners of all levels and interests.",
-              //   Colors.pink.value
-              // ],
               Positioned(
                 left: orientation == Orientation.portrait
                     ? deviceWidth * 0.02
@@ -101,7 +100,6 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                             ? deviceHeight * 0.02
                             : deviceHeight * 0.05,
                       ))),
-
               Positioned(
                 top: deviceHeight * 0.16,
                 left: 15,
@@ -116,8 +114,6 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                           if (quantity < 1) {
                             quantity = 1;
                           }
-                          state.shopItems?[widget.index!][0] = quantity;
-                          print(state.shopItems?[widget.index!][0]);
                         });
                       },
                       child: const Icon(
@@ -130,9 +126,11 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       width: 20,
                     ),
                     Text(
-                      "${state.shopItems?[widget.index!][0]}",
+                      "$quantity",
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                     const SizedBox(
                       width: 25,
@@ -143,8 +141,6 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                           print('Icon tapped');
                           setState(() {
                             quantity += 1;
-                            state.shopItems?[widget.index!][0] = quantity;
-                            print(state.shopItems?[widget.index!][0]);
                           });
                         },
                         child: const Icon(
