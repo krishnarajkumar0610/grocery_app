@@ -99,20 +99,31 @@ class InitialShopBloc extends Bloc<GetInitialEvent, InitialShopState> {
       ];
 
       final sharedPreference = await SharedPreferences.getInstance();
-      if (!sharedPreference.containsKey("shopItem")) {
-        await sendListOfData(item: shopItem, keyName: null);
+      sharedPreference.clear();
+
+      if (!sharedPreference.containsKey("shopItems") &&
+          !sharedPreference.containsKey("users")) {
+        await sendListOfData(item: shopItem, keyName: "shopItems");
+        final users = {"123": "12345"};
+        await sendListOfData(keyName: "users", item: users);
+        print("Users set paniyachu");
       }
+      final items = getListOfData(
+          keyName: "shopItems", sharedPreference: sharedPreference);
+      emit(InitialShopState(shopItems: items));
     });
   }
 
   Future<void> sendListOfData({required keyName, required item}) async {
     final sharedPreference = await SharedPreferences.getInstance();
-    await sharedPreference.setString(keyName, jsonEncode(item));
+    final encodedData = jsonEncode(item);
+
+    await sharedPreference.setString(keyName, encodedData);
   }
 
-  Future<dynamic> getListOfData({required keyName}) async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    final data = sharedPreference.getString(jsonEncode(keyName));
-    return data;
+  List<dynamic> getListOfData({required keyName, required sharedPreference}) {
+    final data = sharedPreference.getString(keyName);
+    final decodedData = jsonDecode(data!);
+    return decodedData;
   }
 }

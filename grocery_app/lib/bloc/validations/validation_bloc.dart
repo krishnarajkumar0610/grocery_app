@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
   ValidationBloc() : super(ValidationState()) {
     on<SignInEvent>((event, emit) async {
-      Map<String, dynamic> data = await getListOfData(keyName: "usernames");
+      Map<String, dynamic> data = await getListOfData(keyName: "users");
       final name = event.name;
       final password = event.password;
       final context = event.context;
@@ -69,7 +69,10 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
           MaterialButton(
             onPressed: () => Navigator.pop(context),
             color: Colors.red,
-            child: const Text("Close",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+            child: const Text(
+              "Close",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),
@@ -78,10 +81,11 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
 
   Future<void> sendListOfData({required keyName, required item}) async {
     final sharedPreference = await SharedPreferences.getInstance();
-    await sharedPreference.setString(keyName, jsonEncode(item));
+    final encodedData = jsonEncode(item);
+    await sharedPreference.setString(keyName, encodedData);
   }
 
-  Future<dynamic> getListOfData({required keyName}) async {
+  Future<Map<String, dynamic>> getListOfData({required keyName}) async {
     final sharedPreference = await SharedPreferences.getInstance();
     dynamic data = sharedPreference.getString(keyName);
     data = jsonDecode(data);
