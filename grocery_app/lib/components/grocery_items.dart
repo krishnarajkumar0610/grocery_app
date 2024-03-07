@@ -80,7 +80,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                         ? deviceWidth * 0.02
                         : deviceWidth * 0.02,
                     child: Image.asset(
-                      state.shopItems?[widget.index!][3],
+                      state.shopItems?[widget.index!][4],
                       height: orientation == Orientation.portrait
                           ? deviceHeight * 0.10
                           : deviceHeight * 0.18,
@@ -159,7 +159,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       width: deviceWidth * 0.35,
                       height: deviceHeight * 0.05,
                       child: MaterialButton(
-                        color: Color(state.shopItems?[widget.index!][5]),
+                        color: Color(state.shopItems?[widget.index!][6]),
                         onPressed: () {
                           // Navigator.push(
                           //     context,

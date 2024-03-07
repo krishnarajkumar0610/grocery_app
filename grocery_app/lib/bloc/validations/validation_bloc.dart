@@ -11,8 +11,8 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
   ValidationBloc() : super(ValidationState()) {
     on<SignInEvent>((event, emit) async {
       Map<String, dynamic> data = await getListOfData(keyName: "users");
-      final name = event.name;
-      final password = event.password;
+      final name = event.name.toLowerCase();
+      final password = event.password.toLowerCase();
       final context = event.context;
       bool status = false;
 

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
@@ -104,32 +106,56 @@ class _CartPageState extends State<CartPage> {
                       return Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20)),
-                          child: ListTile(
-                              leading: Image.asset(state.cartItem![index][3]),
-                              title: Text(
-                                state.cartItem![index][1],
-                                style: GoogleFonts.notoSerif(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              subtitle: Text(
-                                "Rs.${state.cartItem![index][2]}",
-                                style: GoogleFonts.notoSerif(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  //context.read<GroceryBloc>().add(RemoveItem(index: index,));
-                                  //Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.remove_circle,
-                                    size: 30, color: Colors.black),
-                              )),
-                        ),
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                    left: 20,
+                                    top: 30,
+                                    child: Image.asset(
+                                      state.cartItem![index][4],
+                                      height: 120,
+                                    )),
+                                Positioned(
+                                  left: 150,
+                                  top: 40,
+                                  child: Text(
+                                    "Name : ${state.cartItem![index][1]}",
+                                    style: GoogleFonts.notoSerif(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 150,
+                                  top: 80,
+                                  child: Text(
+                                    "Price Rs.${state.cartItem![index][2]}/-",
+                                    style: GoogleFonts.notoSerif(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 150,
+                                  top: 100,
+                                  child: Text(
+                                    "Total amount :${state.cartItem![index][3]}/-",
+                                    style: GoogleFonts.notoSerif(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            )),
                       );
                     },
                   );
