@@ -57,6 +57,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                           color: Colors.black,
                         ),
                         onPressed: () {
+                          print("INSIDE THE ON PRESSED : ${widget.index}");
                           context.read<CartBloc>().add(AddToCart(
                               index: widget.index!,
                               shopItems: state.shopItems!,

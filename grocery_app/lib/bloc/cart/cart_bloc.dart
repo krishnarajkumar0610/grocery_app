@@ -21,18 +21,15 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       List cartItem = [];
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(event.shopItems[event.index]);
-        for (var items in cartItem) {
-          for (var item in items) {
-            print("$item : ${item.runtimeType}");
-          }
-        }
+        print(cartItem);
         sendData(item: cartItem, keyName: "cartItem");
       } else {
         cartItem =
             getData(keyName: "cartItem", sharedPreference: sharedPreference);
         cartItem.add(event.shopItems[event.index]);
-        cartItem[0][0]=event.quantity;
-        print(cartItem);
+        print("cart item : ${cartItem}");
+        print("*" * 50);
+        print("cartItem[event.index] : ${cartItem[event.index]}");
         await sharedPreference.remove("cartItem");
         sendData(item: cartItem, keyName: "cartItem");
       }
