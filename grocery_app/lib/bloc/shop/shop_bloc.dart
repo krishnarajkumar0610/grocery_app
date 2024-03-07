@@ -11,7 +11,7 @@ import 'shop_state.dart';
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
     on<UpdateShopItems>((event, emit) {
-      sendListOfData(keyName: "shopItem", item: state.shopItems);
+      sendListOfData(keyName: "shopItem", item: event.shopItems);
     });
 
     on<GetInitialShopItem>((event, emit) async {

@@ -9,17 +9,15 @@ import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
 import 'package:grocery_app/screens/pages/edit_page.dart';
 
-import '../../bloc/cart/cart_bloc.dart';
-import '../../bloc/cart/cart_event.dart';
+import '../../bloc/greetings/greeting_event.dart';
+import '../../bloc/shop/shop_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
 import 'cart_page.dart';
 
-// 3rd page home screen
-
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -27,6 +25,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int quantity = 1;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<InitialShopBloc>().add(GetInitialShopItem());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,94 +101,107 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Colors.white,
                 child: MyDrawer() // <= click this for Drawer
                 ),
-            body: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-                  child: BlocBuilder<GreetingBloc, GreetingState>(
-                    builder: (context, state) => Text(
-                      state.greeting!,
-                      style: GoogleFonts.notoSerif(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(19),
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "Let's order fresh items for you 😍",
-                        style: GoogleFonts.notoSerif(
+            body: BlocBuilder<InitialShopBloc, InitialShopState>(
+              builder: (context, state) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: deviceHeight * 0.01, left: deviceWidth * 0.05),
+                      child: BlocBuilder<GreetingBloc, GreetingState>(
+                        builder: (context, state) => Text(
+                          state.greeting!,
+                          style: GoogleFonts.notoSerif(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.white),
+                            fontSize: 25,
+                            color: Colors.green,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(19),
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Let's order fresh items for you 😍",
+                            style: GoogleFonts.notoSerif(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    BlocBuilder<InitialShopBloc, InitialShopState>(
+                        builder: (context, state) => state.shopItems!.isEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 250.0),
+                                child: Center(
+                                  child: Text("Sorry server is down 😓",
+                                      style: GoogleFonts.notoSerif(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      )),
+                                ),
+                              )
+                            : SizedBox(
+                                width: double.infinity,
+                                height: 500,
+                                child: GridView.builder(
+                                  itemCount: state.shopItems!.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 1 / 1.4),
+                                  itemBuilder: (context, index) {
+                                    return GroceryItemTile(index: index);
+                                  },
+                                ),
+                              )),
+                  ],
                 ),
-                BlocBuilder<InitialShopBloc, InitialShopState>(
-                    builder: (context, state) => state.shopItems!.isEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 250.0),
-                            child: Center(
-                              child: Text("Sorry server is down 😓",
-                                  style: GoogleFonts.notoSerif(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  )),
-                            ),
-                          )
-                        : SizedBox(
-                            width: double.infinity,
-                            height: 500,
-                            child: GridView.builder(
-                              itemCount: state.shopItems!.length,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 1 / 1.4),
-                              itemBuilder: (context, index) {
-                                return GroceryItemTile(index: index);
-                              },
-                            ),
-                          )),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: Colors.green,
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.black,
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          BlocBuilder<InitialShopBloc, InitialShopState>(
-                              builder: (context, state) => EditPage(
-                                    shopItems: state.shopItems!,
-                                  )),
-                    ));
-              },
-              label: const Text(
-                "Edit",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    letterSpacing: 1,
-                    color: Colors.black),
+            ),
+            floatingActionButton: SingleChildScrollView(
+              child: FloatingActionButton.extended(
+                backgroundColor: Colors.green,
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            BlocBuilder<InitialShopBloc, InitialShopState>(
+                                builder: (context, state) => EditPage(
+                                      shopItems: state.shopItems,
+                                    )),
+                      ));
+                },
+                label: const Text(
+                  "Edit",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      letterSpacing: 1,
+                      color: Colors.black),
+                ),
               ),
             )));
+  }
+
+  Future<void> _setLoading() async {
+    context.read<GreetingBloc>().add(GetGreetings());
+    print("SUCCESS");
+    context.read<InitialShopBloc>().add(GetInitialShopItem());
+    print("SUCCESS");
   }
 }
