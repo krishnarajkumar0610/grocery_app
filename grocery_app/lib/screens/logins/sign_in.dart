@@ -119,16 +119,10 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
 
-                    // context.read<ValidationBloc>().add(SignInEvent(
-                    //     name: _username.text,
-                    //     password: _signInPass.text,
-                    //     context: context));
-
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ));
+                    context.read<ValidationBloc>().add(SignInEvent(
+                        name: _username.text,
+                        password: _signInPass.text,
+                        context: context));
                     _username.clear();
                     _signInPass.clear();
 

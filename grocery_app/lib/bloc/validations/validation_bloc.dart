@@ -45,7 +45,7 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ));
       }
     });
