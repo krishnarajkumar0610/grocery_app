@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({super.key});
@@ -10,6 +11,6 @@ class EditPage extends StatefulWidget {
 class _EditPageState extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold();
   }
 }

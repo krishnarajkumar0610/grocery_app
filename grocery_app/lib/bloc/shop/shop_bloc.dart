@@ -8,8 +8,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'shop_event.dart';
 import 'shop_state.dart';
 
-class InitialShopBloc extends Bloc<GetInitialShopItem, InitialShopState> {
+class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
+    on<EditShopItem>((event, emit) {
+      print('1');
+    });
+
     on<GetInitialShopItem>((event, emit) async {
       List shopItem = [
         [
@@ -111,15 +115,15 @@ class InitialShopBloc extends Bloc<GetInitialShopItem, InitialShopState> {
       ];
 
       final sharedPreference = await SharedPreferences.getInstance();
-      // sharedPreference.clear();
+      sharedPreference.clear();
       final users = {"123": "12345"};
-      await sendListOfData(keyName: "users", item: users);
-      if (!sharedPreference.containsKey("shopItems")) {
-        await sendListOfData(item: shopItem, keyName: "shopItems");
-      }
-      final data = getListOfData(
-          keyName: "shopItems", sharedPreference: sharedPreference);
-      emit(InitialShopState(shopItems: data));
+      // await sendListOfData(keyName: "users", item: users);
+      // if (!sharedPreference.containsKey("shopItems")) {
+      //   await sendListOfData(item: shopItem, keyName: "shopItems");
+      // }
+      // final data = getListOfData(
+      //     keyName: "shopItems", sharedPreference: sharedPreference);
+      // emit(InitialShopState(shopItems: data));
     });
   }
 

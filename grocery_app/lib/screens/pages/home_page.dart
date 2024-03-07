@@ -7,6 +7,7 @@ import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
+import 'package:grocery_app/screens/pages/edit_page.dart';
 
 import '../../bloc/cart/cart_bloc.dart';
 import '../../bloc/cart/cart_event.dart';
@@ -164,7 +165,13 @@ class _HomePageState extends State<HomePage> {
                 Icons.edit,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditPage(),
+                    ));
+              },
               label: const Text(
                 "Edit",
                 style: TextStyle(
