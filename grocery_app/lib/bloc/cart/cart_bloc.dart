@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +31,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
         cartItem =
             getData(keyName: "cartItem", sharedPreference: sharedPreference);
         cartItem.add(event.shopItems[event.index]);
-        cartItem[event.index][0] = event.quantity;
+        cartItem[0][0]=event.quantity;
         print(cartItem);
         await sharedPreference.remove("cartItem");
         sendData(item: cartItem, keyName: "cartItem");
