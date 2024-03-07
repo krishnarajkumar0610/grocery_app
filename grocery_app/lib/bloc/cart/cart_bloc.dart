@@ -16,30 +16,34 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
     on<AddToCart>((event, emit) async {
       print("INDEX : ${event.index}");
-      // event.shopItems?[11][0] = event.quantity;
-      // print(event.shopItems?[11][0]);
-      List<dynamic> item = [];
       final sharedPreference = await SharedPreferences.getInstance();
+      List cartItem = [];
       if (!sharedPreference.containsKey("cartItem")) {
-        item.add(event.shopItems[event.index]);
-        sendData(item: item, keyName: "cartItem");
+        cartItem.add(event.shopItems[event.index]);
+        for (var items in cartItem) {
+          for (var item in items) {
+            print("$item : ${item.runtimeType}");
+          }
+        }
+        sendData(item: cartItem, keyName: "cartItem");
       } else {
-        item = getData(keyName: "cartItem", sharedPreference: sharedPreference);
-        item.add(event.shopItems[event.index]);
-        item[event.index][0] = event.quantity;
-        sharedPreference.remove("cartItem");
-        sendData(item: item, keyName: "cartItem");
-        print("ITEM in else : $item");
+        cartItem =
+            getData(keyName: "cartItem", sharedPreference: sharedPreference);
+        cartItem.add(event.shopItems[event.index]);
+        cartItem[event.index][0] = event.quantity;
+        print(cartItem);
+        await sharedPreference.remove("cartItem");
+        sendData(item: cartItem, keyName: "cartItem");
       }
-      emit(CartState(cartItem: item));
+      emit(CartState(cartItem: cartItem));
     });
 
     on<RemoveItem>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
-      List cartItem =
-          getData(keyName: "cartItem", sharedPreference: sharedPreference);
-      cartItem.removeAt(event.index!);
-      emit(CartState(cartItem: cartItem));
+      // List cartItem =
+      //     getData(keyName: "cartItem", sharedPreference: sharedPreference);
+      // cartItem.removeAt(event.index!);
+      // emit(CartState(cartItem: cartItem));
     });
   }
 
@@ -52,8 +56,9 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   List<dynamic> getData(
       {required String keyName, required final sharedPreference}) {
-    dynamic data = sharedPreference.getString(keyName);
-    data = jsonDecode(data);
-    return data;
+    final data = sharedPreference.getString(keyName);
+    List<dynamic> encodedData = jsonDecode(data);
+
+    return encodedData;
   }
 }

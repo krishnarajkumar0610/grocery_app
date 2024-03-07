@@ -171,8 +171,7 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     letterSpacing: 1,
-                    color: Colors.black
-                ),
+                    color: Colors.black),
               ),
             )));
   }

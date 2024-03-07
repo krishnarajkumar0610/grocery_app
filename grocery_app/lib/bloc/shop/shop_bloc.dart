@@ -115,11 +115,6 @@ class InitialShopBloc extends Bloc<GetInitialShopItem, InitialShopState> {
       final users = {"123": "12345"};
       await sendListOfData(keyName: "users", item: users);
       if (!sharedPreference.containsKey("shopItems")) {
-        // for(var item in shopItem){
-        //   print("*"*10);
-        //   print(item);
-        //   print("*"*10);
-        // }
         await sendListOfData(item: shopItem, keyName: "shopItems");
       }
       final data = getListOfData(
@@ -131,7 +126,7 @@ class InitialShopBloc extends Bloc<GetInitialShopItem, InitialShopState> {
   Future<void> sendListOfData({required keyName, required item}) async {
     final sharedPreference = await SharedPreferences.getInstance();
     final encodedData = jsonEncode(item);
-
+    print(encodedData.runtimeType);
     await sharedPreference.setString(keyName, encodedData);
   }
 

@@ -60,7 +60,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                           context.read<CartBloc>().add(AddToCart(
                               index: widget.index!,
                               shopItems: state.shopItems!,
-                              quantity: quantity!));
+                              quantity: quantity));
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
