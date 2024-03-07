@@ -9,10 +9,11 @@ class AddToCart extends CartEvents {
   List shopItems;
   int quantity;
 
-  AddToCart({required this.index,required this.shopItems,required this.quantity});
+  AddToCart(
+      {required this.index, required this.shopItems, required this.quantity});
 }
 
 class RemoveItem extends CartEvents {
-  int? index; // this will store the index value
-  RemoveItem({this.index});
+  int index; // this will store the index value
+  RemoveItem({required this.index});
 }

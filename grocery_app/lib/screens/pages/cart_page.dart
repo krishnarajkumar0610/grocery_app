@@ -114,15 +114,30 @@ class _CartPageState extends State<CartPage> {
                             child: Stack(
                               children: [
                                 Positioned(
-                                    left: 20,
-                                    top: 30,
+                                    left: 290,
+                                    top: 10,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        context
+                                            .read<CartBloc>()
+                                            .add(RemoveItem(index: index));
+                                      },
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 30,
+                                      ),
+                                    )),
+                                Positioned(
+                                    left: 200,
+                                    top: 50,
                                     child: Image.asset(
                                       state.cartItem![index][4],
                                       height: 120,
                                     )),
                                 Positioned(
-                                  left: 150,
-                                  top: 40,
+                                  left: 20,
+                                  top: 20,
                                   child: Text(
                                     "Name : ${state.cartItem![index][1]}",
                                     style: GoogleFonts.notoSerif(
@@ -133,10 +148,10 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                 ),
                                 Positioned(
-                                  left: 150,
-                                  top: 80,
+                                  left: 20,
+                                  top: 60,
                                   child: Text(
-                                    "Price Rs.${state.cartItem![index][2]}/-",
+                                    "Price : Rs.${state.cartItem![index][2]}/-",
                                     style: GoogleFonts.notoSerif(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -144,10 +159,21 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                 ),
                                 Positioned(
-                                  left: 150,
+                                  left: 20,
                                   top: 100,
                                   child: Text(
-                                    "Total amount :${state.cartItem![index][3]}/-",
+                                    "Total amount : ${state.cartItem![index][3]}/-",
+                                    style: GoogleFonts.notoSerif(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 20,
+                                  top: 140,
+                                  child: Text(
+                                    "Total Quantity : ${state.cartItem![index][0]}",
                                     style: GoogleFonts.notoSerif(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
