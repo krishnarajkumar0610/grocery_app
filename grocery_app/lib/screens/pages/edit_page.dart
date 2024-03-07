@@ -124,25 +124,14 @@ class _EditPageState extends State<EditPage> {
                           child: MaterialButton(
                             color: Colors.blue,
                             onPressed: () {
-                              if (itemPrices[index].text.isEmpty ||
-                                  itemPrices[index].text.startsWith(" ") ||
-                                  itemPrices[index].text.startsWith("0")) {
-                                itemPrices[index].text =
-                                    "${state.shopItems[index][2]}";
-                              }
-                              if (itemNames[index].text.isEmpty ||
-                                  itemNames[index].text.startsWith(" ")) {
-                                itemNames[index].text =
-                                    state.shopItems[index][1];
-                              }
-                              state.shopItems[index][1] = itemNames[index].text;
-                              state.shopItems[index][2] =
-                                  int.parse(itemPrices[index].text);
+                              context.read<InitialShopBloc>().add(EditShopItems(
+                                  shopItems: state.shopItems,
+                                  itemName: itemNames[index].text,
+                                  itemPrice: itemPrices[index].text,
+                                  index: index));
+
                               itemNames[index].clear();
                               itemPrices[index].clear();
-
-                              context.read<InitialShopBloc>().add(
-                                  UpdateShopItems(shopItems: state.shopItems));
 
                               Navigator.pop(context);
                             },

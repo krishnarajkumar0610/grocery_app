@@ -10,8 +10,23 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
-    on<UpdateShopItems>((event, emit) {
+    on<EditShopItems>((event, emit) {
+      String itemPrice = event.itemPrice;
+      String itemName = event.itemName;
+      int index = event.index;
+      if (itemPrice.isEmpty ||
+          itemPrice.startsWith(" ") ||
+          itemPrice.startsWith("0")) {
+        itemPrice = "${event.shopItems[index][2]}";
+      }
+      if (itemName.isEmpty || itemName.startsWith(" ")) {
+        itemName = event.shopItems[index][1];
+      }
+      event.shopItems[index][1] = itemName;
+      event.shopItems[index][2] = int.parse(itemPrice);
+
       sendListOfData(keyName: "shopItem", item: event.shopItems);
+      emit(InitialShopState(shopItems: event.shopItems));
     });
 
     on<GetInitialShopItem>((event, emit) async {

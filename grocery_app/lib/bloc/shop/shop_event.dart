@@ -2,10 +2,17 @@ class ShopEvent {}
 
 class GetInitialShopItem extends ShopEvent {}
 
-class UpdateShopItems extends ShopEvent {
+class EditShopItems extends ShopEvent {
   final shopItems;
+  String itemPrice;
+  String itemName;
+  int index;
 
-  UpdateShopItems({required this.shopItems});
+  EditShopItems(
+      {required this.shopItems,
+      required this.itemName,
+      required this.itemPrice,
+      required this.index});
 }
 
-class AddToShopItem extends ShopEvent {}
+class AddNewItemsInShop extends ShopEvent {}
