@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -49,7 +51,11 @@ class _AddNewItemState extends State<AddNewItem> {
             height: 50,
             child: MaterialButton(
               color: Colors.deepPurple,
-              onPressed: () {},
+              onPressed: () {
+                Timer(const Duration(seconds: 2), () {
+                  Navigator.pop(context);
+                });
+              },
               child: const Text(
                 "Submit",
                 style: TextStyle(
