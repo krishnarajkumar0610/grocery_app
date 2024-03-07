@@ -1,5 +1,5 @@
 class InitialShopState {
-  List? shopItems;
+  List shopItems;
 
-  InitialShopState({this.shopItems});
+  InitialShopState({required this.shopItems});
 }

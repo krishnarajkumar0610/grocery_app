@@ -169,7 +169,11 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const EditPage(),
+                      builder: (context) =>
+                          BlocBuilder<InitialShopBloc, InitialShopState>(
+                              builder: (context, state) => EditPage(
+                                    shopItems: state.shopItems!,
+                                  )),
                     ));
               },
               label: const Text(
