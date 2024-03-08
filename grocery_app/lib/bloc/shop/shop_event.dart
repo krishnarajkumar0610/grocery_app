@@ -25,10 +25,10 @@ class ChangeToCheckmark extends ShopEvent {
 }
 
 class ChangeToShopCart extends ShopEvent {
-  int index;
+  String itemName;
   List shopItem;
 
-  ChangeToShopCart({required this.index, required this.shopItem});
+  ChangeToShopCart({required this.itemName, required this.shopItem});
 }
 
 class ChangeAllIcon extends ShopEvent {

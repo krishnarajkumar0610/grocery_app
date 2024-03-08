@@ -7,7 +7,7 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
-    on<EditShopItems>((event, emit) {
+    on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
       int index = event.index;
@@ -21,7 +21,8 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       }
       event.shopItems[index][1] = itemName;
       event.shopItems[index][2] = int.parse(itemPrice);
-
+      final sharedPreference = await SharedPreferences.getInstance();
+      sharedPreference.remove("shopItem");
       sendListOfData(keyName: "shopItem", item: event.shopItems);
       emit(InitialShopState(shopItems: event.shopItems));
     });
@@ -43,11 +44,16 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       sendListOfData(keyName: "shopItem", item: event.shopItem);
       emit(InitialShopState(shopItems: event.shopItem));
     });
+
     on<ChangeToShopCart>((event, emit) async {
-      event.shopItem[event.index][7] = true;
-      final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItem");
-      sendListOfData(keyName: "shopItem", item: event.shopItem);
+      String name = event.itemName;
+      print(name);
+      for (int i = 0; i < event.shopItem.length; i++) {
+        if (name == event.shopItem[i][1]) {
+          event.shopItem[i][7] = true;
+          break;
+        }
+      }
       emit(InitialShopState(shopItems: event.shopItem));
     });
 
@@ -177,7 +183,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       final sharedPreference = await SharedPreferences.getInstance();
       //sharedPreference.clear();
       print(sharedPreference.containsKey("cartItem"));
-      final users = {"123": "12345", "krishna": "2003"};
+      final users = {"krishna": "2003", "priya": "2005"};
       await sendListOfData(keyName: "users", item: users);
       if (!sharedPreference.containsKey("shopItems")) {
         await sendListOfData(item: shopItem, keyName: "shopItems");
