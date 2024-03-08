@@ -6,6 +6,7 @@ import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 
+import '../bloc/shop/shop_event.dart';
 import '../bloc/shop/shop_state.dart';
 
 class GroceryItemTile extends StatefulWidget {
@@ -51,23 +52,26 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       radius: deviceHeight * 0.03,
                       backgroundColor: Colors.white,
                       child: IconButton(
-                        icon: Icon(
-                          Icons.add_shopping_cart,
-                          size: deviceWidth * 0.07,
-                          color: Colors.black,
-                        ),
+                        icon: state.shopItems[widget.index!][7]
+                            ? Icon(
+                                Icons.add_shopping_cart,
+                                size: deviceWidth * 0.07,
+                                color: Colors.black,
+                              )
+                            : Icon(
+                                Icons.check_circle,
+                                size: deviceWidth * 0.07,
+                                color: Colors.green,
+                              ),
                         onPressed: () {
                           print("INSIDE THE ON PRESSED : ${widget.index}");
+                          context.read<InitialShopBloc>().add(ChangeToCheckmark(
+                              index: widget.index!, shopItem: state.shopItems));
+                          print(state.shopItems[widget.index!][7]);
                           context.read<CartBloc>().add(AddToCart(
                               index: widget.index!,
                               shopItems: state.shopItems,
                               quantity: quantity));
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) =>
-                          //           const CartPage(), // <= click it for cart page
-                          //     ));
                         },
                       ),
                     ),

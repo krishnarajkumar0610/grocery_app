@@ -140,7 +140,7 @@ class _SignInState extends State<SignIn> {
                       color: Colors.lightGreen)),
               listener: (BuildContext context, ValidationState state) {
                 if (state is ValidationSuccess) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HomePage(

@@ -16,3 +16,23 @@ class EditShopItems extends ShopEvent {
 }
 
 class AddNewItemsInShop extends ShopEvent {}
+
+class ChangeToCheckmark extends ShopEvent {
+  int index;
+  List shopItem;
+
+  ChangeToCheckmark({required this.index, required this.shopItem});
+}
+
+class ChangeToShopCart extends ShopEvent {
+  int index;
+  List shopItem;
+
+  ChangeToShopCart({required this.index, required this.shopItem});
+}
+
+class ChangeAllIcon extends ShopEvent {
+  List shopItem;
+
+  ChangeAllIcon({required this.shopItem});
+}

@@ -5,20 +5,22 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(CartState(cartItem: [], iconStatus: true)) {
+  CartBloc() : super(CartState(cartItem: [])) {
     on<Clearcart>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
       sharedPreference.remove("cartItem");
-      emit(CartState(cartItem: [], iconStatus: true));
+
+      emit(CartState(cartItem: []));
     });
 
     on<AddToCart>((event, emit) async {
       List<dynamic> datas = event.shopItems[event.index];
+      final sharedPreference = await SharedPreferences.getInstance();
       List cartItem = [];
       datas[0] = event.quantity;
-      final sharedPreference = await SharedPreferences.getInstance();
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(datas);
+        print("Changed : $cartItem}");
         sendData(item: [datas], keyName: "cartItem");
       } else {
         cartItem =
@@ -37,15 +39,18 @@ class CartBloc extends Bloc<CartEvents, CartState> {
         sharedPreference.remove("cartItem");
         sendData(item: cartItem, keyName: "cartItem");
       }
-      emit((CartState(cartItem: cartItem, iconStatus: true)));
+      emit((CartState(cartItem: cartItem)));
     });
 
     on<RemoveItem>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
       List cartItem =
           getData(keyName: "cartItem", sharedPreference: sharedPreference);
+      cartItem.removeAt(event.index);
+      sharedPreference.remove("cartItem");
+      sendData(item: cartItem, keyName: "cartItem");
       print("In remove : $cartItem");
-      emit(CartState(cartItem: cartItem, iconStatus: true));
+      emit(CartState(cartItem: cartItem));
     });
   }
 
