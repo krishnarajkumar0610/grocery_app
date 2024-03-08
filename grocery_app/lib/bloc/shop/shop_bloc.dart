@@ -7,6 +7,8 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
+
+
     on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
@@ -22,26 +24,30 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       event.shopItems[index][1] = itemName;
       event.shopItems[index][2] = int.parse(itemPrice);
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItem");
-      sendListOfData(keyName: "shopItem", item: event.shopItems);
+      sharedPreference.remove("shopItems");
+      sendListOfData(keyName: "shopItems", item: event.shopItems);
+
+      print("Data changed ");
       emit(InitialShopState(shopItems: event.shopItems));
     });
+
+
 
     on<ChangeAllIcon>((event, emit) async {
       for (int i = 0; i < state.shopItems.length; i++) {
         state.shopItems[i][7] = true;
       }
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItem");
-      sendListOfData(keyName: "shopItem", item: state.shopItems);
+      sharedPreference.remove("shopItems");
+      sendListOfData(keyName: "shopItems", item: state.shopItems);
       emit(InitialShopState(shopItems: state.shopItems));
     });
 
     on<ChangeToCheckmark>((event, emit) async {
       event.shopItem[event.index][7] = false;
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItem");
-      sendListOfData(keyName: "shopItem", item: event.shopItem);
+      sharedPreference.remove("shopItems");
+      sendListOfData(keyName: "shopItems", item: event.shopItem);
       emit(InitialShopState(shopItems: event.shopItem));
     });
 

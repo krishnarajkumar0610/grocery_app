@@ -11,11 +11,9 @@ import '../bloc/shop/shop_state.dart';
 
 class GroceryItemTile extends StatefulWidget {
   int? index;
+  bool? isAdmin;
 
-  GroceryItemTile({
-    super.key,
-    required this.index,
-  });
+  GroceryItemTile({super.key, required this.index, required this.isAdmin});
 
   @override
   State<GroceryItemTile> createState() => _GroceryItemTileState();
@@ -45,37 +43,42 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
             child: BlocBuilder<InitialShopBloc, InitialShopState>(
               builder: (context, state) => Stack(
                 children: [
-                  Positioned(
-                    left: deviceWidth * 0.28,
-                    top: deviceHeight * 0.01,
-                    child: CircleAvatar(
-                      radius: deviceHeight * 0.03,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        icon: state.shopItems[widget.index!][7]
-                            ? Icon(
-                                Icons.add_shopping_cart,
-                                size: deviceWidth * 0.07,
-                                color: Colors.black,
-                              )
-                            : Icon(
-                                Icons.check_circle,
-                                size: deviceWidth * 0.07,
-                                color: Colors.green,
-                              ),
-                        onPressed: () {
-                          print("INSIDE THE ON PRESSED : ${widget.index}");
-                          context.read<InitialShopBloc>().add(ChangeToCheckmark(
-                              index: widget.index!, shopItem: state.shopItems));
-                          print(state.shopItems[widget.index!][7]);
-                          context.read<CartBloc>().add(AddToCart(
-                              index: widget.index!,
-                              shopItems: state.shopItems,
-                              quantity: quantity));
-                        },
-                      ),
-                    ),
-                  ),
+                  widget.isAdmin!
+                      ? const SizedBox()
+                      : Positioned(
+                          left: deviceWidth * 0.28,
+                          top: deviceHeight * 0.01,
+                          child: CircleAvatar(
+                            radius: deviceHeight * 0.03,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: state.shopItems[widget.index!][7]
+                                  ? Icon(
+                                      Icons.add_shopping_cart,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.black,
+                                    )
+                                  : Icon(
+                                      Icons.check_circle,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.green,
+                                    ),
+                              onPressed: () {
+                                print(
+                                    "INSIDE THE ON PRESSED : ${widget.index}");
+                                context.read<InitialShopBloc>().add(
+                                    ChangeToCheckmark(
+                                        index: widget.index!,
+                                        shopItem: state.shopItems));
+                                print(state.shopItems[widget.index!][7]);
+                                context.read<CartBloc>().add(AddToCart(
+                                    index: widget.index!,
+                                    shopItems: state.shopItems,
+                                    quantity: quantity));
+                              },
+                            ),
+                          ),
+                        ),
                   Positioned(
                     left: orientation == Orientation.portrait
                         ? deviceWidth * 0.02

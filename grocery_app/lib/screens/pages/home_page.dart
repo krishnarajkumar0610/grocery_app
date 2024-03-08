@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/greetings/greeting_bloc.dart';
 import 'package:grocery_app/bloc/greetings/greeting_state.dart';
-import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
+import 'package:grocery_app/bloc/validations/validation_bloc.dart';
+import 'package:grocery_app/bloc/validations/validation_state.dart';
 import 'package:grocery_app/screens/pages/edit_page.dart';
 
 import '../../bloc/greetings/greeting_event.dart';
@@ -76,24 +78,26 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.white,
-                      child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const CartPage(), // <= click this for cart page
-                              )),
-                          child: const Icon(
-                            Icons.shopping_cart,
-                            color: Colors.black,
-                            size: 25,
-                          ))),
-                ),
+                widget.isAdmin
+                    ? const SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: Colors.white,
+                            child: GestureDetector(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CartPage(), // <= click this for cart page
+                                    )),
+                                child: const Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.black,
+                                  size: 25,
+                                ))),
+                      ),
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
                 ),
@@ -162,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                                           crossAxisCount: 2,
                                           childAspectRatio: 1 / 1.4),
                                   itemBuilder: (context, index) {
-                                    return GroceryItemTile(index: index);
+                                    return GroceryItemTile(index: index,isAdmin : widget.isAdmin);
                                   },
                                 ),
                               )),
