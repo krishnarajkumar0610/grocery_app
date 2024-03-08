@@ -5,31 +5,39 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(CartState(cartItem: [])) {
+  CartBloc() : super(CartState(cartItem: [], iconStatus: true)) {
     on<Clearcart>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
       sharedPreference.remove("cartItem");
-      emit(CartState(cartItem: []));
+      emit(CartState(cartItem: [], iconStatus: true));
     });
 
     on<AddToCart>((event, emit) async {
       List<dynamic> datas = event.shopItems[event.index];
-      List carItem = [];
+      List cartItem = [];
       datas[0] = event.quantity;
       final sharedPreference = await SharedPreferences.getInstance();
       if (!sharedPreference.containsKey("cartItem")) {
-        carItem.add(datas);
-        print(datas);
+        cartItem.add(datas);
         sendData(item: [datas], keyName: "cartItem");
       } else {
-        carItem =
+        cartItem =
             getData(keyName: "cartItem", sharedPreference: sharedPreference);
-        carItem.add(datas);
-        print("inside the else : ${carItem}");
+        String itemname = datas[1];
+        for (int i = 0; i < cartItem.length; i++) {
+          if (cartItem[i][1] == itemname) {
+            print("Item name : ${cartItem[i][1]}");
+            print("removed");
+            cartItem.removeAt(i);
+            print(cartItem);
+            break;
+          }
+        }
+        cartItem.add(datas);
         sharedPreference.remove("cartItem");
-        sendData(item: carItem, keyName: "cartItem");
+        sendData(item: cartItem, keyName: "cartItem");
       }
-      emit((CartState(cartItem: carItem)));
+      emit((CartState(cartItem: cartItem, iconStatus: true)));
     });
 
     on<RemoveItem>((event, emit) async {
@@ -37,20 +45,11 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       List cartItem =
           getData(keyName: "cartItem", sharedPreference: sharedPreference);
       print("In remove : $cartItem");
-      emit(CartState(cartItem: cartItem));
+      emit(CartState(cartItem: cartItem, iconStatus: true));
     });
   }
 
   void sendData({required final item, required String keyName}) async {
-    // print("*" * 30);
-    // print("RECEIVED AS : ${item.runtimeType}");
-    // print("*" * 30);
-    // for (var datas in item) {
-    //   print("Datas : ${datas.runtimeType}");
-    //   for (var data in datas) {
-    //     print("Item $data : ${data.runtimeType}");
-    //   }
-    // }
     final sharedPreference = await SharedPreferences.getInstance();
     final encodedData = jsonEncode(item);
     await sharedPreference.setString(keyName, encodedData);

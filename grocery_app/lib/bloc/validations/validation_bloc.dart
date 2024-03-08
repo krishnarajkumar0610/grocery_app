@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/validations/valdation_event.dart';
 import 'package:grocery_app/bloc/validations/validation_state.dart';
-import 'package:grocery_app/screens/pages/home_page.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
-  ValidationBloc() : super(ValidationState()) {
+  ValidationBloc() : super(InitialValidation()) {
     on<SignInEvent>((event, emit) async {
       Map<String, dynamic> data = await getListOfData(keyName: "users");
       final name = event.name.toLowerCase();
       final password = event.password.toLowerCase();
       final context = event.context;
       bool status = false;
-
+      bool aAdmin = false;
       if (name.isNotEmpty &&
           password.isNotEmpty &&
           !name.startsWith(" ") &&
@@ -25,12 +25,13 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
           print("USER VALUE : ${user.value}");
           if (name == user.key && password == user.value) {
             status = true;
+            aAdmin = name == "krishna";
             print("NOW STATUS : $status");
+            print("ADMIN $aAdmin");
             break;
           }
         }
         if (!status) {
-          print("AMA DA");
           showAlertBox(
               message: "User name or password does not match !",
               context: context,
@@ -41,12 +42,10 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
             message: "User name or password contains space or it is empty !",
             context: context);
       }
-      if (status == true) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomePage(),
-            ));
+      if (status) {
+        print("Emited");
+        emit(InitialValidation());
+        emit(ValidationSuccess(isAdmin: aAdmin));
       }
     });
   }

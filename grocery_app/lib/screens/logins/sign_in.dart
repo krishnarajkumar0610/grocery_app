@@ -114,7 +114,7 @@ class _SignInState extends State<SignIn> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 30),
-            child: BlocBuilder<ValidationBloc, ValidationState>(
+            child: BlocConsumer<ValidationBloc, ValidationState>(
               builder: (context, state) => GestureDetector(
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
@@ -138,6 +138,17 @@ class _SignInState extends State<SignIn> {
                           : deviceHeight * 0.10,
                       text: "SIGN IN",
                       color: Colors.lightGreen)),
+              listener: (BuildContext context, ValidationState state) {
+                if (state is ValidationSuccess) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(
+                          isAdmin: state.isAdmin,
+                        ),
+                      ));
+                }
+              },
             ),
           ),
           Padding(

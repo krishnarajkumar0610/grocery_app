@@ -136,7 +136,7 @@ class _EditPageState extends State<EditPage> {
                               Navigator.pop(context);
                             },
                             child: const Text(
-                              "Submit",
+                              "Edit",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,

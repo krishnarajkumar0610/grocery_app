@@ -17,7 +17,9 @@ import '../drawer/drawer_page.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  bool isAdmin;
+
+  HomePage({super.key, required this.isAdmin});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -169,33 +171,34 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             floatingActionButton: SingleChildScrollView(
-              child: FloatingActionButton.extended(
-                backgroundColor: Colors.green,
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            BlocBuilder<InitialShopBloc, InitialShopState>(
-                                builder: (context, state) => EditPage(
-                                      shopItems: state.shopItems,
-                                    )),
-                      ));
-                },
-                label: const Text(
-                  "Edit",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      letterSpacing: 1,
-                      color: Colors.black),
-                ),
-              ),
-            )));
+                child: widget.isAdmin
+                    ? FloatingActionButton.extended(
+                        backgroundColor: Colors.green,
+                        icon: const Icon(
+                          Icons.edit,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocBuilder<
+                                        InitialShopBloc, InitialShopState>(
+                                    builder: (context, state) => EditPage(
+                                          shopItems: state.shopItems,
+                                        )),
+                              ));
+                        },
+                        label: const Text(
+                          "Edit",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              letterSpacing: 1,
+                              color: Colors.black),
+                        ),
+                      )
+                    : const SizedBox())));
   }
 
   Future<void> _setLoading() async {

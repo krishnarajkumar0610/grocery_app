@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'shop_event.dart';
 import 'shop_state.dart';
 
@@ -140,7 +137,6 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
           Colors.pink.value
         ],
       ];
-
       final sharedPreference = await SharedPreferences.getInstance();
       //sharedPreference.clear();
       print(sharedPreference.containsKey("cartItem"));
