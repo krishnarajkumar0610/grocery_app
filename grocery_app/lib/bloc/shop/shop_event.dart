@@ -10,9 +10,9 @@ class EditShopItems extends ShopEvent {
 
   EditShopItems(
       {required this.shopItems,
-      required this.itemName,
-      required this.itemPrice,
-      required this.index});
+        required this.itemName,
+        required this.itemPrice,
+        required this.index});
 }
 
 class AddNewItemsInShop extends ShopEvent {}

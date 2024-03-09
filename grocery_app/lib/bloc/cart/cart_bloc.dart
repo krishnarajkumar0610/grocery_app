@@ -45,7 +45,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     on<RemoveItem>((event, emit) async {
       final sharedPreference = await SharedPreferences.getInstance();
       List cartItem =
-          getData(keyName: "cartItem", sharedPreference: sharedPreference);
+      getData(keyName: "cartItem", sharedPreference: sharedPreference);
       cartItem.removeAt(event.index);
       sharedPreference.remove("cartItem");
       sendData(item: cartItem, keyName: "cartItem");

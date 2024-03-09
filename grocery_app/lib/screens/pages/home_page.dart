@@ -65,15 +65,15 @@ class _HomePageState extends State<HomePage> {
                       },
                       icon: state.themeStatus!
                           ? const Icon(
-                              Icons.dark_mode,
-                              size: 30,
-                              color: Colors.black,
-                            )
+                        Icons.dark_mode,
+                        size: 30,
+                        color: Colors.black,
+                      )
                           : const Icon(
-                              Icons.sunny,
-                              color: Colors.yellow,
-                              size: 25,
-                            )),
+                        Icons.sunny,
+                        color: Colors.yellow,
+                        size: 25,
+                      )),
                 ),
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
@@ -81,23 +81,23 @@ class _HomePageState extends State<HomePage> {
                 widget.isAdmin
                     ? const SizedBox()
                     : Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: Colors.white,
-                            child: GestureDetector(
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CartPage(), // <= click this for cart page
-                                    )),
-                                child: const Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.black,
-                                  size: 25,
-                                ))),
-                      ),
+                  padding: const EdgeInsets.all(5.0),
+                  child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const CartPage(), // <= click this for cart page
+                              )),
+                          child: const Icon(
+                            Icons.shopping_cart,
+                            color: Colors.black,
+                            size: 25,
+                          ))),
+                ),
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
                 ),
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             drawer: const Drawer(
                 backgroundColor: Colors.white,
                 child: MyDrawer() // <= click this for Drawer
-                ),
+            ),
             body: BlocBuilder<InitialShopBloc, InitialShopState>(
               builder: (context, state) => SingleChildScrollView(
                 child: Column(
@@ -147,29 +147,29 @@ class _HomePageState extends State<HomePage> {
                     BlocBuilder<InitialShopBloc, InitialShopState>(
                         builder: (context, state) => state.shopItems!.isEmpty
                             ? Padding(
-                                padding: const EdgeInsets.only(top: 250.0),
-                                child: Center(
-                                  child: Text("Sorry server is down 😓",
-                                      style: GoogleFonts.notoSerif(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      )),
-                                ),
-                              )
+                          padding: const EdgeInsets.only(top: 250.0),
+                          child: Center(
+                            child: Text("Sorry server is down 😓",
+                                style: GoogleFonts.notoSerif(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
+                          ),
+                        )
                             : SizedBox(
-                                width: double.infinity,
-                                height: 500,
-                                child: GridView.builder(
-                                  itemCount: state.shopItems!.length,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          childAspectRatio: 1 / 1.4),
-                                  itemBuilder: (context, index) {
-                                    return GroceryItemTile(index: index,isAdmin : widget.isAdmin);
-                                  },
-                                ),
-                              )),
+                          width: double.infinity,
+                          height: 500,
+                          child: GridView.builder(
+                            itemCount: state.shopItems!.length,
+                            gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1 / 1.4),
+                            itemBuilder: (context, index) {
+                              return GroceryItemTile(index: index,isAdmin : widget.isAdmin);
+                            },
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -177,31 +177,31 @@ class _HomePageState extends State<HomePage> {
             floatingActionButton: SingleChildScrollView(
                 child: widget.isAdmin
                     ? FloatingActionButton.extended(
-                        backgroundColor: Colors.green,
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocBuilder<
-                                        InitialShopBloc, InitialShopState>(
-                                    builder: (context, state) => EditPage(
-                                          shopItems: state.shopItems,
-                                        )),
-                              ));
-                        },
-                        label: const Text(
-                          "Edit",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              letterSpacing: 1,
-                              color: Colors.black),
-                        ),
-                      )
+                  backgroundColor: Colors.green,
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocBuilder<
+                              InitialShopBloc, InitialShopState>(
+                              builder: (context, state) => EditPage(
+                                shopItems: state.shopItems,
+                              )),
+                        ));
+                  },
+                  label: const Text(
+                    "Edit",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        letterSpacing: 1,
+                        color: Colors.black),
+                  ),
+                )
                     : const SizedBox())));
   }
 
