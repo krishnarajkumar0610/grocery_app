@@ -8,10 +8,11 @@ import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 
 import '../bloc/shop/shop_event.dart';
 import '../bloc/shop/shop_state.dart';
+import '../screens/pages/order_page.dart';
 
 class GroceryItemTile extends StatefulWidget {
-  int? index;
-  bool? isAdmin;
+  int index;
+  bool isAdmin;
 
   GroceryItemTile({super.key, required this.index, required this.isAdmin});
 
@@ -46,39 +47,39 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                   widget.isAdmin!
                       ? const SizedBox()
                       : Positioned(
-                    left: deviceWidth * 0.28,
-                    top: deviceHeight * 0.01,
-                    child: CircleAvatar(
-                      radius: deviceHeight * 0.03,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        icon: state.shopItems[widget.index!][7]
-                            ? Icon(
-                          Icons.add_shopping_cart,
-                          size: deviceWidth * 0.07,
-                          color: Colors.black,
-                        )
-                            : Icon(
-                          Icons.check_circle,
-                          size: deviceWidth * 0.07,
-                          color: Colors.green,
+                          left: deviceWidth * 0.28,
+                          top: deviceHeight * 0.01,
+                          child: CircleAvatar(
+                            radius: deviceHeight * 0.03,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: state.shopItems[widget.index!][7]
+                                  ? Icon(
+                                      Icons.add_shopping_cart,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.black,
+                                    )
+                                  : Icon(
+                                      Icons.check_circle,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.green,
+                                    ),
+                              onPressed: () {
+                                print(
+                                    "INSIDE THE ON PRESSED : ${widget.index}");
+                                context.read<InitialShopBloc>().add(
+                                    ChangeToCheckmark(
+                                        index: widget.index!,
+                                        shopItem: state.shopItems));
+                                print(state.shopItems[widget.index!][7]);
+                                context.read<CartBloc>().add(AddToCart(
+                                    index: widget.index!,
+                                    shopItems: state.shopItems,
+                                    quantity: quantity));
+                              },
+                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          print(
-                              "INSIDE THE ON PRESSED : ${widget.index}");
-                          context.read<InitialShopBloc>().add(
-                              ChangeToCheckmark(
-                                  index: widget.index!,
-                                  shopItem: state.shopItems));
-                          print(state.shopItems[widget.index!][7]);
-                          context.read<CartBloc>().add(AddToCart(
-                              index: widget.index!,
-                              shopItems: state.shopItems,
-                              quantity: quantity));
-                        },
-                      ),
-                    ),
-                  ),
                   Positioned(
                     left: orientation == Orientation.portrait
                         ? deviceWidth * 0.02
@@ -168,18 +169,13 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       child: MaterialButton(
                         color: Color(state.shopItems?[widget.index!][6]),
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => OrderPage(
-                          //         itemName: itemName,
-                          //         itemPrice: itemPrice,
-                          //         imagePath: imagePath,
-                          //         description: description,
-                          //         widget.index: widget.index,
-                          //         color: color,
-                          //       ),
-                          //     ));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrderPage(
+                                  index: widget.index,
+                                ),
+                              ));
                         },
                         child: Text(
                           "Buy ${state.shopItems?[widget.index!][2]}/-",

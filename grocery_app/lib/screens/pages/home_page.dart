@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                 width: double.infinity,
                                 height: 500,
                                 child: GridView.builder(
-                                  itemCount: state.shopItems!.length,
+                                  itemCount: state.shopItems.length,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
