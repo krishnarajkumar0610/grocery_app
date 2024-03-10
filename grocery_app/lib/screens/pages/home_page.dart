@@ -7,16 +7,12 @@ import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
-import 'package:grocery_app/bloc/validations/validation_bloc.dart';
-import 'package:grocery_app/bloc/validations/validation_state.dart';
-import 'package:grocery_app/screens/pages/edit_page.dart';
-
-import '../../bloc/greetings/greeting_event.dart';
+import 'package:grocery_app/screens/pages/admin_page/edit_page.dart';
 import '../../bloc/shop/shop_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
-import 'add_item.dart';
+import 'admin_page/add_item.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -102,6 +98,30 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
                 ),
+                BlocBuilder<InitialShopBloc, InitialShopState>(
+                  builder: (context, state) => state.shopItems.isNotEmpty
+                      ? (widget.isAdmin
+                          ? IconButton(
+                    tooltip: "Edit item",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditPage(shopItems: state.shopItems),
+                                    ));
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),
+                            )
+                          : const SizedBox())
+                      : const SizedBox(),
+                ),
+                SizedBox(
+                  width: orientation == Orientation.portrait ? 10 : 50,
+                ),
               ],
             ),
             drawer: const Drawer(
@@ -181,30 +201,25 @@ class _HomePageState extends State<HomePage> {
                 BlocBuilder<InitialShopBloc, InitialShopState>(
                     builder: (context, state) => SingleChildScrollView(
                         child: widget.isAdmin
-                            ? (state.shopItems.isEmpty
+                            ? state.shopItems.isEmpty
                                 ? floatingButton(
-                                    icon: const Icon(
-                                      Icons.add,
-                                      color: Colors.black,
-                                      size: 25,
-                                    ),
-                                    text: "Add new item",
-                                    navigatorStatus: widget.isAdmin)
+                                    icon: const Icon(Icons.add,
+                                        color: Colors.black, size: 25),
+                                    text: "Add item",
+                                    navigatorStatus: true)
                                 : floatingButton(
-                                    icon: const Icon(
-                                      Icons.add,
-                                      color: Colors.black,
-                                      size: 25,
-                                    ),
-                                    text: "Edit",
-                                    navigatorStatus: !widget.isAdmin))
+                                    icon: const Icon(Icons.add,
+                                        color: Colors.black, size: 25),
+                                    text: "Add item",
+                                    navigatorStatus: true)
                             : const SizedBox()))));
   }
 
   Widget floatingButton(
       {required Icon icon,
       required String text,
-      required bool navigatorStatus}) {
+      required bool navigatorStatus,
+      List? shopItem}) {
     return FloatingActionButton.extended(
       backgroundColor: Colors.green,
       icon: icon,
@@ -218,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                 return navigatorStatus
                     ? const AddNewItem()
                     : EditPage(
-                        shopItems: state.shopItems,
+                        shopItems: shopItem!,
                       );
               }),
             ));

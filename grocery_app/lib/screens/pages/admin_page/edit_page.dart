@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/screens/pages/add_item.dart';
-import '../../bloc/shop/shop_bloc.dart';
-import '../../bloc/shop/shop_event.dart';
-import '../../bloc/shop/shop_state.dart';
+
+import '../../../bloc/shop/shop_bloc.dart';
+import '../../../bloc/shop/shop_event.dart';
+import '../../../bloc/shop/shop_state.dart';
 
 class EditPage extends StatefulWidget {
-  final List shopItems;
+  List shopItems;
 
   EditPage({Key? key, required this.shopItems});
 
@@ -17,8 +15,8 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-  List<TextEditingController> itemNames = [];
-  List<TextEditingController> itemPrices = [];
+  late List<TextEditingController> itemNames;
+  late List<TextEditingController> itemPrices;
 
   @override
   void initState() {
@@ -34,6 +32,18 @@ class _EditPageState extends State<EditPage> {
   }
 
   @override
+  void dispose() {
+    // Dispose the controllers when the widget is disposed to avoid memory leaks
+    for (var controller in itemNames) {
+      controller.dispose();
+    }
+    for (var controller in itemPrices) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -45,7 +55,7 @@ class _EditPageState extends State<EditPage> {
             width: double.infinity,
             height: 600,
             child: ListView.builder(
-              itemCount: widget.shopItems.length,
+              itemCount: state.shopItems.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(50.0),
                 child: Container(
@@ -150,26 +160,6 @@ class _EditPageState extends State<EditPage> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: Colors.green,
-            icon: const Icon(
-              Icons.add,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddNewItem(),
-                  ));
-            },
-            label: const Text(
-              "Add new item",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-            )),
       ),
     );
   }

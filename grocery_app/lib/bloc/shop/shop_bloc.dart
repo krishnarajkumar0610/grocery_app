@@ -65,6 +65,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
     });
 
     on<AddNewItemsInShop>((event, emit) async {
+      final sharedPreference = await SharedPreferences.getInstance();
       String itemName = event.itemName.toLowerCase();
       String itemPrice = event.itemPrice;
       List shopItem = [];
@@ -73,6 +74,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
           itemPrice.isEmpty ||
           itemName.startsWith(" ") ||
           itemPrice.startsWith(" "))) {
+        sendListOfData(keyName: "shopItem", item: state.shopItems);
         showAlert(
             context: event.context, text: "Name or price should not be empty");
       } else {
@@ -84,14 +86,11 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
           data = [
             itemQuantity,
             itemName,
-            itemPrice,
+            int.parse(itemPrice),
             "assets/$itemName.png",
             iconStatus
           ];
 
-          final sharedPreference = await SharedPreferences.getInstance();
-          print(getListOfData(
-              keyName: "shopItem", sharedPreference: sharedPreference));
           shopItem = getListOfData(
               keyName: "shopItem", sharedPreference: sharedPreference);
           for (int i = 0; i < shopItem.length; i++) {
@@ -105,7 +104,8 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
         } catch (e) {
           showAlert(
               context: event.context, text: "Image path does not contain");
-          shopItem = [];
+          shopItem = getListOfData(
+              keyName: "shopItem", sharedPreference: sharedPreference);
         }
       }
       emit(InitialShopState(shopItems: shopItem));
@@ -115,7 +115,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       List shopItem = event.shopItem;
       int index = event.index;
       shopItem.removeAt(index);
-      print("SHOPITEM : $shopItem");
+
       sendListOfData(keyName: "shopItem", item: shopItem);
       emit(InitialShopState(shopItems: shopItem));
     });
@@ -127,7 +127,6 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       final users = {"krishna": "2003", "priya": "2005"};
       await sendListOfData(keyName: "users", item: users);
       if (!sharedPreference.containsKey("shopItem")) {
-        print("pogama");
         await sendListOfData(item: [], keyName: "shopItem");
       }
       print("get panudhu");

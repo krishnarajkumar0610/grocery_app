@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
 
-import '../../bloc/shop/shop_event.dart';
-import '../../bloc/shop/shop_state.dart';
+import '../../../bloc/shop/shop_event.dart';
+import '../../../bloc/shop/shop_state.dart';
 
 class AddNewItem extends StatefulWidget {
   const AddNewItem({super.key});
@@ -61,6 +62,8 @@ class _AddNewItemState extends State<AddNewItem> {
                       itemName: controllers[0].text,
                       itemPrice: controllers[1].text,
                       context: context));
+                  controllers[0].clear();
+                  controllers[1].clear();
                 },
                 child: const Text(
                   "Submit",
