@@ -10,12 +10,19 @@ class EditShopItems extends ShopEvent {
 
   EditShopItems(
       {required this.shopItems,
-        required this.itemName,
-        required this.itemPrice,
-        required this.index});
+      required this.itemName,
+      required this.itemPrice,
+      required this.index});
 }
 
-class AddNewItemsInShop extends ShopEvent {}
+class AddNewItemsInShop extends ShopEvent {
+  String itemName;
+  String itemPrice;
+  final context;
+
+  AddNewItemsInShop(
+      {required this.itemName, required this.itemPrice, required this.context});
+}
 
 class ChangeToCheckmark extends ShopEvent {
   int index;
@@ -35,4 +42,11 @@ class ChangeAllIcon extends ShopEvent {
   List shopItem;
 
   ChangeAllIcon({required this.shopItem});
+}
+
+class RemoveFromShop extends ShopEvent {
+  int index;
+  List shopItem;
+
+  RemoveFromShop({required this.index, required this.shopItem});
 }

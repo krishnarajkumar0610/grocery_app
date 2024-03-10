@@ -16,6 +16,7 @@ import '../../bloc/shop/shop_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
+import 'add_item.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -149,11 +150,12 @@ class _HomePageState extends State<HomePage> {
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 250.0),
                                 child: Center(
-                                  child: Text("Sorry server is down 😓",
-                                      style: GoogleFonts.notoSerif(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      )),
+                                  child:
+                                      Text("Sorry, there is no items available",
+                                          style: GoogleFonts.notoSerif(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
                                 ),
                               )
                             : SizedBox(
@@ -175,41 +177,60 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            floatingActionButton: SingleChildScrollView(
-                child: widget.isAdmin
-                    ? FloatingActionButton.extended(
-                        backgroundColor: Colors.green,
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocBuilder<
-                                        InitialShopBloc, InitialShopState>(
-                                    builder: (context, state) => EditPage(
-                                          shopItems: state.shopItems,
-                                        )),
-                              ));
-                        },
-                        label: const Text(
-                          "Edit",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              letterSpacing: 1,
-                              color: Colors.black),
-                        ),
-                      )
-                    : const SizedBox())));
+            floatingActionButton:
+                BlocBuilder<InitialShopBloc, InitialShopState>(
+                    builder: (context, state) => SingleChildScrollView(
+                        child: widget.isAdmin
+                            ? (state.shopItems.isEmpty
+                                ? floatingButton(
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.black,
+                                      size: 25,
+                                    ),
+                                    text: "Add new item",
+                                    navigatorStatus: widget.isAdmin)
+                                : floatingButton(
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.black,
+                                      size: 25,
+                                    ),
+                                    text: "Edit",
+                                    navigatorStatus: !widget.isAdmin))
+                            : const SizedBox()))));
   }
 
-  Future<void> _setLoading() async {
-    context.read<GreetingBloc>().add(GetGreetings());
-    print("SUCCESS");
-    context.read<InitialShopBloc>().add(GetInitialShopItem());
-    print("SUCCESS");
+  Widget floatingButton(
+      {required Icon icon,
+      required String text,
+      required bool navigatorStatus}) {
+    return FloatingActionButton.extended(
+      backgroundColor: Colors.green,
+      icon: icon,
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  BlocBuilder<InitialShopBloc, InitialShopState>(
+                      builder: (context, state) {
+                return navigatorStatus
+                    ? const AddNewItem()
+                    : EditPage(
+                        shopItems: state.shopItems,
+                      );
+              }),
+            ));
+      },
+      label: Text(
+        text,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            letterSpacing: 1,
+            color: Colors.black),
+      ),
+    );
   }
 }

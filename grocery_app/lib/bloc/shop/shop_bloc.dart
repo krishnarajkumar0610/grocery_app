@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'shop_event.dart';
@@ -22,8 +23,8 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       event.shopItems[index][1] = itemName;
       event.shopItems[index][2] = int.parse(itemPrice);
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItems");
-      sendListOfData(keyName: "shopItems", item: event.shopItems);
+      sharedPreference.remove("shopItem");
+      sendListOfData(keyName: "shopItem", item: event.shopItems);
 
       print("Data changed ");
       emit(InitialShopState(shopItems: event.shopItems));
@@ -31,19 +32,19 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
 
     on<ChangeAllIcon>((event, emit) async {
       for (int i = 0; i < state.shopItems.length; i++) {
-        state.shopItems[i][7] = true;
+        state.shopItems[i][4] = true;
       }
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItems");
-      sendListOfData(keyName: "shopItems", item: state.shopItems);
+      sharedPreference.remove("shopItem");
+      sendListOfData(keyName: "shopItem", item: state.shopItems);
       emit(InitialShopState(shopItems: state.shopItems));
     });
 
     on<ChangeToCheckmark>((event, emit) async {
-      event.shopItem[event.index][7] = false;
+      event.shopItem[event.index][4] = false;
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItems");
-      sendListOfData(keyName: "shopItems", item: event.shopItem);
+      sharedPreference.remove("shopItem");
+      sendListOfData(keyName: "shopItem", item: event.shopItem);
       emit(InitialShopState(shopItems: event.shopItem));
     });
 
@@ -52,152 +53,86 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       print(name);
       for (int i = 0; i < event.shopItem.length; i++) {
         if (name == event.shopItem[i][1]) {
-          event.shopItem[i][7] = true;
+          event.shopItem[i][4] = true;
           break;
         }
       }
       print("icon changed");
       final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItems");
-      sendListOfData(keyName: "shopItems", item: event.shopItem);
+      sharedPreference.remove("shopItem");
+      sendListOfData(keyName: "shopItem", item: event.shopItem);
       emit(InitialShopState(shopItems: event.shopItem));
     });
 
-    on<GetInitialShopItem>((event, emit) async {
-      List shopItem = [
-        [
-          1,
-          "Avocado",
-          120,
-          120, // total price
-          "assets/avocado.png",
-          "Avocado, a creamy fruit native to Mexico, is packed with healthy fats, vitamins, and minerals. Its versatility makes it a popular ingredient in salads, sandwiches, and dips like guacamole.",
-          Colors.green.value,
-          true
-        ],
-        [
-          1,
-          "Banana",
-          60,
-          60,
-          "assets/banana.png",
-          "Banana is a tropical fruit with a soft, creamy flesh and a sweet flavor. Rich in potassium and vitamins, it's a popular snack and ingredient in smoothies and desserts.",
-          Colors.yellow.value,
-          true
-        ],
-        [
-          1,
-          "Chicken",
-          350,
-          350,
-          "assets/chicken.png",
-          "Chicken is a versatile poultry meat known for its mild flavor and lean protein content. It can be grilled, roasted, fried, or incorporated into a variety of dishes worldwide.",
-          Colors.redAccent.value,
-          true
-        ],
-        [
-          1,
-          "Water",
-          40,
-          40,
-          "assets/water.png",
-          "Water is a transparent, tasteless, and odorless substance essential for life on Earth. It comprises about 71% of the planet's surface and is vital for hydration, regulating body temperature, and facilitating various biochemical processes.",
-          Colors.blue.value,
-          true
-        ],
-        [
-          1,
-          "Apple",
-          120,
-          120,
-          "assets/apple.png",
-          "Apple Inc. is a multinational technology company known for its innovation in consumer electronics, software, and services, including the iPhone, Mac computers, iPad, and Apple Watch. ",
-          Colors.redAccent.value,
-          true
-        ],
-        [
-          1,
-          "Orange",
-          70,
-          70,
-          "assets/orange.png",
-          "Orange is a citrus fruit known for its vibrant color and tangy flavor, rich in vitamin C and antioxidants, often used in juices, desserts, and savory dishes.",
-          Colors.orangeAccent.value,
-          true
-        ],
-        [
-          1,
-          "Carrot",
-          100,
-          100,
-          "assets/carrot.png",
-          "Carrot: A crunchy, orange root vegetable known for its high beta-carotene content, promoting eye health and vibrant skin. It's versatile in cooking, adding sweetness to dishes and serving as a popular snack.",
-          Colors.deepOrange.value,
-          true
-        ],
-        [
-          1,
-          "Watermelon",
-          220,
-          220,
-          "assets/watermelon.png",
-          "Watermelon is a juicy and refreshing fruit with a vibrant red or pink flesh and black seeds, known for its high water content and sweet flavor, making it a popular summer treat.",
-          Colors.lightGreen.value,
-          true
-        ],
-        [
-          1,
-          "Cabbage",
-          60,
-          60,
-          "assets/cabbage.png",
-          "Cabbage is a leafy green or purple biennial plant grown as an annual vegetable crop for its dense-leaved heads. It's rich in vitamins and fiber, commonly used in various cuisines worldwide for salads, soups, and stir-fries.",
-          Colors.lightGreenAccent.value,
-          true
-        ],
-        [
-          1,
-          "Milk",
-          30,
-          30,
-          "assets/milk.png",
-          "Milk is a nutrient-rich liquid produced by mammals to nourish their young, containing essential vitamins, minerals, and proteins vital for human health. It serves as a versatile ingredient in various culinary dishes and beverages, offering a creamy texture and distinctive flavor.",
-          Colors.grey.value,
-          true
-        ],
-        [
-          1,
-          "Potato",
-          45,
-          45,
-          "assets/potato.png",
-          "Potato, a starchy tuber, is a versatile and widely consumed vegetable prized for its rich carbohydrate content and culinary adaptability, serving as a staple ingredient in countless dishes worldwide.",
-          Colors.brown.value,
-          true
-        ],
-        [
-          1,
-          "Rocemilk",
-          60,
-          60,
-          "assets/rocemilk.png",
-          "Rocemilk is an educational platform providing interactive learning experiences through online courses and tutorials. It offers a diverse range of subjects, catering to learners of all levels and interests.",
-          Colors.pink.value,
-          true
-        ],
-      ];
-      final sharedPreference = await SharedPreferences.getInstance();
+    on<AddNewItemsInShop>((event, emit) async {
+      String itemName = event.itemName.toLowerCase();
+      String itemPrice = event.itemPrice;
+      List shopItem = [];
+      List data = [];
+      if ((itemName.isEmpty ||
+          itemPrice.isEmpty ||
+          itemName.startsWith(" ") ||
+          itemPrice.startsWith(" "))) {
+        showAlert(
+            context: event.context, text: "Name or price should not be empty");
+      } else {
+        // Close a dialog, for example
+        try {
+          int itemQuantity = 1;
+          bool iconStatus = true;
+          await rootBundle.load("assets/$itemName.png");
+          data = [
+            itemQuantity,
+            itemName,
+            itemPrice,
+            "assets/$itemName.png",
+            iconStatus
+          ];
 
-      print(sharedPreference.containsKey("cartItem"));
+          final sharedPreference = await SharedPreferences.getInstance();
+          print(getListOfData(
+              keyName: "shopItem", sharedPreference: sharedPreference));
+          shopItem = getListOfData(
+              keyName: "shopItem", sharedPreference: sharedPreference);
+          for (int i = 0; i < shopItem.length; i++) {
+            if (itemName == shopItem[i][1]) {
+              shopItem.removeAt(i);
+              break;
+            }
+          }
+          shopItem.add(data);
+          sendListOfData(keyName: "shopItem", item: shopItem);
+        } catch (e) {
+          showAlert(
+              context: event.context, text: "Image path does not contain");
+          shopItem = [];
+        }
+      }
+      emit(InitialShopState(shopItems: shopItem));
+    });
+
+    on<RemoveFromShop>((event, emit) async {
+      List shopItem = event.shopItem;
+      int index = event.index;
+      shopItem.removeAt(index);
+      print("SHOPITEM : $shopItem");
+      sendListOfData(keyName: "shopItem", item: shopItem);
+      emit(InitialShopState(shopItems: shopItem));
+    });
+    on<GetInitialShopItem>((event, emit) async {
+      // List shopItem = [[1,"Avocado",120,"assets/avocado.png",true],];
+
+      final sharedPreference = await SharedPreferences.getInstance();
+      // sharedPreference.clear();
       final users = {"krishna": "2003", "priya": "2005"};
       await sendListOfData(keyName: "users", item: users);
-      if (!sharedPreference.containsKey("shopItems")) {
+      if (!sharedPreference.containsKey("shopItem")) {
         print("pogama");
-        await sendListOfData(item: shopItem, keyName: "shopItems");
+        await sendListOfData(item: [], keyName: "shopItem");
       }
-      print("Inga vantea");
+      print("get panudhu");
       final data = getListOfData(
-          keyName: "shopItems", sharedPreference: sharedPreference);
+          keyName: "shopItem", sharedPreference: sharedPreference);
       emit(InitialShopState(shopItems: data));
     });
   }
@@ -213,5 +148,33 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
     final data = sharedPreference.getString(keyName);
     final decodedData = jsonDecode(data!);
     return decodedData;
+  }
+
+  void showAlert({required final context, required final text}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Icon(
+          Icons.error,
+          color: Colors.red,
+          size: 30,
+        ),
+        content: Text(
+          text,
+          style: const TextStyle(
+              fontSize: 15, fontWeight: FontWeight.bold, letterSpacing: 1),
+        ),
+        actions: [
+          MaterialButton(
+            onPressed: () => Navigator.pop(context),
+            color: Colors.red,
+            child: const Text(
+              "Close",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+
+import '../../bloc/shop/shop_event.dart';
+import '../../bloc/shop/shop_state.dart';
 
 class AddNewItem extends StatefulWidget {
   const AddNewItem({super.key});
@@ -39,7 +44,6 @@ class _AddNewItemState extends State<AddNewItem> {
                   controller: controllers[index],
                   decoration: InputDecoration(
                       hintText: text[index],
-                      prefix: const Icon(Icons.shopping_cart),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                 ),
@@ -49,19 +53,22 @@ class _AddNewItemState extends State<AddNewItem> {
           SizedBox(
             width: 200,
             height: 50,
-            child: MaterialButton(
-              color: Colors.deepPurple,
-              onPressed: () {
-                Timer(const Duration(seconds: 2), () {
-                  Navigator.pop(context);
-                });
-              },
-              child: const Text(
-                "Submit",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black),
+            child: BlocBuilder<InitialShopBloc, InitialShopState>(
+              builder: (context, state) => MaterialButton(
+                color: Colors.deepPurple,
+                onPressed: () {
+                  context.read<InitialShopBloc>().add(AddNewItemsInShop(
+                      itemName: controllers[0].text,
+                      itemPrice: controllers[1].text,
+                      context: context));
+                },
+                child: const Text(
+                  "Submit",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white),
+                ),
               ),
             ),
           )

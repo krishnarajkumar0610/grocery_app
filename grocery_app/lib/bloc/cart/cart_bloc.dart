@@ -15,13 +15,16 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
     on<AddToCart>((event, emit) async {
       List<dynamic> datas = event.shopItems[event.index];
+      for(var item in datas){
+        print("$item : ${item.runtimeType}");
+      }
       final sharedPreference = await SharedPreferences.getInstance();
       List cartItem = [];
       datas[0] = event.quantity;
       int totalAmount = 0;
       if (!sharedPreference.containsKey("cartItem")) {
         cartItem.add(datas);
-        totalAmount = cartItem[0][0] * cartItem[0][2];
+        totalAmount = datas[0]* datas[2];
         print("Changed : $cartItem}");
         sendData(item: [datas], keyName: "cartItem");
       } else {

@@ -1,5 +1,5 @@
 class InitialShopState {
   List shopItems;
-
-  InitialShopState({required this.shopItems});
+  bool? checkNameAndPrice;
+  InitialShopState({required this.shopItems,this.checkNameAndPrice});
 }

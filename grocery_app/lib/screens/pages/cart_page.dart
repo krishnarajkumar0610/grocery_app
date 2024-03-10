@@ -32,7 +32,7 @@ class CartPage extends StatelessWidget {
                   BlocBuilder<InitialShopBloc, InitialShopState>(
                 builder: (context, shopBloc) {
                   return state.cartItem!.isEmpty
-                      ? SizedBox()
+                      ? const SizedBox()
                       : TextButton(
                           onPressed: () {
                             showDialog(
@@ -165,7 +165,7 @@ class CartPage extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   left: 5.0),
                                               child: Image.asset(
-                                                state.cartItem![index][4],
+                                                state.cartItem![index][3],
                                                 height: 120,
                                               ),
                                             ),
@@ -220,7 +220,7 @@ class CartPage extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Total amount : ${state.totalAmount!} ",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
