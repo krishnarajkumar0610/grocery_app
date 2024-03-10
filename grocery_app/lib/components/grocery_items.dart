@@ -160,33 +160,33 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       ],
                     ),
                   ),
-                  // Positioned(
-                  //   top: deviceHeight * 0.22,
-                  //   left: 13.5,
-                  //   child: SizedBox(
-                  //     width: deviceWidth * 0.35,
-                  //     height: deviceHeight * 0.05,
-                  //     child: MaterialButton(
-                  //       color: Color(state.shopItems?[widget.index!][6]),
-                  //       onPressed: () {
-                  //         Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //               builder: (context) => OrderPage(
-                  //                 index: widget.index,
-                  //               ),
-                  //             ));
-                  //       },
-                  //       child: Text(
-                  //         "Buy ${state.shopItems?[widget.index!][2]}/-",
-                  //         style: GoogleFonts.notoSerif(
-                  //             color: Colors.black,
-                  //             fontWeight: FontWeight.bold,
-                  //             fontSize: deviceHeight * 0.02),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
+                  Positioned(
+                    top: deviceHeight * 0.22,
+                    left: 13.5,
+                    child: SizedBox(
+                      width: deviceWidth * 0.35,
+                      height: deviceHeight * 0.05,
+                      child: MaterialButton(
+                        color: Color(state.shopItems?[widget.index!][6]),
+                        onPressed: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => OrderPage(
+                          //         index: widget.index,
+                          //       ),
+                          //     ));
+                        },
+                        child: Text(
+                          "Buy ${state.shopItems?[widget.index!][2]}/-",
+                          style: GoogleFonts.notoSerif(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: deviceHeight * 0.02),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             )));
