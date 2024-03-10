@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
 
 import '../bloc/shop/shop_event.dart';
 import '../bloc/shop/shop_state.dart';
-import '../screens/pages/order_page.dart';
 
 class GroceryItemTile extends StatefulWidget {
   int index;
@@ -190,13 +190,53 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                       child: MaterialButton(
                         color: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => OrderPage(
-                          //         index: widget.index,
-                          //       ),
-                          //     ));
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Order item"),
+                              content: Text(
+                                "Ordering $quantity ${state.shopItems[widget.index][1]}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              actions: [
+                                MaterialButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Icon(
+                                          Icons.check_circle,
+                                          color: Colors.green,
+                                          size: 30,
+                                        ),
+                                        content:
+                                            const Text("Order successfull"),
+                                        actions: [
+                                          MaterialButton(
+                                            onPressed: () =>
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          HomePage(
+                                                              isAdmin: true),
+                                                    )),
+                                            color: Colors.green,
+                                            child: const Text(
+                                              "Close",
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  color: Colors.green,
+                                  child: const Text("Order"),
+                                )
+                              ],
+                            ),
+                          );
                         },
                         child: Text(
                           "Buy ${state.shopItems[widget.index][2]}/-",

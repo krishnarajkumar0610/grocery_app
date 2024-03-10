@@ -64,6 +64,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       context: context));
                   controllers[0].clear();
                   controllers[1].clear();
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   "Submit",
