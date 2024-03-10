@@ -1,5 +1,6 @@
 class CartState {
   List? cartItem;
+  int? totalAmount;
 
-  CartState({this.cartItem});
+  CartState({this.cartItem, this.totalAmount});
 }
