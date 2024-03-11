@@ -7,7 +7,9 @@ import 'shop_event.dart';
 import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
+
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
+
     on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
@@ -73,8 +75,11 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       if ((itemName.isEmpty ||
           itemPrice.isEmpty ||
           itemName.startsWith(" ") ||
-          itemPrice.startsWith(" "))) {
+          itemPrice.startsWith(" ") ||
+          int.parse(itemPrice) < 1)) {
         sendListOfData(keyName: "shopItem", item: state.shopItems);
+        shopItem = getListOfData(
+            keyName: "shopItem", sharedPreference: sharedPreference);
         showAlert(
             context: event.context, text: "Name or price should not be empty");
       } else {
@@ -90,7 +95,6 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
             "assets/$itemName.png",
             iconStatus
           ];
-
           shopItem = getListOfData(
               keyName: "shopItem", sharedPreference: sharedPreference);
           for (int i = 0; i < shopItem.length; i++) {
