@@ -191,6 +191,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       print(sharedPreference.containsKey("cartItem"));
       final users = {"krishna": "2003", "priya": "2005"};
       await sendListOfData(keyName: "users", item: users);
+
       if (!sharedPreference.containsKey("shopItems")) {
         print("pogama");
         await sendListOfData(item: shopItem, keyName: "shopItems");
