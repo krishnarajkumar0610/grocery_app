@@ -23,15 +23,12 @@ class NewUser extends StatelessWidget {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(orientation == Orientation.portrait
-                ? deviceHeight * 0.35
-                : deviceHeight * 0.4),
+            preferredSize: Size.fromHeight(deviceHeight * 0.35),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -54,12 +51,8 @@ class NewUser extends StatelessWidget {
               ),
               child: Stack(children: [
                 Positioned(
-                  left: orientation == Orientation.portrait
-                      ? deviceWidth * 0.35
-                      : deviceWidth * 0.1,
-                  top: orientation == Orientation.portrait
-                      ? deviceHeight * 0.07
-                      : deviceHeight * 0.1,
+                  left: deviceWidth * 0.35,
+                  top: deviceHeight * 0.07,
                   child: CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.white,
@@ -76,9 +69,7 @@ class NewUser extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: orientation == Orientation.portrait
-                            ? deviceHeight * 0.120
-                            : deviceHeight * 0.100,
+                        height: deviceHeight * 0.120,
                       ),
                       getAppText(
                         "Grocery App",
@@ -96,15 +87,9 @@ class NewUser extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: orientation == Orientation.portrait
-                        ? deviceHeight * 0.350
-                        : deviceHeight * 0.400,
-                    left: orientation == Orientation.portrait
-                        ? deviceWidth * 0.1
-                        : deviceWidth * 0.1,
-                    right: orientation == Orientation.portrait
-                        ? deviceWidth * 0.1
-                        : deviceWidth * 0.1,
+                    top: deviceHeight * 0.350,
+                    left: deviceWidth * 0.1,
+                    right: deviceWidth * 0.1,
                   ),
                   child: const TabBar(
                     labelColor: Colors.black,

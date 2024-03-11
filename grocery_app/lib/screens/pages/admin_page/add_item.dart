@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
-import 'package:grocery_app/screens/pages/home_page.dart';
-
 import '../../../bloc/shop/shop_event.dart';
 import '../../../bloc/shop/shop_state.dart';
 
@@ -29,6 +25,8 @@ class _AddNewItemState extends State<AddNewItem> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       body: Center(
           child: Column(
@@ -36,7 +34,7 @@ class _AddNewItemState extends State<AddNewItem> {
         children: [
           SizedBox(
             width: double.infinity,
-            height: 400,
+            height: deviceHeight * 0.5,
             child: ListView.builder(
               itemCount: controllers.length,
               itemBuilder: (context, index) => Padding(
@@ -52,8 +50,8 @@ class _AddNewItemState extends State<AddNewItem> {
             ),
           ),
           SizedBox(
-            width: 200,
-            height: 50,
+            width: deviceWidth * 0.5,
+            height: deviceHeight * 0.06,
             child: BlocBuilder<InitialShopBloc, InitialShopState>(
               builder: (context, state) => MaterialButton(
                 color: Colors.deepPurple,

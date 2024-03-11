@@ -29,7 +29,6 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Padding(
         padding: const EdgeInsets.all(12.0),
@@ -104,33 +103,21 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                           ),
                         ),
                   Positioned(
-                    left: orientation == Orientation.portrait
-                        ? deviceWidth * 0.02
-                        : deviceWidth * 0.02,
-                    top: orientation == Orientation.portrait
-                        ? deviceWidth * 0.02
-                        : deviceWidth * 0.02,
+                    left: deviceWidth * 0.02,
+                    top: deviceWidth * 0.02,
                     child: Image.asset(
                       state.shopItems[widget.index][3],
-                      height: orientation == Orientation.portrait
-                          ? deviceHeight * 0.10
-                          : deviceHeight * 0.18,
+                      height: deviceHeight * 0.10,
                     ),
                   ),
                   Positioned(
-                      left: orientation == Orientation.portrait
-                          ? deviceWidth * 0.03
-                          : deviceWidth * 0.02,
-                      top: orientation == Orientation.portrait
-                          ? deviceHeight * 0.12
-                          : deviceHeight * 0.25,
+                      left: deviceWidth * 0.03,
+                      top: deviceHeight * 0.12,
                       child: Text(state.shopItems[widget.index][1],
                           style: GoogleFonts.notoSerif(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: orientation == Orientation.portrait
-                                ? deviceHeight * 0.02
-                                : deviceHeight * 0.05,
+                            fontSize: deviceHeight * 0.02,
                           ))),
                   Positioned(
                     top: deviceHeight * 0.16,

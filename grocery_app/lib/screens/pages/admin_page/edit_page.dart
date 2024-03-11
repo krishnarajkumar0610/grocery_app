@@ -32,19 +32,10 @@ class _EditPageState extends State<EditPage> {
   }
 
   @override
-  void dispose() {
-    // Dispose the controllers when the widget is disposed to avoid memory leaks
-    for (var controller in itemNames) {
-      controller.dispose();
-    }
-    for (var controller in itemPrices) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -53,14 +44,13 @@ class _EditPageState extends State<EditPage> {
         body: BlocBuilder<InitialShopBloc, InitialShopState>(
           builder: (context, state) => SizedBox(
             width: double.infinity,
-            height: 600,
+            height: deviceHeight * 0.9,
             child: ListView.builder(
               itemCount: state.shopItems.length,
               itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(50.0),
+                padding: const EdgeInsets.all(40.0),
                 child: Container(
-                  width: 200,
-                  height: 280,
+                  height: deviceHeight * 0.35,
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(10),
@@ -127,8 +117,8 @@ class _EditPageState extends State<EditPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 50.0, top: 10),
                         child: SizedBox(
-                          width: 150,
-                          height: 50,
+                          width: deviceWidth * 0.45,
+                          height: deviceHeight * 0.05,
                           child: MaterialButton(
                             color: Colors.blue,
                             onPressed: () {

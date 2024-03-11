@@ -28,6 +28,9 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -83,8 +86,8 @@ class _CartPageState extends State<CartPage> {
                             );
                           },
                           child: Container(
-                            width: 100,
-                            height: 30,
+                            width: deviceWidth * 0.3,
+                            height: deviceHeight * 0.03,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.greenAccent),
@@ -130,15 +133,15 @@ class _CartPageState extends State<CartPage> {
                           children: [
                             SizedBox(
                               width: double.infinity,
-                              height: 600,
+                              height: deviceHeight * 0.6,
                               child: ListView.builder(
                                 itemCount: state.cartItem!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Container(
-                                      width: 200,
-                                      height: 200,
+                                      width: deviceWidth * 0.2,
+                                      height: deviceHeight * 0.2,
                                       decoration: BoxDecoration(
                                           color: Colors.grey[200],
                                           borderRadius:
@@ -146,8 +149,8 @@ class _CartPageState extends State<CartPage> {
                                       child: Stack(
                                         children: [
                                           Positioned(
-                                            left: 290,
-                                            top: 10,
+                                            left: deviceWidth * 0.8,
+                                            top: deviceHeight * 0.01,
                                             child: GestureDetector(
                                               onTap: () {
                                                 // Assuming this is how your shopItem is stored
@@ -163,16 +166,16 @@ class _CartPageState extends State<CartPage> {
                                                 context.read<CartBloc>().add(
                                                     RemoveItem(index: index));
                                               },
-                                              child: const Icon(
+                                              child: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
-                                                size: 30,
+                                                size: deviceWidth * 0.1,
                                               ),
                                             ),
                                           ),
                                           Positioned(
-                                            left: 5,
-                                            top: 40,
+                                            left: deviceWidth * 0.03,
+                                            top: deviceHeight * 0.03,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 5.0),
@@ -183,8 +186,8 @@ class _CartPageState extends State<CartPage> {
                                             ),
                                           ),
                                           Positioned(
-                                            left: 160,
-                                            top: 50,
+                                            left: deviceWidth * 0.45,
+                                            top: deviceWidth * 0.12,
                                             child: Text(
                                               "Name : ${state.cartItem![index][1]}",
                                               style: GoogleFonts.notoSerif(
@@ -195,8 +198,8 @@ class _CartPageState extends State<CartPage> {
                                             ),
                                           ),
                                           Positioned(
-                                            left: 160,
-                                            top: 85,
+                                            left: deviceWidth * 0.45,
+                                            top: deviceWidth * 0.2,
                                             child: Text(
                                               "Price : Rs.${state.cartItem![index][2] * state.cartItem![index][0]}/-",
                                               style: GoogleFonts.notoSerif(
@@ -206,8 +209,8 @@ class _CartPageState extends State<CartPage> {
                                             ),
                                           ),
                                           Positioned(
-                                            left: 160,
-                                            top: 120,
+                                            left: deviceWidth * 0.45,
+                                            top: deviceWidth * 0.28,
                                             child: Text(
                                               "Total Quantity : ${state.cartItem![index][0] ?? 0}",
                                               style: GoogleFonts.notoSerif(
@@ -223,9 +226,12 @@ class _CartPageState extends State<CartPage> {
                                 },
                               ),
                             ),
+                            SizedBox(
+                              height: deviceHeight * 0.18,
+                            ),
                             Container(
-                              width: 300,
-                              height: 70,
+                              width: deviceWidth * 0.9,
+                              height: deviceHeight * 0.1,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.green),
