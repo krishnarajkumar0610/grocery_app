@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'package:grocery_app/screens/pages/home_page.dart';
 
-import '../../bloc/signIn_validations/valdation_event.dart';
-import '../../bloc/signIn_validations/validation_bloc.dart';
-import '../../bloc/signIn_validations/validation_state.dart';
-
+import '../../bloc/validations/valdation_event.dart';
+import '../../bloc/validations/validation_bloc.dart';
+import '../../bloc/validations/validation_state.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});

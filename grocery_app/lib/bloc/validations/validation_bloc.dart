@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/bloc/signIn_validations/valdation_event.dart';
-import 'package:grocery_app/bloc/signIn_validations/validation_state.dart';
+
+import 'package:grocery_app/bloc/validations/valdation_event.dart';
+import 'package:grocery_app/bloc/validations/validation_state.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,13 +22,9 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
           !name.startsWith(" ") &&
           !password.startsWith(" ")) {
         for (var user in data.entries) {
-          print("USER KEY : ${user.key}");
-          print("USER VALUE : ${user.value}");
           if (name == user.key && password == user.value) {
             status = true;
             aAdmin = name == "krishna";
-            print("NOW STATUS : $status");
-            print("ADMIN $aAdmin");
             break;
           }
         }
@@ -43,7 +40,6 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
             context: context);
       }
       if (status) {
-        print("Emited");
         emit(InitialValidation());
         emit(ValidationSuccess(isAdmin: aAdmin));
       }
@@ -88,7 +84,6 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
     final sharedPreference = await SharedPreferences.getInstance();
     dynamic data = sharedPreference.getString(keyName);
     data = jsonDecode(data);
-    print("DATA TYPE : ${data.runtimeType}");
     return data;
   }
 }

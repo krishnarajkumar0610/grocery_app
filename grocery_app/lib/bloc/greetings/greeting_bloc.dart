@@ -19,7 +19,6 @@ class GreetingBloc extends Bloc<GreetingEvent, GreetingState> {
       } else {
         message = 'Good Night 🍜';
       }
-      print("GREETING : $message");
       emit(GreetingState(greeting: message));
     });
   }

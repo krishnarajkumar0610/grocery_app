@@ -4,14 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../logins/sign_in.dart';
 import '../logins/sign_up.dart';
 
-class NewUser extends StatefulWidget {
+class NewUser extends StatelessWidget {
   const NewUser({super.key});
 
-  @override
-  State<NewUser> createState() => _NewUserState();
-}
-
-class _NewUserState extends State<NewUser> {
   Widget getAppText(String greetingText, double size) {
     return Text(
       greetingText,
@@ -22,12 +17,6 @@ class _NewUserState extends State<NewUser> {
         letterSpacing: 0.5,
       ),
     );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
   }
 
   @override

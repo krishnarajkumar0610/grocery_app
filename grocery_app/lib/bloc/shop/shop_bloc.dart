@@ -7,9 +7,7 @@ import 'shop_event.dart';
 import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
-
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
-
     on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
@@ -28,7 +26,6 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       sharedPreference.remove("shopItem");
       sendListOfData(keyName: "shopItem", item: event.shopItems);
 
-      print("Data changed ");
       emit(InitialShopState(shopItems: event.shopItems));
     });
 
@@ -52,14 +49,12 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
 
     on<ChangeToShopCart>((event, emit) async {
       String name = event.itemName;
-      print(name);
       for (int i = 0; i < event.shopItem.length; i++) {
         if (name == event.shopItem[i][1]) {
           event.shopItem[i][4] = true;
           break;
         }
       }
-      print("icon changed");
       final sharedPreference = await SharedPreferences.getInstance();
       sharedPreference.remove("shopItem");
       sendListOfData(keyName: "shopItem", item: event.shopItem);
@@ -133,7 +128,7 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
       if (!sharedPreference.containsKey("shopItem")) {
         await sendListOfData(item: [], keyName: "shopItem");
       }
-      print("get panudhu");
+
       final data = getListOfData(
           keyName: "shopItem", sharedPreference: sharedPreference);
       emit(InitialShopState(shopItems: data));
