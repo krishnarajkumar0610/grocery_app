@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, state) => state.shopItems.isNotEmpty
                       ? (widget.isAdmin
                           ? IconButton(
-                    tooltip: "Edit item",
+                              tooltip: "Edit item",
                               onPressed: () {
                                 Navigator.push(
                                     context,

@@ -205,13 +205,12 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: const Icon(
+
+                                        content: const Icon(
                                           Icons.check_circle,
                                           color: Colors.green,
-                                          size: 30,
+                                          size: 100,
                                         ),
-                                        content:
-                                            const Text("Order successfull"),
                                         actions: [
                                           MaterialButton(
                                             onPressed: () =>
@@ -220,7 +219,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           HomePage(
-                                                              isAdmin: true),
+                                                              isAdmin: false),
                                                     )),
                                             color: Colors.green,
                                             child: const Text(
