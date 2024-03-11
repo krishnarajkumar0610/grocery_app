@@ -125,9 +125,6 @@ class _SignInState extends State<SignIn> {
                         context: context));
                     _username.clear();
                     _signInPass.clear();
-
-                    print(
-                        "Successfully Created account for this app, You can log in");
                   }, //w:250,h:50,
                   child: otherSignUp(
                       width: orientation == Orientation.portrait

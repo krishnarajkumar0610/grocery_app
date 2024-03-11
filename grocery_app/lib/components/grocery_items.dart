@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -195,40 +197,20 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                             builder: (context) => AlertDialog(
                               title: const Text("Order item"),
                               content: Text(
-                                "Ordering $quantity ${state.shopItems[widget.index][1]}",
+                                "Ordering $quantity ${state.shopItems[widget.index][1]}\nRs.${quantity * state.shopItems[widget.index][2]}",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               actions: [
                                 MaterialButton(
                                   onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-
-                                        content: const Icon(
-                                          Icons.check_circle,
-                                          color: Colors.green,
-                                          size: 100,
-                                        ),
-                                        actions: [
-                                          MaterialButton(
-                                            onPressed: () =>
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          HomePage(
-                                                              isAdmin: false),
-                                                    )),
-                                            color: Colors.green,
-                                            child: const Text(
-                                              "Close",
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(
+                                          'Your order has placed successfully'),
+                                      duration: Duration(seconds: 3),
+                                    ));
                                   },
                                   color: Colors.green,
                                   child: const Text("Order"),
