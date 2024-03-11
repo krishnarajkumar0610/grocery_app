@@ -11,8 +11,20 @@ import 'package:grocery_app/bloc/shop/shop_event.dart';
 
 import '../../bloc/shop/shop_state.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<CartBloc>().add(GetInitialCartData());
+  }
 
   @override
   Widget build(BuildContext context) {

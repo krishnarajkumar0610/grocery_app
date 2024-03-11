@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/bloc/validations/valdation_event.dart';
-import 'package:grocery_app/bloc/validations/validation_state.dart';
+import 'package:grocery_app/bloc/signIn_validations/valdation_event.dart';
+import 'package:grocery_app/bloc/signIn_validations/validation_state.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
