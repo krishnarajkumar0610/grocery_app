@@ -138,7 +138,6 @@ class InitialShopBloc extends Bloc<ShopEvent, InitialShopState> {
   Future<void> sendListOfData({required keyName, required item}) async {
     final sharedPreference = await SharedPreferences.getInstance();
     final encodedData = jsonEncode(item);
-
     await sharedPreference.setString(keyName, encodedData);
   }
 
