@@ -18,19 +18,26 @@ class _IntroPageState extends State<IntroPage> {
     super.initState();
     Timer(
       const Duration(seconds: 5),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const NewUser(),
-        ),
-      ),
+          () =>
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewUser(),
+            ),
+          ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double deviceHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
       body: ListView(
         children: [

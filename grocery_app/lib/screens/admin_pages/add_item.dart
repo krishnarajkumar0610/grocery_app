@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/grocery_bloc.dart';
+import 'package:grocery_app/screens/home_page.dart';
 
 import '../../bloc/grocery_event.dart';
 import '../../bloc/grocery_state.dart';
@@ -64,9 +65,10 @@ class _AddNewItemState extends State<AddNewItem> {
                         itemName: controllers[0].text,
                         itemPrice: controllers[1].text,
                       ));
-                  controllers[0].clear();
-                  controllers[1].clear();
-                  Navigator.pop(context);
+
+                  Navigator.pop(
+                    context,
+                  );
                 },
                 child: const Text(
                   "Submit",

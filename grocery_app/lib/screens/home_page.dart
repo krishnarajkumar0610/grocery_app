@@ -5,7 +5,7 @@ import 'package:grocery_app/bloc/grocery_bloc.dart';
 import 'package:grocery_app/bloc/grocery_event.dart';
 import 'package:grocery_app/bloc/grocery_state.dart';
 import 'package:grocery_app/screens/admin_pages/add_item.dart';
-
+import 'package:grocery_app/screens/drawer/drawer_page.dart';
 import '../components/grocery_items.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,17 +27,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("Ada poda punda");
+
     context.read<GroceryBloc>().add(GreetingEvent());
     context.read<GroceryBloc>().add(GetInitialShopItem());
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   context.read<GroceryBloc>().add(GreetingEvent());
-  //   context.read<GroceryBloc>().add(GetInitialShopItem());
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -137,93 +130,89 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          // drawer: const Drawer(
-          //     backgroundColor: Colors.white,
-          //     child: MyDrawer() // <= click this for Drawer
-          //     ),
+          drawer: const Drawer(
+              backgroundColor: Colors.white,
+              child: MyDrawer() // <= click this for Drawer
+              ),
           body: BlocConsumer<GroceryBloc, GroceryState>(
               listener: (context, state) {
-            // if (state is GreetingState) {
-            //   setState(() {
-            //     greeting = state.greeting;
-            //   });
-            // } else if (state is InitialShopState) {
-            //   setState(() {
-            //     shopItem = state.shopItems;
-            //     print(shopItem);
-            //   });
-            // }
-          }, builder: (context, state) {
             if (state is InitialShopState) {
-              shopItem = state.shopItems;
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-                      child: Text(
-                        greeting,
-                        style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(19),
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Let's order fresh items for you 😍",
-                            style: GoogleFonts.notoSerif(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                    shopItem.isEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 250.0),
-                            child: Center(
-                              child: Text("Sorry, there is no items available",
-                                  style: GoogleFonts.notoSerif(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  )),
-                            ),
-                          )
-                        : SizedBox(
-                            width: double.infinity,
-                            height: 500,
-                            child: GridView.builder(
-                              itemCount: shopItem.length,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 1 / 1.4),
-                              itemBuilder: (context, index) {
-                                return GroceryItemTile(
-                                  shopItem: shopItem,
-                                  isAdmin: widget.isAdmin,
-                                  index: index,
-                                );
-                              },
-                            ),
-                          ),
-                  ],
-                ),
-              );
+              setState(() {
+                print("HA AH");
+                shopItem = state.shopItems;
+              });
+            } else if (state is GreetingState) {
+              setState(() {
+                greeting = state.greeting;
+              });
             }
-            return SizedBox();
+          }, builder: (context, state) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: deviceHeight * 0.01, left: deviceWidth * 0.05),
+                    child: Text(
+                      greeting,
+                      style: GoogleFonts.notoSerif(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(19),
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Let's order fresh items for you 😍",
+                          style: GoogleFonts.notoSerif(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  shopItem.isEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 250.0),
+                          child: Center(
+                            child: Text("Sorry, there is no items available",
+                                style: GoogleFonts.notoSerif(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
+                          ),
+                        )
+                      : SizedBox(
+                          width: double.infinity,
+                          height: 500,
+                          child: GridView.builder(
+                            itemCount: shopItem.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1 / 1.4),
+                            itemBuilder: (context, index) {
+                              return GroceryItemTile(
+                                shopItem: shopItem,
+                                isAdmin: widget.isAdmin,
+                                index: index,
+                              );
+                            },
+                          ),
+                        ),
+                ],
+              ),
+            );
           }),
           floatingActionButton: SingleChildScrollView(
               child: widget.isAdmin
