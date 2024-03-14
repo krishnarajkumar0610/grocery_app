@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/grocery_bloc.dart';
+import 'package:grocery_app/bloc/grocery_state.dart';
 
-import 'package:grocery_app/screens/pages/home_page.dart';
-
-import '../../bloc/validations/valdation_event.dart';
-import '../../bloc/validations/validation_bloc.dart';
-import '../../bloc/validations/validation_state.dart';
+import '../../bloc/grocery_event.dart';
+import '../home_page.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -114,15 +112,15 @@ class _SignInState extends State<SignIn> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 30),
-            child: BlocConsumer<ValidationBloc, ValidationState>(
+            child: BlocConsumer<GroceryBloc, GroceryState>(
               builder: (context, state) => GestureDetector(
                   onTap: () {
                     // when i sign up then it need to display a box to tell go to sign in page
 
-                    context.read<ValidationBloc>().add(SignInEvent(
-                        name: _username.text,
-                        password: _signInPass.text,
-                        context: context));
+                    context.read<GroceryBloc>().add(SignInEvent(
+                          name: _username.text,
+                          password: _signInPass.text,
+                        ));
                     _username.clear();
                     _signInPass.clear();
                   }, //w:250,h:50,
@@ -135,15 +133,27 @@ class _SignInState extends State<SignIn> {
                           : deviceHeight * 0.10,
                       text: "SIGN IN",
                       color: Colors.lightGreen)),
-              listener: (BuildContext context, ValidationState state) {
+              listener: (context, state) {
                 if (state is ValidationSuccess) {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HomePage(
                           isAdmin: state.isAdmin,
                         ),
                       ));
+                } else if (state is ValidationFailure) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      actions: [
+                        ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Close"))
+                      ],
+                      content: const Text("All fields must be filled"),
+                    ),
+                  );
                 }
               },
             ),
