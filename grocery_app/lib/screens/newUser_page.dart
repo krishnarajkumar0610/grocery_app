@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../logins/sign_in.dart';
-import '../logins/sign_up.dart';
+import 'logins/sign_in.dart';
+import 'logins/sign_up.dart';
 
 class NewUser extends StatelessWidget {
   const NewUser({super.key});
