@@ -1,32 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/bloc/grocery_bloc.dart';
-import 'package:grocery_app/bloc/grocery_state.dart';
-import 'package:grocery_app/screens/intro_page.dart';
+import 'package:grocery_app/bloc/themes/theme_bloc.dart';
+import 'package:grocery_app/bloc/themes/theme_state.dart';
+import 'package:grocery_app/screens/intro/intro_screen.dart';
 
-void main() async {
+void main() {
+  deviceOrientation();
+  runApp(const MyApp());
+}
+
+Future<void> deviceOrientation() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
-  runApp(
-      BlocProvider(create: (context) => GroceryBloc(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GroceryBloc, GroceryState>(
-      listener: (context, state) {},
-      builder: (context, state) => MaterialApp(
+    return BlocProvider(
+      create: (_) => ThemeBloc(),
+      child: BlocConsumer<ThemeBloc, ThemeState>(
+        listener: (context, state) {},
+        builder: (context, state) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme:
-              state is LightThemeState ? ThemeData.dark() : ThemeData.light(),
-          home: const IntroPage()),
+          theme: state is DarkThemeState ? ThemeData.dark() : ThemeData.light(),
+          home: const SplashScreen(),
+        ),
+      ),
     );
   }
 }
