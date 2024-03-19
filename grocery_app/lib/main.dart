@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery_app/bloc/sign_in/signIn_event.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_state.dart';
 import 'package:grocery_app/screens/intro/intro_screen.dart';
+
+import 'bloc/sign_in/signIn_bloc.dart';
 
 void main() {
   deviceOrientation();
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ThemeBloc(),
+      create: (context) => ThemeBloc(),
       child: BlocConsumer<ThemeBloc, ThemeState>(
         listener: (context, state) {},
         builder: (context, state) => MaterialApp(

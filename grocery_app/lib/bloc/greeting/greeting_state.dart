@@ -2,18 +2,16 @@ import 'package:equatable/equatable.dart';
 
 abstract class GreetingState extends Equatable {}
 
-class InitialGreeting extends GreetingState {
+class GetGreetingState extends GreetingState {
+  String message;
+
+  GetGreetingState({required this.message});
+
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
-class GetGreetingState extends GreetingState {
-  String getGreeting;
-
-  GetGreetingState({required this.getGreeting}) {
-    print("INGA VANTEA : $getGreeting");
-  }
-
+class InitialGreeting extends GreetingState {
   @override
   List<Object?> get props => [];
 }

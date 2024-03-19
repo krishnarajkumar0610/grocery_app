@@ -32,7 +32,6 @@ class _IntroPageState extends State<SplashScreen> {
     // Splash screen
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
-    Orientation orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       body: ListView(children: [
         Column(

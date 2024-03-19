@@ -6,9 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../methods.dart';
 
 class ShopBloc extends Bloc<ShopEvents, ShopState> {
-  ShopBloc() : super(DummyShopState()) {
+  ShopBloc() : super(InitialShop()) {
     on<GetInitialShopItemsEvent>(getInitialShopItems);
-    // on<AddNewItemsInShopEvent>(addNewItem);
   }
 
   Future<void> getInitialShopItems(

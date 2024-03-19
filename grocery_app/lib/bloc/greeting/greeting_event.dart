@@ -1,3 +1,3 @@
-abstract class GreetingEvents {}
+abstract class GreetingEvent {}
 
-class GetGreetingEvent extends GreetingEvents {}
+class GetGreetingEvent extends GreetingEvent {}

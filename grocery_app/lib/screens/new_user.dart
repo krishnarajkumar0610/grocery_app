@@ -107,10 +107,10 @@ class NewUser extends StatelessWidget {
                 ),
               ]),
             )),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             SignUp(),
-            SignIn(),
+            const SignIn(),
           ],
         ),
       ),
