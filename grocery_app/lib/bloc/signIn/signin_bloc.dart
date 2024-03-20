@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_app/bloc/sign_in/signIn_event.dart';
-import 'package:grocery_app/bloc/sign_in/signIn_state.dart';
+import 'package:grocery_app/bloc/signIn/signin_event.dart';
+import 'package:grocery_app/bloc/signIn/signin_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(InitialSignInState()) {
-    on<SignInValidationEvent>(validateSignInForm);
+    on<ValidateSignInFormEvent>(validateSignInForm);
   }
 
   Future<void> validateSignInForm(
-      SignInValidationEvent event, Emitter<SignInState> emit) async {
+      ValidateSignInFormEvent event, Emitter<SignInState> emit) async {
     final shared = await SharedPreferences.getInstance();
     Map<String, dynamic> users = {"krishna": "2003", "priya": "2005"};
     shared.setString("users", jsonEncode(users));

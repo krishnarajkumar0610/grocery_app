@@ -12,12 +12,12 @@ class SignUp extends StatelessWidget {
 
   Widget getField(
       {double? left = 0,
-      double? right = 0,
-      double? top = 0,
-      double? bottom = 0,
-      TextEditingController? controller,
-      String? hintText,
-      Icon? icon}) {
+        double? right = 0,
+        double? top = 0,
+        double? bottom = 0,
+        TextEditingController? controller,
+        String? hintText,
+        Icon? icon}) {
     return Padding(
         padding: EdgeInsets.only(
             left: left!, right: right!, top: top!, bottom: bottom!),
@@ -27,16 +27,16 @@ class SignUp extends StatelessWidget {
               hintText: hintText,
               prefixIcon: icon,
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ));
   }
 
   Widget otherSignUp(
-          {double? width = 0,
-          double? height = 0,
-          String? text,
-          Color? color,
-          Color? textColor}) =>
+      {double? width = 0,
+        double? height = 0,
+        String? text,
+        Color? color,
+        Color? textColor}) =>
       Container(
           width: width!,
           height: height!,

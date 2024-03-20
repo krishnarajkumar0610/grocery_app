@@ -2,23 +2,25 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../new_user.dart';
+import 'new_user.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+
+class IntroPage extends StatefulWidget {
+  const IntroPage({super.key});
 
   @override
-  State<SplashScreen> createState() => _IntroPageState();
+  State<IntroPage> createState() => _IntroPageState();
 }
 
-class _IntroPageState extends State<SplashScreen> {
+class _IntroPageState extends State<IntroPage> {
   // calling 2nd page
   @override
   void initState() {
     super.initState();
+
     Timer(
       const Duration(seconds: 5),
-      () => Navigator.pushReplacement(
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewUser(), // <= click this for new user
@@ -32,6 +34,7 @@ class _IntroPageState extends State<SplashScreen> {
     // Splash screen
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
+    Orientation orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       body: ListView(children: [
         Column(
@@ -40,7 +43,7 @@ class _IntroPageState extends State<SplashScreen> {
               padding: EdgeInsets.only(
                 left: deviceWidth * 0.1,
                 right: deviceWidth * 0.1,
-                top: deviceHeight * 0.2,
+                top: deviceWidth * 0.5,
               ),
               child: Image.asset(
                 "assets/logo.png",

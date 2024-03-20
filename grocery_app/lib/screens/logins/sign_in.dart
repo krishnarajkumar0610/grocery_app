@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grocery_app/bloc/sign_in/signIn_bloc.dart';
-import 'package:grocery_app/bloc/sign_in/signIn_event.dart';
-import 'package:grocery_app/screens/home.dart';
+import 'package:grocery_app/bloc/signIn/signin_event.dart';
 
-import '../../bloc/sign_in/signIn_state.dart';
+import '../../bloc/signIn/signin_bloc.dart';
+import '../../bloc/signIn/signin_state.dart';
+import '../home.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -82,7 +82,7 @@ class _SignInState extends State<SignIn> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(isAdmin: true),
+                  builder: (context) => const HomePage(),
                 ));
           } else if (state is SignInValidationFailureState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -134,7 +134,7 @@ class _SignInState extends State<SignIn> {
                 child: GestureDetector(
                     onTap: () {
                       // when i sign up then it need to display a box to tell go to sign in page
-                      context.read<SignInBloc>().add(SignInValidationEvent(
+                      context.read<SignInBloc>().add(ValidateSignInFormEvent(
                           name: _username.text, password: _signInPass.text));
                       _username.clear();
                       _signInPass.clear();
