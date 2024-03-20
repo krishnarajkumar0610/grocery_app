@@ -8,6 +8,10 @@ class InitialSignInState extends SignInState {
 }
 
 class SignInValidationSuccessState extends SignInState {
+  bool isAdmin;
+
+  SignInValidationSuccessState({required this.isAdmin});
+
   @override
   List<Object?> get props => [];
 }

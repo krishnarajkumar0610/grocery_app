@@ -28,7 +28,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         if (name == user.key && password == user.value) {
           status = true;
           isAdmin = name == "krishna";
-          emit(SignInValidationSuccessState());
+          emit(SignInValidationSuccessState(isAdmin: isAdmin));
         }
       }
       if (!status) {

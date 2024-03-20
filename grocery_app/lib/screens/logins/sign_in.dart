@@ -82,7 +82,7 @@ class _SignInState extends State<SignIn> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomePage(),
+                  builder: (context) => HomePage(isAdmin: state.isAdmin),
                 ));
           } else if (state is SignInValidationFailureState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
