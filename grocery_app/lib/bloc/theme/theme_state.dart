@@ -14,7 +14,3 @@ class DarkThemeState extends ThemeState {
   List<Object?> get props => [];
 }
 
-class Ini extends ThemeState {
-  @override
-  List<Object?> get props => [];
-}

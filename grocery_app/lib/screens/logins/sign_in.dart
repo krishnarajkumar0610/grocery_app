@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/signIn/signin_event.dart';
 
+import '../../bloc/shop/shop_state.dart';
 import '../../bloc/signIn/signin_bloc.dart';
 import '../../bloc/signIn/signin_state.dart';
-import '../home.dart';
+import '../../home.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});

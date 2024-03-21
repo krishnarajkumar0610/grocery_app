@@ -26,11 +26,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => ThemeBloc(),
       child: BlocConsumer<ThemeBloc, ThemeState>(
-        listener: (context, state) {
-          if (state is DarkThemeState) {
-            print("AMa da");
-          }
-        },
+        listener: (context, state) {},
         builder: (context, state) => MaterialApp(
             debugShowCheckedModeBanner: false,
             theme:
