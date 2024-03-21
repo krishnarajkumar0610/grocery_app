@@ -17,9 +17,7 @@ class HomePage extends StatelessWidget {
   bool isAdmin;
 
   HomePage({Key? key, required this.isAdmin}) : super(key: key);
-
-  final shopObject = ShopBloc();
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

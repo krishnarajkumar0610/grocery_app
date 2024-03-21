@@ -18,6 +18,7 @@ class ShopBloc extends Bloc<ShopEvents, ShopState> {
 
   Future<void> _getShopItems() async {
     final sharedPreferences = await SharedPreferences.getInstance();
+    //sharedPreferences.clear();
     List<dynamic> shopItems = [];
     bool checkKey = await checkKeyContains(
       keyName: "shopItems",
@@ -34,73 +35,5 @@ class ShopBloc extends Bloc<ShopEvents, ShopState> {
   }
 
   Future<void> addItem(
-      AddItemInShopEvent event, Emitter<ShopState> emit) async {
-    print("coming add item");
-    final sharedPreferences = await SharedPreferences.getInstance();
-    List shopItems = [];
-    List data = [
-      1,
-      event.itemName,
-      int.parse(event.itemPrice),
-      "assets/${event.itemName}.png"
-    ];
-    if (await checkKeyContains(
-        keyName: "shopItems", sharedPreferences: sharedPreferences)) {
-      sendListOfData(
-          keyName: "shopItems", data: [data], sharedPreferences: sharedPreferences);
-      emit(GetInitialShopItemState(shopItems: const []));
-    }
-    shopItems = getListOfData(
-        keyName: "shopItems", sharedPreferences: sharedPreferences);
-    print("event.itemName : ${event.itemName}");
-    print("event.itemPrice : ${event.itemPrice}");
-    String itemName = event.itemName;
-    String itemPrice = event.itemPrice;
-    if (itemName.isEmpty ||
-        itemPrice.isEmpty ||
-        int.parse(event.itemPrice) < 1) {
-      shopItems = getListOfData(
-          keyName: "shopItems", sharedPreferences: sharedPreferences);
-      sendListOfData(
-          keyName: "shopItems",
-          data: shopItems,
-          sharedPreferences: sharedPreferences);
-      print("PODA DEI");
-      //emit(ImageNotFound());
-    } else {
-      // Close a dialog, for example
-      print("In else");
-      try {
-        int itemQuantity = 1;
-        bool iconStatus = true;
-        await rootBundle.load("assets/${event.itemName}.png");
-
-        List data = [
-          itemQuantity,
-          event.itemName,
-          int.parse(event.itemPrice),
-          "assets/${event.itemName}.png",
-          iconStatus
-        ];
-        print(data);
-        shopItems = getListOfData(
-            keyName: "shopItems", sharedPreferences: sharedPreferences);
-        for (int i = 0; i < shopItems.length; i++) {
-          if (event.itemName == shopItems[i][1]) {
-            shopItems.removeAt(i);
-            break;
-          }
-        }
-        shopItems.add(data);
-        sendListOfData(
-            keyName: "shopItems",
-            data: data,
-            sharedPreferences: sharedPreferences);
-        emit(GetInitialShopItemState(shopItems: data));
-        print("Success");
-      } catch (e) {
-        emit(ImageNotFound());
-      }
-    }
-  }
+      AddItemInShopEvent event, Emitter<ShopState> emit) async {}
 }
