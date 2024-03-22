@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
-import 'package:grocery_app/bloc/shop/shop_event.dart';
-import 'package:grocery_app/bloc/signIn/signin_event.dart';
 
-import '../../bloc/shop/shop_state.dart';
-import '../../bloc/signIn/signin_bloc.dart';
-import '../../bloc/signIn/signin_state.dart';
-import '../../home.dart';
+import 'package:grocery_app/screens/pages/home_page.dart';
+
+import '../../bloc/signInValidations/signInValdation_event.dart';
+import '../../bloc/signInValidations/signInValidation_bloc.dart';
+import '../../bloc/signInValidations/signInValidation_state.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -77,143 +77,167 @@ class _SignInState extends State<SignIn> {
     double deviceHeight = MediaQuery.sizeOf(context).height;
     Orientation orientation = MediaQuery.of(context).orientation;
 
-    return BlocProvider(
-      create: (context) => SignInBloc(),
-      child: BlocConsumer<SignInBloc, SignInState>(
-        listener: (context, state) {
-          if (state is SignInValidationSuccessState) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(isAdmin: state.isAdmin),
-                ));
-          } else if (state is SignInValidationFailureState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.red,
-                content: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.white, fontSize: 15),
-                )));
-          }
-        },
-        builder: (context, state) => ListView(children: [
-          Column(
-            children: [
-              SizedBox(
-                height: orientation == Orientation.portrait
-                    ? deviceHeight * 0.02
-                    : deviceHeight * 0.05,
-              ),
-              getField(
-                controller: _username,
-                icon: const Icon(Icons.person),
-                hintText: "User name",
-                top: orientation == Orientation.portrait
-                    ? deviceHeight * 0.04
-                    : deviceHeight * 0.04,
-                left: orientation == Orientation.portrait
-                    ? deviceWidth * 0.05
-                    : deviceWidth * 0.04,
-                right: orientation == Orientation.portrait
-                    ? deviceWidth * 0.05
-                    : deviceWidth * 0.04,
-              ),
-              getField(
-                controller: _signInPass,
-                icon: const Icon(Icons.lock),
-                hintText: "Password",
-                top: orientation == Orientation.portrait
-                    ? deviceHeight * 0.04
-                    : deviceHeight * 0.04,
-                left: orientation == Orientation.portrait
-                    ? deviceWidth * 0.05
-                    : deviceWidth * 0.04,
-                right: orientation == Orientation.portrait
-                    ? deviceWidth * 0.05
-                    : deviceWidth * 0.04,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: GestureDetector(
-                    onTap: () {
-                      // when i sign up then it need to display a box to tell go to sign in page
-                      context.read<SignInBloc>().add(ValidateSignInFormEvent(
-                          name: _username.text, password: _signInPass.text));
-                      _username.clear();
-                      _signInPass.clear();
-                    }, //w:250,h:50,
-                    child: otherSignUp(
-                        width: orientation == Orientation.portrait
-                            ? deviceWidth * 0.70
-                            : deviceWidth * 0.50,
-                        height: orientation == Orientation.portrait
-                            ? deviceHeight * 0.05
-                            : deviceHeight * 0.10,
-                        text: "SIGN IN",
-                        color: Colors.lightGreen)),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: orientation == Orientation.portrait
-                        ? deviceWidth * 0.400
-                        : deviceWidth * 0.500,
-                    top: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    print("Pressed forget password");
-                  },
-                  child: Text(
-                    "Forget password?",
-                    style: GoogleFonts.notoSerif(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Text(
-                  "--------------or Sign In with--------------",
-                  style: GoogleFonts.notoSerif(
-                      fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    otherSignUp(
-                        width: orientation == Orientation.portrait
-                            ? deviceWidth * 0.360
-                            : deviceWidth * 0.360,
-                        text: "Google",
-                        color: Colors.white,
-                        height: orientation == Orientation.portrait
-                            ? deviceHeight * 0.050
-                            : deviceHeight * 0.10,
-                        textColor: Colors.black),
-                    otherSignUp(
-                        width: orientation == Orientation.portrait
-                            ? deviceWidth * 0.360
-                            : deviceWidth * 0.360,
-                        text: "Facebook",
-                        color: Colors.deepPurple[700],
-                        height: orientation == Orientation.portrait
-                            ? deviceHeight * 0.050
-                            : deviceHeight * 0.10,
-                        textColor: Colors.white),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              )
-            ],
+    return ListView(children: [
+      Column(
+        children: [
+          SizedBox(
+            height: orientation == Orientation.portrait
+                ? deviceHeight * 0.02
+                : deviceHeight * 0.05,
           ),
-        ]),
+          getField(
+            controller: _username,
+            icon: const Icon(Icons.person),
+            hintText: "User name",
+            top: orientation == Orientation.portrait
+                ? deviceHeight * 0.04
+                : deviceHeight * 0.04,
+            left: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+            right: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+          ),
+          getField(
+            controller: _signInPass,
+            icon: const Icon(Icons.lock),
+            hintText: "Password",
+            top: orientation == Orientation.portrait
+                ? deviceHeight * 0.04
+                : deviceHeight * 0.04,
+            left: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+            right: orientation == Orientation.portrait
+                ? deviceWidth * 0.05
+                : deviceWidth * 0.04,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: BlocConsumer<ValidationBloc, ValidationState>(
+              builder: (context, state) => GestureDetector(
+                  onTap: () {
+                    // when i sign up then it need to display a box to tell go to sign in page
+
+                    context.read<ValidationBloc>().add(SignInEvent(
+                        name: _username.text,
+                        password: _signInPass.text,
+                        context: context));
+                    _username.clear();
+                    _signInPass.clear();
+                  }, //w:250,h:50,
+                  child: otherSignUp(
+                      width: orientation == Orientation.portrait
+                          ? deviceWidth * 0.70
+                          : deviceWidth * 0.50,
+                      height: orientation == Orientation.portrait
+                          ? deviceHeight * 0.05
+                          : deviceHeight * 0.10,
+                      text: "SIGN IN",
+                      color: Colors.lightGreen)),
+              listener: (BuildContext context, ValidationState state) {
+                if (state is SignInValidationSuccess) {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(
+                          isAdmin: state.isAdmin,
+                        ),
+                      ));
+                } else if (state is SignInValidationFailure) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: const Icon(
+                              Icons.error,
+                              color: Colors.red,
+                              size: 30,
+                            ),
+                            content: Text(
+                              state.errorMessage,
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1),
+                            ),
+                            actions: [
+                              MaterialButton(
+                                onPressed: () => Navigator.pop(context),
+                                color: Colors.red,
+                                child: const Text(
+                                  "Close",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ));
+                }
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: orientation == Orientation.portrait
+                    ? deviceWidth * 0.400
+                    : deviceWidth * 0.500,
+                top: 20),
+            child: GestureDetector(
+              onTap: () {
+                print("Pressed forget password");
+              },
+              child: Text(
+                "Forget password?",
+                style: GoogleFonts.notoSerif(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(
+              "--------------or Sign In with--------------",
+              style: GoogleFonts.notoSerif(
+                  fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                otherSignUp(
+                    width: orientation == Orientation.portrait
+                        ? deviceWidth * 0.360
+                        : deviceWidth * 0.360,
+                    text: "Google",
+                    color: Colors.white,
+                    height: orientation == Orientation.portrait
+                        ? deviceHeight * 0.050
+                        : deviceHeight * 0.10,
+                    textColor: Colors.black),
+                otherSignUp(
+                    width: orientation == Orientation.portrait
+                        ? deviceWidth * 0.360
+                        : deviceWidth * 0.360,
+                    text: "Facebook",
+                    color: Colors.deepPurple[700],
+                    height: orientation == Orientation.portrait
+                        ? deviceHeight * 0.050
+                        : deviceHeight * 0.10,
+                    textColor: Colors.white),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          )
+        ],
       ),
-    );
+    ]);
   }
 }

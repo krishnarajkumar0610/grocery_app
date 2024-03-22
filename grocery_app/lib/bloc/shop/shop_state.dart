@@ -2,21 +2,17 @@ import 'package:equatable/equatable.dart';
 
 abstract class ShopState extends Equatable {}
 
-class GetInitialShopItemState extends ShopState {
+class InitialShopState extends ShopState {
   List shopItems;
+  bool? checkNameAndPrice;
 
-  GetInitialShopItemState({required this.shopItems});
+  InitialShopState({required this.shopItems, this.checkNameAndPrice});
 
   @override
   List<Object?> get props => [];
 }
 
-class InitialShopEvent extends ShopState {
+class DummyShop extends ShopState {
   @override
   List<Object?> get props => [];
-}
-
-class ImageNotFound extends ShopState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

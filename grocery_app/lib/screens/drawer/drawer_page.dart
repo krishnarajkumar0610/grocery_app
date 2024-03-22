@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../new_user.dart';
+import '../pages/new_user_page.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});

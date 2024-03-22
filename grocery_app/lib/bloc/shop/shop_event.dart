@@ -1,12 +1,52 @@
-abstract class ShopEvents {}
+class ShopEvent {}
 
-class ShopItemEvent extends ShopEvents {}
+class GetInitialShopItem extends ShopEvent {}
 
-class InitialShopStateLoading extends ShopEvents {}
+class EditShopItems extends ShopEvent {
+  final shopItems;
+  String itemPrice;
+  String itemName;
+  int index;
 
-class AddItemInShopEvent extends ShopEvents {
+  EditShopItems(
+      {required this.shopItems,
+      required this.itemName,
+      required this.itemPrice,
+      required this.index});
+}
+
+class AddNewItemsInShop extends ShopEvent {
   String itemName;
   String itemPrice;
+  final context;
 
-  AddItemInShopEvent({required this.itemName, required this.itemPrice});
+  AddNewItemsInShop(
+      {required this.itemName, required this.itemPrice, required this.context});
+}
+
+class ChangeToCheckmark extends ShopEvent {
+  int index;
+  List shopItem;
+
+  ChangeToCheckmark({required this.index, required this.shopItem});
+}
+
+class ChangeToShopCart extends ShopEvent {
+  String itemName;
+  List shopItem;
+
+  ChangeToShopCart({required this.itemName, required this.shopItem});
+}
+
+class ChangeAllIcon extends ShopEvent {
+  List shopItem;
+
+  ChangeAllIcon({required this.shopItem});
+}
+
+class RemoveFromShop extends ShopEvent {
+  int index;
+  List shopItem;
+
+  RemoveFromShop({required this.index, required this.shopItem});
 }
