@@ -4,9 +4,8 @@ abstract class ShopState extends Equatable {}
 
 class InitialShopState extends ShopState {
   List shopItems;
-  bool? checkNameAndPrice;
 
-  InitialShopState({required this.shopItems, this.checkNameAndPrice});
+  InitialShopState({required this.shopItems});
 
   @override
   List<Object?> get props => [];

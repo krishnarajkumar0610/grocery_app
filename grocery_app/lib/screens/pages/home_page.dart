@@ -28,40 +28,31 @@ class _HomePageState extends State<HomePage> {
   int quantity = 1;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    context.read<InitialShopBloc>().add(GetInitialShopItem());
-  }
-
-  @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return SafeArea(
-        child: BlocConsumer<InitialShopBloc, ShopState>(
-      listener: (context, state) {},
-      builder: (context, state) => BlocConsumer<ThemeBloc, ThemeState>(
-        listener: (context, themeState) {},
-        builder: (context, themeState) => Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.deepPurple,
-              title: Text(
-                "Grocery App",
-                style: GoogleFonts.notoSerif(
-                    fontSize: orientation == Orientation.portrait ? 20 : 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              actions: [
-                IconButton(
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.deepPurple,
+            title: Text(
+              "Grocery App",
+              style: GoogleFonts.notoSerif(
+                  fontSize: orientation == Orientation.portrait ? 20 : 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+            actions: [
+              BlocConsumer<ThemeBloc, ThemeState>(
+                listener: (context, state) => ThemeBloc(),
+                builder: (context, state) => IconButton(
                     onPressed: () {
                       print("CALLING THEME");
                       context.read<ThemeBloc>().add(ChangeTheme());
                     },
-                    icon: themeState is LightThemeState?
+                    icon: state is LightThemeState?
                         ? const Icon(
                             Icons.dark_mode,
                             size: 30,
@@ -72,33 +63,37 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.yellow,
                             size: 25,
                           )),
-                SizedBox(
-                  width: orientation == Orientation.portrait ? 10 : 50,
-                ),
-                widget.isAdmin
-                    ? const SizedBox()
-                    : Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: Colors.white,
-                            child: GestureDetector(
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CartPage(), // <= click this for cart page
-                                    )),
-                                child: const Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.black,
-                                  size: 25,
-                                ))),
-                      ),
-                SizedBox(
-                  width: orientation == Orientation.portrait ? 10 : 50,
-                ),
-                state is InitialShopState && state.shopItems.isNotEmpty
+              ),
+              SizedBox(
+                width: orientation == Orientation.portrait ? 10 : 50,
+              ),
+              widget.isAdmin
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white,
+                          child: GestureDetector(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CartPage(), // <= click this for cart page
+                                  )),
+                              child: const Icon(
+                                Icons.shopping_cart,
+                                color: Colors.black,
+                                size: 25,
+                              ))),
+                    ),
+              SizedBox(
+                width: orientation == Orientation.portrait ? 10 : 50,
+              ),
+              BlocConsumer<InitialShopBloc, ShopState>(
+                listener: (context, state) {},
+                builder: (context, state) => state is InitialShopState &&
+                        state.shopItems.isNotEmpty
                     ? (widget.isAdmin
                         ? IconButton(
                             tooltip: "Edit item",
@@ -117,54 +112,58 @@ class _HomePageState extends State<HomePage> {
                           )
                         : const SizedBox())
                     : const SizedBox(),
-                SizedBox(
-                  width: orientation == Orientation.portrait ? 10 : 50,
+              ),
+              SizedBox(
+                width: orientation == Orientation.portrait ? 10 : 50,
+              ),
+            ],
+          ),
+          drawer: const Drawer(
+              backgroundColor: Colors.white,
+              child: MyDrawer() // <= click this for Drawer
+              ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: deviceHeight * 0.01, left: deviceWidth * 0.05),
+                  child: BlocConsumer<GreetingBloc, GreetingState>(
+                      listener: (context, state) {},
+                      builder: (context, state) => state is MyGreetingState
+                          ? Text(
+                              state.greeting!,
+                              style: GoogleFonts.notoSerif(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.green,
+                              ),
+                            )
+                          : Text(" ")),
                 ),
-              ],
-            ),
-            drawer: const Drawer(
-                backgroundColor: Colors.white,
-                child: MyDrawer() // <= click this for Drawer
-                ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-                    child: BlocConsumer<GreetingBloc, GreetingState>(
-                        listener: (context, state) {},
-                        builder: (context, state) => state is MyGreetingState
-                            ? Text(
-                                state.greeting!,
-                                style: GoogleFonts.notoSerif(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  color: Colors.green,
-                                ),
-                              )
-                            : Text(" ")),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(19),
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "Let's order fresh items for you 😍",
-                          style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.white),
-                        ),
+                Padding(
+                  padding: const EdgeInsets.all(19),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Let's order fresh items for you 😍",
+                        style: GoogleFonts.notoSerif(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.white),
                       ),
                     ),
                   ),
-                  state is InitialShopState && state.shopItems!.isEmpty
+                ),
+                BlocConsumer<InitialShopBloc, ShopState>(
+                  listener: (context, state) {},
+                  builder: (context, state) => state is InitialShopState &&
+                          state.shopItems!.isEmpty
                       ? Padding(
                           padding: const EdgeInsets.only(top: 250.0),
                           child: Center(
@@ -191,26 +190,25 @@ class _HomePageState extends State<HomePage> {
                                   index: index, isAdmin: widget.isAdmin);
                             },
                           ),
-                        )
-                ],
-              ),
+                        ),
+                )
+              ],
             ),
-            floatingActionButton: SingleChildScrollView(
-                child: widget.isAdmin
-                    ? state is InitialShopState && state.shopItems.isEmpty
-                        ? floatingButton(
-                            icon: const Icon(Icons.add,
-                                color: Colors.black, size: 25),
-                            text: "Add item",
-                            navigatorStatus: true)
-                        : floatingButton(
-                            icon: const Icon(Icons.add,
-                                color: Colors.black, size: 25),
-                            text: "Add item",
-                            navigatorStatus: true)
-                    : const SizedBox())),
-      ),
-    ));
+          ),
+          floatingActionButton: BlocConsumer<InitialShopBloc, ShopState>(
+            listener: (context, state) {},
+            builder: (context, state) => SingleChildScrollView(
+                child: widget.isAdmin &&
+                        state is InitialShopState &&
+                        (state.shopItems.isEmpty || state.shopItems.isNotEmpty)
+                    ? floatingButton(
+                        icon: const Icon(Icons.add,
+                            color: Colors.black, size: 25),
+                        text: "Add item",
+                        navigatorStatus: true)
+                    : const SizedBox()),
+          )),
+    );
   }
 
   Widget floatingButton(

@@ -32,9 +32,9 @@ void main() async {
     BlocProvider(
       create: (context) => ValidationBloc(),
     ),
-    // BlocProvider(
-    //   create: (context) => ThemeBloc(),
-    // )
+    BlocProvider(
+      create: (context) => ThemeBloc(),
+    )
   ], child: const MyApp()));
 }
 
@@ -58,16 +58,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc(),
-      child: BlocConsumer<ThemeBloc, ThemeState>(
-        listener: (context, state) {},
-        builder: (context, state) => MaterialApp(
-          title: 'Grocery App',
-          theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
-          debugShowCheckedModeBanner: false,
-          home: const IntroPage(),
-        ),
+    return BlocConsumer<ThemeBloc, ThemeState>(
+      listener: (context, state) {},
+      builder: (context, state) => MaterialApp(
+        title: 'Grocery App',
+        theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        home: const IntroPage(),
       ),
     );
   }
