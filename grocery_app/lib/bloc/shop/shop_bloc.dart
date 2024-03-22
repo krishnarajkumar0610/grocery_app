@@ -151,7 +151,6 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
       emit(InitialShopState(shopItems: shopItem));
     });
     on<GetInitialShopItem>((event, emit) async {
-      // List shopItem = [[1,"Avocado",120,"assets/avocado.png",true],];
       emit(DummyShop());
       final sharedPreference = await SharedPreferences.getInstance();
       // sharedPreference.clear();
