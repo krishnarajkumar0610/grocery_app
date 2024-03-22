@@ -8,7 +8,6 @@ import 'package:grocery_app/bloc/shop/shop_state.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_event.dart';
 import 'package:grocery_app/screens/pages/admin_page/edit_page.dart';
-import '../../bloc/shop/shop_event.dart';
 import '../../bloc/themes/theme_state.dart';
 import '../../components/grocery_items.dart';
 import '../drawer/drawer_page.dart';
