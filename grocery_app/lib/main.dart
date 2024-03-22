@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
+import 'package:grocery_app/bloc/drawer/drawer_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
@@ -34,6 +35,9 @@ void main() async {
     ),
     BlocProvider(
       create: (context) => ThemeBloc(),
+    ),
+    BlocProvider(
+      create: (context) => DrawerBloc(),
     )
   ], child: const MyApp()));
 }

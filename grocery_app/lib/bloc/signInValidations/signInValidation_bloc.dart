@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -9,35 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
   ValidationBloc() : super(InitialValidation()) {
-    on<SignInEvent>((event, emit) async {
-      emit(InitialValidation());
-      Map<String, dynamic> data = await getListOfData(keyName: "users");
-      final name = event.name.toLowerCase();
-      final password = event.password.toLowerCase();
-      final context = event.context;
-      bool status = false;
-      bool aAdmin = false;
-      if (name.isNotEmpty &&
-          password.isNotEmpty &&
-          !name.startsWith(" ") &&
-          !password.startsWith(" ")) {
-        for (var user in data.entries) {
-          if (name == user.key && password == user.value) {
-            status = true;
-            aAdmin = name == "krishna";
-            break;
-          }
-        }
-        if (!status) {
-          emit(SignInValidationFailure(errorMessage: "Name and Password does not match"));
-        }
-      } else {
-        emit(SignInValidationFailure(errorMessage: "Name and Password fields is empty"));
-      }
-      if (status) {
-        emit(SignInValidationSuccess(isAdmin: aAdmin));
-      }
-    });
+    on<SignInEvent>(signIn);
   }
 
   void showAlertBox({String? message, final context, Icon? icon}) {
@@ -79,5 +52,37 @@ class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
     dynamic data = sharedPreference.getString(keyName);
     data = jsonDecode(data);
     return data;
+  }
+
+  Future<void> signIn(SignInEvent event, Emitter<ValidationState> emit) async {
+    emit(InitialValidation());
+    Map<String, dynamic> data = await getListOfData(keyName: "users");
+    final name = event.name.toLowerCase();
+    final password = event.password.toLowerCase();
+    final context = event.context;
+    bool status = false;
+    bool aAdmin = false;
+    if (name.isNotEmpty &&
+        password.isNotEmpty &&
+        !name.startsWith(" ") &&
+        !password.startsWith(" ")) {
+      for (var user in data.entries) {
+        if (name == user.key && password == user.value) {
+          status = true;
+          aAdmin = name == "krishna";
+          break;
+        }
+      }
+      if (!status) {
+        emit(SignInValidationFailure(
+            errorMessage: "Name and Password does not match"));
+      }
+    } else {
+      emit(SignInValidationFailure(
+          errorMessage: "Name and Password fields is empty"));
+    }
+    if (status) {
+      emit(SignInValidationSuccess(isAdmin: aAdmin));
+    }
   }
 }

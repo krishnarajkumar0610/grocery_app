@@ -97,6 +97,7 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
           itemPrice.isEmpty ||
           itemName.startsWith(" ") ||
           itemPrice.startsWith(" ") ||
+          itemPrice.contains(RegExp(r'[a-zA-Z]')) || itemName.contains(RegExp(r'[0-9]')) ||
           int.parse(itemPrice) < 1)) {
         shopItem = getListOfData(
             keyName: "shopItem", sharedPreference: sharedPreference);

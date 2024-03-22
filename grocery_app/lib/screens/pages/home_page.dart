@@ -49,7 +49,9 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, state) => IconButton(
                     onPressed: () {
                       print("CALLING THEME");
-                      context.read<ThemeBloc>().add(ChangeTheme());
+                      context
+                          .read<ThemeBloc>()
+                          .add(ChangeTheme(fromLogout: false));
                     },
                     icon: state is LightThemeState?
                         ? const Icon(
