@@ -4,7 +4,6 @@ import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_state.dart';
 
-
 class AddNewItem extends StatefulWidget {
   const AddNewItem({super.key});
 
@@ -66,7 +65,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         ));
                     controllers[0].clear();
                     controllers[1].clear();
-                    //context.read<ShopBloc>().add(ShopItemEvent());
+                   // context.read<ShopBloc>().add(ShopItemEvent());
                     Navigator.pop(context);
                   },
                   child: const Text(

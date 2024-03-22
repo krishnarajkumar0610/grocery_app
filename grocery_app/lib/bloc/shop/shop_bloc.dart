@@ -8,7 +8,7 @@ import 'package:grocery_app/methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopBloc extends Bloc<ShopEvents, ShopState> {
-  ShopBloc() : super(GetInitialShopItemState(shopItems: [])) {
+  ShopBloc() : super(GetInitialShopItemState(shopItems: const [])) {
     _getShopItems();
     on<ShopItemEvent>((event, emit) {
       _getShopItems();
