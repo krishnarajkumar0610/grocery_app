@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void sendListOfData(
@@ -15,9 +16,37 @@ List<dynamic> getListOfData({required keyName, required sharedPreference}) {
   return decodedData;
 }
 
-bool checkKey({required String key, required SharedPreferences sharedPreference}) {
+bool checkKey(
+    {required String key, required SharedPreferences sharedPreference}) {
   if (!sharedPreference.containsKey(key)) {
     return true;
   }
   return false;
+}
+
+void showMessage({required final context,required String errorMessage}) {
+  showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Icon(
+              Icons.error,
+              color: Colors.red,
+              size: 30,
+            ),
+            content: Text(
+              errorMessage,
+              style: const TextStyle(
+                  fontSize: 15, fontWeight: FontWeight.bold, letterSpacing: 1),
+            ),
+            actions: [
+              MaterialButton(
+                onPressed: () => Navigator.pop(context),
+                color: Colors.red,
+                child: const Text(
+                  "Close",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              )
+            ],
+          ));
 }

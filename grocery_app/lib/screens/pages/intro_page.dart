@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-
-import 'new_user.dart';
-
+import 'package:grocery_app/screens/pages/new_user_page.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -20,7 +19,7 @@ class _IntroPageState extends State<IntroPage> {
 
     Timer(
       const Duration(seconds: 5),
-          () => Navigator.pushReplacement(
+      () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const NewUser(), // <= click this for new user

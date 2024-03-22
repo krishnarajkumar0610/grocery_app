@@ -16,3 +16,8 @@ class DummyShop extends ShopState {
   @override
   List<Object?> get props => [];
 }
+
+class ImageNotFound extends ShopState {
+  @override
+  List<Object?> get props => [];
+}

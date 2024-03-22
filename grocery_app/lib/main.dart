@@ -20,9 +20,9 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (context) => InitialShopBloc(),
-    ),
+    // BlocProvider(
+    //   create: (context) => InitialShopBloc(),
+    // ),
     BlocProvider(
       create: (context) => GreetingBloc(),
     ),
@@ -49,13 +49,15 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     context.read<GreetingBloc>().add(GetGreetings());
     print("Calling greeting");
-    context.read<InitialShopBloc>().add(GetInitialShopItem());
+    final bloc = InitialShopBloc();
+    bloc.add(GetInitialShopItem());
+    // context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ThemeBloc(),
+        create: (_) => ThemeBloc(),
         child: BlocConsumer<ThemeBloc, ThemeState>(
           listener: (context, state) {},
           builder: (context, state) => MaterialApp(

@@ -9,6 +9,8 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
+
+
     on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
@@ -104,8 +106,7 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
             keyName: "shopItem",
             item: shopItem,
             sharedPreference: sharedPreference);
-        showAlert(
-            context: event.context, text: "Name or price should not be empty");
+        emit(ImageNotFound());
       } else {
         // Close a dialog, for example
         try {

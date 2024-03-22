@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/methods.dart';
 
 import 'package:grocery_app/screens/pages/home_page.dart';
 
@@ -146,34 +147,8 @@ class _SignInState extends State<SignIn> {
                         ),
                       ));
                 } else if (state is SignInValidationFailure) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: const Icon(
-                              Icons.error,
-                              color: Colors.red,
-                              size: 30,
-                            ),
-                            content: Text(
-                              state.errorMessage,
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1),
-                            ),
-                            actions: [
-                              MaterialButton(
-                                onPressed: () => Navigator.pop(context),
-                                color: Colors.red,
-                                child: const Text(
-                                  "Close",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ));
+                  showMessage(
+                      context: context, errorMessage: state.errorMessage);
                 }
               },
             ),
