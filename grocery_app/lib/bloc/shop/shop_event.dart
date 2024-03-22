@@ -18,10 +18,8 @@ class EditShopItems extends ShopEvent {
 class AddNewItemsInShop extends ShopEvent {
   String itemName;
   String itemPrice;
-  final context;
 
-  AddNewItemsInShop(
-      {required this.itemName, required this.itemPrice, required this.context});
+  AddNewItemsInShop({required this.itemName, required this.itemPrice});
 }
 
 class ChangeToCheckmark extends ShopEvent {

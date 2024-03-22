@@ -20,9 +20,9 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   runApp(MultiBlocProvider(providers: [
-    // BlocProvider(
-    //   create: (context) => InitialShopBloc(),
-    // ),
+    BlocProvider(
+      create: (context) => InitialShopBloc(),
+    ),
     BlocProvider(
       create: (context) => GreetingBloc(),
     ),
@@ -31,7 +31,10 @@ void main() async {
     ),
     BlocProvider(
       create: (context) => ValidationBloc(),
-    )
+    ),
+    // BlocProvider(
+    //   create: (context) => ThemeBloc(),
+    // )
   ], child: const MyApp()));
 }
 
@@ -49,24 +52,23 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     context.read<GreetingBloc>().add(GetGreetings());
     print("Calling greeting");
-    final bloc = InitialShopBloc();
-    bloc.add(GetInitialShopItem());
-    // context.read<InitialShopBloc>().add(GetInitialShopItem());
+
+    context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => ThemeBloc(),
-        child: BlocConsumer<ThemeBloc, ThemeState>(
-          listener: (context, state) {},
-          builder: (context, state) => MaterialApp(
-            title: 'Grocery App',
-            theme:
-                state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
-            debugShowCheckedModeBanner: false,
-            home: const IntroPage(),
-          ),
-        ));
+      create: (context) => ThemeBloc(),
+      child: BlocConsumer<ThemeBloc, ThemeState>(
+        listener: (context, state) {},
+        builder: (context, state) => MaterialApp(
+          title: 'Grocery App',
+          theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
+          debugShowCheckedModeBanner: false,
+          home: const IntroPage(),
+        ),
+      ),
+    );
   }
 }

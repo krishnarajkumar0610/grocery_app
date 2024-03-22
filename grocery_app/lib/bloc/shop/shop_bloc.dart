@@ -9,8 +9,6 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
-
-
     on<EditShopItems>((event, emit) async {
       String itemPrice = event.itemPrice;
       String itemName = event.itemName;
@@ -102,10 +100,7 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
           int.parse(itemPrice) < 1)) {
         shopItem = getListOfData(
             keyName: "shopItem", sharedPreference: sharedPreference);
-        sendListOfData(
-            keyName: "shopItem",
-            item: shopItem,
-            sharedPreference: sharedPreference);
+
         emit(ImageNotFound());
       } else {
         // Close a dialog, for example
@@ -133,11 +128,11 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
               keyName: "shopItem",
               item: shopItem,
               sharedPreference: sharedPreference);
+          print(shopItem);
         } catch (e) {
-          showAlert(
-              context: event.context, text: "Image path does not contain");
           shopItem = getListOfData(
               keyName: "shopItem", sharedPreference: sharedPreference);
+          emit(ImageNotFound());
         }
       }
       emit(InitialShopState(shopItems: shopItem));
@@ -157,7 +152,7 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
     });
     on<GetInitialShopItem>((event, emit) async {
       // List shopItem = [[1,"Avocado",120,"assets/avocado.png",true],];
-
+      emit(DummyShop());
       final sharedPreference = await SharedPreferences.getInstance();
       // sharedPreference.clear();
       final users = {"krishna": "2003", "priya": "2005"};

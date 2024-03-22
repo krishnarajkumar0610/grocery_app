@@ -114,7 +114,8 @@ class _CartPageState extends State<CartPage> {
         ),
         body: BlocConsumer<CartBloc, CartState>(
           builder: (context, state) {
-            return BlocBuilder<InitialShopBloc, ShopState>(
+            return BlocConsumer<InitialShopBloc, ShopState>(
+              listener: (context, shopState) {},
               builder: (context, shopState) {
                 return state is MyCartState && state.cartItem.isEmpty
                     ? const Center(
@@ -280,7 +281,7 @@ class _CartPageState extends State<CartPage> {
               },
             );
           },
-          listener: (context, state) {
+          listener: (context, cartState) {
             // Handle events or side effects here
           },
         ),

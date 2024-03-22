@@ -44,41 +44,34 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.deepPurple,
-              title: BlocProvider(
-                create: (context) => InitialShopBloc(),
-                child: BlocConsumer<ThemeBloc, ThemeState>(
-                  builder: (context, state) => Text(
-                    "Grocery App",
-                    style: GoogleFonts.notoSerif(
-                        fontSize: orientation == Orientation.portrait ? 20 : 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                  listener: (BuildContext context, ThemeState state) {},
+              title: BlocBuilder<ThemeBloc, ThemeState>(
+                builder: (context, state) => Text(
+                  "Grocery App",
+                  style: GoogleFonts.notoSerif(
+                      fontSize: orientation == Orientation.portrait ? 20 : 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
               ),
               actions: [
-                BlocProvider(
-                  create: (context) => InitialShopBloc(),
-                  child: BlocConsumer<ThemeBloc, ThemeState>(
-                    listener: (context, state) {},
-                    builder: (context, state) => IconButton(
-                        onPressed: () {
-                          print("CALLING THEME");
-                          context.read<ThemeBloc>().add(ChangeTheme());
-                        },
-                        icon: state is LightThemeState
-                            ? const Icon(
-                                Icons.dark_mode,
-                                size: 30,
-                                color: Colors.black,
-                              )
-                            : const Icon(
-                                Icons.sunny,
-                                color: Colors.yellow,
-                                size: 25,
-                              )),
-                  ),
+                BlocConsumer<ThemeBloc, ThemeState>(
+                  listener: (context, state) {},
+                  builder: (context, state) => IconButton(
+                      onPressed: () {
+                        print("CALLING THEME");
+                        context.read<ThemeBloc>().add(ChangeTheme());
+                      },
+                      icon: state is LightThemeState?
+                          ? const Icon(
+                              Icons.dark_mode,
+                              size: 30,
+                              color: Colors.black,
+                            )
+                          : const Icon(
+                              Icons.sunny,
+                              color: Colors.yellow,
+                              size: 25,
+                            )),
                 ),
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
@@ -106,31 +99,28 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
                 ),
-                BlocProvider(
-                  create: (context) => InitialShopBloc(),
-                  child: BlocConsumer<InitialShopBloc, ShopState>(
-                    listener: (context, state) {},
-                    builder: (context, state) =>
-                        state is InitialShopState && state.shopItems.isNotEmpty
-                            ? (widget.isAdmin
-                                ? IconButton(
-                                    tooltip: "Edit item",
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => EditPage(
-                                                shopItems: state.shopItems),
-                                          ));
-                                    },
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                : const SizedBox())
-                            : const SizedBox(),
-                  ),
+                BlocConsumer<InitialShopBloc, ShopState>(
+                  listener: (context, state) {},
+                  builder: (context, state) => state is InitialShopState &&
+                          state.shopItems.isNotEmpty
+                      ? (widget.isAdmin
+                          ? IconButton(
+                              tooltip: "Edit item",
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditPage(shopItems: state.shopItems),
+                                    ));
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),
+                            )
+                          : const SizedBox())
+                      : const SizedBox(),
                 ),
                 SizedBox(
                   width: orientation == Orientation.portrait ? 10 : 50,
@@ -141,94 +131,101 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Colors.white,
                 child: MyDrawer() // <= click this for Drawer
                 ),
-            body: BlocProvider(
-              create: (context) => InitialShopBloc(),
-              child: BlocConsumer<InitialShopBloc, ShopState>(
-                listener: (context, state) {},
-                builder: (context, state) => SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-                        child: BlocConsumer<GreetingBloc, MyGreetingState>(
-                          listener: (context, state) {},
-                          builder: (context, state) => Text(
-                            state.greeting!,
+            body: BlocConsumer<InitialShopBloc, ShopState>(
+              listener: (context, state) {},
+              builder: (context, state) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: deviceHeight * 0.01, left: deviceWidth * 0.05),
+                      child: BlocBuilder<GreetingBloc, GreetingState>(
+                          builder: (context, state) => state is MyGreetingState
+                              ? Text(
+                                  state.greeting!,
+                                  style: GoogleFonts.notoSerif(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                    color: Colors.green,
+                                  ),
+                                )
+                              : Text(" ")),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(19),
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Let's order fresh items for you 😍",
                             style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              color: Colors.green,
-                            ),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.white),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(19),
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: Colors.orange,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              "Let's order fresh items for you 😍",
-                              style: GoogleFonts.notoSerif(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      state is InitialShopState && state.shopItems.isEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 250.0),
-                              child: Center(
-                                child:
-                                    Text("Sorry, there is no items available",
-                                        style: GoogleFonts.notoSerif(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        )),
-                              ),
-                            )
-                          : SizedBox(
-                              width: double.infinity,
-                              height: 500,
-                              child: GridView.builder(
-                                itemCount: state is InitialShopState
-                                    ? state.shopItems.length
-                                    : 0,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 1 / 1.4),
-                                itemBuilder: (context, index) {
-                                  return GroceryItemTile(
-                                      index: index, isAdmin: widget.isAdmin);
-                                },
-                              ),
-                            ),
-                    ],
-                  ),
+                    ),
+                    BlocConsumer<InitialShopBloc, ShopState>(
+                        listener: (context, state) {
+                          if(state is InitialShopState){
+                            print("True");
+                          }
+                        },
+                        builder: (context, state) => state
+                                    is InitialShopState &&
+                                state.shopItems!.isEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 250.0),
+                                child: Center(
+                                  child:
+                                      Text("Sorry, there is no items available",
+                                          style: GoogleFonts.notoSerif(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
+                                ),
+                              )
+                            : SizedBox(
+                                width: double.infinity,
+                                height: 500,
+                                child: GridView.builder(
+                                  itemCount: state is InitialShopState
+                                      ? state.shopItems.length
+                                      : 0,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 1 / 1.4),
+                                  itemBuilder: (context, index) {
+                                    return GroceryItemTile(
+                                        index: index, isAdmin: widget.isAdmin);
+                                  },
+                                ),
+                              )),
+                  ],
                 ),
               ),
             ),
-            floatingActionButton: BlocProvider(
-              create: (context) => InitialShopBloc(),
-              child: BlocConsumer<InitialShopBloc, ShopState>(
-                  listener: (context, state) {},
-                  builder: (context, state) => SingleChildScrollView(
-                      child: widget.isAdmin && state is InitialShopState
-                          ? floatingButton(
-                              icon: const Icon(Icons.add,
-                                  color: Colors.black, size: 25),
-                              text: "Add item",
-                              navigatorStatus: true)
-                          : const SizedBox())),
-            )));
+            floatingActionButton: BlocBuilder<InitialShopBloc, ShopState>(
+                builder: (context, state) => SingleChildScrollView(
+                    child: widget.isAdmin
+                        ? state is InitialShopState && state.shopItems.isEmpty
+                            ? floatingButton(
+                                icon: const Icon(Icons.add,
+                                    color: Colors.black, size: 25),
+                                text: "Add item",
+                                navigatorStatus: true)
+                            : floatingButton(
+                                icon: const Icon(Icons.add,
+                                    color: Colors.black, size: 25),
+                                text: "Add item",
+                                navigatorStatus: true)
+                        : const SizedBox()))));
   }
 
   Widget floatingButton(
@@ -243,17 +240,15 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => InitialShopBloc(),
-                child: BlocConsumer<InitialShopBloc, ShopState>(
-                    builder: (context, state) {
-                  return navigatorStatus
-                      ? const AddNewItem()
-                      : EditPage(
-                          shopItems: shopItem!,
-                        );
-                }, listener: (BuildContext context, ShopState state) {  },),
-              ),
+              builder: (context) => BlocConsumer<InitialShopBloc, ShopState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return navigatorStatus
+                        ? const AddNewItem()
+                        : EditPage(
+                            shopItems: shopItem!,
+                          );
+                  }),
             ));
       },
       label: Text(

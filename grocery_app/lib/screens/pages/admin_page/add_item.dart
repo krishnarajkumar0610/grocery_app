@@ -29,7 +29,8 @@ class _AddNewItemState extends State<AddNewItem> {
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     return BlocProvider(
-      create: (context) => InitialShopBloc(), // Provide the InitialShopBloc here
+      create: (context) => InitialShopBloc(),
+      // Provide the InitialShopBloc here
       child: Scaffold(
         body: Center(
           child: Column(
@@ -60,22 +61,22 @@ class _AddNewItemState extends State<AddNewItem> {
                 child: BlocConsumer<InitialShopBloc, ShopState>(
                   listener: (context, state) {
                     if (state is ImageNotFound) {
-                      showMessage(context: context, errorMessage: "Image not found");
+                      showMessage(
+                          context: context, errorMessage: "Image not found");
                     }
                   },
                   builder: (context, state) => MaterialButton(
                     color: Colors.deepPurple,
                     onPressed: () {
                       context.read<InitialShopBloc>().add(
-                        AddNewItemsInShop(
-                          itemName: controllers[0].text,
-                          itemPrice: controllers[1].text,
-                          context: context,
-                        ),
-                      );
+                            AddNewItemsInShop(
+                              itemName: controllers[0].text,
+                              itemPrice: controllers[1].text,
+                            ),
+                          );
                       controllers[0].clear();
                       controllers[1].clear();
-                      // context.read<InitialShopBloc>().add(GetInitialShopItem());
+                      //context.read<InitialShopBloc>().add(GetInitialShopItem());
                       Navigator.pop(context);
                     },
                     child: const Text(

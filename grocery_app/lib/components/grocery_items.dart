@@ -39,204 +39,201 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                     blurRadius: 5,
                   )
                 ]),
-            child: BlocProvider(
-              create: (context) => InitialShopBloc(),
-              child: BlocConsumer<InitialShopBloc, ShopState>(
-                listener: (context, state) {},
-                builder: (context, state) => Stack(
-                  children: [
-                    widget.isAdmin
-                        ? Positioned(
-                            left: deviceWidth * 0.28,
-                            top: deviceHeight * 0.01,
-                            child: CircleAvatar(
-                              radius: deviceHeight * 0.03,
-                              backgroundColor: Colors.white,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  size: deviceWidth * 0.07,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () {
-                                  print(
-                                      "INSIDE THE ON PRESSED : ${widget.index}");
-                                  context.read<InitialShopBloc>().add(
-                                      RemoveFromShop(
-                                          index: widget.index,
-                                          shopItem: state is InitialShopState
-                                              ? state.shopItems
-                                              : []));
-                                  // context
-                                  //     .read<InitialShopBloc>()
-                                  //     .add(GetInitialShopItem());
-                                },
+            child: BlocConsumer<InitialShopBloc, ShopState>(
+              listener: (context, state) {},
+              builder: (context, state) => Stack(
+                children: [
+                  widget.isAdmin
+                      ? Positioned(
+                          left: deviceWidth * 0.28,
+                          top: deviceHeight * 0.01,
+                          child: CircleAvatar(
+                            radius: deviceHeight * 0.03,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                size: deviceWidth * 0.07,
+                                color: Colors.red,
                               ),
-                            ),
-                          )
-                        : Positioned(
-                            left: deviceWidth * 0.28,
-                            top: deviceHeight * 0.01,
-                            child: CircleAvatar(
-                              radius: deviceHeight * 0.03,
-                              backgroundColor: Colors.white,
-                              child: IconButton(
-                                icon: state is InitialShopState &&
-                                        state.shopItems[widget.index][4]
-                                    ? Icon(
-                                        Icons.add_shopping_cart,
-                                        size: deviceWidth * 0.07,
-                                        color: Colors.black,
-                                      )
-                                    : Icon(
-                                        Icons.check_circle,
-                                        size: deviceWidth * 0.07,
-                                        color: Colors.green,
-                                      ),
-                                onPressed: () {
-                                  print(
-                                      "INSIDE THE ON PRESSED : ${widget.index}");
-                                  context.read<InitialShopBloc>().add(
-                                      ChangeToCheckmark(
-                                          index: widget.index,
-                                          shopItem: state is InitialShopState
-                                              ? state.shopItems
-                                              : []));
-                                  context.read<CartBloc>().add(AddToCart(
-                                      index: widget.index,
-                                      shopItems: state is InitialShopState
-                                          ? state.shopItems
-                                          : [],
-                                      quantity: quantity));
-                                },
-                              ),
+                              onPressed: () {
+                                print(
+                                    "INSIDE THE ON PRESSED : ${widget.index}");
+                                context.read<InitialShopBloc>().add(
+                                    RemoveFromShop(
+                                        index: widget.index,
+                                        shopItem: state is InitialShopState
+                                            ? state.shopItems
+                                            : []));
+                                // context
+                                //     .read<InitialShopBloc>()
+                                //     .add(GetInitialShopItem());
+                              },
                             ),
                           ),
-                    Positioned(
-                      left: deviceWidth * 0.02,
-                      top: deviceWidth * 0.02,
-                      child: Image.asset(
-                        state is InitialShopState
-                            ? state.shopItems[widget.index][3]
-                            : " ",
-                        height: deviceHeight * 0.10,
-                      ),
+                        )
+                      : Positioned(
+                          left: deviceWidth * 0.28,
+                          top: deviceHeight * 0.01,
+                          child: CircleAvatar(
+                            radius: deviceHeight * 0.03,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: state is InitialShopState &&
+                                      state.shopItems[widget.index][4]
+                                  ? Icon(
+                                      Icons.add_shopping_cart,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.black,
+                                    )
+                                  : Icon(
+                                      Icons.check_circle,
+                                      size: deviceWidth * 0.07,
+                                      color: Colors.green,
+                                    ),
+                              onPressed: () {
+                                print(
+                                    "INSIDE THE ON PRESSED : ${widget.index}");
+                                context.read<InitialShopBloc>().add(
+                                    ChangeToCheckmark(
+                                        index: widget.index,
+                                        shopItem: state is InitialShopState
+                                            ? state.shopItems
+                                            : []));
+                                context.read<CartBloc>().add(AddToCart(
+                                    index: widget.index,
+                                    shopItems: state is InitialShopState
+                                        ? state.shopItems
+                                        : [],
+                                    quantity: quantity));
+                              },
+                            ),
+                          ),
+                        ),
+                  Positioned(
+                    left: deviceWidth * 0.02,
+                    top: deviceWidth * 0.02,
+                    child: Image.asset(
+                      state is InitialShopState
+                          ? state.shopItems[widget.index][3]
+                          : " ",
+                      height: deviceHeight * 0.10,
                     ),
-                    Positioned(
-                        left: deviceWidth * 0.03,
-                        top: deviceHeight * 0.12,
-                        child: Text(
-                            state is InitialShopState
-                                ? state.shopItems[widget.index][1]
-                                : " ",
-                            style: GoogleFonts.notoSerif(
-                              color: Colors.black,
+                  ),
+                  Positioned(
+                      left: deviceWidth * 0.03,
+                      top: deviceHeight * 0.12,
+                      child: Text(
+                          state is InitialShopState
+                              ? state.shopItems[widget.index][1]
+                              : " ",
+                          style: GoogleFonts.notoSerif(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: deviceHeight * 0.02,
+                          ))),
+                  Positioned(
+                    top: deviceHeight * 0.16,
+                    left: 15,
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Add your onTap functionality here
+                            print('Icon tapped');
+                            setState(() {
+                              quantity -= 1;
+                              if (quantity < 1) {
+                                quantity = 1;
+                              }
+                            });
+                          },
+                          child: const Icon(
+                            Icons.remove_circle,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          "$quantity",
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: deviceHeight * 0.02,
-                            ))),
-                    Positioned(
-                      top: deviceHeight * 0.16,
-                      left: 15,
-                      child: Row(
-                        children: [
-                          GestureDetector(
+                              fontSize: 20,
+                              color: Colors.black),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        GestureDetector(
                             onTap: () {
                               // Add your onTap functionality here
                               print('Icon tapped');
                               setState(() {
-                                quantity -= 1;
-                                if (quantity < 1) {
-                                  quantity = 1;
-                                }
+                                quantity += 1;
                               });
                             },
                             child: const Icon(
-                              Icons.remove_circle,
-                              color: Colors.red,
+                              Icons.add_circle,
+                              color: Colors.green,
                               size: 30,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "$quantity",
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black),
-                          ),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                // Add your onTap functionality here
-                                print('Icon tapped');
-                                setState(() {
-                                  quantity += 1;
-                                });
-                              },
-                              child: const Icon(
-                                Icons.add_circle,
-                                color: Colors.green,
-                                size: 30,
-                              ))
-                        ],
-                      ),
+                            ))
+                      ],
                     ),
-                    Positioned(
-                      top: deviceHeight * 0.22,
-                      left: 13.5,
-                      child: SizedBox(
-                        width: deviceWidth * 0.35,
-                        height: deviceHeight * 0.05,
-                        child: MaterialButton(
-                            color: Colors.blue,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: const Text("Order item"),
-                                  content: state is InitialShopState
-                                      ? Text(
-                                          "Ordering $quantity ${state.shopItems[widget.index][1]}\nRs.${quantity * state.shopItems[widget.index][2]}",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        )
-                                      : Text(""),
-                                  actions: [
-                                    MaterialButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                          content: Text(
-                                              'Your order has placed successfully'),
-                                          duration: Duration(seconds: 3),
-                                        ));
-                                      },
-                                      color: Colors.green,
-                                      child: const Text("Order"),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                            child: state is InitialShopState
-                                ? Text(
-                                    "Buy ${state.shopItems[widget.index][2]}/-",
-                                    style: GoogleFonts.notoSerif(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: deviceHeight * 0.02),
+                  ),
+                  Positioned(
+                    top: deviceHeight * 0.22,
+                    left: 13.5,
+                    child: SizedBox(
+                      width: deviceWidth * 0.35,
+                      height: deviceHeight * 0.05,
+                      child: MaterialButton(
+                          color: Colors.blue,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Order item"),
+                                content: state is InitialShopState
+                                    ? Text(
+                                        "Ordering $quantity ${state.shopItems[widget.index][1]}\nRs.${quantity * state.shopItems[widget.index][2]}",
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      )
+                                    : Text(""),
+                                actions: [
+                                  MaterialButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(
+                                            'Your order has placed successfully'),
+                                        duration: Duration(seconds: 3),
+                                      ));
+                                    },
+                                    color: Colors.green,
+                                    child: const Text("Order"),
                                   )
-                                : Text("")),
-                      ),
-                    )
-                  ],
-                ),
+                                ],
+                              ),
+                            );
+                          },
+                          child: state is InitialShopState
+                              ? Text(
+                                  "Buy ${state.shopItems[widget.index][2]}/-",
+                                  style: GoogleFonts.notoSerif(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: deviceHeight * 0.02),
+                                )
+                              : Text("")),
+                    ),
+                  )
+                ],
               ),
             )));
   }
