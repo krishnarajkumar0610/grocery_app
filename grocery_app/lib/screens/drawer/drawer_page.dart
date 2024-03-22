@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/drawer/drawer_bloc.dart';
 import 'package:grocery_app/bloc/drawer/drawer_event.dart';
 import 'package:grocery_app/bloc/drawer/drawer_state.dart';
+import 'package:grocery_app/bloc/themes/theme_bloc.dart';
+import 'package:grocery_app/bloc/themes/theme_event.dart';
 
 import '../pages/new_user_page.dart';
 
@@ -36,6 +38,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
               if (navigateToLogout) {
                 context.read<DrawerBloc>().add(LogOutEvent());
+                context.read<ThemeBloc>().add(ChangeTheme(fromLogout: true));
               }
             },
           )),

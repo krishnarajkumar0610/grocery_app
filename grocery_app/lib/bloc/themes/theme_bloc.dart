@@ -5,7 +5,12 @@ import 'package:grocery_app/bloc/themes/theme_state.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(LightThemeState()) {
     on<ChangeTheme>((event, emit) async {
-      emit(state is LightThemeState ? DarkThemeState() : LightThemeState());
+      if (event.fromLogout) {
+        emit(LightThemeState());
+      }
+      emit(state is LightThemeState && event.fromLogout == false
+          ? DarkThemeState()
+          : LightThemeState());
     });
   }
 }
