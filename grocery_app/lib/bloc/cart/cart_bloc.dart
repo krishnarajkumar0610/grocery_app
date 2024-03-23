@@ -96,9 +96,9 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem",
           sharedPreference: sharedPreference);
     }
-    emit((MyCartState(
+    emit(MyCartState(
       cartItem: cartItem,
-    )));
+    ));
   }
 
   Future<void> removeFromSCart(

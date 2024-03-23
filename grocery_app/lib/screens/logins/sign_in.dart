@@ -148,7 +148,7 @@ class _SignInState extends State<SignIn> {
                       ));
                 } else if (state is SignInValidationFailure) {
                   showMessage(
-                      context: context, errorMessage: state.errorMessage);
+                      context: context, message: state.errorMessage);
                 }
               },
             ),

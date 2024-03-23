@@ -48,3 +48,5 @@ class RemoveFromShop extends ShopEvent {
 
   RemoveFromShop({required this.index, required this.shopItem});
 }
+
+class BuyItemEvent extends ShopEvent {}

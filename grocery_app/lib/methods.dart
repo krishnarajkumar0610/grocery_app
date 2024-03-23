@@ -24,7 +24,7 @@ bool checkKey(
   return false;
 }
 
-void showMessage({required final context,required String errorMessage}) {
+void showMessage({required final context,required String message}) {
   showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -34,7 +34,7 @@ void showMessage({required final context,required String errorMessage}) {
               size: 30,
             ),
             content: Text(
-              errorMessage,
+              message,
               style: const TextStyle(
                   fontSize: 15, fontWeight: FontWeight.bold, letterSpacing: 1),
             ),

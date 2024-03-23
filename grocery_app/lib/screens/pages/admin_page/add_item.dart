@@ -59,7 +59,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 listener: (context, state) {
                   if (state is ImageNotFound) {
                     showMessage(
-                        context: context, errorMessage: "Image not found");
+                        context: context, message: "Image not found");
                   }
                 },
                 builder: (context, state) => MaterialButton(

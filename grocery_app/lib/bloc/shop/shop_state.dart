@@ -20,3 +20,8 @@ class ImageNotFound extends ShopState {
   @override
   List<Object?> get props => [];
 }
+
+class BuyItemState extends ShopState {
+  @override
+  List<Object?> get props => [];
+}

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
+import 'package:grocery_app/methods.dart';
 
 import '../bloc/shop/shop_event.dart';
 import '../bloc/shop/shop_state.dart';
@@ -40,7 +41,12 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                   )
                 ]),
             child: BlocConsumer<InitialShopBloc, ShopState>(
-              listener: (context, state) {},
+              listener: (context, state) {
+                if (state is BuyItemState) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Your order has placed successfully")));
+                }
+              },
               builder: (context, state) => Stack(
                 children: [
                   widget.isAdmin
@@ -65,9 +71,6 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                         shopItem: state is InitialShopState
                                             ? state.shopItems
                                             : []));
-                                // context
-                                //     .read<InitialShopBloc>()
-                                //     .add(GetInitialShopItem());
                               },
                             ),
                           ),
@@ -207,13 +210,10 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                 actions: [
                                   MaterialButton(
                                     onPressed: () {
+                                      context
+                                          .read<InitialShopBloc>()
+                                          .add(BuyItemEvent());
                                       Navigator.pop(context);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content: Text(
-                                            'Your order has placed successfully'),
-                                        duration: Duration(seconds: 3),
-                                      ));
                                     },
                                     color: Colors.green,
                                     child: const Text("Order"),
