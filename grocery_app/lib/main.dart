@@ -28,6 +28,7 @@ void main() async {
       create: (context) => GreetingBloc(),
     ),
     BlocProvider(
+
       create: (context) => CartBloc(),
     ),
     BlocProvider(
