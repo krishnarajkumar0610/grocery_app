@@ -214,7 +214,7 @@ class _CartPageState extends State<CartPage> {
                                             ),
                                           ),
                                           Positioned(
-                                              left: deviceWidth * 0.45,
+                                              left: deviceWidth * 0.4,
                                               top: deviceWidth * 0.12,
                                               child: cartState is MyCartState
                                                   ? Text(
@@ -229,7 +229,7 @@ class _CartPageState extends State<CartPage> {
                                                     )
                                                   : const Text(" ")),
                                           Positioned(
-                                              left: deviceWidth * 0.45,
+                                              left: deviceWidth * 0.4,
                                               top: deviceWidth * 0.2,
                                               child: cartState is MyCartState
                                                   ? Text(
@@ -245,7 +245,7 @@ class _CartPageState extends State<CartPage> {
                                                     )
                                                   : const Text(" ")),
                                           Positioned(
-                                              left: deviceWidth * 0.45,
+                                              left: deviceWidth * 0.4,
                                               top: deviceWidth * 0.28,
                                               child: cartState is MyCartState
                                                   ? Text(
