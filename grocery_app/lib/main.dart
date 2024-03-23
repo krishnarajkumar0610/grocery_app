@@ -52,7 +52,6 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     context.read<GreetingBloc>().add(GetGreetings());
-    context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 
   @override

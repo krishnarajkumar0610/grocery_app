@@ -7,7 +7,8 @@ import 'shop_event.dart';
 import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
-  InitialShopBloc() : super(InitialShopState(shopItems: [])) {
+  InitialShopBloc() : super(LoadingState()) {
+    on<LoadingEvent>(loading);
     on<EditShopItems>(editShopItems);
     on<ChangeAllIcon>(changeAllIcon);
     on<ChangeToCheckmark>(changeToCheckMark);
@@ -40,7 +41,10 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
         item: event.shopItems,
         sharedPreference: sharedPreference);
 
-    emit(InitialShopState(shopItems: event.shopItems));
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: event.shopItems));
+    });
   }
 
   Future<void> changeAllIcon(
@@ -58,7 +62,10 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
         keyName: "shopItem",
         item: shopItem,
         sharedPreference: sharedPreference);
-    emit(InitialShopState(shopItems: shopItem));
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: shopItem));
+    });
   }
 
   Future<void> changeToCheckMark(
@@ -96,7 +103,10 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
         keyName: "shopItem",
         item: shopItem,
         sharedPreference: sharedPreference);
-    emit(InitialShopState(shopItems: shopItem));
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: shopItem));
+    });
   }
 
   Future<void> addNewItemsInShop(
@@ -151,7 +161,10 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
         emit(ImageNotFound());
       }
     }
-    emit(InitialShopState(shopItems: shopItem));
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: shopItem));
+    });
   }
 
   Future<void> removeFromShop(
@@ -183,7 +196,10 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
 
     final data =
         getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
-    emit(InitialShopState(shopItems: data));
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: data));
+    });
   }
 
   Future<void> buyItem(BuyItemEvent event, Emitter<ShopState> emit) async {
@@ -193,5 +209,15 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
     List shopItem =
         getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
     emit(InitialShopState(shopItems: shopItem));
+  }
+
+  Future<void> loading(LoadingEvent event, Emitter<ShopState> emit) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    List shopItems =
+        getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
+    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(InitialShopState(shopItems: shopItems));
+    });
   }
 }
