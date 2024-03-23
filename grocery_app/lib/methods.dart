@@ -27,8 +27,7 @@ bool checkKey(
 void showMessage({required final context, required String message}) {
   showDialog(
       context: context,
-      builder: (context) =>
-          AlertDialog(
+      builder: (context) => AlertDialog(
             title: const Icon(
               Icons.error,
               color: Colors.red,

@@ -6,7 +6,7 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(MyCartState(cartItem: [])) {
+  CartBloc() : super(MyCartState(cartItem: const [], totalAmount: 0)) {
     on<Clearcart>(clearCart);
     on<GetInitialCartData>(getInitialShopItems);
     on<AddToCart>(addToCart);
@@ -39,9 +39,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     emit(DummyCart());
     final sharedPreference = await SharedPreferences.getInstance();
     sharedPreference.remove("cartItem");
-    emit(MyCartState(
-      cartItem: const [],
-    ));
+    emit(MyCartState(cartItem: const [], totalAmount: 0));
   }
 
   Future<void> getInitialShopItems(
@@ -61,9 +59,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem", sharedPreference: sharedPreference);
     }
     totalAmount = getTotalAmount(cartItems: cartItems);
-    emit(MyCartState(
-      cartItem: cartItems,
-    ));
+    emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
   }
 
   Future<void> addToCart(AddToCart event, Emitter<CartState> emit) async {
@@ -96,27 +92,27 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem",
           sharedPreference: sharedPreference);
     }
-    emit(MyCartState(
-      cartItem: cartItem,
-    ));
+    emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
   }
 
   Future<void> removeFromSCart(
       RemoveItem event, Emitter<CartState> emit) async {
     emit(DummyCart());
     final sharedPreference = await SharedPreferences.getInstance();
+
     List cartItem =
         getListOfData(keyName: "cartItem", sharedPreference: sharedPreference);
-    getListOfData(keyName: "cartItem", sharedPreference: sharedPreference);
-    //totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
+    int totalAmount = 0;
+    for(int i=0;i<cartItem.length;i++){
+      totalAmount += cartItem[i][0] * cartItem[i][2] as int;
+    }
+    totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
     cartItem.removeAt(event.index);
     sharedPreference.remove("cartItem");
     sendListOfData(
         item: cartItem,
         keyName: "cartItem",
         sharedPreference: sharedPreference);
-    emit(MyCartState(
-      cartItem: cartItem,
-    ));
+    emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
   }
 }

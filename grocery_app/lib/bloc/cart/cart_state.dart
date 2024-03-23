@@ -4,9 +4,10 @@ abstract class CartState extends Equatable {}
 
 class MyCartState extends CartState {
   List cartItem;
-
+  int totalAmount;
   MyCartState({
     required this.cartItem,
+    required this.totalAmount
   });
 
   @override

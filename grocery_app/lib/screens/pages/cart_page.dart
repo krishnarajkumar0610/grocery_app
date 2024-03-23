@@ -113,11 +113,11 @@ class _CartPageState extends State<CartPage> {
           ],
         ),
         body: BlocConsumer<CartBloc, CartState>(
-          builder: (context, state) {
+          builder: (context, cartState) {
             return BlocConsumer<InitialShopBloc, ShopState>(
               listener: (context, shopState) {},
               builder: (context, shopState) {
-                return state is MyCartState && state.cartItem.isEmpty
+                return cartState is MyCartState && cartState.cartItem.isEmpty
                     ? const Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -141,8 +141,8 @@ class _CartPageState extends State<CartPage> {
                               width: double.infinity,
                               height: deviceHeight * 0.6,
                               child: ListView.builder(
-                                itemCount: state is MyCartState
-                                    ? state.cartItem.length
+                                itemCount: cartState is MyCartState
+                                    ? cartState.cartItem.length
                                     : 0,
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -165,9 +165,10 @@ class _CartPageState extends State<CartPage> {
                                                 context
                                                     .read<InitialShopBloc>()
                                                     .add(ChangeToShopCart(
-                                                        itemName: state
+                                                        itemName: cartState
                                                                 is MyCartState
-                                                            ? state.cartItem[
+                                                            ? cartState
+                                                                    .cartItem[
                                                                 index][1]
                                                             : " ",
                                                         shopItem: shopState
@@ -179,11 +180,12 @@ class _CartPageState extends State<CartPage> {
                                                 context.read<CartBloc>().add(
                                                     RemoveItem(
                                                         index: index,
-                                                        amount: state
+                                                        amount: cartState
                                                                 is MyCartState
-                                                            ? state.cartItem[
+                                                            ? cartState.cartItem[
                                                                     index][0] *
-                                                                state.cartItem[
+                                                                cartState
+                                                                        .cartItem[
                                                                     index][2]
                                                             : 0));
                                               },
@@ -203,8 +205,9 @@ class _CartPageState extends State<CartPage> {
                                                 right: 5.0,
                                               ),
                                               child: Image.asset(
-                                                state is MyCartState
-                                                    ? state.cartItem![index][3]
+                                                cartState is MyCartState
+                                                    ? cartState.cartItem![index]
+                                                        [3]
                                                     : " ",
                                                 height: 100,
                                               ),
@@ -213,9 +216,9 @@ class _CartPageState extends State<CartPage> {
                                           Positioned(
                                               left: deviceWidth * 0.45,
                                               top: deviceWidth * 0.12,
-                                              child: state is MyCartState
+                                              child: cartState is MyCartState
                                                   ? Text(
-                                                      "Name : ${state.cartItem![index][1]}",
+                                                      "Name : ${cartState.cartItem![index][1]}",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 15,
@@ -228,9 +231,9 @@ class _CartPageState extends State<CartPage> {
                                           Positioned(
                                               left: deviceWidth * 0.45,
                                               top: deviceWidth * 0.2,
-                                              child: state is MyCartState
+                                              child: cartState is MyCartState
                                                   ? Text(
-                                                      "Price : Rs.${state.cartItem![index][2] * state.cartItem![index][0]}/-",
+                                                      "Price : Rs.${cartState.cartItem![index][2] * cartState.cartItem![index][0]}/-",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                               fontSize: 15,
@@ -244,9 +247,9 @@ class _CartPageState extends State<CartPage> {
                                           Positioned(
                                               left: deviceWidth * 0.45,
                                               top: deviceWidth * 0.28,
-                                              child: state is MyCartState
+                                              child: cartState is MyCartState
                                                   ? Text(
-                                                      "Total Quantity : ${state.cartItem![index][0] ?? 0}",
+                                                      "Total Quantity : ${cartState.cartItem![index][0] ?? 0}",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                               fontSize: 15,
@@ -273,7 +276,16 @@ class _CartPageState extends State<CartPage> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.green),
-                              child: const Center(child: Text("0")),
+                              child: Center(
+                                  child: cartState is MyCartState
+                                      ? Text(
+                                          "Total amount : ${cartState.totalAmount}",
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      : const Text("")),
                             )
                           ],
                         ),
