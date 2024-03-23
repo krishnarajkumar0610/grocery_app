@@ -61,8 +61,7 @@ class _MyAppState extends State<MyApp> {
       listener: (context, state) {},
       builder: (context, state) => MaterialApp(
         title: 'Grocery App',
-        theme:
-            state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
+        theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: const IntroPage(),
       ),
