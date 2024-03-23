@@ -5,7 +5,7 @@ import 'package:grocery_app/bloc/greetings/greeting_event.dart';
 import 'package:grocery_app/bloc/greetings/greeting_state.dart';
 
 class GreetingBloc extends Bloc<GreetingEvent, MyGreetingState> {
-  GreetingBloc() : super(MyGreetingState()) {
+  GreetingBloc() : super(MyGreetingState(greeting: "Good morning")) {
     on<GetGreetings>(getGreeting);
   }
 

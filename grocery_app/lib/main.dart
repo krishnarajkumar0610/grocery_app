@@ -7,12 +7,9 @@ import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_state.dart';
-
 import 'bloc/greetings/greeting_bloc.dart';
 import 'bloc/greetings/greeting_event.dart';
-
 import 'bloc/signInValidations/signInValidation_bloc.dart';
-
 import 'screens/pages/intro_page.dart';
 
 void main() async {
@@ -55,8 +52,6 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     context.read<GreetingBloc>().add(GetGreetings());
-    print("Calling greeting");
-
     context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 
@@ -66,7 +61,8 @@ class _MyAppState extends State<MyApp> {
       listener: (context, state) {},
       builder: (context, state) => MaterialApp(
         title: 'Grocery App',
-        theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
+        theme:
+            state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: const IntroPage(),
       ),

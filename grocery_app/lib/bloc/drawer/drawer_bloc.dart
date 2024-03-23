@@ -9,7 +9,8 @@ class DrawerBloc extends Bloc<DrawerEvent,DrawerState>{
     on<LogOutEvent>(logOut);
   }
 
-  FutureOr<void> logOut(LogOutEvent event, Emitter<DrawerState> emit) {
+  Future<void> logOut(LogOutEvent event, Emitter<DrawerState> emit) async{
+    print("Logout pandra event ku vantea");
     emit(DummyDrawerState());
     emit(LogoutState());
   }
