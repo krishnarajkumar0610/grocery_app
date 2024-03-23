@@ -10,27 +10,7 @@ import 'shop_state.dart';
 class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
   InitialShopBloc() : super(InitialShopState(shopItems: [])) {
     on<EditShopItems>((event, emit) async {
-      String itemPrice = event.itemPrice;
-      String itemName = event.itemName;
-      int index = event.index;
-      if (itemPrice.isEmpty ||
-          itemPrice.startsWith(" ") ||
-          itemPrice.startsWith("0")) {
-        itemPrice = "${event.shopItems[index][2]}";
-      }
-      if (itemName.isEmpty || itemName.startsWith(" ")) {
-        itemName = event.shopItems[index][1];
-      }
-      event.shopItems[index][1] = itemName;
-      event.shopItems[index][2] = int.parse(itemPrice);
-      final sharedPreference = await SharedPreferences.getInstance();
-      sharedPreference.remove("shopItem");
-      sendListOfData(
-          keyName: "shopItem",
-          item: event.shopItems,
-          sharedPreference: sharedPreference);
 
-      emit(InitialShopState(shopItems: event.shopItems));
     });
 
     on<ChangeAllIcon>((event, emit) async {
@@ -87,56 +67,7 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
     });
 
     on<AddNewItemsInShop>((event, emit) async {
-      final sharedPreference = await SharedPreferences.getInstance();
-      String itemName = event.itemName.toLowerCase();
-      String itemPrice = event.itemPrice;
-      List shopItem = [];
-      List data = [];
-      emit(DummyShop());
-      if ((itemName.isEmpty ||
-          itemPrice.isEmpty ||
-          itemName.startsWith(" ") ||
-          itemPrice.startsWith(" ") ||
-          itemPrice.contains(RegExp(r'[a-zA-Z]')) || itemName.contains(RegExp(r'[0-9]')) ||
-          int.parse(itemPrice) < 1)) {
-        shopItem = getListOfData(
-            keyName: "shopItem", sharedPreference: sharedPreference);
 
-        emit(ImageNotFound());
-      } else {
-        // Close a dialog, for example
-        try {
-          int itemQuantity = 1;
-          bool iconStatus = true;
-          await rootBundle.load("assets/$itemName.png");
-          data = [
-            itemQuantity,
-            itemName,
-            int.parse(itemPrice),
-            "assets/$itemName.png",
-            iconStatus
-          ];
-          shopItem = getListOfData(
-              keyName: "shopItem", sharedPreference: sharedPreference);
-          for (int i = 0; i < shopItem.length; i++) {
-            if (itemName == shopItem[i][1]) {
-              shopItem.removeAt(i);
-              break;
-            }
-          }
-          shopItem.add(data);
-          sendListOfData(
-              keyName: "shopItem",
-              item: shopItem,
-              sharedPreference: sharedPreference);
-          print(shopItem);
-        } catch (e) {
-          shopItem = getListOfData(
-              keyName: "shopItem", sharedPreference: sharedPreference);
-          emit(ImageNotFound());
-        }
-      }
-      emit(InitialShopState(shopItems: shopItem));
     });
 
     on<RemoveFromShop>((event, emit) async {
@@ -167,33 +98,5 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
           keyName: "shopItem", sharedPreference: sharedPreference);
       emit(InitialShopState(shopItems: data));
     });
-  }
-
-  void showAlert({required final context, required final text}) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 30,
-        ),
-        content: Text(
-          text,
-          style: const TextStyle(
-              fontSize: 15, fontWeight: FontWeight.bold, letterSpacing: 1),
-        ),
-        actions: [
-          MaterialButton(
-            onPressed: () => Navigator.pop(context),
-            color: Colors.red,
-            child: const Text(
-              "Close",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-          )
-        ],
-      ),
-    );
   }
 }

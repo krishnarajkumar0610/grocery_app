@@ -41,7 +41,8 @@ class _EditPageState extends State<EditPage> {
         appBar: AppBar(
           title: const Text("Grocery app server"),
         ),
-        body: BlocBuilder<InitialShopBloc, ShopState>(
+        body: BlocConsumer<InitialShopBloc, ShopState>(
+          listener: (context, state) {},
           builder: (context, state) => SizedBox(
             width: double.infinity,
             height: deviceHeight * 0.9,
@@ -123,7 +124,9 @@ class _EditPageState extends State<EditPage> {
                             color: Colors.blue,
                             onPressed: () {
                               context.read<InitialShopBloc>().add(EditShopItems(
-                                  shopItems:state is InitialShopState ?  state.shopItems : 0,
+                                  shopItems: state is InitialShopState
+                                      ? state.shopItems
+                                      : 0,
                                   itemName: itemNames[index].text,
                                   itemPrice: itemPrices[index].text,
                                   index: index));
