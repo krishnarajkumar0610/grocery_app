@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
-import 'package:grocery_app/methods.dart';
-
 import '../bloc/shop/shop_event.dart';
 import '../bloc/shop/shop_state.dart';
 
@@ -43,7 +40,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
             child: BlocConsumer<InitialShopBloc, ShopState>(
               listener: (context, state) {
                 if (state is BuyItemState) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Your order has placed successfully")));
                 }
               },
