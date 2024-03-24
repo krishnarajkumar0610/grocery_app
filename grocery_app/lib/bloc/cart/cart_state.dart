@@ -16,8 +16,3 @@ class MyCartState extends CartState {
   @override
   List<Object?> get props => [];
 }
-
-class DummyCart extends CartState {
-  @override
-  List<Object?> get props => [];
-}
