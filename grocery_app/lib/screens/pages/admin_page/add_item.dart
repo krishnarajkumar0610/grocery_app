@@ -55,7 +55,7 @@ class _AddNewItemState extends State<AddNewItem> {
             SizedBox(
               width: deviceWidth * 0.5,
               height: deviceHeight * 0.06,
-              child: BlocConsumer<InitialShopBloc, ShopState>(
+              child: BlocConsumer<ShopBloc, ShopState>(
                 listener: (context, state) {
                   if (state is ImageNotFound) {
                     showMessage(context: context, message: "Image not found");
@@ -64,7 +64,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 builder: (context, state) => MaterialButton(
                   color: Colors.deepPurple,
                   onPressed: () {
-                    context.read<InitialShopBloc>().add(
+                    context.read<ShopBloc>().add(
                           AddNewItemsInShop(
                             itemName: controllers[0].text,
                             itemPrice: controllers[1].text,
@@ -73,7 +73,7 @@ class _AddNewItemState extends State<AddNewItem> {
                     controllers[0].clear();
                     controllers[1].clear();
                     //context.read<InitialShopBloc>().add(GetInitialShopItem());
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                   },
                   child: const Text(
                     "Submit",

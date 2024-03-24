@@ -6,8 +6,8 @@ import '../../methods.dart';
 import 'shop_event.dart';
 import 'shop_state.dart';
 
-class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
-  InitialShopBloc() : super(LoadingShopItemsState()) {
+class ShopBloc extends Bloc<ShopEvent, ShopState> {
+  ShopBloc() : super(LoadingShopItemsState()) {
     on<GetInitialShopItem>(getInitialShopItem);
     on<AddNewItemsInShop>(addNewItemsInShop);
     on<RemoveFromShop>(removeFromShop);
@@ -152,9 +152,8 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
         emit(ImageNotFound());
       }
     }
-    emit(LoadingShopItemsState());
-    await Future.delayed(const Duration(seconds: 1),
-        () => emit(InitialShopState(shopItems: shopItem)));
+    //emit(LoadingShopItemsState());
+    emit(InitialShopState(shopItems: shopItem));
   }
 
   Future<void> removeFromShop(

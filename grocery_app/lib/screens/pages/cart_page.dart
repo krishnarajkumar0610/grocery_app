@@ -41,7 +41,7 @@ class _CartPageState extends State<CartPage> {
                 fontWeight: FontWeight.bold, color: Colors.black),
           ),
           actions: [
-            BlocConsumer<InitialShopBloc, ShopState>(
+            BlocConsumer<ShopBloc, ShopState>(
               listener: (context, shopBloc) {},
               builder: (context, shopBloc) {
                 return TextButton(
@@ -72,7 +72,7 @@ class _CartPageState extends State<CartPage> {
                               context
                                   .read<CartBloc>()
                                   .add(ClearCartItemsEvent());
-                              context.read<InitialShopBloc>().add(ChangeAllIcon(
+                              context.read<ShopBloc>().add(ChangeAllIcon(
                                   shopItem: shopBloc is InitialShopState
                                       ? shopBloc.shopItems
                                       : []));
@@ -113,7 +113,7 @@ class _CartPageState extends State<CartPage> {
         body: BlocConsumer<CartBloc, CartState>(
           listener: (context, cartState) {},
           builder: (context, cartState) =>
-              BlocConsumer<InitialShopBloc, ShopState>(
+              BlocConsumer<ShopBloc, ShopState>(
             listener: (context, shopState) {},
             builder: (context, shopState) => cartState is MyCartState &&
                     cartState.cartItem.isEmpty
@@ -168,7 +168,7 @@ class _CartPageState extends State<CartPage> {
                                               onTap: () {
                                                 // Assuming this is how your shopItem is stored
                                                 context
-                                                    .read<InitialShopBloc>()
+                                                    .read<ShopBloc>()
                                                     .add(ChangeToShopCart(
                                                         itemName: cartState
                                                                 is MyCartState

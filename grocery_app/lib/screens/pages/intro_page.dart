@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/screens/pages/new_user_page.dart';
 
@@ -33,7 +32,7 @@ class _IntroPageState extends State<IntroPage> {
     // Splash screen
     double deviceWidth = MediaQuery.sizeOf(context).width;
     double deviceHeight = MediaQuery.sizeOf(context).height;
-    Orientation orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       body: ListView(children: [
         Column(
@@ -42,7 +41,7 @@ class _IntroPageState extends State<IntroPage> {
               padding: EdgeInsets.only(
                 left: deviceWidth * 0.1,
                 right: deviceWidth * 0.1,
-                top: deviceWidth * 0.5,
+                top: deviceHeight * 0.15,
               ),
               child: Image.asset(
                 "assets/logo.png",

@@ -17,7 +17,26 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (context) => ShopBloc(),
+    ),
+    BlocProvider(
+      create: (context) => GreetingBloc(),
+    ),
+    BlocProvider(
+      create: (context) => CartBloc(),
+    ),
+    BlocProvider(
+      create: (context) => SignInValidationBloc(),
+    ),
+    BlocProvider(
+      create: (context) => ThemeBloc(),
+    ),
+    BlocProvider(
+      create: (context) => DrawerBloc(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -30,24 +49,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => InitialShopBloc(),
-      child: BlocProvider(
-        create: (context) => CartBloc(),
-        child: BlocProvider(
-          create: (context) => ThemeBloc(),
-          child: BlocBuilder<ThemeBloc, ThemeState>(
-            // listener: (context, state) {},
-            builder: (context, state) => MaterialApp(
-              title: 'Grocery App',
-              theme: state is LightThemeState
-                  ? ThemeData.light()
-                  : ThemeData.dark(),
-              debugShowCheckedModeBanner: false,
-              home: const IntroPage(),
-            ),
-          ),
-        ),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      // listener: (context, state) {},
+      builder: (context, state) => MaterialApp(
+        title: 'Grocery App',
+        theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        home: const IntroPage(),
       ),
     );
   }

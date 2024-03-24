@@ -37,7 +37,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                     blurRadius: 5,
                   )
                 ]),
-            child: BlocBuilder<InitialShopBloc, ShopState>(
+            child: BlocBuilder<ShopBloc, ShopState>(
               // listener: (context, state) {
               //   if (state is BuyItemState) {
               //
@@ -61,7 +61,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                               onPressed: () {
                                 print(
                                     "INSIDE THE ON PRESSED : ${widget.index}");
-                                context.read<InitialShopBloc>().add(
+                                context.read<ShopBloc>().add(
                                     RemoveFromShop(
                                         index: widget.index,
                                         shopItem: state is InitialShopState
@@ -93,7 +93,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                               onPressed: () {
                                 print(
                                     "INSIDE THE ON PRESSED : ${widget.index}");
-                                context.read<InitialShopBloc>().add(
+                                context.read<ShopBloc>().add(
                                     ChangeToCheckmark(
                                         index: widget.index,
                                         shopItem: state is InitialShopState
@@ -207,7 +207,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                   MaterialButton(
                                     onPressed: () {
                                       context
-                                          .read<InitialShopBloc>()
+                                          .read<ShopBloc>()
                                           .add(BuyItemEvent());
                                       Navigator.pop(context);
                                     },

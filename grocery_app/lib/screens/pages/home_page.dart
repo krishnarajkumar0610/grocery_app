@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
 
-    context.read<InitialShopBloc>().add(GetInitialShopItem());
+    context.read<ShopBloc>().add(GetInitialShopItem());
   }
 
   @override
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return SafeArea(
-      child: BlocConsumer<InitialShopBloc, ShopState>(
+      child: BlocConsumer<ShopBloc, ShopState>(
         listener: (context, state) {
           if (state is BuyItemState) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -193,12 +193,12 @@ class _HomePageState extends State<HomePage> {
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 250.0),
                                 child: Center(
-                                  child:
-                                      Text("Sorry, there is no items available",
-                                          style: GoogleFonts.notoSerif(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          )),
+                                  child: Text(
+                                      "Sorry, there is no items available",
+                                      style: GoogleFonts.notoSerif(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      )),
                                 ),
                               )
                             : SizedBox(
@@ -214,7 +214,8 @@ class _HomePageState extends State<HomePage> {
                                           childAspectRatio: 1 / 1.4),
                                   itemBuilder: (context, index) {
                                     return GroceryItemTile(
-                                        index: index, isAdmin: widget.isAdmin);
+                                        index: index,
+                                        isAdmin: widget.isAdmin);
                                   },
                                 ),
                               )
@@ -224,7 +225,8 @@ class _HomePageState extends State<HomePage> {
             floatingActionButton: SingleChildScrollView(
                 child: widget.isAdmin &&
                         state is InitialShopState &&
-                        (state.shopItems.isEmpty || state.shopItems.isNotEmpty)
+                        (state.shopItems.isEmpty ||
+                            state.shopItems.isNotEmpty)
                     ? floatingButton(
                         icon: const Icon(Icons.add,
                             color: Colors.black, size: 25),
