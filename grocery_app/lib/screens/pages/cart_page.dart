@@ -131,7 +131,7 @@ class _CartPageState extends State<CartPage> {
                       children: [
                         SizedBox(
                           width: double.infinity,
-                          height: deviceHeight * 0.6,
+                          height: deviceHeight * 0.77,
                           child: ListView.builder(
                             itemCount: cartState is MyCartState
                                 ? cartState.cartItem.length
@@ -246,7 +246,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                         SizedBox(
-                          height: deviceHeight * 0.18,
+                          height: deviceHeight * 0.01,
                         ),
                         Container(
                           width: deviceWidth * 0.9,
