@@ -30,7 +30,11 @@ class CartBloc extends Bloc<CartEvents, CartState> {
             keyName: "cartItem", sharedPreference: sharedPreference);
       }
       totalAmount = getTotalAmount(cartItems: cartItems);
-      emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
+      emit(LoadingCartItemsState());
+      await Future.delayed(
+          const Duration(seconds: 1),
+          () =>
+              emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount)));
     });
 
     on<AddToCartEvent>((event, emit) async {

@@ -22,6 +22,9 @@ void main() async {
       create: (context) => InitialShopBloc(),
     ),
     BlocProvider(
+      create: (context) => ThemeBloc(),
+    ),
+    BlocProvider(
       create: (context) => GreetingBloc(),
     ),
     BlocProvider(
@@ -29,9 +32,6 @@ void main() async {
     ),
     BlocProvider(
       create: (context) => ValidationBloc(),
-    ),
-    BlocProvider(
-      create: (context) => ThemeBloc(),
     ),
     BlocProvider(
       create: (context) => DrawerBloc(),
@@ -56,8 +56,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ThemeBloc, ThemeState>(
-      listener: (context, state) {},
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      // listener: (context, state) {},
       builder: (context, state) => MaterialApp(
         title: 'Grocery App',
         theme: state is LightThemeState ? ThemeData.light() : ThemeData.dark(),
