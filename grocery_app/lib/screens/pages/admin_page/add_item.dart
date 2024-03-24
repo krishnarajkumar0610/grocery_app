@@ -73,7 +73,7 @@ class _AddNewItemState extends State<AddNewItem> {
                     controllers[0].clear();
                     controllers[1].clear();
                     //context.read<InitialShopBloc>().add(GetInitialShopItem());
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     "Submit",
