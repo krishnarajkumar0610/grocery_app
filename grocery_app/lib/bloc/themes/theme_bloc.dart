@@ -12,9 +12,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   Future<void> changeTheme(ChangeTheme event, Emitter<ThemeState> emit) async {
     if (event.fromLogout) {
       emit(LightThemeState());
+    } else {
+      emit(state is LightThemeState ? DarkThemeState() : LightThemeState());
     }
-    emit(state is LightThemeState && event.fromLogout == false
-        ? DarkThemeState()
-        : LightThemeState());
   }
 }

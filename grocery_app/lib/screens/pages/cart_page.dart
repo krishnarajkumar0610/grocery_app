@@ -69,7 +69,7 @@ class _CartPageState extends State<CartPage> {
                           MaterialButton(
                             color: Colors.green,
                             onPressed: () {
-                              context.read<CartBloc>().add(ClearcartEvent());
+                              context.read<CartBloc>().add(ClearCartItemsEvent());
                               context.read<InitialShopBloc>().add(ChangeAllIcon(
                                   shopItem: shopBloc is InitialShopState
                                       ? shopBloc.shopItems
@@ -180,7 +180,7 @@ class _CartPageState extends State<CartPage> {
                                                             : []));
 
                                                 context.read<CartBloc>().add(
-                                                    RemoveItemEvent(
+                                                    RemoveItemFomCartEvent(
                                                         index: index,
                                                         amount: cartState
                                                                 is MyCartState

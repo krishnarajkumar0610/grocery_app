@@ -8,14 +8,13 @@ import 'shop_state.dart';
 
 class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
   InitialShopBloc() : super(LoadingShopItemsState()) {
-    on<LoadingShopItemsEvent>(loading);
-    on<EditShopItems>(editShopItems);
-    on<ChangeAllIcon>(changeAllIcon);
-    on<ChangeToCheckmark>(changeToCheckMark);
-    on<ChangeToShopCart>(changeToShopCart);
+    on<GetInitialShopItem>(getInitialShopItem);
     on<AddNewItemsInShop>(addNewItemsInShop);
     on<RemoveFromShop>(removeFromShop);
-    on<GetInitialShopItem>(getInitialShopItem);
+    on<EditShopItems>(editShopItems);
+    on<ChangeToCheckmark>(changeToCheckMark);
+    on<ChangeToShopCart>(changeToShopCart);
+    on<ChangeAllIcon>(changeAllIcon);
     on<BuyItemEvent>(buyItem);
   }
 
@@ -200,13 +199,13 @@ class InitialShopBloc extends Bloc<ShopEvent, ShopState> {
     emit(InitialShopState(shopItems: shopItem));
   }
 
-  Future<void> loading(
-      LoadingShopItemsEvent event, Emitter<ShopState> emit) async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    List shopItems =
-        getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
-    emit(LoadingShopItemsState());
-    await Future.delayed(const Duration(seconds: 1),
-        () => emit(InitialShopState(shopItems: shopItems)));
-  }
+// Future<void> loading(
+//     LoadingShopItemsEvent event, Emitter<ShopState> emit) async {
+//   final sharedPreference = await SharedPreferences.getInstance();
+//   List shopItems =
+//       getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
+//   emit(LoadingShopItemsState());
+//   await Future.delayed(const Duration(seconds: 1),
+//       () => emit(InitialShopState(shopItems: shopItems)));
+// }
 }

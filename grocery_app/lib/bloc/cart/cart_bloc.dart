@@ -7,13 +7,13 @@ import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
   CartBloc() : super(LoadingCartItemsState()) {
-    on<ClearcartEvent>(clearCart);
+    on<ClearCartItemsEvent>(clearCart);
     on<GetInitialCartDataEvent>(getInitialCartItems);
     on<AddToCartEvent>(addToCart);
-    on<RemoveItemEvent>(removeItem);
+    on<RemoveItemFomCartEvent>(removeItem);
   }
 
-  Future<void> clearCart(ClearcartEvent event, Emitter<CartState> emit) async {
+  Future<void> clearCart(ClearCartItemsEvent event, Emitter<CartState> emit) async {
     final sharedPreference = await SharedPreferences.getInstance();
     sharedPreference.remove("cartItem");
     emit(MyCartState(cartItem: const [], totalAmount: 0));
@@ -75,7 +75,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
   }
 
   Future<void> removeItem(
-      RemoveItemEvent event, Emitter<CartState> emit) async {
+      RemoveItemFomCartEvent event, Emitter<CartState> emit) async {
     final sharedPreference = await SharedPreferences.getInstance();
 
     List cartItem =

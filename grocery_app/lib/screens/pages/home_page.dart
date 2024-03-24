@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/bloc/greetings/greeting_bloc.dart';
+import 'package:grocery_app/bloc/greetings/greeting_event.dart';
 import 'package:grocery_app/bloc/greetings/greeting_state.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    context.read<GreetingBloc>().add(GetMyGreetingsEvent());
     context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 

@@ -6,11 +6,11 @@ import 'package:grocery_app/bloc/greetings/greeting_state.dart';
 
 class GreetingBloc extends Bloc<GreetingEvent, MyGreetingState> {
   GreetingBloc() : super(MyGreetingState(greeting: "Good morning")) {
-    on<GetGreetings>(getGreeting);
+    on<GetMyGreetingsEvent>(getGreeting);
   }
 
   Future<void> getGreeting(
-      GetGreetings event, Emitter<MyGreetingState> emit) async {
+      GetMyGreetingsEvent event, Emitter<MyGreetingState> emit) async {
     final hour = DateTime.now().hour;
     // Determine the time of day based on the hour
     String message;
