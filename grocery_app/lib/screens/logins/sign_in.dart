@@ -116,41 +116,44 @@ class _SignInState extends State<SignIn> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 30),
-            child: BlocConsumer<ValidationBloc, ValidationState>(
-              builder: (context, state) => GestureDetector(
-                  onTap: () {
-                    // when i sign up then it need to display a box to tell go to sign in page
+            child: BlocProvider(
+              create: (context) => SignInValidationBloc(),
+              child: BlocConsumer<SignInValidationBloc, ValidationState>(
+                builder: (context, state) => GestureDetector(
+                    onTap: () {
+                      // when i sign up then it need to display a box to tell go to sign in page
 
-                    context.read<ValidationBloc>().add(SignInEvent(
-                        name: _username.text,
-                        password: _signInPass.text,
-                        context: context));
-                    _username.clear();
-                    _signInPass.clear();
-                  }, //w:250,h:50,
-                  child: otherSignUp(
-                      width: orientation == Orientation.portrait
-                          ? deviceWidth * 0.70
-                          : deviceWidth * 0.50,
-                      height: orientation == Orientation.portrait
-                          ? deviceHeight * 0.05
-                          : deviceHeight * 0.10,
-                      text: "SIGN IN",
-                      color: Colors.lightGreen)),
-              listener: (BuildContext context, ValidationState state) {
-                if (state is SignInValidationSuccess) {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(
-                          isAdmin: state.isAdmin,
-                        ),
-                      ));
-                } else if (state is SignInValidationFailure) {
-                  showMessage(
-                      context: context, message: state.errorMessage);
-                }
-              },
+                      context.read<SignInValidationBloc>().add(SignInEvent(
+                          name: _username.text,
+                          password: _signInPass.text,
+                          context: context));
+                      _username.clear();
+                      _signInPass.clear();
+                    }, //w:250,h:50,
+                    child: otherSignUp(
+                        width: orientation == Orientation.portrait
+                            ? deviceWidth * 0.70
+                            : deviceWidth * 0.50,
+                        height: orientation == Orientation.portrait
+                            ? deviceHeight * 0.05
+                            : deviceHeight * 0.10,
+                        text: "SIGN IN",
+                        color: Colors.lightGreen)),
+                listener: (BuildContext context, ValidationState state) {
+                  if (state is SignInValidationSuccess) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(
+                            isAdmin: state.isAdmin,
+                          ),
+                        ));
+                  } else if (state is SignInValidationFailure) {
+                    showMessage(
+                        context: context, message: state.errorMessage);
+                  }
+                },
+              ),
             ),
           ),
           Padding(

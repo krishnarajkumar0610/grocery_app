@@ -37,13 +37,12 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                     blurRadius: 5,
                   )
                 ]),
-            child: BlocConsumer<InitialShopBloc, ShopState>(
-              listener: (context, state) {
-                if (state is BuyItemState) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Your order has placed successfully")));
-                }
-              },
+            child: BlocBuilder<InitialShopBloc, ShopState>(
+              // listener: (context, state) {
+              //   if (state is BuyItemState) {
+              //
+              //   }
+              // },
               builder: (context, state) => Stack(
                 children: [
                   widget.isAdmin

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/bloc/drawer/drawer_bloc.dart';
 import 'package:grocery_app/bloc/greetings/greeting_bloc.dart';
 import 'package:grocery_app/bloc/greetings/greeting_event.dart';
 import 'package:grocery_app/bloc/greetings/greeting_state.dart';
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<GreetingBloc>().add(GetMyGreetingsEvent());
+
     context.read<InitialShopBloc>().add(GetInitialShopItem());
   }
 
@@ -44,7 +45,12 @@ class _HomePageState extends State<HomePage> {
 
     return SafeArea(
       child: BlocConsumer<InitialShopBloc, ShopState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is BuyItemState) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Your order has placed successfully")));
+          }
+        },
         builder: (context, state) => Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.deepPurple,
@@ -127,9 +133,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            drawer: const Drawer(
+            drawer: Drawer(
                 backgroundColor: Colors.white,
-                child: MyDrawer() // <= click this for Drawer
+                child: BlocProvider(
+                    create: (context) => DrawerBloc(),
+                    child: const MyDrawer()) // <= click this for Drawer
                 ),
             body: state is LoadingShopItemsState
                 ? const Center(
@@ -144,19 +152,23 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.only(
                               top: deviceHeight * 0.01,
                               left: deviceWidth * 0.05),
-                          child: BlocConsumer<GreetingBloc, GreetingState>(
-                              listener: (context, state) {},
-                              builder: (context, state) =>
-                                  state is MyGreetingState
-                                      ? Text(
-                                          state.greeting!,
-                                          style: GoogleFonts.notoSerif(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25,
-                                            color: Colors.green,
-                                          ),
-                                        )
-                                      : const Text(" ")),
+                          child: BlocProvider(
+                            create: (context) =>
+                                GreetingBloc()..add(GetMyGreetingsEvent()),
+                            child: BlocConsumer<GreetingBloc, GreetingState>(
+                                listener: (context, state) {},
+                                builder: (context, state) =>
+                                    state is MyGreetingState
+                                        ? Text(
+                                            state.greeting!,
+                                            style: GoogleFonts.notoSerif(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                              color: Colors.green,
+                                            ),
+                                          )
+                                        : const Text(" ")),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(19),

@@ -8,8 +8,8 @@ import 'package:grocery_app/bloc/signInValidations/signInValidation_state.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ValidationBloc extends Bloc<ValidateEvents, ValidationState> {
-  ValidationBloc() : super(InitialValidation()) {
+class SignInValidationBloc extends Bloc<ValidateEvents, ValidationState> {
+  SignInValidationBloc() : super(InitialValidation()) {
     on<SignInEvent>(signIn);
   }
 

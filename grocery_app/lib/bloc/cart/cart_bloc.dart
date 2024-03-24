@@ -27,7 +27,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     int totalAmount = 0;
     final sharedPreference = await SharedPreferences.getInstance();
     final List cartItems;
-    if (!sharedPreference.containsKey("cartItem")) {
+    if (checkKey(key: "cartItem", sharedPreference: sharedPreference)) {
       cartItems = [];
       sendListOfData(
           item: cartItems,
@@ -45,26 +45,26 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   Future<void> addToCart(AddToCartEvent event, Emitter<CartState> emit) async {
     emit(DummyCartState());
-    List<dynamic> datas = event.shopItems[event.index];
+    List<dynamic> data = event.shopItems[event.index];
     final sharedPreference = await SharedPreferences.getInstance();
     List cartItem = [];
-    datas[0] = event.quantity;
+    data[0] = event.quantity;
     int totalAmount = 0;
     if (!sharedPreference.containsKey("cartItem")) {
-      cartItem.add(datas);
-      totalAmount = datas[0] * datas[2];
+      cartItem.add(data);
+      totalAmount = data[0] * data[2];
       sendListOfData(
-          item: [datas],
+          item: [data],
           keyName: "cartItem",
           sharedPreference: sharedPreference);
     } else {
       cartItem = getListOfData(
           keyName: "cartItem", sharedPreference: sharedPreference);
-      String itemName = datas[1];
+      String itemName = data[1];
       totalAmount = getTotalAmount(cartItems: cartItem);
       totalAmount = removeAmount(
           cartItem: cartItem, itemName: itemName, totalAmount: totalAmount);
-      cartItem.add(datas);
+      cartItem.add(data);
       totalAmount += cartItem[cartItem.length - 1][0] *
           cartItem[cartItem.length - 1][2] as int;
       sharedPreference.remove("cartItem");
@@ -85,7 +85,6 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     List cartItem =
         getListOfData(keyName: "cartItem", sharedPreference: sharedPreference);
     int totalAmount = getTotalAmount(cartItems: cartItem);
-
     totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
     cartItem.removeAt(event.index);
     print("removed item : $cartItem");
