@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return SafeArea(
-      child: BlocBuilder<InitialShopBloc, ShopState>(
-        //listener: (context, state) {},
+      child: BlocConsumer<InitialShopBloc, ShopState>(
+        listener: (context, state) {},
         builder: (context, state) => Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.deepPurple,
@@ -54,8 +54,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black),
               ),
               actions: [
-                BlocBuilder<ThemeBloc, ThemeState>(
-                  //listener: (context, state) {},
+                BlocConsumer<ThemeBloc, ThemeState>(
+                  listener: (context, state) => ThemeBloc(),
                   builder: (context, state) => IconButton(
                       onPressed: () {
                         print("CALLING THEME");
@@ -179,12 +179,12 @@ class _HomePageState extends State<HomePage> {
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 250.0),
                                 child: Center(
-                                  child: Text(
-                                      "Sorry, there is no items available",
-                                      style: GoogleFonts.notoSerif(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      )),
+                                  child:
+                                      Text("Sorry, there is no items available",
+                                          style: GoogleFonts.notoSerif(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
                                 ),
                               )
                             : SizedBox(
@@ -200,8 +200,7 @@ class _HomePageState extends State<HomePage> {
                                           childAspectRatio: 1 / 1.4),
                                   itemBuilder: (context, index) {
                                     return GroceryItemTile(
-                                        index: index,
-                                        isAdmin: widget.isAdmin);
+                                        index: index, isAdmin: widget.isAdmin);
                                   },
                                 ),
                               )
@@ -211,27 +210,43 @@ class _HomePageState extends State<HomePage> {
             floatingActionButton: SingleChildScrollView(
                 child: widget.isAdmin &&
                         state is InitialShopState &&
-                        (state.shopItems.isEmpty ||
-                            state.shopItems.isNotEmpty)
-                    ? FloatingActionButton.extended(
-                        backgroundColor: Colors.green,
-                        icon: const Icon(Icons.add),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AddNewItem()));
-                        },
-                        label: const Text(
-                          "Add item",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              letterSpacing: 1,
-                              color: Colors.black),
-                        ),
-                      )
+                        (state.shopItems.isEmpty || state.shopItems.isNotEmpty)
+                    ? floatingButton(
+                        icon: const Icon(Icons.add,
+                            color: Colors.black, size: 25),
+                        text: "Add item",
+                        navigatorStatus: true)
                     : const SizedBox())),
+      ),
+    );
+  }
+
+  Widget floatingButton(
+      {required Icon icon,
+      required String text,
+      required bool navigatorStatus,
+      List? shopItem}) {
+    return FloatingActionButton.extended(
+      backgroundColor: Colors.green,
+      icon: icon,
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => navigatorStatus
+                  ? const AddNewItem()
+                  : EditPage(
+                      shopItems: shopItem!,
+                    ),
+            ));
+      },
+      label: Text(
+        text,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            letterSpacing: 1,
+            color: Colors.black),
       ),
     );
   }

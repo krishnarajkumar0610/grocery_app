@@ -22,9 +22,6 @@ void main() async {
       create: (context) => InitialShopBloc(),
     ),
     BlocProvider(
-      create: (context) => ThemeBloc(),
-    ),
-    BlocProvider(
       create: (context) => GreetingBloc(),
     ),
     BlocProvider(
@@ -32,6 +29,9 @@ void main() async {
     ),
     BlocProvider(
       create: (context) => ValidationBloc(),
+    ),
+    BlocProvider(
+      create: (context) => ThemeBloc(),
     ),
     BlocProvider(
       create: (context) => DrawerBloc(),
