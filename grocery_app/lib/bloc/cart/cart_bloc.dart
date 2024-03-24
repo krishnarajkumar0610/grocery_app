@@ -6,7 +6,7 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(DummyCart()) {
+  CartBloc() : super(LoadingCartState()) {
     on<ClearCartItemsEvent>(clearCart);
     on<GetInitialCartDataEvent>(getInitialCartItems);
     on<AddToCartEvent>(addToCart);
@@ -15,6 +15,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   Future<void> clearCart(
       ClearCartItemsEvent event, Emitter<CartState> emit) async {
+    emit(DummyCartState());
     final sharedPreference = await SharedPreferences.getInstance();
     sharedPreference.remove("cartItem");
     emit(MyCartState(cartItem: const [], totalAmount: 0));
@@ -22,7 +23,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   Future<void> getInitialCartItems(
       GetInitialCartDataEvent event, Emitter<CartState> emit) async {
-    emit(DummyCart());
+    emit(DummyCartState());
     int totalAmount = 0;
     final sharedPreference = await SharedPreferences.getInstance();
     final List cartItems;
@@ -37,11 +38,13 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem", sharedPreference: sharedPreference);
     }
     totalAmount = getTotalAmount(cartItems: cartItems);
-    emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
+    emit(LoadingCartState());
+    await Future.delayed(const Duration(seconds: 1),
+        () => emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount)));
   }
 
   Future<void> addToCart(AddToCartEvent event, Emitter<CartState> emit) async {
-    emit(DummyCart());
+    emit(DummyCartState());
     List<dynamic> datas = event.shopItems[event.index];
     final sharedPreference = await SharedPreferences.getInstance();
     List cartItem = [];
@@ -76,7 +79,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   Future<void> removeItem(
       RemoveItemFomCartEvent event, Emitter<CartState> emit) async {
-    emit(DummyCart());
+    emit(DummyCartState());
     final sharedPreference = await SharedPreferences.getInstance();
 
     List cartItem =

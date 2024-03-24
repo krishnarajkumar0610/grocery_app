@@ -2,7 +2,12 @@ import 'package:equatable/equatable.dart';
 
 abstract class CartState extends Equatable {}
 
-class DummyCart extends CartState {
+class DummyCartState extends CartState {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoadingCartState extends CartState {
   @override
   List<Object?> get props => [];
 }
