@@ -8,7 +8,7 @@ import 'cart_state.dart';
 class CartBloc extends Bloc<CartEvents, CartState> {
   CartBloc() : super(MyCartState(cartItem: const [], totalAmount: 0)) {
     on<Clearcart>(clearCart);
-    on<GetInitialCartData>(getInitialShopItems);
+    on<GetInitialCartData>(getInitialCartItems);
     on<AddToCart>(addToCart);
     on<RemoveItem>(removeFromSCart);
   }
@@ -39,12 +39,10 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     emit(DummyCart());
     final sharedPreference = await SharedPreferences.getInstance();
     sharedPreference.remove("cartItem");
-    emit(MyCartState(cartItem: const [], totalAmount: 0));
   }
 
-  Future<void> getInitialShopItems(
+  Future<void> getInitialCartItems(
       GetInitialCartData event, Emitter<CartState> emit) async {
-    emit(DummyCart());
     int totalAmount = 0;
     final sharedPreference = await SharedPreferences.getInstance();
     final List cartItems;
@@ -59,11 +57,13 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem", sharedPreference: sharedPreference);
     }
     totalAmount = getTotalAmount(cartItems: cartItems);
-    emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
+    emit(LoadingStateInCart());
+    await Future.delayed(const Duration(seconds: 3), () {
+      emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
+    });
   }
 
   Future<void> addToCart(AddToCart event, Emitter<CartState> emit) async {
-    emit(DummyCart());
     List<dynamic> datas = event.shopItems[event.index];
     final sharedPreference = await SharedPreferences.getInstance();
     List cartItem = [];
@@ -103,7 +103,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
     List cartItem =
         getListOfData(keyName: "cartItem", sharedPreference: sharedPreference);
     int totalAmount = 0;
-    for(int i=0;i<cartItem.length;i++){
+    for (int i = 0; i < cartItem.length; i++) {
       totalAmount += cartItem[i][0] * cartItem[i][2] as int;
     }
     totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
