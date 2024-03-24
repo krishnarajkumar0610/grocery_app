@@ -135,6 +135,7 @@ class _CartPageState extends State<CartPage> {
                             )
                           ],
                         ),
+
                       )
                     : SingleChildScrollView(
                         child: Column(
