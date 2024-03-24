@@ -1,23 +1,23 @@
 class CartEvents {}
 
-class GetInitialCartData extends CartEvents {}
+class GetInitialCartDataEvent extends CartEvents {}
 
-class Clearcart extends CartEvents {}
+class ClearcartEvent extends CartEvents {}
 
-class AddToCart extends CartEvents {
+class AddToCartEvent extends CartEvents {
   int index;
   List shopItems;
   int quantity;
 
-  AddToCart({
+  AddToCartEvent({
     required this.index,
     required this.shopItems,
     required this.quantity,
   });
 }
 
-class RemoveItem extends CartEvents {
+class RemoveItemEvent extends CartEvents {
   int index; // this will store the index value
   int amount;
-  RemoveItem({required this.index,required this.amount});
+  RemoveItemEvent({required this.index,required this.amount});
 }

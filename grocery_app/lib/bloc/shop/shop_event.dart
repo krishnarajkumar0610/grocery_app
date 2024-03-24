@@ -2,7 +2,7 @@ class ShopEvent {}
 
 class GetInitialShopItem extends ShopEvent {}
 
-class LoadingEvent extends ShopEvent {}
+class LoadingShopItemsEvent extends ShopEvent {}
 
 class EditShopItems extends ShopEvent {
   final shopItems;

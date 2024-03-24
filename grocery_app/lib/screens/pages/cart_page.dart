@@ -21,7 +21,7 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<CartBloc>().add(GetInitialCartData());
+    context.read<CartBloc>().add(GetInitialCartDataEvent());
     print("calling initial cart ");
   }
 
@@ -69,7 +69,7 @@ class _CartPageState extends State<CartPage> {
                           MaterialButton(
                             color: Colors.green,
                             onPressed: () {
-                              context.read<CartBloc>().add(Clearcart());
+                              context.read<CartBloc>().add(ClearcartEvent());
                               context.read<InitialShopBloc>().add(ChangeAllIcon(
                                   shopItem: shopBloc is InitialShopState
                                       ? shopBloc.shopItems
@@ -82,21 +82,26 @@ class _CartPageState extends State<CartPage> {
                       ),
                     );
                   },
-                  child: Container(
-                    width: deviceWidth * 0.3,
-                    height: deviceHeight * 0.03,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.greenAccent),
-                    child: Center(
-                      child: Text(
-                        "Clear cart",
-                        style: GoogleFonts.notoSerif(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  child: BlocConsumer<CartBloc, CartState>(
+                    listener: (context, cartState) {},
+                    builder: (context, cartState) => cartState is MyCartState &&
+                            cartState.cartItem.isNotEmpty
+                        ? Container(
+                            width: deviceWidth * 0.3,
+                            height: deviceHeight * 0.03,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.greenAccent),
+                            child: Center(
+                              child: Text(
+                                "Clear cart",
+                                style: GoogleFonts.notoSerif(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ))
+                        : Text(""),
                   ),
                 );
               },
@@ -166,7 +171,7 @@ class _CartPageState extends State<CartPage> {
                                                         : []));
 
                                             context.read<CartBloc>().add(
-                                                RemoveItem(
+                                                RemoveItemEvent(
                                                     index: index,
                                                     amount: cartState
                                                             is MyCartState

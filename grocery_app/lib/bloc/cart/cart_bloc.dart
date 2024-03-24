@@ -7,14 +7,14 @@ import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
   CartBloc() : super(MyCartState(cartItem: [], totalAmount: 0)) {
-    on<Clearcart>((event, emit) async {
+    on<ClearcartEvent>((event, emit) async {
       emit(DummyCart());
       final sharedPreference = await SharedPreferences.getInstance();
       sharedPreference.remove("cartItem");
       emit(MyCartState(cartItem: [], totalAmount: 0));
     });
 
-    on<GetInitialCartData>((event, emit) async {
+    on<GetInitialCartDataEvent>((event, emit) async {
       emit(DummyCart());
       int totalAmount = 0;
       final sharedPreference = await SharedPreferences.getInstance();
@@ -33,7 +33,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
     });
 
-    on<AddToCart>((event, emit) async {
+    on<AddToCartEvent>((event, emit) async {
       emit(DummyCart());
       List<dynamic> datas = event.shopItems[event.index];
       final sharedPreference = await SharedPreferences.getInstance();
@@ -66,7 +66,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       emit((MyCartState(cartItem: cartItem, totalAmount: totalAmount)));
     });
 
-    on<RemoveItem>((event, emit) async {
+    on<RemoveItemEvent>((event, emit) async {
       emit(DummyCart());
       final sharedPreference = await SharedPreferences.getInstance();
       int totalAmount = 0;

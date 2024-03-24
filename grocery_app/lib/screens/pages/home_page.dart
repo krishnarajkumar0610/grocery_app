@@ -129,76 +129,84 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Colors.white,
                 child: MyDrawer() // <= click this for Drawer
                 ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: deviceHeight * 0.01, left: deviceWidth * 0.05),
-                    child: BlocConsumer<GreetingBloc, GreetingState>(
-                        listener: (context, state) {},
-                        builder: (context, state) => state is MyGreetingState
-                            ? Text(
-                                state.greeting!,
+            body: state is LoadingShopItemsState
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: deviceHeight * 0.01,
+                              left: deviceWidth * 0.05),
+                          child: BlocConsumer<GreetingBloc, GreetingState>(
+                              listener: (context, state) {},
+                              builder: (context, state) =>
+                                  state is MyGreetingState
+                                      ? Text(
+                                          state.greeting!,
+                                          style: GoogleFonts.notoSerif(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25,
+                                            color: Colors.green,
+                                          ),
+                                        )
+                                      : const Text(" ")),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(19),
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                "Let's order fresh items for you 😍",
                                 style: GoogleFonts.notoSerif(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        state is InitialShopState && state.shopItems!.isEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 250.0),
+                                child: Center(
+                                  child:
+                                      Text("Sorry, there is no items available",
+                                          style: GoogleFonts.notoSerif(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
                                 ),
                               )
-                            : Text(" ")),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(19),
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "Let's order fresh items for you 😍",
-                          style: GoogleFonts.notoSerif(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.white),
-                        ),
-                      ),
+                            : SizedBox(
+                                width: double.infinity,
+                                height: 500,
+                                child: GridView.builder(
+                                  itemCount: state is InitialShopState
+                                      ? state.shopItems.length
+                                      : 0,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 1 / 1.4),
+                                  itemBuilder: (context, index) {
+                                    return GroceryItemTile(
+                                        index: index, isAdmin: widget.isAdmin);
+                                  },
+                                ),
+                              )
+                      ],
                     ),
                   ),
-                  state is InitialShopState && state.shopItems!.isEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 250.0),
-                              child: Center(
-                                child:
-                                    Text("Sorry, there is no items available",
-                                        style: GoogleFonts.notoSerif(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        )),
-                              ),
-                            )
-                          : SizedBox(
-                              width: double.infinity,
-                              height: 500,
-                              child: GridView.builder(
-                                itemCount: state is InitialShopState
-                                    ? state.shopItems.length
-                                    : 0,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 1 / 1.4),
-                                itemBuilder: (context, index) {
-                                  return GroceryItemTile(
-                                      index: index, isAdmin: widget.isAdmin);
-                                },
-                              ),
-                            )
-                ],
-              ),
-            ),
             floatingActionButton: SingleChildScrollView(
                 child: widget.isAdmin &&
                         state is InitialShopState &&

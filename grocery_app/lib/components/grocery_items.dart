@@ -100,7 +100,7 @@ class _GroceryItemTileState extends State<GroceryItemTile> {
                                         shopItem: state is InitialShopState
                                             ? state.shopItems
                                             : []));
-                                context.read<CartBloc>().add(AddToCart(
+                                context.read<CartBloc>().add(AddToCartEvent(
                                     index: widget.index,
                                     shopItems: state is InitialShopState
                                         ? state.shopItems
