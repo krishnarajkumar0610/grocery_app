@@ -17,7 +17,3 @@ class DummyCart extends CartState {
   List<Object?> get props => [];
 }
 
-class LoadingStateInCart extends CartState {
-  @override
-  List<Object?> get props => [];
-}

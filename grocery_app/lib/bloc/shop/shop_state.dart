@@ -2,11 +2,6 @@ import 'package:equatable/equatable.dart';
 
 abstract class ShopState extends Equatable {}
 
-class LoadingState extends ShopState {
-  @override
-  List<Object?> get props => [];
-}
-
 class InitialShopState extends ShopState {
   List shopItems;
 

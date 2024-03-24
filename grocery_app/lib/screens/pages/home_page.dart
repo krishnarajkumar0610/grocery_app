@@ -167,13 +167,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  state is LoadingState
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.blue,
-                          ),
-                        )
-                      : state is InitialShopState && state.shopItems!.isEmpty
+                  state is InitialShopState && state.shopItems!.isEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(top: 250.0),
                               child: Center(

@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,11 +6,86 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(MyCartState(cartItem: const [], totalAmount: 0)) {
-    on<Clearcart>(clearCart);
-    on<GetInitialCartData>(getInitialCartItems);
-    on<AddToCart>(addToCart);
-    on<RemoveItem>(removeFromSCart);
+  CartBloc() : super(MyCartState(cartItem: [], totalAmount: 0)) {
+    on<Clearcart>((event, emit) async {
+      emit(DummyCart());
+      final sharedPreference = await SharedPreferences.getInstance();
+      sharedPreference.remove("cartItem");
+      emit(MyCartState(cartItem: [], totalAmount: 0));
+    });
+
+    on<GetInitialCartData>((event, emit) async {
+      emit(DummyCart());
+      int totalAmount = 0;
+      final sharedPreference = await SharedPreferences.getInstance();
+      final List cartItems;
+      if (!sharedPreference.containsKey("cartItem")) {
+        cartItems = [];
+        sendListOfData(
+            item: cartItems,
+            keyName: "cartItem",
+            sharedPreference: sharedPreference);
+      } else {
+        cartItems = getListOfData(
+            keyName: "cartItem", sharedPreference: sharedPreference);
+      }
+      totalAmount = getTotalAmount(cartItems: cartItems);
+      emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
+    });
+
+    on<AddToCart>((event, emit) async {
+      emit(DummyCart());
+      List<dynamic> datas = event.shopItems[event.index];
+      final sharedPreference = await SharedPreferences.getInstance();
+      List cartItem = [];
+      datas[0] = event.quantity;
+      int totalAmount = 0;
+      if (!sharedPreference.containsKey("cartItem")) {
+        cartItem.add(datas);
+        totalAmount = datas[0] * datas[2];
+        sendListOfData(
+            item: [datas],
+            keyName: "cartItem",
+            sharedPreference: sharedPreference);
+      } else {
+        cartItem = getListOfData(
+            keyName: "cartItem", sharedPreference: sharedPreference);
+        String itemName = datas[1];
+        totalAmount = getTotalAmount(cartItems: cartItem);
+        totalAmount = removeAmount(
+            cartItem: cartItem, itemName: itemName, totalAmount: totalAmount);
+        cartItem.add(datas);
+        totalAmount += cartItem[cartItem.length - 1][0] *
+            cartItem[cartItem.length - 1][2] as int;
+        sharedPreference.remove("cartItem");
+        sendListOfData(
+            item: cartItem,
+            keyName: "cartItem",
+            sharedPreference: sharedPreference);
+      }
+      emit((MyCartState(cartItem: cartItem, totalAmount: totalAmount)));
+    });
+
+    on<RemoveItem>((event, emit) async {
+      emit(DummyCart());
+      final sharedPreference = await SharedPreferences.getInstance();
+      int totalAmount = 0;
+      List cartItem = getListOfData(
+          keyName: "cartItem", sharedPreference: sharedPreference);
+      for (int i = 0; i < cartItem.length; i++) {
+        totalAmount += cartItem[i][0] * cartItem[i][2] as int;
+      }
+
+      totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
+      cartItem.removeAt(event.index);
+      print("removed item : $cartItem");
+      sharedPreference.remove("cartItem");
+      sendListOfData(
+          item: cartItem,
+          keyName: "cartItem",
+          sharedPreference: sharedPreference);
+      emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
+    });
   }
 
   int getTotalAmount({required List cartItems}) {
@@ -33,86 +108,5 @@ class CartBloc extends Bloc<CartEvents, CartState> {
       }
     }
     return totalAmount;
-  }
-
-  Future<void> clearCart(Clearcart event, Emitter<CartState> emit) async {
-    emit(DummyCart());
-    final sharedPreference = await SharedPreferences.getInstance();
-    sharedPreference.remove("cartItem");
-  }
-
-  Future<void> getInitialCartItems(
-      GetInitialCartData event, Emitter<CartState> emit) async {
-    int totalAmount = 0;
-    final sharedPreference = await SharedPreferences.getInstance();
-    final List cartItems;
-    if (!sharedPreference.containsKey("cartItem")) {
-      cartItems = [];
-      sendListOfData(
-          item: cartItems,
-          keyName: "cartItem",
-          sharedPreference: sharedPreference);
-    } else {
-      cartItems = getListOfData(
-          keyName: "cartItem", sharedPreference: sharedPreference);
-    }
-    totalAmount = getTotalAmount(cartItems: cartItems);
-    emit(LoadingStateInCart());
-    await Future.delayed(const Duration(seconds: 3), () {
-      emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
-    });
-  }
-
-  Future<void> addToCart(AddToCart event, Emitter<CartState> emit) async {
-    List<dynamic> datas = event.shopItems[event.index];
-    final sharedPreference = await SharedPreferences.getInstance();
-    List cartItem = [];
-    datas[0] = event.quantity;
-    int totalAmount = 0;
-    if (checkKey(key: "cartItem", sharedPreference: sharedPreference)) {
-      cartItem.add(datas);
-      totalAmount = datas[0] * datas[2];
-      sendListOfData(
-          item: [datas],
-          keyName: "cartItem",
-          sharedPreference: sharedPreference);
-    } else {
-      cartItem = getListOfData(
-          keyName: "cartItem", sharedPreference: sharedPreference);
-      String itemName = datas[1];
-      totalAmount = getTotalAmount(cartItems: cartItem);
-      totalAmount = removeAmount(
-          cartItem: cartItem, itemName: itemName, totalAmount: totalAmount);
-      cartItem.add(datas);
-      totalAmount += cartItem[cartItem.length - 1][0] *
-          cartItem[cartItem.length - 1][2] as int;
-      sharedPreference.remove("cartItem");
-      sendListOfData(
-          item: cartItem,
-          keyName: "cartItem",
-          sharedPreference: sharedPreference);
-    }
-    emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
-  }
-
-  Future<void> removeFromSCart(
-      RemoveItem event, Emitter<CartState> emit) async {
-    emit(DummyCart());
-    final sharedPreference = await SharedPreferences.getInstance();
-
-    List cartItem =
-        getListOfData(keyName: "cartItem", sharedPreference: sharedPreference);
-    int totalAmount = 0;
-    for (int i = 0; i < cartItem.length; i++) {
-      totalAmount += cartItem[i][0] * cartItem[i][2] as int;
-    }
-    totalAmount -= cartItem[event.index][0] * cartItem[event.index][2] as int;
-    cartItem.removeAt(event.index);
-    sharedPreference.remove("cartItem");
-    sendListOfData(
-        item: cartItem,
-        keyName: "cartItem",
-        sharedPreference: sharedPreference);
-    emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
   }
 }
