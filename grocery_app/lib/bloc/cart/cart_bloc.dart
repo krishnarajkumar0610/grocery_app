@@ -6,14 +6,15 @@ import 'cart_event.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvents, CartState> {
-  CartBloc() : super(LoadingCartItemsState()) {
+  CartBloc() : super(DummyCart()) {
     on<ClearCartItemsEvent>(clearCart);
     on<GetInitialCartDataEvent>(getInitialCartItems);
     on<AddToCartEvent>(addToCart);
     on<RemoveItemFomCartEvent>(removeItem);
   }
 
-  Future<void> clearCart(ClearCartItemsEvent event, Emitter<CartState> emit) async {
+  Future<void> clearCart(
+      ClearCartItemsEvent event, Emitter<CartState> emit) async {
     final sharedPreference = await SharedPreferences.getInstance();
     sharedPreference.remove("cartItem");
     emit(MyCartState(cartItem: const [], totalAmount: 0));
@@ -21,7 +22,7 @@ class CartBloc extends Bloc<CartEvents, CartState> {
 
   Future<void> getInitialCartItems(
       GetInitialCartDataEvent event, Emitter<CartState> emit) async {
-    emit(LoadingCartItemsState());
+    emit(DummyCart());
     int totalAmount = 0;
     final sharedPreference = await SharedPreferences.getInstance();
     final List cartItems;
@@ -36,12 +37,11 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem", sharedPreference: sharedPreference);
     }
     totalAmount = getTotalAmount(cartItems: cartItems);
-    emit(LoadingCartItemsState());
-    await Future.delayed(const Duration(seconds: 1),
-        () => emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount)));
+    emit(MyCartState(cartItem: cartItems, totalAmount: totalAmount));
   }
 
   Future<void> addToCart(AddToCartEvent event, Emitter<CartState> emit) async {
+    emit(DummyCart());
     List<dynamic> datas = event.shopItems[event.index];
     final sharedPreference = await SharedPreferences.getInstance();
     List cartItem = [];
@@ -70,12 +70,13 @@ class CartBloc extends Bloc<CartEvents, CartState> {
           keyName: "cartItem",
           sharedPreference: sharedPreference);
     }
-    emit(LoadingCartItemsState());
-    emit((MyCartState(cartItem: cartItem, totalAmount: totalAmount)));
+
+    emit(MyCartState(cartItem: cartItem, totalAmount: totalAmount));
   }
 
   Future<void> removeItem(
       RemoveItemFomCartEvent event, Emitter<CartState> emit) async {
+    emit(DummyCart());
     final sharedPreference = await SharedPreferences.getInstance();
 
     List cartItem =
