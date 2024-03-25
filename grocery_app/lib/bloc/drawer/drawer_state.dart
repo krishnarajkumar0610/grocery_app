@@ -1,13 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-abstract class DrawerState extends Equatable {}
+class DrawerState {}
 
-class LogoutState extends DrawerState {
-  @override
-  List<Object?> get props => [];
-}
+class LogoutState extends DrawerState {}
 
-class DummyDrawerState extends DrawerState {
-  @override
-  List<Object?> get props => [];
-}
+class DummyDrawerState extends DrawerState {}

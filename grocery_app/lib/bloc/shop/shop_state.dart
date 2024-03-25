@@ -1,32 +1,17 @@
-import 'package:equatable/equatable.dart';
+class ShopState {}
 
-abstract class ShopState extends Equatable {}
-
-class LoadingShopItemsState extends ShopState {
-  @override
-  List<Object?> get props => [];
-}
+class LoadingShopItemsState extends ShopState {}
 
 class InitialShopState extends ShopState {
   List shopItems;
 
   InitialShopState({required this.shopItems});
-
-  @override
-  List<Object?> get props => [];
 }
 
-class DummyShop extends ShopState {
-  @override
-  List<Object?> get props => [];
-}
+class DummyShopState extends ShopState {}
 
-class ImageNotFound extends ShopState {
-  @override
-  List<Object?> get props => [];
-}
+class ItemNotFoundState extends ShopState {}
 
-class BuyItemState extends ShopState {
-  @override
-  List<Object?> get props => [];
-}
+class ItemAddInShopSuccessState extends ShopState {}
+
+class BuyItemState extends ShopState {}

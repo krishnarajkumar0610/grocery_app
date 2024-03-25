@@ -1,4 +1,4 @@
-abstract class CartEvents {}
+class CartEvents {}
 
 class GetInitialCartDataEvent extends CartEvents {}
 

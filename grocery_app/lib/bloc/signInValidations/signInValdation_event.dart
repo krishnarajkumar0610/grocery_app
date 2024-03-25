@@ -1,4 +1,4 @@
-abstract class ValidateEvents {}
+class ValidateEvents {}
 
 class SignUpEvent extends ValidateEvents {}
 

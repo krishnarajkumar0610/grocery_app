@@ -57,8 +57,10 @@ class _AddNewItemState extends State<AddNewItem> {
               height: deviceHeight * 0.06,
               child: BlocConsumer<ShopBloc, ShopState>(
                 listener: (context, state) {
-                  if (state is ImageNotFound) {
+                  if (state is ItemNotFoundState) {
                     showMessage(context: context, message: "Image not found");
+                  } else if (state is ItemAddInShopSuccessState) {
+                    Navigator.pop(context);
                   }
                 },
                 builder: (context, state) => MaterialButton(
@@ -72,8 +74,6 @@ class _AddNewItemState extends State<AddNewItem> {
                         );
                     controllers[0].clear();
                     controllers[1].clear();
-                    //context.read<InitialShopBloc>().add(GetInitialShopItem());
-                    //Navigator.pop(context);
                   },
                   child: const Text(
                     "Submit",

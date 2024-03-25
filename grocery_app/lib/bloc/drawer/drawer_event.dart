@@ -1,3 +1,3 @@
-abstract class DrawerEvent {}
+class DrawerEvent {}
 
 class LogOutEvent extends DrawerEvent {}

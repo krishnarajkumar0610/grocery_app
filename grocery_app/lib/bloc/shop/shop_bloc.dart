@@ -46,7 +46,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
   Future<void> changeAllIcon(
       ChangeAllIcon event, Emitter<ShopState> emit) async {
     final sharedPreference = await SharedPreferences.getInstance();
-    emit(DummyShop());
+    emit(DummyShopState());
     List shopItem =
         getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
     for (int i = 0; i < shopItem.length; i++) {
@@ -64,7 +64,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
 
   Future<void> changeToCheckMark(
       ChangeToCheckmark event, Emitter<ShopState> emit) async {
-    emit(DummyShop());
+    emit(DummyShopState());
     final sharedPreference = await SharedPreferences.getInstance();
     List shopItem =
         getListOfData(keyName: "shopItem", sharedPreference: sharedPreference);
@@ -80,7 +80,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
 
   Future<void> changeToShopCart(
       ChangeToShopCart event, Emitter<ShopState> emit) async {
-    emit(DummyShop());
+    emit(DummyShopState());
     final sharedPreference = await SharedPreferences.getInstance();
     String name = event.itemName;
     List shopItem =
@@ -107,7 +107,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     String itemPrice = event.itemPrice;
     List shopItem = [];
     List data = [];
-    emit(DummyShop());
+    emit(DummyShopState());
     if ((itemName.isEmpty ||
         itemPrice.isEmpty ||
         itemName.startsWith(" ") ||
@@ -118,7 +118,8 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       shopItem = getListOfData(
           keyName: "shopItem", sharedPreference: sharedPreference);
 
-      emit(ImageNotFound());
+      emit(ItemNotFoundState());
+      emit(InitialShopState(shopItems: shopItem));
     } else {
       // Close a dialog, for example
       try {
@@ -145,15 +146,14 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
             keyName: "shopItem",
             item: shopItem,
             sharedPreference: sharedPreference);
-        print(shopItem);
+        emit(ItemAddInShopSuccessState());
+        emit(InitialShopState(shopItems: shopItem));
       } catch (e) {
         shopItem = getListOfData(
             keyName: "shopItem", sharedPreference: sharedPreference);
-        emit(ImageNotFound());
+        emit(ItemNotFoundState());
       }
     }
-    //emit(LoadingShopItemsState());
-    emit(InitialShopState(shopItems: shopItem));
   }
 
   Future<void> removeFromShop(
@@ -166,7 +166,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         keyName: "shopItem",
         item: shopItem,
         sharedPreference: sharedPreference);
-    emit(DummyShop());
+    emit(DummyShopState());
     emit(InitialShopState(shopItems: shopItem));
   }
 
@@ -190,7 +190,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
   }
 
   Future<void> buyItem(BuyItemEvent event, Emitter<ShopState> emit) async {
-    emit(DummyShop());
+    emit(DummyShopState());
     emit(BuyItemState());
     final sharedPreference = await SharedPreferences.getInstance();
     List shopItem =
