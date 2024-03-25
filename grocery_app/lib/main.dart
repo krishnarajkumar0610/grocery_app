@@ -3,12 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app/bloc/cart/cart_bloc.dart';
 import 'package:grocery_app/bloc/drawer/drawer_bloc.dart';
-import 'package:grocery_app/bloc/shop/shop_event.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_bloc.dart';
 import 'package:grocery_app/bloc/themes/theme_state.dart';
 import 'bloc/greetings/greeting_bloc.dart';
-import 'bloc/greetings/greeting_event.dart';
 import 'bloc/signInValidations/signInValidation_bloc.dart';
 import 'screens/pages/intro_page.dart';
 

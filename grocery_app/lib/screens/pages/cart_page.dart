@@ -6,7 +6,6 @@ import 'package:grocery_app/bloc/cart/cart_event.dart';
 import 'package:grocery_app/bloc/cart/cart_state.dart';
 import 'package:grocery_app/bloc/shop/shop_bloc.dart';
 import 'package:grocery_app/bloc/shop/shop_event.dart';
-
 import '../../bloc/shop/shop_state.dart';
 
 class CartPage extends StatefulWidget {
@@ -112,8 +111,7 @@ class _CartPageState extends State<CartPage> {
         ),
         body: BlocConsumer<CartBloc, CartState>(
           listener: (context, cartState) {},
-          builder: (context, cartState) =>
-              BlocConsumer<ShopBloc, ShopState>(
+          builder: (context, cartState) => BlocConsumer<ShopBloc, ShopState>(
             listener: (context, shopState) {},
             builder: (context, shopState) => cartState is MyCartState &&
                     cartState.cartItem.isEmpty
@@ -167,9 +165,8 @@ class _CartPageState extends State<CartPage> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 // Assuming this is how your shopItem is stored
-                                                context
-                                                    .read<ShopBloc>()
-                                                    .add(ChangeToShopCart(
+                                                context.read<ShopBloc>().add(
+                                                    ChangeToShopCart(
                                                         itemName: cartState
                                                                 is MyCartState
                                                             ? cartState
@@ -211,7 +208,7 @@ class _CartPageState extends State<CartPage> {
                                               ),
                                               child: Image.asset(
                                                 cartState is MyCartState
-                                                    ? cartState.cartItem![index]
+                                                    ? cartState.cartItem[index]
                                                         [3]
                                                     : " ",
                                                 height: 100,
@@ -223,7 +220,7 @@ class _CartPageState extends State<CartPage> {
                                               top: deviceWidth * 0.12,
                                               child: cartState is MyCartState
                                                   ? Text(
-                                                      "Name : ${cartState.cartItem![index][1]}",
+                                                      "Name : ${cartState.cartItem[index][1]}",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 15,
@@ -238,7 +235,7 @@ class _CartPageState extends State<CartPage> {
                                               top: deviceWidth * 0.2,
                                               child: cartState is MyCartState
                                                   ? Text(
-                                                      "Price : Rs.${cartState.cartItem![index][2] * cartState.cartItem![index][0]}/-",
+                                                      "Price : Rs.${cartState.cartItem[index][2] * cartState.cartItem[index][0]}/-",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                               fontSize: 15,
@@ -254,7 +251,7 @@ class _CartPageState extends State<CartPage> {
                                               top: deviceWidth * 0.28,
                                               child: cartState is MyCartState
                                                   ? Text(
-                                                      "Total Quantity : ${cartState.cartItem![index][0] ?? 0}",
+                                                      "Total Quantity : ${cartState.cartItem[index][0] ?? 0}",
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                               fontSize: 15,
